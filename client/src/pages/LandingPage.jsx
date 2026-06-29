@@ -1,357 +1,124 @@
-import React from 'react';
-import Button from '../shared/ui/Button';
-import Card from '../shared/ui/Card';
-import Badge from '../shared/ui/Badge';
-import Section from '../shared/ui/Section';
-
 export default function LandingPage({ setView }) {
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #F5F5F4 0%, #FAFAF9 100%)',
-    }}>
+    <div className="landing-page">
       {/* Hero Section */}
-      <section style={{
-        background: 'linear-gradient(135deg, #009999 0%, #007A7A 100%)',
-        color: 'white',
-        padding: '4rem 1.5rem',
-        textAlign: 'center',
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ marginBottom: '2rem' }}>
-            <img
-              src="/assets/onovi-logo.png"
-              alt="Onovi"
-              style={{
-                maxWidth: '280px',
-                height: 'auto',
-                filter: 'brightness(0) invert(1)',
-              }}
-            />
+      <section className="landing-hero">
+        <div className="landing-hero-content">
+          <div className="landing-logo">
+            <img src="/assets/onovi-logo.png" alt="Onovi" style={{ maxWidth: '280px', height: 'auto' }} />
           </div>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: '700',
-            marginBottom: '1rem',
-            lineHeight: '1.2',
-          }}>
-            התור שלך, בזמן שלך
-          </h1>
-          <p style={{
-            fontSize: '1.25rem',
-            marginBottom: '3rem',
-            opacity: '0.95',
-            lineHeight: '1.6',
-            maxWidth: '600px',
-            margin: '0 auto 3rem',
-          }}>
+          <h2 className="landing-tagline">התור שלך, בזמן שלך</h2>
+          <p className="landing-description">
             מצאו תור פנוי להיום, חסכו עד 50%, והזמינו בלי טלפונים.<br />
             אלפי תורים זמינים מעסקים מובילים.
           </p>
-          <div style={{
-            display: 'flex',
-            gap: '1rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-          }}>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => setView('customer')}
-              style={{
-                minWidth: '200px',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
-              }}
-            >
+          <div className="landing-cta-group">
+            <button className="btn-primary btn-lg landing-cta-primary" onClick={() => setView('customer')}>
               🔍 מצא תור עכשיו
-            </Button>
-            <Button
-              variant="ghost"
-              size="lg"
-              onClick={() => setView('auth')}
-              style={{
-                minWidth: '200px',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                color: 'white',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
+            </button>
+            <button className="btn-outline btn-lg landing-cta-secondary" onClick={() => setView('auth')}>
               הרשמת עסק
-            </Button>
+            </button>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 1.5rem' }}>
-        <Section
-          title="איך זה עובד?"
-          description="שלושה צעדים פשוטים לתור המושלם"
-        >
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem',
-          }}>
-            {/* Step 1 */}
-            <Card variant="elevated" padding="lg">
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem',
-              }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #009999, #007A7A)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  marginLeft: '1rem',
-                }}>
-                  1
-                </div>
-                <div style={{ fontSize: '3rem' }}>📍</div>
-              </div>
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                marginBottom: '0.75rem',
-                color: '#1C1917',
-              }}>
-                בחרו שירות ומיקום
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6' }}>
+      <section className="landing-section">
+        <div className="landing-container">
+          <h2 className="landing-section-title">איך זה עובד?</h2>
+          <div className="landing-steps">
+            <div className="landing-step">
+              <div className="landing-step-number">1</div>
+              <div className="landing-step-icon">📍</div>
+              <h3 className="landing-step-title">בחרו שירות ומיקום</h3>
+              <p className="landing-step-description">
                 ספרות שיער, מכוני יופי, מוסכים, קליניקות ועוד — כל השירותים באזור שלכם
               </p>
-            </Card>
+            </div>
 
-            {/* Step 2 */}
-            <Card variant="elevated" padding="lg">
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem',
-              }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #009999, #007A7A)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  marginLeft: '1rem',
-                }}>
-                  2
-                </div>
-                <div style={{ fontSize: '3rem' }}>⚡</div>
-              </div>
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                marginBottom: '0.75rem',
-                color: '#1C1917',
-              }}>
-                ראו תורים פנויים
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6' }}>
+            <div className="landing-step">
+              <div className="landing-step-number">2</div>
+              <div className="landing-step-icon">⚡</div>
+              <h3 className="landing-step-title">ראו תורים פנויים</h3>
+              <p className="landing-step-description">
                 תורים זמינים להיום ולמחר, עם הנחות מיוחדות עד 50%
               </p>
-              <Badge variant="danger" size="md" style={{ marginTop: '0.75rem' }}>
-                🔥 הנחות עד 50%
-              </Badge>
-            </Card>
+            </div>
 
-            {/* Step 3 */}
-            <Card variant="elevated" padding="lg">
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '1rem',
-              }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #009999, #007A7A)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  marginLeft: '1rem',
-                }}>
-                  3
-                </div>
-                <div style={{ fontSize: '3rem' }}>✅</div>
-              </div>
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: '600',
-                marginBottom: '0.75rem',
-                color: '#1C1917',
-              }}>
-                הזמינו ותקבלו אישור
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6' }}>
+            <div className="landing-step">
+              <div className="landing-step-number">3</div>
+              <div className="landing-step-icon">✅</div>
+              <h3 className="landing-step-title">הזמינו ותקבלו אישור</h3>
+              <p className="landing-step-description">
                 מלאו פרטים במהירות והעסק יאשר תוך דקות — פשוט וחכם
               </p>
-            </Card>
+            </div>
           </div>
-        </Section>
+        </div>
+      </section>
 
-        {/* For Businesses */}
-        <Section
-          title="למה עסקים בוחרים ב-Onovi?"
-          description="הפלטפורמה המובילה לניהול תורים ולקוחות"
-          spacing="lg"
-        >
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '1.5rem',
-            marginBottom: '3rem',
-          }}>
-            {/* Feature 1 */}
-            <Card variant="bordered" padding="lg">
-              <div style={{
-                fontSize: '3rem',
-                marginBottom: '1rem',
-              }}>
-                📅
-              </div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                marginBottom: '0.5rem',
-                color: '#1C1917',
-              }}>
-                מלאו תורים ריקים
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6', fontSize: '0.875rem' }}>
+
+      {/* For Businesses */}
+      <section className="landing-section landing-section-alt">
+        <div className="landing-container">
+          <h2 className="landing-section-title">למה עסקים בוחרים ב-Onovi?</h2>
+          <div className="landing-features">
+            <div className="landing-feature">
+              <div className="landing-feature-icon">📅</div>
+              <h3 className="landing-feature-title">מלאו תורים ריקים</h3>
+              <p className="landing-feature-description">
                 תורים שמתבטלים או נשארים ריקים מתמלאים אוטומטית על ידי לקוחות חדשים
               </p>
-            </Card>
+            </div>
 
-            {/* Feature 2 */}
-            <Card variant="bordered" padding="lg">
-              <div style={{
-                fontSize: '3rem',
-                marginBottom: '1rem',
-              }}>
-                💰
-              </div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                marginBottom: '0.5rem',
-                color: '#1C1917',
-              }}>
-                הגדילו הכנסות
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6', fontSize: '0.875rem' }}>
+            <div className="landing-feature">
+              <div className="landing-feature-icon">💰</div>
+              <h3 className="landing-feature-title">הגדילו הכנסות</h3>
+              <p className="landing-feature-description">
                 הפכו ביטולי תורים להזדמנות למכור במחיר מיוחד והגדילו מחזור
               </p>
-            </Card>
+            </div>
 
-            {/* Feature 3 */}
-            <Card variant="bordered" padding="lg">
-              <div style={{
-                fontSize: '3rem',
-                marginBottom: '1rem',
-              }}>
-                👥
-              </div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                marginBottom: '0.5rem',
-                color: '#1C1917',
-              }}>
-                צמחו עם לקוחות חדשים
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6', fontSize: '0.875rem' }}>
+            <div className="landing-feature">
+              <div className="landing-feature-icon">👥</div>
+              <h3 className="landing-feature-title">צמחו עם לקוחות חדשים</h3>
+              <p className="landing-feature-description">
                 חשיפה לאלפי לקוחות פוטנציאליים שמחפשים בדיוק את השירות שלכם
               </p>
-            </Card>
+            </div>
 
-            {/* Feature 4 */}
-            <Card variant="bordered" padding="lg">
-              <div style={{
-                fontSize: '3rem',
-                marginBottom: '1rem',
-              }}>
-                ⚙️
-              </div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: '600',
-                marginBottom: '0.5rem',
-                color: '#1C1917',
-              }}>
-                נהלו בקלות
-              </h3>
-              <p style={{ color: '#78716C', lineHeight: '1.6', fontSize: '0.875rem' }}>
+            <div className="landing-feature">
+              <div className="landing-feature-icon">⚙️</div>
+              <h3 className="landing-feature-title">נהלו בקלות</h3>
+              <p className="landing-feature-description">
                 פאנל ניהול מקצועי לשירותים, תורים והזמנות — הכל במקום אחד
               </p>
-            </Card>
+            </div>
           </div>
 
-          <div style={{ textAlign: 'center' }}>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => setView('auth')}
-              style={{ minWidth: '250px' }}
-            >
+          <div className="landing-business-cta">
+            <button className="btn-primary btn-lg" onClick={() => setView('auth')}>
               💼 התחילו בחינם עכשיו
-            </Button>
+            </button>
           </div>
-        </Section>
-      </div>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer style={{
-        background: 'white',
-        borderTop: '1px solid #E7E5E4',
-        padding: '2rem 1.5rem',
-        marginTop: '4rem',
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}>
-          <div>
-            <img
-              src="/assets/onovi-logo.png"
-              alt="Onovi"
-              style={{ height: '32px', marginBottom: '0.5rem' }}
-            />
-            <p style={{ color: '#78716C', fontSize: '0.875rem' }}>
-              התור שלך, בזמן שלך
-            </p>
+      <footer className="landing-footer">
+        <div className="landing-container">
+          <div className="landing-footer-content">
+            <div className="landing-footer-brand">
+              <div className="landing-logo-small">
+                <img src="/assets/onovi-logo.png" alt="Onovi" style={{ height: '32px' }} />
+              </div>
+              <p>התור שלך, בזמן שלך</p>
+            </div>
+            <button className="btn-secondary" onClick={() => setView('auth')}>
+              התחבר / הרשם
+            </button>
           </div>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => setView('auth')}
-          >
-            התחבר / הרשם
-          </Button>
         </div>
       </footer>
     </div>
