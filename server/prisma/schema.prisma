@@ -1,0 +1,287 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  BUSINESS
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum BusinessStatus {
+  PENDING_APPROVAL
+  ACTIVE
+  SUSPENDED
+}
+
+enum SlotStatus {
+  OPEN
+  RESERVED
+  BOOKED
+  CANCELLED
+  EXPIRED
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+  CANCELLED
+  CONFIRMED
+  CANCELLED_BY_CUSTOMER
+  CANCELLED_BY_BUSINESS
+  NO_SHOW
+}
+
+enum IdentifierType {
+  ISRAELI_ID
+  COMPANY_NUMBER
+  AUTHORIZED_DEALER
+  EXEMPT_DEALER
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  INTERESTED
+  MEETING_SCHEDULED
+  PROPOSAL_SENT
+  CLOSED_WON
+  CLOSED_LOST
+  INACTIVE
+}
+
+enum TimelineEventType {
+  LEAD_CREATED
+  PHONE_CALL_OUTBOUND
+  PHONE_CALL_INBOUND
+  WHATSAPP_SENT
+  WHATSAPP_RECEIVED
+  EMAIL_SENT
+  EMAIL_RECEIVED
+  MEETING_SCHEDULED
+  MEETING_COMPLETED
+  PROPOSAL_SENT
+  STATUS_CHANGED
+  NOTE_ADDED
+  FOLLOW_UP_SCHEDULED
+  FOLLOW_UP_COMPLETED
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  fullName     String
+  phone        String     @unique
+  email        String?    @unique
+  passwordHash String
+  role         UserRole
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  businesses Business[] @relation("BusinessOwner")
+  bookings   Booking[]
+}
+
+model Category {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  icon         String?
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  businesses Business[]
+  leads      Lead[]
+}
+
+model Business {
+  id               Int            @id @default(autoincrement())
+  ownerId          Int?
+  categoryId       Int
+  name             String
+  description      String?
+  phone            String
+
+  // Official identifier - MANDATORY and UNIQUE
+  identifierType   IdentifierType
+  identifierValue  String
+
+  // Code-based address fields
+  cityCode         Int?           // Official Israeli city code
+  cityNameHebrew   String?        // Hebrew city name
+  streetCode       Int?           // Official Israeli street code
+  streetNameHebrew String?        // Hebrew street name
+  houseNumber      String?        // House number
+  formattedAddress String?        // Full formatted address (Hebrew only)
+
+  // Legacy fields (kept for backwards compatibility, will be deprecated)
+  city             String?
+  street           String?
+  address          String?
+
+  // Coordinate fields
+  latitude                    Float?
+  longitude                   Float?
+  hasExactCoordinates         Boolean @default(false)   // True if geocoded from exact address
+  isEstimatedLocation         Boolean @default(true)    // False only if exact geocode succeeded
+  locationVerifiedByBusiness  Boolean @default(false)   // True if manually adjusted by business owner
+
+  status           BusinessStatus @default(PENDING_APPROVAL)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  owner      User?     @relation("BusinessOwner", fields: [ownerId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+  services   Service[]
+  slots      Slot[]
+  bookings   Booking[]
+  linkedLeads Lead[]   @relation("LeadToBusiness")
+
+  @@unique([identifierType, identifierValue])
+}
+
+model Service {
+  id              Int      @id @default(autoincrement())
+  businessId      Int
+  name            String
+  description     String?
+  durationMinutes Int
+  regularPrice    Int
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  business Business  @relation(fields: [businessId], references: [id])
+  slots    Slot[]
+  bookings Booking[]
+}
+
+model Slot {
+  id           Int        @id @default(autoincrement())
+  businessId   Int
+  serviceId    Int
+  date         String
+  startTime    String
+  endTime      String
+  regularPrice Int
+  dealPrice    Int?
+  status       SlotStatus @default(OPEN)
+  note         String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  business Business  @relation(fields: [businessId], references: [id])
+  service  Service   @relation(fields: [serviceId], references: [id])
+  bookings Booking[]
+}
+
+model Booking {
+  id            Int           @id @default(autoincrement())
+  customerId    Int?
+  businessId    Int
+  serviceId     Int
+  slotId        Int
+  customerName  String
+  customerPhone String
+  customerNote  String?
+  price         Int
+  status        BookingStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+  confirmedAt   DateTime?
+  cancelledAt   DateTime?
+  updatedAt     DateTime      @updatedAt
+
+  customer User?    @relation(fields: [customerId], references: [id])
+  business Business @relation(fields: [businessId], references: [id])
+  service  Service  @relation(fields: [serviceId], references: [id])
+  slot     Slot     @relation(fields: [slotId], references: [id])
+}
+
+model Lead {
+  id                 Int            @id @default(autoincrement())
+
+  // Official identifier - MANDATORY and UNIQUE
+  identifierType     IdentifierType
+  identifierValue    String
+
+  // Contact information
+  businessName       String
+  contactPersonName  String?
+  phone              String
+  email              String?
+
+  // Address (optional for lead)
+  cityCode           Int?
+  cityNameHebrew     String?
+  streetCode         Int?
+  streetNameHebrew   String?
+  houseNumber        String?
+  formattedAddress   String?
+
+  // Lead management
+  status             LeadStatus     @default(NEW)
+  categoryId         Int?
+  source             String?        // Where lead came from (website, referral, etc.)
+
+  // Auto-linking (prepared for future implementation)
+  linkedBusinessId   Int?           // Auto-linked to Business if identifier matches
+
+  // Follow-up tracking
+  nextAction         String?        // Next action to take (Call, WhatsApp, Email, Meeting, Send Proposal, Other)
+  nextActionAt       DateTime?      // When the next action is scheduled
+  lastContactedAt    DateTime?
+
+  // Metadata
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  // Relationships
+  category           Category?      @relation(fields: [categoryId], references: [id])
+  linkedBusiness     Business?      @relation("LeadToBusiness", fields: [linkedBusinessId], references: [id])
+  timelineEvents     TimelineEvent[]
+  notes              LeadNote[]
+
+  // Unique constraint on identifier
+  @@unique([identifierType, identifierValue])
+  @@index([status])
+  @@index([nextActionAt])
+  @@index([createdAt])
+}
+
+model TimelineEvent {
+  id          Int               @id @default(autoincrement())
+  leadId      Int
+  type        TimelineEventType
+  description String?           // Auto-generated or custom description
+  metadata    String?           // JSON string for additional data
+  createdAt   DateTime          @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt])
+}
+
+model LeadNote {
+  id        Int      @id @default(autoincrement())
+  leadId    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt])
+}

@@ -1,0 +1,7661 @@
+[
+  {
+    "cityCode": 967,
+    "hebrewName": "אבו ג'ווייעד )שבט(",
+    "aliases": [],
+    "_englishName": "ABU JUWEI'ID"
+  },
+  {
+    "cityCode": 472,
+    "hebrewName": "אבו גוש",
+    "aliases": [],
+    "_englishName": "ABU GHOSH"
+  },
+  {
+    "cityCode": 473,
+    "hebrewName": "אבו סנאן",
+    "aliases": [],
+    "_englishName": "ABU SINAN"
+  },
+  {
+    "cityCode": 935,
+    "hebrewName": "אבו סריחאן )שבט(",
+    "aliases": [],
+    "_englishName": "ABU SUREIHAN"
+  },
+  {
+    "cityCode": 958,
+    "hebrewName": "אבו עבדון )שבט(",
+    "aliases": [],
+    "_englishName": "ABU  ABDUN"
+  },
+  {
+    "cityCode": 1042,
+    "hebrewName": "אבו עמאר )שבט(",
+    "aliases": [],
+    "_englishName": "ABU  AMMAR"
+  },
+  {
+    "cityCode": 932,
+    "hebrewName": "אבו עמרה )שבט(",
+    "aliases": [],
+    "_englishName": "ABU  AMRE"
+  },
+  {
+    "cityCode": 968,
+    "hebrewName": "אבו קורינאת )שבט(",
+    "aliases": [],
+    "_englishName": "ABU QUREINAT"
+  },
+  {
+    "cityCode": 1342,
+    "hebrewName": "אבו קרינאת )יישוב(",
+    "aliases": [],
+    "_englishName": "ABU QUREINAT"
+  },
+  {
+    "cityCode": 966,
+    "hebrewName": "אבו רובייעה )שבט(",
+    "aliases": [],
+    "_englishName": "ABU RUBEI'A"
+  },
+  {
+    "cityCode": 961,
+    "hebrewName": "אבו רוקייק )שבט(",
+    "aliases": [],
+    "_englishName": "ABU RUQAYYEQ"
+  },
+  {
+    "cityCode": 1375,
+    "hebrewName": "אבו תלול",
+    "aliases": [],
+    "_englishName": "ABU TULUL"
+  },
+  {
+    "cityCode": 652,
+    "hebrewName": "אבטין",
+    "aliases": [],
+    "_englishName": "IBTIN"
+  },
+  {
+    "cityCode": 1275,
+    "hebrewName": "אבטליון",
+    "aliases": [],
+    "_englishName": "AVTALYON"
+  },
+  {
+    "cityCode": 679,
+    "hebrewName": "אביאל",
+    "aliases": [],
+    "_englishName": "AVI'EL"
+  },
+  {
+    "cityCode": 1115,
+    "hebrewName": "אביבים",
+    "aliases": [],
+    "_englishName": "AVIVIM"
+  },
+  {
+    "cityCode": 819,
+    "hebrewName": "אביגדור",
+    "aliases": [],
+    "_englishName": "AVIGEDOR"
+  },
+  {
+    "cityCode": 175,
+    "hebrewName": "אביחיל",
+    "aliases": [],
+    "_englishName": "AVIHAYIL"
+  },
+  {
+    "cityCode": 2052,
+    "hebrewName": "אביטל",
+    "aliases": [],
+    "_englishName": "AVITAL"
+  },
+  {
+    "cityCode": 1070,
+    "hebrewName": "אביעזר",
+    "aliases": [],
+    "_englishName": "AVI'EZER"
+  },
+  {
+    "cityCode": 1220,
+    "hebrewName": "אבירים",
+    "aliases": [],
+    "_englishName": "ABBIRIM"
+  },
+  {
+    "cityCode": 182,
+    "hebrewName": "אבן יהודה",
+    "aliases": [],
+    "_englishName": "EVEN YEHUDA"
+  },
+  {
+    "cityCode": 783,
+    "hebrewName": "אבן ספיר",
+    "aliases": [],
+    "_englishName": "EVEN SAPPIR"
+  },
+  {
+    "cityCode": 400,
+    "hebrewName": "אבן שמואל",
+    "aliases": [],
+    "_englishName": "EVEN SHEMU'EL"
+  },
+  {
+    "cityCode": 4011,
+    "hebrewName": "אבני איתן",
+    "aliases": [],
+    "_englishName": "AVNE ETAN"
+  },
+  {
+    "cityCode": 3793,
+    "hebrewName": "אבני חפץ",
+    "aliases": [],
+    "_englishName": "AVNE HEFEZ"
+  },
+  {
+    "cityCode": 3786,
+    "hebrewName": "אבנת",
+    "aliases": [],
+    "_englishName": "AVENAT"
+  },
+  {
+    "cityCode": 1311,
+    "hebrewName": "אבשלום",
+    "aliases": [],
+    "_englishName": "AVSHALOM"
+  },
+  {
+    "cityCode": 3759,
+    "hebrewName": "אדורה",
+    "aliases": [],
+    "_englishName": "ADORA"
+  },
+  {
+    "cityCode": 113,
+    "hebrewName": "אדירים",
+    "aliases": [],
+    "_englishName": "ADDIRIM"
+  },
+  {
+    "cityCode": 1068,
+    "hebrewName": "אדמית",
+    "aliases": [],
+    "_englishName": "ADAMIT"
+  },
+  {
+    "cityCode": 1123,
+    "hebrewName": "אדרת",
+    "aliases": [],
+    "_englishName": "ADDERET"
+  },
+  {
+    "cityCode": 446,
+    "hebrewName": "אודים",
+    "aliases": [],
+    "_englishName": "UDIM"
+  },
+  {
+    "cityCode": 4010,
+    "hebrewName": "אודם",
+    "aliases": [],
+    "_englishName": "ODEM"
+  },
+  {
+    "cityCode": 1046,
+    "hebrewName": "אוהד",
+    "aliases": [],
+    "_englishName": "OHAD"
+  },
+  {
+    "cityCode": 2710,
+    "hebrewName": "אום אל-פחם",
+    "aliases": [],
+    "_englishName": "UMM AL-FAHM"
+  },
+  {
+    "cityCode": 2024,
+    "hebrewName": "אום אל-קוטוף",
+    "aliases": [],
+    "_englishName": "UMM AL-QUTUF"
+  },
+  {
+    "cityCode": 1358,
+    "hebrewName": "אום בטין",
+    "aliases": [],
+    "_englishName": "UMM BATIN"
+  },
+  {
+    "cityCode": 1108,
+    "hebrewName": "אומן",
+    "aliases": [],
+    "_englishName": "OMEN"
+  },
+  {
+    "cityCode": 680,
+    "hebrewName": "אומץ",
+    "aliases": [],
+    "_englishName": "OMEZ"
+  },
+  {
+    "cityCode": 31,
+    "hebrewName": "אופקים",
+    "aliases": [],
+    "_englishName": "OFAQIM",
+    "latitude": 31.3158,
+    "longitude": 34.6181
+  },
+  {
+    "cityCode": 1294,
+    "hebrewName": "אור הגנוז",
+    "aliases": [],
+    "_englishName": "OR HAGANUZ"
+  },
+  {
+    "cityCode": 2400,
+    "hebrewName": "אור יהודה",
+    "aliases": [],
+    "_englishName": "OR YEHUDA",
+    "latitude": 32.0267,
+    "longitude": 34.8603
+  },
+  {
+    "cityCode": 1020,
+    "hebrewName": "אור עקיבא",
+    "aliases": [],
+    "_englishName": "OR AQIVA",
+    "latitude": 32.5057,
+    "longitude": 34.9175
+  },
+  {
+    "cityCode": 780,
+    "hebrewName": "אורה",
+    "aliases": [],
+    "_englishName": "ORA"
+  },
+  {
+    "cityCode": 2012,
+    "hebrewName": "אורות",
+    "aliases": [],
+    "_englishName": "OROT"
+  },
+  {
+    "cityCode": 4013,
+    "hebrewName": "אורטל",
+    "aliases": [],
+    "_englishName": "ORTAL"
+  },
+  {
+    "cityCode": 403,
+    "hebrewName": "אורים",
+    "aliases": [],
+    "_englishName": "URIM"
+  },
+  {
+    "cityCode": 882,
+    "hebrewName": "אורנים",
+    "aliases": [],
+    "_englishName": "ORANIM"
+  },
+  {
+    "cityCode": 3760,
+    "hebrewName": "אורנית",
+    "aliases": [],
+    "_englishName": "ORANIT"
+  },
+  {
+    "cityCode": 278,
+    "hebrewName": "אושה",
+    "aliases": [],
+    "_englishName": "USHA"
+  },
+  {
+    "cityCode": 565,
+    "hebrewName": "אזור",
+    "aliases": [],
+    "_englishName": "AZOR"
+  },
+  {
+    "cityCode": 1157,
+    "hebrewName": "אחווה",
+    "aliases": [],
+    "_englishName": "AHAWA"
+  },
+  {
+    "cityCode": 821,
+    "hebrewName": "אחוזם",
+    "aliases": [],
+    "_englishName": "AHUZZAM"
+  },
+  {
+    "cityCode": 1330,
+    "hebrewName": "אחוזת ברק",
+    "aliases": [],
+    "_englishName": "AHUZZAT BARAQ"
+  },
+  {
+    "cityCode": 785,
+    "hebrewName": "אחיהוד",
+    "aliases": [],
+    "_englishName": "AHIHUD"
+  },
+  {
+    "cityCode": 850,
+    "hebrewName": "אחיטוב",
+    "aliases": [],
+    "_englishName": "AHITUV"
+  },
+  {
+    "cityCode": 804,
+    "hebrewName": "אחיסמך",
+    "aliases": [],
+    "_englishName": "AHISAMAKH"
+  },
+  {
+    "cityCode": 797,
+    "hebrewName": "אחיעזר",
+    "aliases": [],
+    "_englishName": "AHI'EZER"
+  },
+  {
+    "cityCode": 965,
+    "hebrewName": "אטרש )שבט(",
+    "aliases": [],
+    "_englishName": "ATRASH"
+  },
+  {
+    "cityCode": 338,
+    "hebrewName": "איבים",
+    "aliases": [],
+    "_englishName": "IBBIM"
+  },
+  {
+    "cityCode": 716,
+    "hebrewName": "אייל",
+    "aliases": [],
+    "_englishName": "EYAL"
+  },
+  {
+    "cityCode": 77,
+    "hebrewName": "איילת השחר",
+    "aliases": [],
+    "_englishName": "AYYELET HASHAHAR"
+  },
+  {
+    "cityCode": 294,
+    "hebrewName": "אילון",
+    "aliases": [],
+    "_englishName": "ELON"
+  },
+  {
+    "cityCode": 1126,
+    "hebrewName": "אילות",
+    "aliases": [],
+    "_englishName": "ELOT"
+  },
+  {
+    "cityCode": 49,
+    "hebrewName": "אילניה",
+    "aliases": [],
+    "_englishName": "ILANIYYA"
+  },
+  {
+    "cityCode": 2600,
+    "hebrewName": "אילת",
+    "aliases": [
+      "פתח תקוה",
+      "פתח-תקוה",
+      "פת"
+    ],
+    "_englishName": "ELAT",
+    "latitude": 29.5569,
+    "longitude": 34.9516
+  },
+  {
+    "cityCode": 1336,
+    "hebrewName": "אירוס",
+    "aliases": [],
+    "_englishName": "IRUS"
+  },
+  {
+    "cityCode": 3762,
+    "hebrewName": "איתמר",
+    "aliases": [],
+    "_englishName": "ITAMAR"
+  },
+  {
+    "cityCode": 37,
+    "hebrewName": "איתן",
+    "aliases": [],
+    "_englishName": "ETAN"
+  },
+  {
+    "cityCode": 886,
+    "hebrewName": "איתנים",
+    "aliases": [],
+    "_englishName": "ETANIM"
+  },
+  {
+    "cityCode": 478,
+    "hebrewName": "אכסאל",
+    "aliases": [],
+    "_englishName": "IKSAL"
+  },
+  {
+    "cityCode": 1359,
+    "hebrewName": "אל סייד",
+    "aliases": [],
+    "_englishName": "AL SAYYID"
+  },
+  {
+    "cityCode": 1339,
+    "hebrewName": "אל-עזי",
+    "aliases": [],
+    "_englishName": "AL-AZY"
+  },
+  {
+    "cityCode": 1316,
+    "hebrewName": "אל-עריאן",
+    "aliases": [],
+    "_englishName": "AL-ARYAN"
+  },
+  {
+    "cityCode": 4003,
+    "hebrewName": "אל-רום",
+    "aliases": [],
+    "_englishName": "EL-ROM"
+  },
+  {
+    "cityCode": 1145,
+    "hebrewName": "אלומה",
+    "aliases": [],
+    "_englishName": "ALUMMA"
+  },
+  {
+    "cityCode": 330,
+    "hebrewName": "אלומות",
+    "aliases": [],
+    "_englishName": "ALUMMOT"
+  },
+  {
+    "cityCode": 1182,
+    "hebrewName": "אלון הגליל",
+    "aliases": [],
+    "_englishName": "ALLON HAGALIL"
+  },
+  {
+    "cityCode": 3579,
+    "hebrewName": "אלון מורה",
+    "aliases": [],
+    "_englishName": "ELON MORE"
+  },
+  {
+    "cityCode": 3604,
+    "hebrewName": "אלון שבות",
+    "aliases": [],
+    "_englishName": "ALLON SHEVUT"
+  },
+  {
+    "cityCode": 429,
+    "hebrewName": "אלוני אבא",
+    "aliases": [],
+    "_englishName": "ALLONE ABBA"
+  },
+  {
+    "cityCode": 4017,
+    "hebrewName": "אלוני הבשן",
+    "aliases": [],
+    "_englishName": "ALLONE HABASHAN"
+  },
+  {
+    "cityCode": 868,
+    "hebrewName": "אלוני יצחק",
+    "aliases": [],
+    "_englishName": "ALLONE YIZHAQ"
+  },
+  {
+    "cityCode": 285,
+    "hebrewName": "אלונים",
+    "aliases": [],
+    "_englishName": "ALLONIM"
+  },
+  {
+    "cityCode": 4002,
+    "hebrewName": "אלי-עד",
+    "aliases": [],
+    "_englishName": "ELI AL"
+  },
+  {
+    "cityCode": 1365,
+    "hebrewName": "אליאב",
+    "aliases": [],
+    "_englishName": "ELIAV"
+  },
+  {
+    "cityCode": 41,
+    "hebrewName": "אליכין",
+    "aliases": [],
+    "_englishName": "ELYAKHIN"
+  },
+  {
+    "cityCode": 1248,
+    "hebrewName": "אליפז",
+    "aliases": [],
+    "_englishName": "ELIFAZ"
+  },
+  {
+    "cityCode": 730,
+    "hebrewName": "אליפלט",
+    "aliases": [],
+    "_englishName": "ELIFELET"
+  },
+  {
+    "cityCode": 682,
+    "hebrewName": "אליקים",
+    "aliases": [],
+    "_englishName": "ELYAQIM"
+  },
+  {
+    "cityCode": 204,
+    "hebrewName": "אלישיב",
+    "aliases": [],
+    "_englishName": "ELYASHIV"
+  },
+  {
+    "cityCode": 841,
+    "hebrewName": "אלישמע",
+    "aliases": [],
+    "_englishName": "ELISHAMA"
+  },
+  {
+    "cityCode": 1125,
+    "hebrewName": "אלמגור",
+    "aliases": [],
+    "_englishName": "ALMAGOR"
+  },
+  {
+    "cityCode": 3556,
+    "hebrewName": "אלמוג",
+    "aliases": [],
+    "_englishName": "ALMOG"
+  },
+  {
+    "cityCode": 1309,
+    "hebrewName": "אלעד",
+    "aliases": [],
+    "_englishName": "EL'AD"
+  },
+  {
+    "cityCode": 3618,
+    "hebrewName": "אלעזר",
+    "aliases": [],
+    "_englishName": "EL'AZAR"
+  },
+  {
+    "cityCode": 3750,
+    "hebrewName": "אלפי מנשה",
+    "aliases": [],
+    "_englishName": "ALFE MENASHE"
+  },
+  {
+    "cityCode": 603,
+    "hebrewName": "אלקוש",
+    "aliases": [],
+    "_englishName": "ELQOSH"
+  },
+  {
+    "cityCode": 3560,
+    "hebrewName": "אלקנה",
+    "aliases": [],
+    "_englishName": "ELQANA"
+  },
+  {
+    "cityCode": 772,
+    "hebrewName": "אמונים",
+    "aliases": [],
+    "_englishName": "EMUNIM"
+  },
+  {
+    "cityCode": 1064,
+    "hebrewName": "אמירים",
+    "aliases": [],
+    "_englishName": "AMIRIM"
+  },
+  {
+    "cityCode": 1253,
+    "hebrewName": "אמנון",
+    "aliases": [],
+    "_englishName": "AMNUN"
+  },
+  {
+    "cityCode": 23,
+    "hebrewName": "אמציה",
+    "aliases": [],
+    "_englishName": "AMAZYA"
+  },
+  {
+    "cityCode": 4012,
+    "hebrewName": "אניעם",
+    "aliases": [],
+    "_englishName": "ANI'AM"
+  },
+  {
+    "cityCode": 960,
+    "hebrewName": "אסד )שבט(",
+    "aliases": [],
+    "_englishName": "ASAD"
+  },
+  {
+    "cityCode": 3754,
+    "hebrewName": "אספר",
+    "aliases": [],
+    "_englishName": "ASEFAR"
+  },
+  {
+    "cityCode": 529,
+    "hebrewName": "אעבלין",
+    "aliases": [],
+    "_englishName": "I'BILLIN"
+  },
+  {
+    "cityCode": 963,
+    "hebrewName": "אעצם )שבט(",
+    "aliases": [],
+    "_englishName": "A'SAM"
+  },
+  {
+    "cityCode": 959,
+    "hebrewName": "אפיניש )שבט(",
+    "aliases": [],
+    "_englishName": "AFEINISH"
+  },
+  {
+    "cityCode": 4301,
+    "hebrewName": "אפיק",
+    "aliases": [],
+    "_englishName": "AFIQ"
+  },
+  {
+    "cityCode": 176,
+    "hebrewName": "אפיקים",
+    "aliases": [],
+    "_englishName": "AFIQIM"
+  },
+  {
+    "cityCode": 313,
+    "hebrewName": "אפק",
+    "aliases": [],
+    "_englishName": "AFEQ"
+  },
+  {
+    "cityCode": 3650,
+    "hebrewName": "אפרת",
+    "aliases": [],
+    "_englishName": "EFRAT"
+  },
+  {
+    "cityCode": 701,
+    "hebrewName": "ארבל",
+    "aliases": [],
+    "_englishName": "ARBEL"
+  },
+  {
+    "cityCode": 3598,
+    "hebrewName": "ארגמן",
+    "aliases": [],
+    "_englishName": "ARGAMAN"
+  },
+  {
+    "cityCode": 714,
+    "hebrewName": "ארז",
+    "aliases": [],
+    "_englishName": "EREZ"
+  },
+  {
+    "cityCode": 3570,
+    "hebrewName": "אריאל",
+    "aliases": [],
+    "_englishName": "ARI'EL"
+  },
+  {
+    "cityCode": 1324,
+    "hebrewName": "ארסוף",
+    "aliases": [],
+    "_englishName": "ARSUF"
+  },
+  {
+    "cityCode": 71,
+    "hebrewName": "אשבול",
+    "aliases": [],
+    "_englishName": "ESHBOL"
+  },
+  {
+    "cityCode": 1276,
+    "hebrewName": "אשבל",
+    "aliases": [],
+    "_englishName": "NAHAL ESHBAL"
+  },
+  {
+    "cityCode": 70,
+    "hebrewName": "אשדוד",
+    "aliases": [
+      "באר שבע",
+      "באר-שבע",
+      "באר שבע"
+    ],
+    "_englishName": "ASHDOD",
+    "latitude": 31.8044,
+    "longitude": 34.6553
+  },
+  {
+    "cityCode": 199,
+    "hebrewName": "אשדות יעקב  )איחוד(",
+    "aliases": [],
+    "_englishName": "ASHDOT YA'AQOV(IHUD)"
+  },
+  {
+    "cityCode": 188,
+    "hebrewName": "אשדות יעקב  )מאוחד(",
+    "aliases": [],
+    "_englishName": "ASHDOT YA'AQOV(ME'UH"
+  },
+  {
+    "cityCode": 1188,
+    "hebrewName": "אשחר",
+    "aliases": [],
+    "_englishName": "ESHHAR"
+  },
+  {
+    "cityCode": 3722,
+    "hebrewName": "אשכולות",
+    "aliases": [],
+    "_englishName": "ESHKOLOT"
+  },
+  {
+    "cityCode": 2021,
+    "hebrewName": "אשל הנשיא",
+    "aliases": [],
+    "_englishName": "ESHEL HANASI"
+  },
+  {
+    "cityCode": 1152,
+    "hebrewName": "אשלים",
+    "aliases": [],
+    "_englishName": "ASHALIM"
+  },
+  {
+    "cityCode": 7100,
+    "hebrewName": "אשקלון",
+    "aliases": [],
+    "_englishName": "ASHQELON",
+    "latitude": 31.6688,
+    "longitude": 34.5742
+  },
+  {
+    "cityCode": 1256,
+    "hebrewName": "אשרת",
+    "aliases": [],
+    "_englishName": "ASHERAT"
+  },
+  {
+    "cityCode": 740,
+    "hebrewName": "אשתאול",
+    "aliases": [],
+    "_englishName": "ESHTA'OL"
+  },
+  {
+    "cityCode": 6000,
+    "hebrewName": "באקה אל-גרביה",
+    "aliases": [],
+    "_englishName": "BAQA AL-GHARBIYYE"
+  },
+  {
+    "cityCode": 21,
+    "hebrewName": "באר אורה",
+    "aliases": [],
+    "_englishName": "BE'ER ORA"
+  },
+  {
+    "cityCode": 1376,
+    "hebrewName": "באר גנים",
+    "aliases": [],
+    "_englishName": "BEER GANNIM"
+  },
+  {
+    "cityCode": 155,
+    "hebrewName": "באר טוביה",
+    "aliases": [],
+    "_englishName": "BE'ER TUVEYA"
+  },
+  {
+    "cityCode": 2530,
+    "hebrewName": "באר יעקב",
+    "aliases": [],
+    "_englishName": "BE'ER YA'AQOV"
+  },
+  {
+    "cityCode": 1278,
+    "hebrewName": "באר מילכה",
+    "aliases": [],
+    "_englishName": "BE'ER MILKA"
+  },
+  {
+    "cityCode": 9000,
+    "hebrewName": "באר שבע",
+    "aliases": [],
+    "_englishName": "BE'ER SHEVA",
+    "latitude": 31.2518,
+    "longitude": 34.7913
+  },
+  {
+    "cityCode": 450,
+    "hebrewName": "בארות יצחק",
+    "aliases": [],
+    "_englishName": "BE'EROT YIZHAQ"
+  },
+  {
+    "cityCode": 697,
+    "hebrewName": "בארותיים",
+    "aliases": [],
+    "_englishName": "BE'EROTAYIM"
+  },
+  {
+    "cityCode": 399,
+    "hebrewName": "בארי",
+    "aliases": [],
+    "_englishName": "BE'ERI"
+  },
+  {
+    "cityCode": 559,
+    "hebrewName": "בוסתן הגליל",
+    "aliases": [],
+    "_englishName": "BUSTAN HAGALIL"
+  },
+  {
+    "cityCode": 482,
+    "hebrewName": "בועיינה-נוג'ידאת",
+    "aliases": [],
+    "_englishName": "BU'EINE-NUJEIDAT"
+  },
+  {
+    "cityCode": 4001,
+    "hebrewName": "בוקעאתא",
+    "aliases": [],
+    "_englishName": "BUQ'ATA"
+  },
+  {
+    "cityCode": 698,
+    "hebrewName": "בורגתה",
+    "aliases": [],
+    "_englishName": "BURGETA"
+  },
+  {
+    "cityCode": 2043,
+    "hebrewName": "בחן",
+    "aliases": [],
+    "_englishName": "BAHAN"
+  },
+  {
+    "cityCode": 762,
+    "hebrewName": "בטחה",
+    "aliases": [],
+    "_englishName": "BITHA"
+  },
+  {
+    "cityCode": 234,
+    "hebrewName": "ביצרון",
+    "aliases": [],
+    "_englishName": "BIZZARON"
+  },
+  {
+    "cityCode": 998,
+    "hebrewName": "ביר אל-מכסור",
+    "aliases": [],
+    "_englishName": "BIR EL-MAKSUR"
+  },
+  {
+    "cityCode": 1348,
+    "hebrewName": "ביר הדאג'",
+    "aliases": [],
+    "_englishName": "BIR HADAGE"
+  },
+  {
+    "cityCode": 368,
+    "hebrewName": "ביריה",
+    "aliases": [],
+    "_englishName": "BIRIYYA"
+  },
+  {
+    "cityCode": 317,
+    "hebrewName": "בית אורן",
+    "aliases": [],
+    "_englishName": "BET OREN"
+  },
+  {
+    "cityCode": 3574,
+    "hebrewName": "בית אל",
+    "aliases": [],
+    "_englishName": "BET EL"
+  },
+  {
+    "cityCode": 562,
+    "hebrewName": "בית אלעזרי",
+    "aliases": [],
+    "_englishName": "BET EL'AZARI"
+  },
+  {
+    "cityCode": 95,
+    "hebrewName": "בית אלפא",
+    "aliases": [],
+    "_englishName": "BET ALFA"
+  },
+  {
+    "cityCode": 3652,
+    "hebrewName": "בית אריה",
+    "aliases": [],
+    "_englishName": "BET ARYE"
+  },
+  {
+    "cityCode": 1076,
+    "hebrewName": "בית ברל",
+    "aliases": [],
+    "_englishName": "BET BERL"
+  },
+  {
+    "cityCode": 480,
+    "hebrewName": "בית ג'ן",
+    "aliases": [],
+    "_englishName": "BEIT JANN"
+  },
+  {
+    "cityCode": 619,
+    "hebrewName": "בית גוברין",
+    "aliases": [],
+    "_englishName": "BET GUVRIN"
+  },
+  {
+    "cityCode": 571,
+    "hebrewName": "בית גמליאל",
+    "aliases": [],
+    "_englishName": "BET GAMLI'EL"
+  },
+  {
+    "cityCode": 466,
+    "hebrewName": "בית דגן",
+    "aliases": [],
+    "_englishName": "BET DAGAN"
+  },
+  {
+    "cityCode": 723,
+    "hebrewName": "בית הגדי",
+    "aliases": [],
+    "_englishName": "BET HAGADDI"
+  },
+  {
+    "cityCode": 373,
+    "hebrewName": "בית הלוי",
+    "aliases": [],
+    "_englishName": "BET HALEVI"
+  },
+  {
+    "cityCode": 322,
+    "hebrewName": "בית הלל",
+    "aliases": [],
+    "_englishName": "BET HILLEL"
+  },
+  {
+    "cityCode": 572,
+    "hebrewName": "בית העמק",
+    "aliases": [],
+    "_englishName": "BET HAEMEQ"
+  },
+  {
+    "cityCode": 3645,
+    "hebrewName": "בית הערבה",
+    "aliases": [],
+    "_englishName": "BET HAARAVA"
+  },
+  {
+    "cityCode": 242,
+    "hebrewName": "בית השיטה",
+    "aliases": [],
+    "_englishName": "BET HASHITTA"
+  },
+  {
+    "cityCode": 353,
+    "hebrewName": "בית זיד",
+    "aliases": [],
+    "_englishName": "BET ZEID"
+  },
+  {
+    "cityCode": 710,
+    "hebrewName": "בית זית",
+    "aliases": [],
+    "_englishName": "BET ZAYIT"
+  },
+  {
+    "cityCode": 143,
+    "hebrewName": "בית זרע",
+    "aliases": [],
+    "_englishName": "BET ZERA"
+  },
+  {
+    "cityCode": 3575,
+    "hebrewName": "בית חורון",
+    "aliases": [],
+    "_englishName": "BET HORON"
+  },
+  {
+    "cityCode": 877,
+    "hebrewName": "בית חירות",
+    "aliases": [],
+    "_englishName": "BET HERUT"
+  },
+  {
+    "cityCode": 2033,
+    "hebrewName": "בית חלקיה",
+    "aliases": [],
+    "_englishName": "BET HILQIYYA"
+  },
+  {
+    "cityCode": 159,
+    "hebrewName": "בית חנן",
+    "aliases": [],
+    "_englishName": "BET HANAN"
+  },
+  {
+    "cityCode": 800,
+    "hebrewName": "בית חנניה",
+    "aliases": [],
+    "_englishName": "BET HANANYA"
+  },
+  {
+    "cityCode": 1050,
+    "hebrewName": "בית חשמונאי",
+    "aliases": [],
+    "_englishName": "BET HASHMONAY"
+  },
+  {
+    "cityCode": 288,
+    "hebrewName": "בית יהושע",
+    "aliases": [],
+    "_englishName": "BET YEHOSHUA"
+  },
+  {
+    "cityCode": 265,
+    "hebrewName": "בית יוסף",
+    "aliases": [],
+    "_englishName": "BET YOSEF"
+  },
+  {
+    "cityCode": 200,
+    "hebrewName": "בית ינאי",
+    "aliases": [],
+    "_englishName": "BET YANNAY"
+  },
+  {
+    "cityCode": 326,
+    "hebrewName": "בית יצחק-שער חפר",
+    "aliases": [],
+    "_englishName": "BET YIZHAQ-SH. HEFER"
+  },
+  {
+    "cityCode": 430,
+    "hebrewName": "בית לחם הגלילית",
+    "aliases": [],
+    "_englishName": "BET LEHEM HAGELILIT"
+  },
+  {
+    "cityCode": 751,
+    "hebrewName": "בית מאיר",
+    "aliases": [],
+    "_englishName": "BET ME'IR"
+  },
+  {
+    "cityCode": 784,
+    "hebrewName": "בית נחמיה",
+    "aliases": [],
+    "_englishName": "BET NEHEMYA"
+  },
+  {
+    "cityCode": 16,
+    "hebrewName": "בית ניר",
+    "aliases": [],
+    "_englishName": "BET NIR"
+  },
+  {
+    "cityCode": 672,
+    "hebrewName": "בית נקופה",
+    "aliases": [],
+    "_englishName": "BET NEQOFA"
+  },
+  {
+    "cityCode": 202,
+    "hebrewName": "בית עובד",
+    "aliases": [],
+    "_englishName": "BET OVED"
+  },
+  {
+    "cityCode": 301,
+    "hebrewName": "בית עוזיאל",
+    "aliases": [],
+    "_englishName": "BET UZZI'EL"
+  },
+  {
+    "cityCode": 756,
+    "hebrewName": "בית עזרא",
+    "aliases": [],
+    "_englishName": "BET EZRA"
+  },
+  {
+    "cityCode": 604,
+    "hebrewName": "בית עריף",
+    "aliases": [],
+    "_englishName": "BET ARIF"
+  },
+  {
+    "cityCode": 212,
+    "hebrewName": "בית צבי",
+    "aliases": [],
+    "_englishName": "BET ZEVI"
+  },
+  {
+    "cityCode": 598,
+    "hebrewName": "בית קמה",
+    "aliases": [],
+    "_englishName": "BET QAMA"
+  },
+  {
+    "cityCode": 365,
+    "hebrewName": "בית קשת",
+    "aliases": [],
+    "_englishName": "BET QESHET"
+  },
+  {
+    "cityCode": 848,
+    "hebrewName": "בית רבן",
+    "aliases": [],
+    "_englishName": "BET RABBAN"
+  },
+  {
+    "cityCode": 1162,
+    "hebrewName": "בית רימון",
+    "aliases": [],
+    "_englishName": "BET RIMMON"
+  },
+  {
+    "cityCode": 9200,
+    "hebrewName": "בית שאן",
+    "aliases": [],
+    "_englishName": "BET SHE'AN"
+  },
+  {
+    "cityCode": 2610,
+    "hebrewName": "בית שמש",
+    "aliases": [
+      "רמת גן",
+      "רמת-גן"
+    ],
+    "_englishName": "BET SHEMESH",
+    "latitude": 31.753,
+    "longitude": 34.9885
+  },
+  {
+    "cityCode": 248,
+    "hebrewName": "בית שערים",
+    "aliases": [],
+    "_englishName": "BET SHE'ARIM"
+  },
+  {
+    "cityCode": 747,
+    "hebrewName": "בית שקמה",
+    "aliases": [],
+    "_englishName": "BET SHIQMA"
+  },
+  {
+    "cityCode": 252,
+    "hebrewName": "ביתן אהרן",
+    "aliases": [],
+    "_englishName": "BITAN AHARON"
+  },
+  {
+    "cityCode": 3780,
+    "hebrewName": "ביתר עילית",
+    "aliases": [],
+    "_englishName": "BETAR ILLIT"
+  },
+  {
+    "cityCode": 94,
+    "hebrewName": "בלפוריה",
+    "aliases": [],
+    "_englishName": "BALFURIYYA"
+  },
+  {
+    "cityCode": 712,
+    "hebrewName": "בן עמי",
+    "aliases": [],
+    "_englishName": "BEN AMMI"
+  },
+  {
+    "cityCode": 1084,
+    "hebrewName": "בן שמן )כפר נוער(",
+    "aliases": [],
+    "_englishName": "BEN SHEMEN(K.NO'AR)"
+  },
+  {
+    "cityCode": 2013,
+    "hebrewName": "בן שמן )מושב(",
+    "aliases": [],
+    "_englishName": "BEN SHEMEN (MOSHAV)"
+  },
+  {
+    "cityCode": 6100,
+    "hebrewName": "בני ברק",
+    "aliases": [
+      "בני ברק",
+      "בני-ברק",
+      "בני ברק"
+    ],
+    "_englishName": "BENE BERAQ",
+    "latitude": 32.0809,
+    "longitude": 34.8338
+  },
+  {
+    "cityCode": 1368,
+    "hebrewName": "בני דקלים",
+    "aliases": [],
+    "_englishName": "BNE DKALIM"
+  },
+  {
+    "cityCode": 592,
+    "hebrewName": "בני דרום",
+    "aliases": [],
+    "_englishName": "BENE DAROM"
+  },
+  {
+    "cityCode": 386,
+    "hebrewName": "בני דרור",
+    "aliases": [],
+    "_englishName": "BENE DEROR"
+  },
+  {
+    "cityCode": 4015,
+    "hebrewName": "בני יהודה",
+    "aliases": [],
+    "_englishName": "BENE YEHUDA"
+  },
+  {
+    "cityCode": 1363,
+    "hebrewName": "בני נצרים",
+    "aliases": [],
+    "_englishName": "BENE NEZARIM"
+  },
+  {
+    "cityCode": 448,
+    "hebrewName": "בני עטרות",
+    "aliases": [],
+    "_englishName": "BENE ATAROT"
+  },
+  {
+    "cityCode": 1066,
+    "hebrewName": "בני עי\"ש",
+    "aliases": [],
+    "_englishName": "BENE AYISH"
+  },
+  {
+    "cityCode": 418,
+    "hebrewName": "בני ציון",
+    "aliases": [],
+    "_englishName": "BENE ZIYYON"
+  },
+  {
+    "cityCode": 588,
+    "hebrewName": "בני ראם",
+    "aliases": [],
+    "_englishName": "BENE RE'EM"
+  },
+  {
+    "cityCode": 685,
+    "hebrewName": "בניה",
+    "aliases": [],
+    "_englishName": "BENAYA"
+  },
+  {
+    "cityCode": 9800,
+    "hebrewName": "בנימינה-גבעת עדה",
+    "aliases": [],
+    "_englishName": "BINYAMINA"
+  },
+  {
+    "cityCode": 1326,
+    "hebrewName": "בסמ\"ה",
+    "aliases": [],
+    "_englishName": "BASMA"
+  },
+  {
+    "cityCode": 944,
+    "hebrewName": "בסמת טבעון",
+    "aliases": [],
+    "_englishName": "BASMAT TAB'UN"
+  },
+  {
+    "cityCode": 483,
+    "hebrewName": "��ענה",
+    "aliases": [],
+    "_englishName": "BI NE"
+  },
+  {
+    "cityCode": 389,
+    "hebrewName": "בצרה",
+    "aliases": [],
+    "_englishName": "BAZRA"
+  },
+  {
+    "cityCode": 589,
+    "hebrewName": "בצת",
+    "aliases": [],
+    "_englishName": "BEZET"
+  },
+  {
+    "cityCode": 864,
+    "hebrewName": "בקוע",
+    "aliases": [],
+    "_englishName": "BEQOA"
+  },
+  {
+    "cityCode": 3612,
+    "hebrewName": "בקעות",
+    "aliases": [],
+    "_englishName": "BEQA'OT"
+  },
+  {
+    "cityCode": 823,
+    "hebrewName": "בר גיורא",
+    "aliases": [],
+    "_englishName": "BAR GIYYORA"
+  },
+  {
+    "cityCode": 1191,
+    "hebrewName": "בר יוחאי",
+    "aliases": [],
+    "_englishName": "BAR YOHAY"
+  },
+  {
+    "cityCode": 3744,
+    "hebrewName": "ברוכין",
+    "aliases": [],
+    "_englishName": "BRUKHIN"
+  },
+  {
+    "cityCode": 428,
+    "hebrewName": "ברור חיל",
+    "aliases": [],
+    "_englishName": "BEROR HAYIL"
+  },
+  {
+    "cityCode": 2060,
+    "hebrewName": "ברוש",
+    "aliases": [],
+    "_englishName": "BEROSH"
+  },
+  {
+    "cityCode": 3710,
+    "hebrewName": "ברכה",
+    "aliases": [],
+    "_englishName": "BERAKHA"
+  },
+  {
+    "cityCode": 746,
+    "hebrewName": "ברכיה",
+    "aliases": [],
+    "_englishName": "BEREKHYA"
+  },
+  {
+    "cityCode": 667,
+    "hebrewName": "ברעם",
+    "aliases": [],
+    "_englishName": "BAR'AM"
+  },
+  {
+    "cityCode": 141,
+    "hebrewName": "ברק",
+    "aliases": [],
+    "_englishName": "BARAQ"
+  },
+  {
+    "cityCode": 617,
+    "hebrewName": "ברקאי",
+    "aliases": [],
+    "_englishName": "BARQAY"
+  },
+  {
+    "cityCode": 3654,
+    "hebrewName": "ברקן",
+    "aliases": [],
+    "_englishName": "BARQAN"
+  },
+  {
+    "cityCode": 2038,
+    "hebrewName": "ברקת",
+    "aliases": [],
+    "_englishName": "BAREQET"
+  },
+  {
+    "cityCode": 1323,
+    "hebrewName": "בת הדר",
+    "aliases": [],
+    "_englishName": "BAT HADAR"
+  },
+  {
+    "cityCode": 1319,
+    "hebrewName": "בת חפר",
+    "aliases": [],
+    "_englishName": "BAT HEFER"
+  },
+  {
+    "cityCode": 1401,
+    "hebrewName": "בת חצור",
+    "aliases": [],
+    "_englishName": "BAT HAZOR"
+  },
+  {
+    "cityCode": 6200,
+    "hebrewName": "בת ים",
+    "aliases": [],
+    "_englishName": "BAT YAM",
+    "latitude": 32.0208,
+    "longitude": 34.7478
+  },
+  {
+    "cityCode": 3794,
+    "hebrewName": "בת עין",
+    "aliases": [],
+    "_englishName": "BAT AYIN"
+  },
+  {
+    "cityCode": 33,
+    "hebrewName": "בת שלמה",
+    "aliases": [],
+    "_englishName": "BAT SHELOMO"
+  },
+  {
+    "cityCode": 1292,
+    "hebrewName": "ג'דיידה-מכר",
+    "aliases": [],
+    "_englishName": "JUDEIDE-MAKER"
+  },
+  {
+    "cityCode": 485,
+    "hebrewName": "ג'ולס",
+    "aliases": [],
+    "_englishName": "JULIS"
+  },
+  {
+    "cityCode": 627,
+    "hebrewName": "ג'לג'וליה",
+    "aliases": [],
+    "_englishName": "JALJULYE"
+  },
+  {
+    "cityCode": 976,
+    "hebrewName": "ג'נאביב )שבט(",
+    "aliases": [],
+    "_englishName": "JUNNABIB"
+  },
+  {
+    "cityCode": 541,
+    "hebrewName": "ג'סר א-זרקא",
+    "aliases": [],
+    "_englishName": "JISR AZ-ZARQA"
+  },
+  {
+    "cityCode": 487,
+    "hebrewName": "ג'ש )גוש חלב(",
+    "aliases": [],
+    "_englishName": "JISH(GUSH HALAV)"
+  },
+  {
+    "cityCode": 628,
+    "hebrewName": "ג'ת",
+    "aliases": [],
+    "_englishName": "JAAT"
+  },
+  {
+    "cityCode": 872,
+    "hebrewName": "גאולי תימן",
+    "aliases": [],
+    "_englishName": "GE'ULE TEMAN"
+  },
+  {
+    "cityCode": 379,
+    "hebrewName": "גאולים",
+    "aliases": [],
+    "_englishName": "GE'ULIM"
+  },
+  {
+    "cityCode": 853,
+    "hebrewName": "גאליה",
+    "aliases": [],
+    "_englishName": "GE'ALYA"
+  },
+  {
+    "cityCode": 352,
+    "hebrewName": "גבולות",
+    "aliases": [],
+    "_englishName": "GEVULOT"
+  },
+  {
+    "cityCode": 424,
+    "hebrewName": "גבים",
+    "aliases": [],
+    "_englishName": "GEVIM"
+  },
+  {
+    "cityCode": 86,
+    "hebrewName": "גבע",
+    "aliases": [],
+    "_englishName": "GEVA"
+  },
+  {
+    "cityCode": 3763,
+    "hebrewName": "גבע בנימין",
+    "aliases": [],
+    "_englishName": "GEVA BINYAMIN"
+  },
+  {
+    "cityCode": 683,
+    "hebrewName": "גבע כרמל",
+    "aliases": [],
+    "_englishName": "GEVA  KARMEL"
+  },
+  {
+    "cityCode": 2014,
+    "hebrewName": "גבעולים",
+    "aliases": [],
+    "_englishName": "GIV'OLIM"
+  },
+  {
+    "cityCode": 3644,
+    "hebrewName": "גבעון החדשה",
+    "aliases": [],
+    "_englishName": "GIV'ON HAHADASHA"
+  },
+  {
+    "cityCode": 1344,
+    "hebrewName": "גבעות בר",
+    "aliases": [],
+    "_englishName": "GEVA'OT BAR"
+  },
+  {
+    "cityCode": 1293,
+    "hebrewName": "גבעת אבני",
+    "aliases": [],
+    "_englishName": "GIV'AT AVNI"
+  },
+  {
+    "cityCode": 1288,
+    "hebrewName": "גבעת אלה",
+    "aliases": [],
+    "_englishName": "GIV'AT ELA"
+  },
+  {
+    "cityCode": 147,
+    "hebrewName": "גבעת ברנר",
+    "aliases": [],
+    "_englishName": "GIV'AT BRENNER"
+  },
+  {
+    "cityCode": 870,
+    "hebrewName": "גבעת השלושה",
+    "aliases": [],
+    "_englishName": "GIV'AT HASHELOSHA"
+  },
+  {
+    "cityCode": 3730,
+    "hebrewName": "גבעת זאב",
+    "aliases": [],
+    "_englishName": "GIV'AT ZE'EV"
+  },
+  {
+    "cityCode": 207,
+    "hebrewName": "גבעת ח\"ן",
+    "aliases": [],
+    "_englishName": "GIV'AT HEN"
+  },
+  {
+    "cityCode": 2018,
+    "hebrewName": "גבעת חיים )איחוד(",
+    "aliases": [],
+    "_englishName": "GIV'AT HAYYIM (IHUD)"
+  },
+  {
+    "cityCode": 173,
+    "hebrewName": "גבעת חיים )מאוחד(",
+    "aliases": [],
+    "_englishName": "GIV'AT HAYYIM(ME'UHA"
+  },
+  {
+    "cityCode": 4021,
+    "hebrewName": "גבעת יואב",
+    "aliases": [],
+    "_englishName": "GIV'AT YO'AV"
+  },
+  {
+    "cityCode": 787,
+    "hebrewName": "גבעת יערים",
+    "aliases": [],
+    "_englishName": "GIV'AT YE'ARIM"
+  },
+  {
+    "cityCode": 919,
+    "hebrewName": "גבעת ישעיהו",
+    "aliases": [],
+    "_englishName": "GIV'AT YESHA'YAHU"
+  },
+  {
+    "cityCode": 802,
+    "hebrewName": "גבעת כ\"ח",
+    "aliases": [],
+    "_englishName": "GIV'AT KOAH"
+  },
+  {
+    "cityCode": 360,
+    "hebrewName": "גבעת ניל\"י",
+    "aliases": [],
+    "_englishName": "GIV'AT NILI"
+  },
+  {
+    "cityCode": 703,
+    "hebrewName": "גבעת עוז",
+    "aliases": [],
+    "_englishName": "GIV'AT OZ"
+  },
+  {
+    "cityCode": 681,
+    "hebrewName": "גבעת שמואל",
+    "aliases": [],
+    "_englishName": "GIV'AT SHEMU'EL"
+  },
+  {
+    "cityCode": 566,
+    "hebrewName": "גבעת שמש",
+    "aliases": [],
+    "_englishName": "GIV'AT SHEMESH"
+  },
+  {
+    "cityCode": 1077,
+    "hebrewName": "גבעת שפירא",
+    "aliases": [],
+    "_englishName": "GIV'AT SHAPPIRA"
+  },
+  {
+    "cityCode": 793,
+    "hebrewName": "גבעתי",
+    "aliases": [],
+    "_englishName": "GIV'ATI"
+  },
+  {
+    "cityCode": 6300,
+    "hebrewName": "גבעתיים",
+    "aliases": [],
+    "_englishName": "GIV'ATAYIM"
+  },
+  {
+    "cityCode": 342,
+    "hebrewName": "גברעם",
+    "aliases": [],
+    "_englishName": "GEVAR'AM"
+  },
+  {
+    "cityCode": 133,
+    "hebrewName": "גבת",
+    "aliases": [],
+    "_englishName": "GEVAT"
+  },
+  {
+    "cityCode": 35,
+    "hebrewName": "גדות",
+    "aliases": [],
+    "_englishName": "GADOT"
+  },
+  {
+    "cityCode": 145,
+    "hebrewName": "גדיש",
+    "aliases": [],
+    "_englishName": "GADISH"
+  },
+  {
+    "cityCode": 442,
+    "hebrewName": "גדעונה",
+    "aliases": [],
+    "_englishName": "GID'ONA"
+  },
+  {
+    "cityCode": 2550,
+    "hebrewName": "גדרה",
+    "aliases": [],
+    "_englishName": "GEDERA"
+  },
+  {
+    "cityCode": 852,
+    "hebrewName": "גונן",
+    "aliases": [],
+    "_englishName": "GONEN"
+  },
+  {
+    "cityCode": 755,
+    "hebrewName": "גורן",
+    "aliases": [],
+    "_englishName": "GOREN"
+  },
+  {
+    "cityCode": 1219,
+    "hebrewName": "גורנות הגליל",
+    "aliases": [],
+    "_englishName": "GORNOT HAGALIL"
+  },
+  {
+    "cityCode": 457,
+    "hebrewName": "גזית",
+    "aliases": [],
+    "_englishName": "GAZIT"
+  },
+  {
+    "cityCode": 370,
+    "hebrewName": "גזר",
+    "aliases": [],
+    "_englishName": "GEZER"
+  },
+  {
+    "cityCode": 706,
+    "hebrewName": "גיאה",
+    "aliases": [],
+    "_englishName": "GE'A"
+  },
+  {
+    "cityCode": 196,
+    "hebrewName": "גיבתון",
+    "aliases": [],
+    "_englishName": "GIBBETON"
+  },
+  {
+    "cityCode": 1043,
+    "hebrewName": "גיזו",
+    "aliases": [],
+    "_englishName": "GIZO"
+  },
+  {
+    "cityCode": 1204,
+    "hebrewName": "גילון",
+    "aliases": [],
+    "_englishName": "GILON"
+  },
+  {
+    "cityCode": 736,
+    "hebrewName": "גילת",
+    "aliases": [],
+    "_englishName": "GILAT"
+  },
+  {
+    "cityCode": 262,
+    "hebrewName": "גינוסר",
+    "aliases": [],
+    "_englishName": "GINNOSAR"
+  },
+  {
+    "cityCode": 92,
+    "hebrewName": "גיניגר",
+    "aliases": [],
+    "_englishName": "GINNEGAR"
+  },
+  {
+    "cityCode": 863,
+    "hebrewName": "גינתון",
+    "aliases": [],
+    "_englishName": "GINNATON"
+  },
+  {
+    "cityCode": 1206,
+    "hebrewName": "גיתה",
+    "aliases": [],
+    "_englishName": "GITTA"
+  },
+  {
+    "cityCode": 3613,
+    "hebrewName": "גיתית",
+    "aliases": [],
+    "_englishName": "GITTIT"
+  },
+  {
+    "cityCode": 393,
+    "hebrewName": "גלאון",
+    "aliases": [],
+    "_englishName": "GAL'ON"
+  },
+  {
+    "cityCode": 3606,
+    "hebrewName": "גלגל",
+    "aliases": [],
+    "_englishName": "GILGAL"
+  },
+  {
+    "cityCode": 346,
+    "hebrewName": "גליל ים",
+    "aliases": [],
+    "_englishName": "GELIL YAM"
+  },
+  {
+    "cityCode": 369,
+    "hebrewName": "גלעד )אבן יצחק(",
+    "aliases": [],
+    "_englishName": "EVEN YIZHAQ(GAL'ED)"
+  },
+  {
+    "cityCode": 745,
+    "hebrewName": "גמזו",
+    "aliases": [],
+    "_englishName": "GIMZO"
+  },
+  {
+    "cityCode": 1072,
+    "hebrewName": "גן הדרום",
+    "aliases": [],
+    "_englishName": "GAN HADAROM"
+  },
+  {
+    "cityCode": 225,
+    "hebrewName": "גן השומרון",
+    "aliases": [],
+    "_englishName": "GAN HASHOMERON"
+  },
+  {
+    "cityCode": 239,
+    "hebrewName": "גן חיים",
+    "aliases": [],
+    "_englishName": "GAN HAYYIM"
+  },
+  {
+    "cityCode": 734,
+    "hebrewName": "גן יאשיה",
+    "aliases": [],
+    "_englishName": "GAN YOSHIYYA"
+  },
+  {
+    "cityCode": 166,
+    "hebrewName": "גן יבנה",
+    "aliases": [],
+    "_englishName": "GAN YAVNE"
+  },
+  {
+    "cityCode": 1274,
+    "hebrewName": "גן נר",
+    "aliases": [],
+    "_englishName": "GAN NER"
+  },
+  {
+    "cityCode": 311,
+    "hebrewName": "גן שורק",
+    "aliases": [],
+    "_englishName": "GAN SOREQ"
+  },
+  {
+    "cityCode": 144,
+    "hebrewName": "גן שלמה",
+    "aliases": [],
+    "_englishName": "GAN SHELOMO"
+  },
+  {
+    "cityCode": 72,
+    "hebrewName": "גן שמואל",
+    "aliases": [],
+    "_englishName": "GAN SHEMU'EL"
+  },
+  {
+    "cityCode": 836,
+    "hebrewName": "גנות",
+    "aliases": [],
+    "_englishName": "GANNOT"
+  },
+  {
+    "cityCode": 549,
+    "hebrewName": "גנות הדר",
+    "aliases": [],
+    "_englishName": "GANNOT HADAR"
+  },
+  {
+    "cityCode": 1103,
+    "hebrewName": "גני הדר",
+    "aliases": [],
+    "_englishName": "GANNE HADAR"
+  },
+  {
+    "cityCode": 1371,
+    "hebrewName": "גני טל",
+    "aliases": [],
+    "_englishName": "GANNE TAL"
+  },
+  {
+    "cityCode": 862,
+    "hebrewName": "גני יוחנן",
+    "aliases": [],
+    "_englishName": "GANNE YOHANAN"
+  },
+  {
+    "cityCode": 3823,
+    "hebrewName": "גני מודיעין",
+    "aliases": [],
+    "_englishName": "GANNE MODIIN"
+  },
+  {
+    "cityCode": 218,
+    "hebrewName": "גני עם",
+    "aliases": [],
+    "_englishName": "GANNE AM"
+  },
+  {
+    "cityCode": 229,
+    "hebrewName": "גני תקווה",
+    "aliases": [],
+    "_englishName": "GANNE TIQWA",
+    "latitude": 32.0664,
+    "longitude": 34.8716
+  },
+  {
+    "cityCode": 842,
+    "hebrewName": "געש",
+    "aliases": [],
+    "_englishName": "GA'ASH"
+  },
+  {
+    "cityCode": 463,
+    "hebrewName": "געתון",
+    "aliases": [],
+    "_englishName": "GA'TON"
+  },
+  {
+    "cityCode": 39,
+    "hebrewName": "גפן",
+    "aliases": [],
+    "_englishName": "GEFEN"
+  },
+  {
+    "cityCode": 1129,
+    "hebrewName": "גרופית",
+    "aliases": [],
+    "_englishName": "GEROFIT"
+  },
+  {
+    "cityCode": 4022,
+    "hebrewName": "גשור",
+    "aliases": [],
+    "_englishName": "GESHUR"
+  },
+  {
+    "cityCode": 305,
+    "hebrewName": "גשר",
+    "aliases": [],
+    "_englishName": "GESHER"
+  },
+  {
+    "cityCode": 574,
+    "hebrewName": "גשר הזיו",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 340,
+    "hebrewName": "גת )קיבוץ(",
+    "aliases": [],
+    "_englishName": "GAT(QIBBUZ)"
+  },
+  {
+    "cityCode": 128,
+    "hebrewName": "גת רימון",
+    "aliases": [],
+    "_englishName": "GAT RIMMON"
+  },
+  {
+    "cityCode": 494,
+    "hebrewName": "דאלית אל-כרמל",
+    "aliases": [],
+    "_englishName": "DALIYAT AL-KARMEL"
+  },
+  {
+    "cityCode": 146,
+    "hebrewName": "דבורה",
+    "aliases": [],
+    "_englishName": "DEVORA"
+  },
+  {
+    "cityCode": 489,
+    "hebrewName": "דבוריה",
+    "aliases": [],
+    "_englishName": "DABBURYE"
+  },
+  {
+    "cityCode": 849,
+    "hebrewName": "דבירה",
+    "aliases": [],
+    "_englishName": "DEVIRA"
+  },
+  {
+    "cityCode": 407,
+    "hebrewName": "דברת",
+    "aliases": [],
+    "_englishName": "DAVERAT"
+  },
+  {
+    "cityCode": 62,
+    "hebrewName": "דגניה א'",
+    "aliases": [],
+    "_englishName": "DEGANYA ALEF"
+  },
+  {
+    "cityCode": 79,
+    "hebrewName": "דגניה ב'",
+    "aliases": [],
+    "_englishName": "DEGANYA BET"
+  },
+  {
+    "cityCode": 1067,
+    "hebrewName": "דוב\"ב",
+    "aliases": [],
+    "_englishName": "DOVEV"
+  },
+  {
+    "cityCode": 3747,
+    "hebrewName": "דולב",
+    "aliases": [],
+    "_englishName": "DOLEV"
+  },
+  {
+    "cityCode": 738,
+    "hebrewName": "דור",
+    "aliases": [],
+    "_englishName": "DOR"
+  },
+  {
+    "cityCode": 336,
+    "hebrewName": "דורות",
+    "aliases": [],
+    "_englishName": "DOROT"
+  },
+  {
+    "cityCode": 475,
+    "hebrewName": "דחי",
+    "aliases": [],
+    "_englishName": "DAHI"
+  },
+  {
+    "cityCode": 490,
+    "hebrewName": "דייר אל-אסד",
+    "aliases": [],
+    "_englishName": "DEIR AL-ASAD"
+  },
+  {
+    "cityCode": 492,
+    "hebrewName": "דייר חנא",
+    "aliases": [],
+    "_englishName": "DEIR HANNA"
+  },
+  {
+    "cityCode": 493,
+    "hebrewName": "דייר ראפאת",
+    "aliases": [],
+    "_englishName": "DEIR RAFAT"
+  },
+  {
+    "cityCode": 2200,
+    "hebrewName": "דימונה",
+    "aliases": [],
+    "_englishName": "DIMONA",
+    "latitude": 31.0686,
+    "longitude": 35.0332
+  },
+  {
+    "cityCode": 2063,
+    "hebrewName": "דישון",
+    "aliases": [],
+    "_englishName": "DISHON"
+  },
+  {
+    "cityCode": 300,
+    "hebrewName": "דליה",
+    "aliases": [],
+    "_englishName": "DALIYYA"
+  },
+  {
+    "cityCode": 431,
+    "hebrewName": "דלתון",
+    "aliases": [],
+    "_englishName": "DALTON"
+  },
+  {
+    "cityCode": 1317,
+    "hebrewName": "דמיידה",
+    "aliases": [],
+    "_englishName": "DEMEIDE"
+  },
+  {
+    "cityCode": 303,
+    "hebrewName": "דן",
+    "aliases": [],
+    "_englishName": "DAN"
+  },
+  {
+    "cityCode": 302,
+    "hebrewName": "דפנה",
+    "aliases": [],
+    "_englishName": "DAFNA"
+  },
+  {
+    "cityCode": 1241,
+    "hebrewName": "דקל",
+    "aliases": [],
+    "_englishName": "DEQEL"
+  },
+  {
+    "cityCode": 1349,
+    "hebrewName": "דריג'את",
+    "aliases": [],
+    "_englishName": "DERIG'AT"
+  },
+  {
+    "cityCode": 702,
+    "hebrewName": "האון",
+    "aliases": [],
+    "_englishName": "HAON"
+  },
+  {
+    "cityCode": 675,
+    "hebrewName": "הבונים",
+    "aliases": [],
+    "_englishName": "HABONIM"
+  },
+  {
+    "cityCode": 356,
+    "hebrewName": "הגושרים",
+    "aliases": [],
+    "_englishName": "HAGOSHERIM"
+  },
+  {
+    "cityCode": 191,
+    "hebrewName": "הדר עם",
+    "aliases": [],
+    "_englishName": "HADAR AM"
+  },
+  {
+    "cityCode": 9700,
+    "hebrewName": "הוד השרון",
+    "aliases": [],
+    "_englishName": "HOD HASHARON"
+  },
+  {
+    "cityCode": 726,
+    "hebrewName": "הודיה",
+    "aliases": [],
+    "_englishName": "HODIYYA"
+  },
+  {
+    "cityCode": 1322,
+    "hebrewName": "הודיות",
+    "aliases": [],
+    "_englishName": "HODAYOT"
+  },
+  {
+    "cityCode": 1169,
+    "hebrewName": "הוואשלה )שבט(",
+    "aliases": [],
+    "_englishName": "HAWASHLA"
+  },
+  {
+    "cityCode": 956,
+    "hebrewName": "הוזייל )שבט(",
+    "aliases": [],
+    "_englishName": "HUZAYYEL"
+  },
+  {
+    "cityCode": 1186,
+    "hebrewName": "הושעיה",
+    "aliases": [],
+    "_englishName": "HOSHA'AYA"
+  },
+  {
+    "cityCode": 250,
+    "hebrewName": "הזורע",
+    "aliases": [],
+    "_englishName": "HAZOREA"
+  },
+  {
+    "cityCode": 307,
+    "hebrewName": "הזורעים",
+    "aliases": [],
+    "_englishName": "HAZORE'IM"
+  },
+  {
+    "cityCode": 434,
+    "hebrewName": "החותר��ם",
+    "aliases": [],
+    "_englishName": "HAHOTERIM"
+  },
+  {
+    "cityCode": 684,
+    "hebrewName": "היוגב",
+    "aliases": [],
+    "_englishName": "HAYOGEV"
+  },
+  {
+    "cityCode": 1208,
+    "hebrewName": "הילה",
+    "aliases": [],
+    "_englishName": "HILLA"
+  },
+  {
+    "cityCode": 377,
+    "hebrewName": "המעפיל",
+    "aliases": [],
+    "_englishName": "HAMA'PIL"
+  },
+  {
+    "cityCode": 677,
+    "hebrewName": "הסוללים",
+    "aliases": [],
+    "_englishName": "HASOLELIM"
+  },
+  {
+    "cityCode": 423,
+    "hebrewName": "העוגן",
+    "aliases": [],
+    "_englishName": "HAOGEN"
+  },
+  {
+    "cityCode": 3769,
+    "hebrewName": "הר אדר",
+    "aliases": [],
+    "_englishName": "HAR ADAR"
+  },
+  {
+    "cityCode": 3603,
+    "hebrewName": "הר גילה",
+    "aliases": [],
+    "_englishName": "HAR GILLO"
+  },
+  {
+    "cityCode": 1261,
+    "hebrewName": "הר עמשא",
+    "aliases": [],
+    "_englishName": "HAR AMASA"
+  },
+  {
+    "cityCode": 464,
+    "hebrewName": "הראל",
+    "aliases": [],
+    "_englishName": "HAR'EL"
+  },
+  {
+    "cityCode": 1249,
+    "hebrewName": "הרדוף",
+    "aliases": [],
+    "_englishName": "HARDUF"
+  },
+  {
+    "cityCode": 6400,
+    "hebrewName": "הרצליה",
+    "aliases": [],
+    "_englishName": "HERZELIYYA",
+    "latitude": 32.1624,
+    "longitude": 34.8443
+  },
+  {
+    "cityCode": 1203,
+    "hebrewName": "הררית",
+    "aliases": [],
+    "_englishName": "HARARIT"
+  },
+  {
+    "cityCode": 3639,
+    "hebrewName": "ורד יריחו",
+    "aliases": [],
+    "_englishName": "WERED YERIHO"
+  },
+  {
+    "cityCode": 1133,
+    "hebrewName": "ורדון",
+    "aliases": [],
+    "_englishName": "WARDON"
+  },
+  {
+    "cityCode": 2742,
+    "hebrewName": "זבארגה )שבט(",
+    "aliases": [],
+    "_englishName": "ZABARGA"
+  },
+  {
+    "cityCode": 815,
+    "hebrewName": "זבדיאל",
+    "aliases": [],
+    "_englishName": "ZAVDI'EL"
+  },
+  {
+    "cityCode": 44,
+    "hebrewName": "זוהר",
+    "aliases": [],
+    "_englishName": "ZOHAR"
+  },
+  {
+    "cityCode": 584,
+    "hebrewName": "זיקים",
+    "aliases": [],
+    "_englishName": "ZIQIM"
+  },
+  {
+    "cityCode": 788,
+    "hebrewName": "זיתן",
+    "aliases": [],
+    "_englishName": "ZETAN"
+  },
+  {
+    "cityCode": 9300,
+    "hebrewName": "זכרון יעקב",
+    "aliases": [],
+    "_englishName": "ZIKHRON YA'AQOV"
+  },
+  {
+    "cityCode": 799,
+    "hebrewName": "זכריה",
+    "aliases": [],
+    "_englishName": "ZEKHARYA"
+  },
+  {
+    "cityCode": 1290,
+    "hebrewName": "זמר",
+    "aliases": [],
+    "_englishName": "ZEMER"
+  },
+  {
+    "cityCode": 1065,
+    "hebrewName": "זמרת",
+    "aliases": [],
+    "_englishName": "ZIMRAT"
+  },
+  {
+    "cityCode": 816,
+    "hebrewName": "זנוח",
+    "aliases": [],
+    "_englishName": "ZANOAH"
+  },
+  {
+    "cityCode": 2064,
+    "hebrewName": "זרועה",
+    "aliases": [],
+    "_englishName": "ZERU'A"
+  },
+  {
+    "cityCode": 975,
+    "hebrewName": "זרזיר",
+    "aliases": [],
+    "_englishName": "ZARZIR"
+  },
+  {
+    "cityCode": 818,
+    "hebrewName": "זרחיה",
+    "aliases": [],
+    "_englishName": "ZERAHYA"
+  },
+  {
+    "cityCode": 1321,
+    "hebrewName": "ח'ואלד",
+    "aliases": [],
+    "_englishName": "KHAWALED"
+  },
+  {
+    "cityCode": 986,
+    "hebrewName": "ח'ואלד )שבט(",
+    "aliases": [],
+    "_englishName": "KHAWALED"
+  },
+  {
+    "cityCode": 235,
+    "hebrewName": "חבצלת השרון",
+    "aliases": [],
+    "_englishName": "HAVAZZELET HASHARON"
+  },
+  {
+    "cityCode": 1110,
+    "hebrewName": "חבר",
+    "aliases": [],
+    "_englishName": "HEVER"
+  },
+  {
+    "cityCode": 3400,
+    "hebrewName": "חברון",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 717,
+    "hebrewName": "חגור",
+    "aliases": [],
+    "_englishName": "HAGOR"
+  },
+  {
+    "cityCode": 3764,
+    "hebrewName": "חגי",
+    "aliases": [],
+    "_englishName": "HAGGAI"
+  },
+  {
+    "cityCode": 205,
+    "hebrewName": "חגלה",
+    "aliases": [],
+    "_englishName": "HOGLA"
+  },
+  {
+    "cityCode": 4026,
+    "hebrewName": "חד-נס",
+    "aliases": [],
+    "_englishName": "HAD-NES"
+  },
+  {
+    "cityCode": 618,
+    "hebrewName": "חדיד",
+    "aliases": [],
+    "_englishName": "HADID"
+  },
+  {
+    "cityCode": 6500,
+    "hebrewName": "חדרה",
+    "aliases": [],
+    "_englishName": "HADERA",
+    "latitude": 32.4346,
+    "longitude": 34.9189
+  },
+  {
+    "cityCode": 948,
+    "hebrewName": "חוג'ייראת )ד'הרה(",
+    "aliases": [],
+    "_englishName": "HUJEIRAT (DAHRA)"
+  },
+  {
+    "cityCode": 160,
+    "hebrewName": "חולדה",
+    "aliases": [],
+    "_englishName": "HULDA"
+  },
+  {
+    "cityCode": 6600,
+    "hebrewName": "חולון",
+    "aliases": [],
+    "_englishName": "HOLON",
+    "latitude": 32.0157,
+    "longitude": 34.7752
+  },
+  {
+    "cityCode": 1239,
+    "hebrewName": "חולית",
+    "aliases": [],
+    "_englishName": "HOLIT"
+  },
+  {
+    "cityCode": 253,
+    "hebrewName": "חולתה",
+    "aliases": [],
+    "_englishName": "HULATA"
+  },
+  {
+    "cityCode": 662,
+    "hebrewName": "חוסן",
+    "aliases": [],
+    "_englishName": "HOSEN"
+  },
+  {
+    "cityCode": 1332,
+    "hebrewName": "חוסנייה",
+    "aliases": [],
+    "_englishName": "HUSSNIYYA"
+  },
+  {
+    "cityCode": 115,
+    "hebrewName": "חופית",
+    "aliases": [],
+    "_englishName": "HOFIT"
+  },
+  {
+    "cityCode": 374,
+    "hebrewName": "חוקוק",
+    "aliases": [],
+    "_englishName": "HUQOQ"
+  },
+  {
+    "cityCode": 1303,
+    "hebrewName": "חורה",
+    "aliases": [],
+    "_englishName": "HURA"
+  },
+  {
+    "cityCode": 496,
+    "hebrewName": "חורפיש",
+    "aliases": [],
+    "_englishName": "HURFEISH"
+  },
+  {
+    "cityCode": 355,
+    "hebrewName": "חורשים",
+    "aliases": [],
+    "_englishName": "HORESHIM"
+  },
+  {
+    "cityCode": 1047,
+    "hebrewName": "חזון",
+    "aliases": [],
+    "_englishName": "HAZON"
+  },
+  {
+    "cityCode": 219,
+    "hebrewName": "חיבת ציון",
+    "aliases": [],
+    "_englishName": "HIBBAT ZIYYON"
+  },
+  {
+    "cityCode": 3643,
+    "hebrewName": "חיננית",
+    "aliases": [],
+    "_englishName": "HINNANIT"
+  },
+  {
+    "cityCode": 4000,
+    "hebrewName": "חיפה",
+    "aliases": [],
+    "_englishName": "HAIFA",
+    "latitude": 32.794,
+    "longitude": 34.9896
+  },
+  {
+    "cityCode": 162,
+    "hebrewName": "חירות",
+    "aliases": [],
+    "_englishName": "HERUT"
+  },
+  {
+    "cityCode": 1272,
+    "hebrewName": "חלוץ",
+    "aliases": [],
+    "_englishName": "HALUZ"
+  },
+  {
+    "cityCode": 3573,
+    "hebrewName": "חלמיש",
+    "aliases": [],
+    "_englishName": "HALLAMISH"
+  },
+  {
+    "cityCode": 820,
+    "hebrewName": "חלץ",
+    "aliases": [],
+    "_englishName": "HELEZ"
+  },
+  {
+    "cityCode": 993,
+    "hebrewName": "חמאם",
+    "aliases": [],
+    "_englishName": "HAMAM"
+  },
+  {
+    "cityCode": 801,
+    "hebrewName": "חמד",
+    "aliases": [],
+    "_englishName": "HEMED"
+  },
+  {
+    "cityCode": 343,
+    "hebrewName": "חמדיה",
+    "aliases": [],
+    "_englishName": "HAMADYA"
+  },
+  {
+    "cityCode": 3646,
+    "hebrewName": "חמדת",
+    "aliases": [],
+    "_englishName": "NAHAL HEMDAT"
+  },
+  {
+    "cityCode": 3609,
+    "hebrewName": "חמרה",
+    "aliases": [],
+    "_englishName": "HAMRA"
+  },
+  {
+    "cityCode": 807,
+    "hebrewName": "חניא��",
+    "aliases": [],
+    "_englishName": "HANNI'EL"
+  },
+  {
+    "cityCode": 280,
+    "hebrewName": "חניתה",
+    "aliases": [],
+    "_englishName": "HANITA"
+  },
+  {
+    "cityCode": 1257,
+    "hebrewName": "חנתון",
+    "aliases": [],
+    "_englishName": "HANNATON"
+  },
+  {
+    "cityCode": 4005,
+    "hebrewName": "חספין",
+    "aliases": [],
+    "_englishName": "HASPIN"
+  },
+  {
+    "cityCode": 363,
+    "hebrewName": "חפץ חיים",
+    "aliases": [],
+    "_englishName": "HAFEZ HAYYIM"
+  },
+  {
+    "cityCode": 90,
+    "hebrewName": "חפצי-בה",
+    "aliases": [],
+    "_englishName": "HEFZI-BAH"
+  },
+  {
+    "cityCode": 700,
+    "hebrewName": "חצב",
+    "aliases": [],
+    "_englishName": "HAZAV"
+  },
+  {
+    "cityCode": 13,
+    "hebrewName": "חצבה",
+    "aliases": [],
+    "_englishName": "HAZEVA"
+  },
+  {
+    "cityCode": 2034,
+    "hebrewName": "חצור הגלילית",
+    "aliases": [],
+    "_englishName": "HAZOR HAGELILIT"
+  },
+  {
+    "cityCode": 406,
+    "hebrewName": "חצור-אשדוד",
+    "aliases": [],
+    "_englishName": "HAZOR-ASHDOD"
+  },
+  {
+    "cityCode": 1409,
+    "hebrewName": "חצר בארותיים",
+    "aliases": [],
+    "_englishName": "HAZAR BE'EROTAYIM"
+  },
+  {
+    "cityCode": 1402,
+    "hebrewName": "חצרות חולדה",
+    "aliases": [],
+    "_englishName": "HAZROT HULDA"
+  },
+  {
+    "cityCode": 1404,
+    "hebrewName": "חצרות יסף",
+    "aliases": [],
+    "_englishName": "HAZROT YASAF"
+  },
+  {
+    "cityCode": 1405,
+    "hebrewName": "חצרות כ\"ח",
+    "aliases": [],
+    "_englishName": "HAZROT KOAH"
+  },
+  {
+    "cityCode": 397,
+    "hebrewName": "חצרים",
+    "aliases": [],
+    "_englishName": "HAZERIM"
+  },
+  {
+    "cityCode": 422,
+    "hebrewName": "חרב לאת",
+    "aliases": [],
+    "_englishName": "HEREV LE'ET"
+  },
+  {
+    "cityCode": 1024,
+    "hebrewName": "חרוצים",
+    "aliases": [],
+    "_englishName": "HARUZIM"
+  },
+  {
+    "cityCode": 1247,
+    "hebrewName": "חריש",
+    "aliases": [],
+    "_englishName": "HARISH"
+  },
+  {
+    "cityCode": 3717,
+    "hebrewName": "חרמש",
+    "aliases": [],
+    "_englishName": "HERMESH"
+  },
+  {
+    "cityCode": 1209,
+    "hebrewName": "חרשים",
+    "aliases": [],
+    "_englishName": "HARASHIM"
+  },
+  {
+    "cityCode": 3770,
+    "hebrewName": "חשמונאים",
+    "aliases": [],
+    "_englishName": "HASHMONA'IM"
+  },
+  {
+    "cityCode": 6700,
+    "hebrewName": "טבריה",
+    "aliases": [],
+    "_englishName": "TIBERIAS",
+    "latitude": 32.7913,
+    "longitude": 35.5308
+  },
+  {
+    "cityCode": 962,
+    "hebrewName": "טובא-זנגריה",
+    "aliases": [],
+    "_englishName": "TUBA-ZANGARIYYE"
+  },
+  {
+    "cityCode": 498,
+    "hebrewName": "טורעאן",
+    "aliases": [],
+    "_englishName": "TUR'AN"
+  },
+  {
+    "cityCode": 2730,
+    "hebrewName": "טייבה",
+    "aliases": [],
+    "_englishName": "TAYIBE"
+  },
+  {
+    "cityCode": 497,
+    "hebrewName": "טייבה )בעמק(",
+    "aliases": [],
+    "_englishName": "TAYIBE(BAEMEQ)"
+  },
+  {
+    "cityCode": 2720,
+    "hebrewName": "טירה",
+    "aliases": [],
+    "_englishName": "TIRE"
+  },
+  {
+    "cityCode": 663,
+    "hebrewName": "טירת יהודה",
+    "aliases": [],
+    "_englishName": "TIRAT YEHUDA"
+  },
+  {
+    "cityCode": 2100,
+    "hebrewName": "טירת כרמל",
+    "aliases": [],
+    "_englishName": "TIRAT KARMEL",
+    "latitude": 32.7621,
+    "longitude": 34.9711
+  },
+  {
+    "cityCode": 268,
+    "hebrewName": "טירת צבי",
+    "aliases": [],
+    "_englishName": "TIRAT ZEVI"
+  },
+  {
+    "cityCode": 462,
+    "hebrewName": "טל שחר",
+    "aliases": [],
+    "_englishName": "TAL SHAHAR"
+  },
+  {
+    "cityCode": 1181,
+    "hebrewName": "טל-אל",
+    "aliases": [],
+    "_englishName": "TAL-EL"
+  },
+  {
+    "cityCode": 1177,
+    "hebrewName": "טללים",
+    "aliases": [],
+    "_englishName": "TELALIM"
+  },
+  {
+    "cityCode": 3788,
+    "hebrewName": "טלמון",
+    "aliases": [],
+    "_englishName": "TALMON"
+  },
+  {
+    "cityCode": 8900,
+    "hebrewName": "טמרה",
+    "aliases": [],
+    "_englishName": "TAMRA"
+  },
+  {
+    "cityCode": 547,
+    "hebrewName": "טמרה )יזרעאל(",
+    "aliases": [],
+    "_englishName": "TAMRA (YIZRE'EL)"
+  },
+  {
+    "cityCode": 3743,
+    "hebrewName": "טנא",
+    "aliases": [],
+    "_englishName": "TENE"
+  },
+  {
+    "cityCode": 1214,
+    "hebrewName": "טפחות",
+    "aliases": [],
+    "_englishName": "TEFAHOT"
+  },
+  {
+    "cityCode": 1295,
+    "hebrewName": "יאנוח-ג'ת",
+    "aliases": [],
+    "_englishName": "YANUH-JAT"
+  },
+  {
+    "cityCode": 1232,
+    "hebrewName": "יבול",
+    "aliases": [],
+    "_englishName": "YEVUL"
+  },
+  {
+    "cityCode": 46,
+    "hebrewName": "יבנאל",
+    "aliases": [],
+    "_englishName": "YAVNE'EL"
+  },
+  {
+    "cityCode": 2660,
+    "hebrewName": "יבנה",
+    "aliases": [],
+    "_englishName": "YAVNE",
+    "latitude": 31.878,
+    "longitude": 34.7415
+  },
+  {
+    "cityCode": 96,
+    "hebrewName": "יגור",
+    "aliases": [],
+    "_englishName": "YAGUR"
+  },
+  {
+    "cityCode": 798,
+    "hebrewName": "יגל",
+    "aliases": [],
+    "_englishName": "YAGEL"
+  },
+  {
+    "cityCode": 577,
+    "hebrewName": "יד בנימין",
+    "aliases": [],
+    "_englishName": "YAD BINYAMIN"
+  },
+  {
+    "cityCode": 1134,
+    "hebrewName": "יד השמונה",
+    "aliases": [],
+    "_englishName": "YAD HASHEMONA"
+  },
+  {
+    "cityCode": 758,
+    "hebrewName": "יד חנה",
+    "aliases": [],
+    "_englishName": "YAD HANNA"
+  },
+  {
+    "cityCode": 358,
+    "hebrewName": "יד מרדכי",
+    "aliases": [],
+    "_englishName": "YAD MORDEKHAY"
+  },
+  {
+    "cityCode": 775,
+    "hebrewName": "יד נתן",
+    "aliases": [],
+    "_englishName": "YAD NATAN"
+  },
+  {
+    "cityCode": 64,
+    "hebrewName": "יד רמב\"ם",
+    "aliases": [],
+    "_englishName": "YAD RAMBAM"
+  },
+  {
+    "cityCode": 1144,
+    "hebrewName": "ידידה",
+    "aliases": [],
+    "_englishName": "YEDIDA"
+  },
+  {
+    "cityCode": 9400,
+    "hebrewName": "יהוד-מונוסון",
+    "aliases": [],
+    "_englishName": "YEHUD-MONOSON",
+    "latitude": 32.0303,
+    "longitude": 34.8896
+  },
+  {
+    "cityCode": 1158,
+    "hebrewName": "יהל",
+    "aliases": [],
+    "_englishName": "YAHEL"
+  },
+  {
+    "cityCode": 2009,
+    "hebrewName": "יובל",
+    "aliases": [],
+    "_englishName": "YUVAL"
+  },
+  {
+    "cityCode": 1226,
+    "hebrewName": "יובלים",
+    "aliases": [],
+    "_englishName": "YUVALIM"
+  },
+  {
+    "cityCode": 1112,
+    "hebrewName": "יודפת",
+    "aliases": [],
+    "_englishName": "YODEFAT"
+  },
+  {
+    "cityCode": 4007,
+    "hebrewName": "יונתן",
+    "aliases": [],
+    "_englishName": "YONATAN"
+  },
+  {
+    "cityCode": 803,
+    "hebrewName": "יושיביה",
+    "aliases": [],
+    "_englishName": "YOSHIVYA"
+  },
+  {
+    "cityCode": 452,
+    "hebrewName": "יזרעאל",
+    "aliases": [],
+    "_englishName": "YIZRE'EL"
+  },
+  {
+    "cityCode": 409,
+    "hebrewName": "יחיעם",
+    "aliases": [],
+    "_englishName": "YEHI'AM"
+  },
+  {
+    "cityCode": 866,
+    "hebrewName": "יטבתה",
+    "aliases": [],
+    "_englishName": "YOTVATA"
+  },
+  {
+    "cityCode": 3607,
+    "hebrewName": "ייט\"ב",
+    "aliases": [],
+    "_englishName": "YITAV"
+  },
+  {
+    "cityCode": 811,
+    "hebrewName": "יכיני",
+    "aliases": [],
+    "_englishName": "YAKHINI"
+  },
+  {
+    "cityCode": 753,
+    "hebrewName": "ינוב",
+    "aliases": [],
+    "_englishName": "YANUV"
+  },
+  {
+    "cityCode": 2011,
+    "hebrewName": "ינון",
+    "aliases": [],
+    "_englishName": "YINNON"
+  },
+  {
+    "cityCode": 29,
+    "hebrewName": "יסוד המעלה",
+    "aliases": [],
+    "_englishName": "YESUD HAMA'ALA"
+  },
+  {
+    "cityCode": 440,
+    "hebrewName": "יסודות",
+    "aliases": [],
+    "_englishName": "YESODOT"
+  },
+  {
+    "cityCode": 575,
+    "hebrewName": "יסעור",
+    "aliases": [],
+    "_englishName": "YAS'UR"
+  },
+  {
+    "cityCode": 1138,
+    "hebrewName": "יעד",
+    "aliases": [],
+    "_englishName": "YA'AD"
+  },
+  {
+    "cityCode": 1117,
+    "hebrewName": "יעל",
+    "aliases": [],
+    "_englishName": "YA'EL"
+  },
+  {
+    "cityCode": 1044,
+    "hebrewName": "יעף",
+    "aliases": [],
+    "_englishName": "YE'AF"
+  },
+  {
+    "cityCode": 795,
+    "hebrewName": "יערה",
+    "aliases": [],
+    "_englishName": "YA'ARA"
+  },
+  {
+    "cityCode": 499,
+    "hebrewName": "יפיע",
+    "aliases": [],
+    "_englishName": "YAFI"
+  },
+  {
+    "cityCode": 3566,
+    "hebrewName": "יפית",
+    "aliases": [],
+    "_englishName": "YAFIT"
+  },
+  {
+    "cityCode": 134,
+    "hebrewName": "יפעת",
+    "aliases": [],
+    "_englishName": "YIF'AT"
+  },
+  {
+    "cityCode": 453,
+    "hebrewName": "יפתח",
+    "aliases": [],
+    "_englishName": "YIFTAH"
+  },
+  {
+    "cityCode": 3749,
+    "hebrewName": "יצהר",
+    "aliases": [],
+    "_englishName": "YIZHAR"
+  },
+  {
+    "cityCode": 759,
+    "hebrewName": "יציץ",
+    "aliases": [],
+    "_englishName": "YAZIZ"
+  },
+  {
+    "cityCode": 417,
+    "hebrewName": "יקום",
+    "aliases": [],
+    "_englishName": "YAQUM"
+  },
+  {
+    "cityCode": 3647,
+    "hebrewName": "יקיר",
+    "aliases": [],
+    "_englishName": "YAQIR"
+  },
+  {
+    "cityCode": 241,
+    "hebrewName": "יקנעם )מושבה(",
+    "aliases": [],
+    "_englishName": "YOQNE'AM(MOSHAVA)"
+  },
+  {
+    "cityCode": 240,
+    "hebrewName": "יקנעם עילית",
+    "aliases": [],
+    "_englishName": "YOQNE'AM ILLIT"
+  },
+  {
+    "cityCode": 623,
+    "hebrewName": "יראון",
+    "aliases": [],
+    "_englishName": "YIR'ON"
+  },
+  {
+    "cityCode": 2026,
+    "hebrewName": "ירדנ��",
+    "aliases": [],
+    "_englishName": "YARDENA"
+  },
+  {
+    "cityCode": 831,
+    "hebrewName": "ירוחם",
+    "aliases": [],
+    "_englishName": "YEROHAM"
+  },
+  {
+    "cityCode": 3000,
+    "hebrewName": "ירושלים",
+    "aliases": [
+      "ירושלים",
+      "ירושליים"
+    ],
+    "_englishName": "JERUSALEM",
+    "latitude": 31.7683,
+    "longitude": 35.2137
+  },
+  {
+    "cityCode": 718,
+    "hebrewName": "ירחיב",
+    "aliases": [],
+    "_englishName": "YARHIV"
+  },
+  {
+    "cityCode": 502,
+    "hebrewName": "ירכא",
+    "aliases": [],
+    "_englishName": "YIRKA"
+  },
+  {
+    "cityCode": 183,
+    "hebrewName": "ירקונה",
+    "aliases": [],
+    "_englishName": "YARQONA"
+  },
+  {
+    "cityCode": 916,
+    "hebrewName": "ישע",
+    "aliases": [],
+    "_englishName": "YESHA"
+  },
+  {
+    "cityCode": 805,
+    "hebrewName": "ישעי",
+    "aliases": [],
+    "_englishName": "YISH'I"
+  },
+  {
+    "cityCode": 828,
+    "hebrewName": "ישרש",
+    "aliases": [],
+    "_englishName": "YASHRESH"
+  },
+  {
+    "cityCode": 1227,
+    "hebrewName": "יתד",
+    "aliases": [],
+    "_englishName": "YATED"
+  },
+  {
+    "cityCode": 1329,
+    "hebrewName": "יתיר",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 504,
+    "hebrewName": "כאבול",
+    "aliases": [],
+    "_englishName": "KABUL"
+  },
+  {
+    "cityCode": 505,
+    "hebrewName": "כאוכב אבו אל-היג'א",
+    "aliases": [],
+    "_englishName": "KAOKAB ABU AL-HIJA"
+  },
+  {
+    "cityCode": 576,
+    "hebrewName": "כברי",
+    "aliases": [],
+    "_englishName": "KABRI"
+  },
+  {
+    "cityCode": 371,
+    "hebrewName": "כדורי",
+    "aliases": [],
+    "_englishName": "KADOORIE"
+  },
+  {
+    "cityCode": 1338,
+    "hebrewName": "כדיתה",
+    "aliases": [],
+    "_englishName": "KADDITA"
+  },
+  {
+    "cityCode": 3564,
+    "hebrewName": "כוכב השחר",
+    "aliases": [],
+    "_englishName": "KOKHAV HASHAHAR"
+  },
+  {
+    "cityCode": 1224,
+    "hebrewName": "כוכב יאיר",
+    "aliases": [],
+    "_englishName": "KOKHAV YA'IR"
+  },
+  {
+    "cityCode": 3779,
+    "hebrewName": "כוכב יעקב",
+    "aliases": [],
+    "_englishName": "KOKHAV YA'AQOV"
+  },
+  {
+    "cityCode": 824,
+    "hebrewName": "כוכב מיכאל",
+    "aliases": [],
+    "_englishName": "KOKHAV MIKHA'EL"
+  },
+  {
+    "cityCode": 1252,
+    "hebrewName": "כורזים",
+    "aliases": [],
+    "_englishName": "KORAZIM"
+  },
+  {
+    "cityCode": 1210,
+    "hebrewName": "כחל",
+    "aliases": [],
+    "_englishName": "KAHAL"
+  },
+  {
+    "cityCode": 1367,
+    "hebrewName": "כחלה",
+    "aliases": [],
+    "_englishName": "KOCHLEA"
+  },
+  {
+    "cityCode": 840,
+    "hebrewName": "כיסופים",
+    "aliases": [],
+    "_englishName": "KISSUFIM"
+  },
+  {
+    "cityCode": 1183,
+    "hebrewName": "כליל",
+    "aliases": [],
+    "_englishName": "KELIL"
+  },
+  {
+    "cityCode": 1229,
+    "hebrewName": "כלנית",
+    "aliases": [],
+    "_englishName": "KALLANIT"
+  },
+  {
+    "cityCode": 1331,
+    "hebrewName": "כמאנה",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 1291,
+    "hebrewName": "כמהין",
+    "aliases": [],
+    "_englishName": "KEMEHIN"
+  },
+  {
+    "cityCode": 1201,
+    "hebrewName": "כמון",
+    "aliases": [],
+    "_englishName": "KAMMON"
+  },
+  {
+    "cityCode": 2006,
+    "hebrewName": "כנות",
+    "aliases": [],
+    "_englishName": "KANNOT"
+  },
+  {
+    "cityCode": 4028,
+    "hebrewName": "כנף",
+    "aliases": [],
+    "_englishName": "KANAF"
+  },
+  {
+    "cityCode": 63,
+    "hebrewName": "כנרת )מושבה(",
+    "aliases": [],
+    "_englishName": "KINNERET(MOSHAVA)"
+  },
+  {
+    "cityCode": 57,
+    "hebrewName": "כנרת )קבוצה(",
+    "aliases": [],
+    "_englishName": "KINNERET(QEVUZA)"
+  },
+  {
+    "cityCode": 1059,
+    "hebrewName": "כסיפה",
+    "aliases": [],
+    "_englishName": "KUSEIFE"
+  },
+  {
+    "cityCode": 859,
+    "hebrewName": "כסלון",
+    "aliases": [],
+    "_englishName": "KESALON"
+  },
+  {
+    "cityCode": 1296,
+    "hebrewName": "כסרא-סמיע",
+    "aliases": [],
+    "_englishName": "KISRA-SUMEI"
+  },
+  {
+    "cityCode": 978,
+    "hebrewName": "כעביה-טבאש-חג'אג'רה",
+    "aliases": [],
+    "_englishName": "KA'ABIYYE-TABBASH-HA"
+  },
+  {
+    "cityCode": 857,
+    "hebrewName": "כפר אביב",
+    "aliases": [],
+    "_englishName": "KEFAR AVIV"
+  },
+  {
+    "cityCode": 3638,
+    "hebrewName": "כפר אדומים",
+    "aliases": [],
+    "_englishName": "KEFAR ADUMMIM"
+  },
+  {
+    "cityCode": 364,
+    "hebrewName": "כפר אוריה",
+    "aliases": [],
+    "_englishName": "KEFAR URIYYA"
+  },
+  {
+    "cityCode": 690,
+    "hebrewName": "כפר אחים",
+    "aliases": [],
+    "_englishName": "KEFAR AHIM"
+  },
+  {
+    "cityCode": 220,
+    "hebrewName": "כפר ביאליק",
+    "aliases": [],
+    "_englishName": "KEFAR BIALIK"
+  },
+  {
+    "cityCode": 177,
+    "hebrewName": "כפר ביל\"ו",
+    "aliases": [],
+    "_englishName": "KEFAR BILU"
+  },
+  {
+    "cityCode": 357,
+    "hebrewName": "כפר בלום",
+    "aliases": [],
+    "_englishName": "KEFAR BLUM"
+  },
+  {
+    "cityCode": 2010,
+    "hebrewName": "כפר בן נון",
+    "aliases": [],
+    "_englishName": "KEFAR BIN NUN"
+  },
+  {
+    "cityCode": 633,
+    "hebrewName": "כפר ברא",
+    "aliases": [],
+    "_englishName": "KAFAR BARA"
+  },
+  {
+    "cityCode": 132,
+    "hebrewName": "כפר ברוך",
+    "aliases": [],
+    "_englishName": "KEFAR BARUKH"
+  },
+  {
+    "cityCode": 106,
+    "hebrewName": "כפר גדעון",
+    "aliases": [],
+    "_englishName": "KEFAR GID'ON"
+  },
+  {
+    "cityCode": 427,
+    "hebrewName": "כפר גלים",
+    "aliases": [],
+    "_englishName": "KEFAR GALLIM"
+  },
+  {
+    "cityCode": 310,
+    "hebrewName": "כפר גליקסון",
+    "aliases": [],
+    "_englishName": "KEFAR GLIKSON"
+  },
+  {
+    "cityCode": 76,
+    "hebrewName": "כפר גלעדי",
+    "aliases": [],
+    "_englishName": "KEFAR GIL'ADI"
+  },
+  {
+    "cityCode": 707,
+    "hebrewName": "כפר דניאל",
+    "aliases": [],
+    "_englishName": "KEFAR DANIYYEL"
+  },
+  {
+    "cityCode": 3796,
+    "hebrewName": "כפר האורנים",
+    "aliases": [],
+    "_englishName": "KEFAR HAORANIM"
+  },
+  {
+    "cityCode": 192,
+    "hebrewName": "כפר החורש",
+    "aliases": [],
+    "_englishName": "KEFAR HAHORESH"
+  },
+  {
+    "cityCode": 254,
+    "hebrewName": "כפר המכבי",
+    "aliases": [],
+    "_englishName": "KEFAR HAMAKKABI"
+  },
+  {
+    "cityCode": 582,
+    "hebrewName": "כפר הנגיד",
+    "aliases": [],
+    "_englishName": "KEFAR HANAGID"
+  },
+  {
+    "cityCode": 890,
+    "hebrewName": "כפר הנוער הדתי",
+    "aliases": [],
+    "_englishName": "KEFAR HANO'AR HADATI"
+  },
+  {
+    "cityCode": 443,
+    "hebrewName": "כפר הנשיא",
+    "aliases": [],
+    "_englishName": "KEFAR HANASI"
+  },
+  {
+    "cityCode": 187,
+    "hebrewName": "כפר הס",
+    "aliases": [],
+    "_englishName": "KEFAR HESS"
+  },
+  {
+    "cityCode": 217,
+    "hebrewName": "כפר הרא\"ה",
+    "aliases": [],
+    "_englishName": "KEFAR HARO'E"
+  },
+  {
+    "cityCode": 888,
+    "hebrewName": "כפר הרי\"ף",
+    "aliases": [],
+    "_englishName": "KEFAR HARIF"
+  },
+  {
+    "cityCode": 190,
+    "hebrewName": "כפר ויתקין",
+    "aliases": [],
+    "_englishName": "KEFAR VITKIN"
+  },
+  {
+    "cityCode": 320,
+    "hebrewName": "כפר ורבורג",
+    "aliases": [],
+    "_englishName": "KEFAR WARBURG"
+  },
+  {
+    "cityCode": 1263,
+    "hebrewName": "כפר ורדים",
+    "aliases": [],
+    "_englishName": "KEFAR WERADIM"
+  },
+  {
+    "cityCode": 1325,
+    "hebrewName": "כפר זוהרים",
+    "aliases": [],
+    "_englishName": "KEFAR ZOHARIM"
+  },
+  {
+    "cityCode": 786,
+    "hebrewName": "כפר זיתים",
+    "aliases": [],
+    "_englishName": "KEFAR ZETIM"
+  },
+  {
+    "cityCode": 696,
+    "hebrewName": "כפר חב\"ד",
+    "aliases": [],
+    "_englishName": "KEFAR HABAD"
+  },
+  {
+    "cityCode": 609,
+    "hebrewName": "כפר חושן",
+    "aliases": [],
+    "_englishName": "KEFAR HOSHEN"
+  },
+  {
+    "cityCode": 255,
+    "hebrewName": "כפר חיטים",
+    "aliases": [],
+    "_englishName": "KEFAR HITTIM"
+  },
+  {
+    "cityCode": 193,
+    "hebrewName": "כפר חיים",
+    "aliases": [],
+    "_englishName": "KEFAR HAYYIM"
+  },
+  {
+    "cityCode": 1297,
+    "hebrewName": "כפר חנניה",
+    "aliases": [],
+    "_englishName": "KEFAR HANANYA"
+  },
+  {
+    "cityCode": 112,
+    "hebrewName": "כפר חסידים א'",
+    "aliases": [],
+    "_englishName": "KEFAR HASIDIM ALEF"
+  },
+  {
+    "cityCode": 889,
+    "hebrewName": "כפר חסידים ב'",
+    "aliases": [],
+    "_englishName": "KEFAR HASIDIM BET"
+  },
+  {
+    "cityCode": 4004,
+    "hebrewName": "כפר חרוב",
+    "aliases": [],
+    "_englishName": "KEFAR HARUV"
+  },
+  {
+    "cityCode": 673,
+    "hebrewName": "כפר טרומן",
+    "aliases": [],
+    "_englishName": "KEFAR TRUMAN"
+  },
+  {
+    "cityCode": 507,
+    "hebrewName": "כפר יאסיף",
+    "aliases": [],
+    "_englishName": "KAFAR YASIF"
+  },
+  {
+    "cityCode": 233,
+    "hebrewName": "כפר ידידיה",
+    "aliases": [],
+    "_englishName": "YEDIDYA"
+  },
+  {
+    "cityCode": 140,
+    "hebrewName": "כפר יהושע",
+    "aliases": [],
+    "_englishName": "KEFAR YEHOSHUA"
+  },
+  {
+    "cityCode": 168,
+    "hebrewName": "כפר יונה",
+    "aliases": [],
+    "_englishName": "KEFAR YONA"
+  },
+  {
+    "cityCode": 85,
+    "hebrewName": "כפר יחזקאל",
+    "aliases": [],
+    "_englishName": "KEFAR YEHEZQEL"
+  },
+  {
+    "cityCode": 170,
+    "hebrewName": "כפר יעבץ",
+    "aliases": [],
+    "_englishName": "KEFAR YA'BEZ"
+  },
+  {
+    "cityCode": 508,
+    "hebrewName": "כפר כמא",
+    "aliases": [],
+    "_englishName": "KAFAR KAMA"
+  },
+  {
+    "cityCode": 509,
+    "hebrewName": "כפר כנא",
+    "aliases": [],
+    "_englishName": "KAFAR KANNA"
+  },
+  {
+    "cityCode": 387,
+    "hebrewName": "כפר מונש",
+    "aliases": [],
+    "_englishName": "KEFAR MONASH"
+  },
+  {
+    "cityCode": 1095,
+    "hebrewName": "כפר מימון",
+    "aliases": [],
+    "_englishName": "KEFAR MAYMON"
+  },
+  {
+    "cityCode": 98,
+    "hebrewName": "כפר מל\"ל",
+    "aliases": [],
+    "_englishName": "KEFAR MALAL"
+  },
+  {
+    "cityCode": 510,
+    "hebrewName": "כפר מנדא",
+    "aliases": [],
+    "_englishName": "KAFAR MANDA"
+  },
+  {
+    "cityCode": 274,
+    "hebrewName": "כפר מנחם",
+    "aliases": [],
+    "_englishName": "KEFAR MENAHEM"
+  },
+  {
+    "cityCode": 297,
+    "hebrewName": "כפר מסריק",
+    "aliases": [],
+    "_englishName": "KEFAR MASARYK"
+  },
+  {
+    "cityCode": 512,
+    "hebrewName": "כפר מצר",
+    "aliases": [],
+    "_englishName": "KAFAR MISR"
+  },
+  {
+    "cityCode": 764,
+    "hebrewName": "כפר מרדכי",
+    "aliases": [],
+    "_englishName": "KEFAR MORDEKHAY"
+  },
+  {
+    "cityCode": 316,
+    "hebrewName": "כפר נטר",
+    "aliases": [],
+    "_englishName": "KEFAR NETTER"
+  },
+  {
+    "cityCode": 345,
+    "hebrewName": "כפר סאלד",
+    "aliases": [],
+    "_englishName": "KEFAR SZOLD"
+  },
+  {
+    "cityCode": 6900,
+    "hebrewName": "כפר סבא",
+    "aliases": [],
+    "_englishName": "KEFAR SAVA",
+    "latitude": 32.1747,
+    "longitude": 34.9076
+  },
+  {
+    "cityCode": 107,
+    "hebrewName": "כפר סילבר",
+    "aliases": [],
+    "_englishName": "KEFAR SILVER"
+  },
+  {
+    "cityCode": 249,
+    "hebrewName": "כפר סירקין",
+    "aliases": [],
+    "_englishName": "KEFAR SIRKIN"
+  },
+  {
+    "cityCode": 875,
+    "hebrewName": "כפר עבודה",
+    "aliases": [],
+    "_englishName": "KEFAR AVODA"
+  },
+  {
+    "cityCode": 845,
+    "hebrewName": "כפר עזה",
+    "aliases": [],
+    "_englishName": "KEFAR AZZA"
+  },
+  {
+    "cityCode": 3488,
+    "hebrewName": "כפר עציון",
+    "aliases": [],
+    "_englishName": "KEFAR EZYON"
+  },
+  {
+    "cityCode": 189,
+    "hebrewName": "כפר פינס",
+    "aliases": [],
+    "_englishName": "KEFAR PINES"
+  },
+  {
+    "cityCode": 634,
+    "hebrewName": "כפר קאסם",
+    "aliases": [],
+    "_englishName": "KAFAR QASEM"
+  },
+  {
+    "cityCode": 388,
+    "hebrewName": "כפר קיש",
+    "aliases": [],
+    "_englishName": "KEFAR KISH"
+  },
+  {
+    "cityCode": 654,
+    "hebrewName": "כפר קרע",
+    "aliases": [],
+    "_englishName": "KAFAR QARA"
+  },
+  {
+    "cityCode": 579,
+    "hebrewName": "כפר ראש הנקרה",
+    "aliases": [],
+    "_englishName": "KEFAR ROSH HANIQRA"
+  },
+  {
+    "cityCode": 1130,
+    "hebrewName": "כפר רוזנואלד )זרעית(",
+    "aliases": [],
+    "_englishName": "KEFAR ROZENWALD(ZAR."
+  },
+  {
+    "cityCode": 295,
+    "hebrewName": "כפר רופין",
+    "aliases": [],
+    "_englishName": "KEFAR RUPPIN"
+  },
+  {
+    "cityCode": 1166,
+    "hebrewName": "כפר רות",
+    "aliases": [],
+    "_englishName": "KEFAR RUT"
+  },
+  {
+    "cityCode": 605,
+    "hebrewName": "כפר שמאי",
+    "aliases": [],
+    "_englishName": "KEFAR SHAMMAY"
+  },
+  {
+    "cityCode": 743,
+    "hebrewName": "כפר שמואל",
+    "aliases": [],
+    "_englishName": "KEFAR SHEMU'EL"
+  },
+  {
+    "cityCode": 267,
+    "hebrewName": "כפר שמריהו",
+    "aliases": [],
+    "_englishName": "KEFAR SHEMARYAHU"
+  },
+  {
+    "cityCode": 47,
+    "hebrewName": "כפר תבור",
+    "aliases": [],
+    "_englishName": "KEFAR TAVOR"
+  },
+  {
+    "cityCode": 3572,
+    "hebrewName": "כפר תפוח",
+    "aliases": [],
+    "_englishName": "KEFAR TAPPUAH"
+  },
+  {
+    "cityCode": 38,
+    "hebrewName": "כרי דשא",
+    "aliases": [],
+    "_englishName": "KARE DESHE"
+  },
+  {
+    "cityCode": 1285,
+    "hebrewName": "כרכום",
+    "aliases": [],
+    "_englishName": "KARKOM"
+  },
+  {
+    "cityCode": 664,
+    "hebrewName": "כרם בן זמרה",
+    "aliases": [],
+    "_englishName": "KEREM BEN ZIMRA"
+  },
+  {
+    "cityCode": 88,
+    "hebrewName": "כרם בן שמן",
+    "aliases": [],
+    "_englishName": "KEREM BEN SHEMEN"
+  },
+  {
+    "cityCode": 1094,
+    "hebrewName": "כרם יבנה )ישיבה(",
+    "aliases": [],
+    "_englishName": "KEREM YAVNE(YESHIVA)"
+  },
+  {
+    "cityCode": 580,
+    "hebrewName": "כרם מהר\"ל",
+    "aliases": [],
+    "_englishName": "KEREM MAHARAL"
+  },
+  {
+    "cityCode": 1085,
+    "hebrewName": "כרם שלום",
+    "aliases": [],
+    "_englishName": "KEREM SHALOM"
+  },
+  {
+    "cityCode": 1264,
+    "hebrewName": "כרמי יוסף",
+    "aliases": [],
+    "_englishName": "KARME YOSEF"
+  },
+  {
+    "cityCode": 3766,
+    "hebrewName": "כרמי צור",
+    "aliases": [],
+    "_englishName": "KARME ZUR"
+  },
+  {
+    "cityCode": 1374,
+    "hebrewName": "כרמי קטיף",
+    "aliases": [],
+    "_englishName": "KARME QATIF"
+  },
+  {
+    "cityCode": 1139,
+    "hebrewName": "כרמיאל",
+    "aliases": [],
+    "_englishName": "KARMI'EL",
+    "latitude": 32.9189,
+    "longitude": 35.2969
+  },
+  {
+    "cityCode": 768,
+    "hebrewName": "כרמיה",
+    "aliases": [],
+    "_englishName": "KARMIYYA"
+  },
+  {
+    "cityCode": 1198,
+    "hebrewName": "כרמים",
+    "aliases": [],
+    "_englishName": "KERAMIM"
+  },
+  {
+    "cityCode": 3656,
+    "hebrewName": "כרמל",
+    "aliases": [],
+    "_englishName": "KARMEL"
+  },
+  {
+    "cityCode": 1207,
+    "hebrewName": "לבון",
+    "aliases": [],
+    "_englishName": "LAVON"
+  },
+  {
+    "cityCode": 585,
+    "hebrewName": "לביא",
+    "aliases": [],
+    "_englishName": "LAVI"
+  },
+  {
+    "cityCode": 1230,
+    "hebrewName": "לבנים",
+    "aliases": [],
+    "_englishName": "LIVNIM"
+  },
+  {
+    "cityCode": 2023,
+    "hebrewName": "להב",
+    "aliases": [],
+    "_englishName": "LAHAV"
+  },
+  {
+    "cityCode": 380,
+    "hebrewName": "להבות הבשן",
+    "aliases": [],
+    "_englishName": "LAHAVOT HABASHAN"
+  },
+  {
+    "cityCode": 715,
+    "hebrewName": "להבות חביבה",
+    "aliases": [],
+    "_englishName": "LAHAVOT HAVIVA"
+  },
+  {
+    "cityCode": 1271,
+    "hebrewName": "להבים",
+    "aliases": [],
+    "_englishName": "LEHAVIM"
+  },
+  {
+    "cityCode": 7000,
+    "hebrewName": "לוד",
+    "aliases": [],
+    "_englishName": "LOD",
+    "latitude": 31.9511,
+    "longitude": 34.8875
+  },
+  {
+    "cityCode": 52,
+    "hebrewName": "לוזית",
+    "aliases": [],
+    "_englishName": "LUZIT"
+  },
+  {
+    "cityCode": 595,
+    "hebrewName": "לוחמי הגיטאות",
+    "aliases": [],
+    "_englishName": "LOHAME HAGETA'OT"
+  },
+  {
+    "cityCode": 1171,
+    "hebrewName": "לוטם",
+    "aliases": [],
+    "_englishName": "LOTEM"
+  },
+  {
+    "cityCode": 1255,
+    "hebrewName": "לוטן",
+    "aliases": [],
+    "_englishName": "LOTAN"
+  },
+  {
+    "cityCode": 674,
+    "hebrewName": "לימן",
+    "aliases": [],
+    "_englishName": "LIMAN"
+  },
+  {
+    "cityCode": 24,
+    "hebrewName": "לכיש",
+    "aliases": [],
+    "_englishName": "LAKHISH"
+  },
+  {
+    "cityCode": 1310,
+    "hebrewName": "לפיד",
+    "aliases": [],
+    "_englishName": "LAPPID"
+  },
+  {
+    "cityCode": 1173,
+    "hebrewName": "לפידות",
+    "aliases": [],
+    "_englishName": "LAPPIDOT"
+  },
+  {
+    "cityCode": 1060,
+    "hebrewName": "לקיה",
+    "aliases": [],
+    "_englishName": "LAQYE"
+  },
+  {
+    "cityCode": 2055,
+    "hebrewName": "מאור",
+    "aliases": [],
+    "_englishName": "MA'OR"
+  },
+  {
+    "cityCode": 102,
+    "hebrewName": "מאיר שפיה",
+    "aliases": [],
+    "_englishName": "ME'IR SHEFEYA"
+  },
+  {
+    "cityCode": 771,
+    "hebrewName": "מבוא ביתר",
+    "aliases": [],
+    "_englishName": "MEVO BETAR"
+  },
+  {
+    "cityCode": 3569,
+    "hebrewName": "מבוא דותן",
+    "aliases": [],
+    "_englishName": "MEVO DOTAN"
+  },
+  {
+    "cityCode": 3709,
+    "hebrewName": "מבוא חורון",
+    "aliases": [],
+    "_englishName": "MEVO HORON"
+  },
+  {
+    "cityCode": 4204,
+    "hebrewName": "מבוא חמה",
+    "aliases": [],
+    "_englishName": "MEVO HAMMA"
+  },
+  {
+    "cityCode": 1141,
+    "hebrewName": "מבוא מודיעים",
+    "aliases": [],
+    "_englishName": "MEVO MODI'IM"
+  },
+  {
+    "cityCode": 1318,
+    "hebrewName": "מבואות ים",
+    "aliases": [],
+    "_englishName": "MEVO'OT YAM"
+  },
+  {
+    "cityCode": 1080,
+    "hebrewName": "מבועים",
+    "aliases": [],
+    "_englishName": "MABBU'IM"
+  },
+  {
+    "cityCode": 829,
+    "hebrewName": "מבטחים",
+    "aliases": [],
+    "_englishName": "MIVTAHIM"
+  },
+  {
+    "cityCode": 573,
+    "hebrewName": "מבקיעים",
+    "aliases": [],
+    "_englishName": "MAVQI'IM"
+  },
+  {
+    "cityCode": 1015,
+    "hebrewName": "מבשרת ציון",
+    "aliases": [],
+    "_englishName": "MEVASSERET ZIYYON"
+  },
+  {
+    "cityCode": 516,
+    "hebrewName": "מג'ד אל-כרום",
+    "aliases": [],
+    "_englishName": "MAJD AL-KURUM"
+  },
+  {
+    "cityCode": 4201,
+    "hebrewName": "מג'דל שמס",
+    "aliases": [],
+    "_englishName": "MAJDAL SHAMS"
+  },
+  {
+    "cityCode": 481,
+    "hebrewName": "מגאר",
+    "aliases": [],
+    "_englishName": "MUGHAR"
+  },
+  {
+    "cityCode": 689,
+    "hebrewName": "מגדים",
+    "aliases": [],
+    "_englishName": "MEGADIM"
+  },
+  {
+    "cityCode": 65,
+    "hebrewName": "מגדל",
+    "aliases": [],
+    "_englishName": "MIGDAL"
+  },
+  {
+    "cityCode": 874,
+    "hebrewName": "מגדל העמק",
+    "aliases": [],
+    "_englishName": "MIGDAL HAEMEQ",
+    "latitude": 32.6743,
+    "longitude": 35.2372
+  },
+  {
+    "cityCode": 3561,
+    "hebrewName": "מגדל עוז",
+    "aliases": [],
+    "_englishName": "MIGDAL OZ"
+  },
+  {
+    "cityCode": 586,
+    "hebrewName": "מגידו",
+    "aliases": [],
+    "_englishName": "MEGIDDO"
+  },
+  {
+    "cityCode": 375,
+    "hebrewName": "מגל",
+    "aliases": [],
+    "_englishName": "MAGGAL"
+  },
+  {
+    "cityCode": 695,
+    "hebrewName": "מגן",
+    "aliases": [],
+    "_englishName": "MAGEN"
+  },
+  {
+    "cityCode": 1155,
+    "hebrewName": "מגן שאול",
+    "aliases": [],
+    "_englishName": "MAGEN SHA'UL"
+  },
+  {
+    "cityCode": 722,
+    "hebrewName": "מגשימים",
+    "aliases": [],
+    "_englishName": "MAGSHIMIM"
+  },
+  {
+    "cityCode": 2029,
+    "hebrewName": "מדרך עוז",
+    "aliases": [],
+    "_englishName": "MIDRAKH OZ"
+  },
+  {
+    "cityCode": 1140,
+    "hebrewName": "מדרשת בן גוריון",
+    "aliases": [],
+    "_englishName": "MIDRESHET BEN GURION"
+  },
+  {
+    "cityCode": 897,
+    "hebrewName": "מדרשת רופין",
+    "aliases": [],
+    "_englishName": "MIDRESHET RUPPIN"
+  },
+  {
+    "cityCode": 3797,
+    "hebrewName": "מודיעין עילית",
+    "aliases": [],
+    "_englishName": "MODI'IN ILLIT"
+  },
+  {
+    "cityCode": 1200,
+    "hebrewName": "מודיעין-מכבים-רעות",
+    "aliases": [
+      "מודיעין",
+      "מכבים רעות",
+      "מכבים-רעות",
+      "מודיעין מכבים רעות"
+    ],
+    "_englishName": "MODI'IN-MAKKABBIM-RE",
+    "latitude": 31.8969,
+    "longitude": 34.9981
+  },
+  {
+    "cityCode": 269,
+    "hebrewName": "מולדת",
+    "aliases": [],
+    "_englishName": "MOLEDET"
+  },
+  {
+    "cityCode": 208,
+    "hebrewName": "מוצא עילית",
+    "aliases": [],
+    "_englishName": "MOZA ILLIT"
+  },
+  {
+    "cityCode": 635,
+    "hebrewName": "מוקייבלה",
+    "aliases": [],
+    "_englishName": "MUQEIBLE"
+  },
+  {
+    "cityCode": 1163,
+    "hebrewName": "מורן",
+    "aliases": [],
+    "_englishName": "MORAN"
+  },
+  {
+    "cityCode": 1178,
+    "hebrewName": "מורשת",
+    "aliases": [],
+    "_englishName": "MORESHET"
+  },
+  {
+    "cityCode": 606,
+    "hebrewName": "מזור",
+    "aliases": [],
+    "_englishName": "MAZOR"
+  },
+  {
+    "cityCode": 28,
+    "hebrewName": "מזכרת בתיה",
+    "aliases": [],
+    "_englishName": "MAZKERET BATYA"
+  },
+  {
+    "cityCode": 104,
+    "hebrewName": "מזרע",
+    "aliases": [],
+    "_englishName": "MIZRA"
+  },
+  {
+    "cityCode": 517,
+    "hebrewName": "מזרעה",
+    "aliases": [],
+    "_englishName": "MAZRA'A"
+  },
+  {
+    "cityCode": 3599,
+    "hebrewName": "מחולה",
+    "aliases": [],
+    "_englishName": "MEHOLA"
+  },
+  {
+    "cityCode": 1411,
+    "hebrewName": "מחנה הילה",
+    "aliases": [],
+    "_englishName": "MAHANE HILLA"
+  },
+  {
+    "cityCode": 1418,
+    "hebrewName": "מחנה טלי",
+    "aliases": [],
+    "_englishName": "MAHANE TALI"
+  },
+  {
+    "cityCode": 1413,
+    "hebrewName": "מחנה יהודית",
+    "aliases": [],
+    "_englishName": "MAHANE YEHUDIT"
+  },
+  {
+    "cityCode": 1416,
+    "hebrewName": "מחנה יוכבד",
+    "aliases": [],
+    "_englishName": "MAHANE YOKHVED"
+  },
+  {
+    "cityCode": 1415,
+    "hebrewName": "מחנה יפה",
+    "aliases": [],
+    "_englishName": "MAHANE YAFA"
+  },
+  {
+    "cityCode": 1196,
+    "hebrewName": "מחנה יתיר",
+    "aliases": [],
+    "_englishName": "MAHANE YATTIR"
+  },
+  {
+    "cityCode": 1414,
+    "hebrewName": "מחנה מרים",
+    "aliases": [],
+    "_englishName": "MAHANE MIRYAM"
+  },
+  {
+    "cityCode": 1412,
+    "hebrewName": "מחנה תל נוף",
+    "aliases": [],
+    "_englishName": "MAHANE TEL NOF"
+  },
+  {
+    "cityCode": 308,
+    "hebrewName": "מחניים",
+    "aliases": [],
+    "_englishName": "MAHANAYIM"
+  },
+  {
+    "cityCode": 776,
+    "hebrewName": "מחסיה",
+    "aliases": [],
+    "_englishName": "MAHSEYA"
+  },
+  {
+    "cityCode": 43,
+    "hebrewName": "מטולה",
+    "aliases": [],
+    "_englishName": "METULA"
+  },
+  {
+    "cityCode": 822,
+    "hebrewName": "מטע",
+    "aliases": [],
+    "_englishName": "MATTA"
+  },
+  {
+    "cityCode": 1128,
+    "hebrewName": "מי עמי",
+    "aliases": [],
+    "_englishName": "ME AMMI"
+  },
+  {
+    "cityCode": 2054,
+    "hebrewName": "מיטב",
+    "aliases": [],
+    "_englishName": "METAV"
+  },
+  {
+    "cityCode": 649,
+    "hebrewName": "מייסר",
+    "aliases": [],
+    "_englishName": "MEISER"
+  },
+  {
+    "cityCode": 4019,
+    "hebrewName": "מיצר",
+    "aliases": [],
+    "_englishName": "MEZAR"
+  },
+  {
+    "cityCode": 1282,
+    "hebrewName": "מירב",
+    "aliases": [],
+    "_englishName": "MERAV"
+  },
+  {
+    "cityCode": 607,
+    "hebrewName": "מירון",
+    "aliases": [],
+    "_englishName": "MERON"
+  },
+  {
+    "cityCode": 731,
+    "hebrewName": "מישר",
+    "aliases": [],
+    "_englishName": "MESHAR"
+  },
+  {
+    "cityCode": 1268,
+    "hebrewName": "מיתר",
+    "aliases": [],
+    "_englishName": "METAR"
+  },
+  {
+    "cityCode": 3614,
+    "hebrewName": "מכורה",
+    "aliases": [],
+    "_englishName": "MEKHORA"
+  },
+  {
+    "cityCode": 1343,
+    "hebrewName": "מכחול",
+    "aliases": [],
+    "_englishName": "MAKCHUL"
+  },
+  {
+    "cityCode": 382,
+    "hebrewName": "מכמורת",
+    "aliases": [],
+    "_englishName": "MIKHMORET"
+  },
+  {
+    "cityCode": 1202,
+    "hebrewName": "מכמנים",
+    "aliases": [],
+    "_englishName": "MIKHMANNIM"
+  },
+  {
+    "cityCode": 164,
+    "hebrewName": "מלאה",
+    "aliases": [],
+    "_englishName": "MELE'A"
+  },
+  {
+    "cityCode": 2044,
+    "hebrewName": "מלילות",
+    "aliases": [],
+    "_englishName": "MELILOT"
+  },
+  {
+    "cityCode": 596,
+    "hebrewName": "מלכיה",
+    "aliases": [],
+    "_englishName": "MALKIYYA"
+  },
+  {
+    "cityCode": 1154,
+    "hebrewName": "מלכישוע",
+    "aliases": [],
+    "_englishName": "MALKISHUA"
+  },
+  {
+    "cityCode": 2030,
+    "hebrewName": "מנוחה",
+    "aliases": [],
+    "_englishName": "MENUHA"
+  },
+  {
+    "cityCode": 1174,
+    "hebrewName": "מנוף",
+    "aliases": [],
+    "_englishName": "MANOF"
+  },
+  {
+    "cityCode": 1205,
+    "hebrewName": "מנות",
+    "aliases": [],
+    "_englishName": "MANOT"
+  },
+  {
+    "cityCode": 48,
+    "hebrewName": "מנחמיה",
+    "aliases": [],
+    "_englishName": "MENAHEMYA"
+  },
+  {
+    "cityCode": 347,
+    "hebrewName": "מנרה",
+    "aliases": [],
+    "_englishName": "MENNARA"
+  },
+  {
+    "cityCode": 994,
+    "hebrewName": "מנשית זבדה",
+    "aliases": [],
+    "_englishName": "MANSHIYYET ZABDA"
+  },
+  {
+    "cityCode": 1258,
+    "hebrewName": "מסד",
+    "aliases": [],
+    "_englishName": "MASSAD"
+  },
+  {
+    "cityCode": 263,
+    "hebrewName": "מסדה",
+    "aliases": [],
+    "_englishName": "MASSADA"
+  },
+  {
+    "cityCode": 298,
+    "hebrewName": "מסילות",
+    "aliases": [],
+    "_englishName": "MESILLOT"
+  },
+  {
+    "cityCode": 742,
+    "hebrewName": "מסילת ציון",
+    "aliases": [],
+    "_englishName": "MESILLAT ZIYYON"
+  },
+  {
+    "cityCode": 748,
+    "hebrewName": "מסלול",
+    "aliases": [],
+    "_englishName": "MASLUL"
+  },
+  {
+    "cityCode": 4203,
+    "hebrewName": "מסעדה",
+    "aliases": [],
+    "_englishName": "MAS'ADE"
+  },
+  {
+    "cityCode": 939,
+    "hebrewName": "מסעודין אל-עזאזמה",
+    "aliases": [],
+    "_englishName": "MAS'UDIN AL-'AZAZME"
+  },
+  {
+    "cityCode": 197,
+    "hebrewName": "מעברות",
+    "aliases": [],
+    "_englishName": "MA'BAROT"
+  },
+  {
+    "cityCode": 1082,
+    "hebrewName": "מעגלים",
+    "aliases": [],
+    "_englishName": "MA'GALIM"
+  },
+  {
+    "cityCode": 678,
+    "hebrewName": "מעגן",
+    "aliases": [],
+    "_englishName": "MA'AGAN"
+  },
+  {
+    "cityCode": 694,
+    "hebrewName": "מעגן מיכאל",
+    "aliases": [],
+    "_englishName": "MA'AGAN MIKHA'EL"
+  },
+  {
+    "cityCode": 272,
+    "hebrewName": "מעוז חיים",
+    "aliases": [],
+    "_englishName": "MA'OZ HAYYIM"
+  },
+  {
+    "cityCode": 3657,
+    "hebrewName": "מעון",
+    "aliases": [],
+    "_englishName": "MA'ON"
+  },
+  {
+    "cityCode": 570,
+    "hebrewName": "מעונה",
+    "aliases": [],
+    "_englishName": "ME'ONA"
+  },
+  {
+    "cityCode": 518,
+    "hebrewName": "מעיליא",
+    "aliases": [],
+    "_englishName": "MI'ELYA"
+  },
+  {
+    "cityCode": 416,
+    "hebrewName": "מעין ברוך",
+    "aliases": [],
+    "_englishName": "MA'YAN BARUKH"
+  },
+  {
+    "cityCode": 290,
+    "hebrewName": "מעין צבי",
+    "aliases": [],
+    "_englishName": "MA'YAN ZEVI"
+  },
+  {
+    "cityCode": 3616,
+    "hebrewName": "מעלה אדומים",
+    "aliases": [],
+    "_englishName": "MA'ALE ADUMMIM",
+    "latitude": 31.7728,
+    "longitude": 35.297
+  },
+  {
+    "cityCode": 3608,
+    "hebrewName": "מעלה אפרים",
+    "aliases": [],
+    "_englishName": "MA'ALE EFRAYIM"
+  },
+  {
+    "cityCode": 1127,
+    "hebrewName": "מעלה גלבוע",
+    "aliases": [],
+    "_englishName": "MA'ALE GILBOA"
+  },
+  {
+    "cityCode": 4008,
+    "hebrewName": "מעלה גמלא",
+    "aliases": [],
+    "_englishName": "MA'ALE GAMLA"
+  },
+  {
+    "cityCode": 286,
+    "hebrewName": "מעלה החמישה",
+    "aliases": [],
+    "_englishName": "MA'ALE HAHAMISHA"
+  },
+  {
+    "cityCode": 3752,
+    "hebrewName": "מעלה לבונה",
+    "aliases": [],
+    "_englishName": "MA'ALE LEVONA"
+  },
+  {
+    "cityCode": 3651,
+    "hebrewName": "מעלה מכמש",
+    "aliases": [],
+    "_englishName": "MA'ALE MIKHMAS"
+  },
+  {
+    "cityCode": 1327,
+    "hebrewName": "מעלה עירון",
+    "aliases": [],
+    "_englishName": "MA'ALE IRON"
+  },
+  {
+    "cityCode": 3653,
+    "hebrewName": "מעלה עמוס",
+    "aliases": [],
+    "_englishName": "MA'ALE AMOS"
+  },
+  {
+    "cityCode": 3637,
+    "hebrewName": "מעלה שומרון",
+    "aliases": [],
+    "_englishName": "MA'ALE SHOMERON"
+  },
+  {
+    "cityCode": 1063,
+    "hebrewName": "מעלות-תרשיחא",
+    "aliases": [],
+    "_englishName": "MA'ALOT-TARSHIHA"
+  },
+  {
+    "cityCode": 344,
+    "hebrewName": "מענית",
+    "aliases": [],
+    "_englishName": "MA'ANIT"
+  },
+  {
+    "cityCode": 230,
+    "hebrewName": "מעש",
+    "aliases": [],
+    "_englishName": "MA'AS"
+  },
+  {
+    "cityCode": 668,
+    "hebrewName": "מפלסים",
+    "aliases": [],
+    "_englishName": "MEFALLESIM"
+  },
+  {
+    "cityCode": 3745,
+    "hebrewName": "מצדות יהודה",
+    "aliases": [],
+    "_englishName": "MEZADOT YEHUDA"
+  },
+  {
+    "cityCode": 325,
+    "hebrewName": "מצובה",
+    "aliases": [],
+    "_englishName": "MAZZUVA"
+  },
+  {
+    "cityCode": 757,
+    "hebrewName": "מצליח",
+    "aliases": [],
+    "_englishName": "MAZLIAH"
+  },
+  {
+    "cityCode": 58,
+    "hebrewName": "מצפה",
+    "aliases": [],
+    "_englishName": "MIZPA"
+  },
+  {
+    "cityCode": 1222,
+    "hebrewName": "מצפה אבי\"ב",
+    "aliases": [],
+    "_englishName": "MIZPE AVIV"
+  },
+  {
+    "cityCode": 1370,
+    "hebrewName": "מצפה אילן",
+    "aliases": [],
+    "_englishName": "MITSPE ILAN"
+  },
+  {
+    "cityCode": 3576,
+    "hebrewName": "מצפה יריחו",
+    "aliases": [],
+    "_englishName": "MIZPE YERIHO"
+  },
+  {
+    "cityCode": 1190,
+    "hebrewName": "מצפה נטופה",
+    "aliases": [],
+    "_englishName": "MIZPE NETOFA"
+  },
+  {
+    "cityCode": 99,
+    "hebrewName": "מצפה רמון",
+    "aliases": [],
+    "_englishName": "MIZPE RAMON"
+  },
+  {
+    "cityCode": 3610,
+    "hebrewName": "מצפה שלם",
+    "aliases": [],
+    "_englishName": "MIZPE SHALEM"
+  },
+  {
+    "cityCode": 648,
+    "hebrewName": "מצר",
+    "aliases": [],
+    "_englishName": "MEZER"
+  },
+  {
+    "cityCode": 22,
+    "hebrewName": "מקווה ישראל",
+    "aliases": [],
+    "_englishName": "MIQWE YISRA'EL"
+  },
+  {
+    "cityCode": 843,
+    "hebrewName": "מרגליות",
+    "aliases": [],
+    "_englishName": "MARGALIYYOT"
+  },
+  {
+    "cityCode": 4101,
+    "hebrewName": "מרום גולן",
+    "aliases": [],
+    "_englishName": "MEROM GOLAN"
+  },
+  {
+    "cityCode": 1340,
+    "hebrewName": "מרחב עם",
+    "aliases": [],
+    "_englishName": "MERHAV AM"
+  },
+  {
+    "cityCode": 97,
+    "hebrewName": "מרחביה )מושב(",
+    "aliases": [],
+    "_englishName": "MERHAVYA(MOSHAV)"
+  },
+  {
+    "cityCode": 66,
+    "hebrewName": "מרחביה )קיבוץ(",
+    "aliases": [],
+    "_englishName": "MERHAVYA(QIBBUZ)"
+  },
+  {
+    "cityCode": 1098,
+    "hebrewName": "מרכז שפירא",
+    "aliases": [],
+    "_englishName": "MERKAZ SHAPPIRA"
+  },
+  {
+    "cityCode": 421,
+    "hebrewName": "משאבי שדה",
+    "aliases": [],
+    "_englishName": "MASH'ABBE SADE"
+  },
+  {
+    "cityCode": 765,
+    "hebrewName": "משגב דב",
+    "aliases": [],
+    "_englishName": "MISGAV DOV"
+  },
+  {
+    "cityCode": 378,
+    "hebrewName": "משגב עם",
+    "aliases": [],
+    "_englishName": "MISGAV AM"
+  },
+  {
+    "cityCode": 520,
+    "hebrewName": "משהד",
+    "aliases": [],
+    "_englishName": "MESHHED"
+  },
+  {
+    "cityCode": 3605,
+    "hebrewName": "משואה",
+    "aliases": [],
+    "_englishName": "MASSU'A"
+  },
+  {
+    "cityCode": 620,
+    "hebrewName": "משואות יצחק",
+    "aliases": [],
+    "_englishName": "MASSUOT YIZHAQ"
+  },
+  {
+    "cityCode": 3785,
+    "hebrewName": "משכיות",
+    "aliases": [],
+    "_englishName": "MASKIYYOT"
+  },
+  {
+    "cityCode": 670,
+    "hebrewName": "משמר איילון",
+    "aliases": [],
+    "_englishName": "MISHMAR AYYALON"
+  },
+  {
+    "cityCode": 563,
+    "hebrewName": "משמר דוד",
+    "aliases": [],
+    "_englishName": "MISHMAR DAWID"
+  },
+  {
+    "cityCode": 732,
+    "hebrewName": "משמר הירדן",
+    "aliases": [],
+    "_englishName": "MISHMAR HAYARDEN"
+  },
+  {
+    "cityCode": 395,
+    "hebrewName": "משמר הנגב",
+    "aliases": [],
+    "_englishName": "MISHMAR HANEGEV"
+  },
+  {
+    "cityCode": 130,
+    "hebrewName": "משמר העמק",
+    "aliases": [],
+    "_englishName": "MISHMAR HAEMEQ"
+  },
+  {
+    "cityCode": 729,
+    "hebrewName": "משמר השבעה",
+    "aliases": [],
+    "_englishName": "MISHMAR HASHIV'A"
+  },
+  {
+    "cityCode": 194,
+    "hebrewName": "משמר השרון",
+    "aliases": [],
+    "_englishName": "MISHMAR HASHARON"
+  },
+  {
+    "cityCode": 213,
+    "hebrewName": "משמרות",
+    "aliases": [],
+    "_englishName": "MISHMAROT"
+  },
+  {
+    "cityCode": 425,
+    "hebrewName": "משמרת",
+    "aliases": [],
+    "_englishName": "MISHMERET"
+  },
+  {
+    "cityCode": 791,
+    "hebrewName": "משען",
+    "aliases": [],
+    "_englishName": "MASH'EN"
+  },
+  {
+    "cityCode": 1315,
+    "hebrewName": "מתן",
+    "aliases": [],
+    "_englishName": "MATTAN"
+  },
+  {
+    "cityCode": 1184,
+    "hebrewName": "מתת",
+    "aliases": [],
+    "_englishName": "MATTAT"
+  },
+  {
+    "cityCode": 3648,
+    "hebrewName": "מתתיהו",
+    "aliases": [],
+    "_englishName": "MATTITYAHU"
+  },
+  {
+    "cityCode": 4551,
+    "hebrewName": "נאות גולן",
+    "aliases": [],
+    "_englishName": "NE'OT GOLAN"
+  },
+  {
+    "cityCode": 1124,
+    "hebrewName": "נאות הכיכר",
+    "aliases": [],
+    "_englishName": "NE'OT HAKIKKAR"
+  },
+  {
+    "cityCode": 408,
+    "hebrewName": "נאות מרדכי",
+    "aliases": [],
+    "_englishName": "NE'OT MORDEKHAY"
+  },
+  {
+    "cityCode": 1197,
+    "hebrewName": "נאות סמדר",
+    "aliases": [],
+    "_englishName": "SHIZZAFON"
+  },
+  {
+    "cityCode": 524,
+    "hebrewName": "נאעורה",
+    "aliases": [],
+    "_englishName": "NA'URA"
+  },
+  {
+    "cityCode": 396,
+    "hebrewName": "נבטים",
+    "aliases": [],
+    "_englishName": "NEVATIM"
+  },
+  {
+    "cityCode": 315,
+    "hebrewName": "נגבה",
+    "aliases": [],
+    "_englishName": "NEGBA"
+  },
+  {
+    "cityCode": 3724,
+    "hebrewName": "נגוהות",
+    "aliases": [],
+    "_englishName": "NEGOHOT"
+  },
+  {
+    "cityCode": 309,
+    "hebrewName": "נהורה",
+    "aliases": [],
+    "_englishName": "NEHORA"
+  },
+  {
+    "cityCode": 80,
+    "hebrewName": "נהלל",
+    "aliases": [],
+    "_englishName": "NAHALAL"
+  },
+  {
+    "cityCode": 9100,
+    "hebrewName": "נהריה",
+    "aliases": [],
+    "_englishName": "NAHARIYYA"
+  },
+  {
+    "cityCode": 4304,
+    "hebrewName": "נוב",
+    "aliases": [],
+    "_englishName": "NOV"
+  },
+  {
+    "cityCode": 55,
+    "hebrewName": "נוגה",
+    "aliases": [],
+    "_englishName": "NOGAH"
+  },
+  {
+    "cityCode": 1366,
+    "hebrewName": "נווה",
+    "aliases": [],
+    "_englishName": "NAVE"
+  },
+  {
+    "cityCode": 926,
+    "hebrewName": "נווה אבות",
+    "aliases": [],
+    "_englishName": "NEWE AVOT"
+  },
+  {
+    "cityCode": 590,
+    "hebrewName": "נווה אור",
+    "aliases": [],
+    "_englishName": "NEWE UR"
+  },
+  {
+    "cityCode": 4303,
+    "hebrewName": "נווה אטי\"ב",
+    "aliases": [],
+    "_englishName": "NEWE ATIV"
+  },
+  {
+    "cityCode": 405,
+    "hebrewName": "נווה אילן",
+    "aliases": [],
+    "_englishName": "NEWE ILAN"
+  },
+  {
+    "cityCode": 296,
+    "hebrewName": "נווה איתן",
+    "aliases": [],
+    "_englishName": "NEWE ETAN"
+  },
+  {
+    "cityCode": 3725,
+    "hebrewName": "נווה דניאל",
+    "aliases": [],
+    "_englishName": "NEWE DANIYYEL"
+  },
+  {
+    "cityCode": 1057,
+    "hebrewName": "נווה זוהר",
+    "aliases": [],
+    "_englishName": "NEWE ZOHAR"
+  },
+  {
+    "cityCode": 1314,
+    "hebrewName": "נווה זיו",
+    "aliases": [],
+    "_englishName": "NEWE ZIV"
+  },
+  {
+    "cityCode": 1279,
+    "hebrewName": "נווה חריף",
+    "aliases": [],
+    "_englishName": "NEWE HARIF"
+  },
+  {
+    "cityCode": 312,
+    "hebrewName": "נווה ים",
+    "aliases": [],
+    "_englishName": "NEWE YAM"
+  },
+  {
+    "cityCode": 686,
+    "hebrewName": "נווה ימין",
+    "aliases": [],
+    "_englishName": "NEWE YAMIN"
+  },
+  {
+    "cityCode": 858,
+    "hebrewName": "נווה ירק",
+    "aliases": [],
+    "_englishName": "NEWE YARAQ"
+  },
+  {
+    "cityCode": 827,
+    "hebrewName": "נווה מבטח",
+    "aliases": [],
+    "_englishName": "NEWE MIVTAH"
+  },
+  {
+    "cityCode": 1071,
+    "hebrewName": "נווה מיכאל",
+    "aliases": [],
+    "_englishName": "NEWE MIKHA'EL"
+  },
+  {
+    "cityCode": 1259,
+    "hebrewName": "נווה שלום",
+    "aliases": [],
+    "_englishName": "NEWE SHALOM"
+  },
+  {
+    "cityCode": 15,
+    "hebrewName": "נועם",
+    "aliases": [],
+    "_englishName": "NO'AM"
+  },
+  {
+    "cityCode": 1333,
+    "hebrewName": "נוף איילון",
+    "aliases": [],
+    "_englishName": "NOF AYYALON"
+  },
+  {
+    "cityCode": 3790,
+    "hebrewName": "נופים",
+    "aliases": [],
+    "_englishName": "NOFIM"
+  },
+  {
+    "cityCode": 1284,
+    "hebrewName": "נופית",
+    "aliases": [],
+    "_englishName": "NOFIT"
+  },
+  {
+    "cityCode": 257,
+    "hebrewName": "נופך",
+    "aliases": [],
+    "_englishName": "NOFEKH"
+  },
+  {
+    "cityCode": 3726,
+    "hebrewName": "נוקדים",
+    "aliases": [],
+    "_englishName": "NOQEDIM"
+  },
+  {
+    "cityCode": 447,
+    "hebrewName": "נורדיה",
+    "aliases": [],
+    "_englishName": "NORDIYYA"
+  },
+  {
+    "cityCode": 833,
+    "hebrewName": "נורית",
+    "aliases": [],
+    "_englishName": "NURIT"
+  },
+  {
+    "cityCode": 59,
+    "hebrewName": "נחושה",
+    "aliases": [],
+    "_englishName": "NEHUSHA"
+  },
+  {
+    "cityCode": 844,
+    "hebrewName": "נחל עוז",
+    "aliases": [],
+    "_englishName": "NAHAL OZ"
+  },
+  {
+    "cityCode": 2045,
+    "hebrewName": "נחלה",
+    "aliases": [],
+    "_englishName": "NAHALA"
+  },
+  {
+    "cityCode": 3767,
+    "hebrewName": "נחליאל",
+    "aliases": [],
+    "_englishName": "NAHALI'EL"
+  },
+  {
+    "cityCode": 449,
+    "hebrewName": "נחלים",
+    "aliases": [],
+    "_englishName": "NEHALIM"
+  },
+  {
+    "cityCode": 809,
+    "hebrewName": "נחם",
+    "aliases": [],
+    "_englishName": "NAHAM"
+  },
+  {
+    "cityCode": 522,
+    "hebrewName": "נחף",
+    "aliases": [],
+    "_englishName": "NAHEF"
+  },
+  {
+    "cityCode": 433,
+    "hebrewName": "נחשולים",
+    "aliases": [],
+    "_englishName": "NAHSHOLIM"
+  },
+  {
+    "cityCode": 777,
+    "hebrewName": "נחשון",
+    "aliases": [],
+    "_englishName": "NAHSHON"
+  },
+  {
+    "cityCode": 705,
+    "hebrewName": "נחשונים",
+    "aliases": [],
+    "_englishName": "NAHSHONIM"
+  },
+  {
+    "cityCode": 1147,
+    "hebrewName": "נטועה",
+    "aliases": [],
+    "_englishName": "NETU'A"
+  },
+  {
+    "cityCode": 4014,
+    "hebrewName": "נטור",
+    "aliases": [],
+    "_englishName": "NATUR"
+  },
+  {
+    "cityCode": 1369,
+    "hebrewName": "נטע",
+    "aliases": [],
+    "_englishName": "NETA"
+  },
+  {
+    "cityCode": 174,
+    "hebrewName": "נטעים",
+    "aliases": [],
+    "_englishName": "NETA'IM"
+  },
+  {
+    "cityCode": 1254,
+    "hebrewName": "נטף",
+    "aliases": [],
+    "_englishName": "NATAF"
+  },
+  {
+    "cityCode": 523,
+    "hebrewName": "ניין",
+    "aliases": [],
+    "_englishName": "NEIN"
+  },
+  {
+    "cityCode": 3655,
+    "hebrewName": "ניל\"י",
+    "aliases": [],
+    "_englishName": "NILI"
+  },
+  {
+    "cityCode": 351,
+    "hebrewName": "ניצן",
+    "aliases": [],
+    "_englishName": "NIZZAN"
+  },
+  {
+    "cityCode": 1419,
+    "hebrewName": "ניצן ב'",
+    "aliases": [],
+    "_englishName": "NIZZAN B"
+  },
+  {
+    "cityCode": 1195,
+    "hebrewName": "ניצנה )קהילת חינוך(",
+    "aliases": [],
+    "_englishName": "NIZZANA (QEHILAT HIN"
+  },
+  {
+    "cityCode": 1280,
+    "hebrewName": "ניצני סיני",
+    "aliases": [],
+    "_englishName": "NIZZANE SINAY"
+  },
+  {
+    "cityCode": 851,
+    "hebrewName": "ניצני עוז",
+    "aliases": [],
+    "_englishName": "NIZZANE OZ"
+  },
+  {
+    "cityCode": 359,
+    "hebrewName": "ניצנים",
+    "aliases": [],
+    "_englishName": "NIZZANIM"
+  },
+  {
+    "cityCode": 808,
+    "hebrewName": "ניר אליהו",
+    "aliases": [],
+    "_englishName": "NIR ELIYYAHU"
+  },
+  {
+    "cityCode": 553,
+    "hebrewName": "ניר בנים",
+    "aliases": [],
+    "_englishName": "NIR BANIM"
+  },
+  {
+    "cityCode": 720,
+    "hebrewName": "ניר גלים",
+    "aliases": [],
+    "_englishName": "NIR GALLIM"
+  },
+  {
+    "cityCode": 256,
+    "hebrewName": "ניר דוד )תל עמל(",
+    "aliases": [],
+    "_englishName": "NIR DAWID (TEL AMAL)"
+  },
+  {
+    "cityCode": 11,
+    "hebrewName": "ניר ח\"ן",
+    "aliases": [],
+    "_englishName": "NIR HEN"
+  },
+  {
+    "cityCode": 165,
+    "hebrewName": "ניר יפה",
+    "aliases": [],
+    "_englishName": "NIR YAFE"
+  },
+  {
+    "cityCode": 402,
+    "hebrewName": "ניר יצחק",
+    "aliases": [],
+    "_englishName": "NIR YIZHAQ"
+  },
+  {
+    "cityCode": 699,
+    "hebrewName": "ניר ישראל",
+    "aliases": [],
+    "_englishName": "NIR YISRA'EL"
+  },
+  {
+    "cityCode": 2047,
+    "hebrewName": "ניר משה",
+    "aliases": [],
+    "_englishName": "NIR MOSHE"
+  },
+  {
+    "cityCode": 69,
+    "hebrewName": "ניר עוז",
+    "aliases": [],
+    "_englishName": "NIR OZ"
+  },
+  {
+    "cityCode": 348,
+    "hebrewName": "ניר עם",
+    "aliases": [],
+    "_englishName": "NIR AM"
+  },
+  {
+    "cityCode": 769,
+    "hebrewName": "ניר עציון",
+    "aliases": [],
+    "_englishName": "NIR EZYON"
+  },
+  {
+    "cityCode": 2048,
+    "hebrewName": "ניר עקיבא",
+    "aliases": [],
+    "_englishName": "NIR AQIVA"
+  },
+  {
+    "cityCode": 331,
+    "hebrewName": "ניר צבי",
+    "aliases": [],
+    "_englishName": "NIR ZEVI"
+  },
+  {
+    "cityCode": 602,
+    "hebrewName": "נירים",
+    "aliases": [],
+    "_englishName": "NIRIM"
+  },
+  {
+    "cityCode": 1236,
+    "hebrewName": "נירית",
+    "aliases": [],
+    "_englishName": "NIRIT"
+  },
+  {
+    "cityCode": 3620,
+    "hebrewName": "נירן",
+    "aliases": [],
+    "_englishName": "NIRAN"
+  },
+  {
+    "cityCode": 4035,
+    "hebrewName": "נמרוד",
+    "aliases": [],
+    "_englishName": "NIMROD"
+  },
+  {
+    "cityCode": 825,
+    "hebrewName": "נס הרים",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 1143,
+    "hebrewName": "נס עמים",
+    "aliases": [],
+    "_englishName": "NES AMMIM"
+  },
+  {
+    "cityCode": 7200,
+    "hebrewName": "נס ציונה",
+    "aliases": [],
+    "_englishName": "NES ZIYYONA",
+    "latitude": 31.9306,
+    "longitude": 34.7992
+  },
+  {
+    "cityCode": 186,
+    "hebrewName": "נעורים",
+    "aliases": [],
+    "_englishName": "NE'URIM"
+  },
+  {
+    "cityCode": 3787,
+    "hebrewName": "נעלה",
+    "aliases": [],
+    "_englishName": "NA'ALE"
+  },
+  {
+    "cityCode": 3713,
+    "hebrewName": "נעמ\"ה",
+    "aliases": [],
+    "_englishName": "NAAMA"
+  },
+  {
+    "cityCode": 158,
+    "hebrewName": "נען",
+    "aliases": [],
+    "_englishName": "NA'AN"
+  },
+  {
+    "cityCode": 1041,
+    "hebrewName": "נצאצרה )שבט(",
+    "aliases": [],
+    "_englishName": "NASASRA"
+  },
+  {
+    "cityCode": 1372,
+    "hebrewName": "נצר חזני",
+    "aliases": [],
+    "_englishName": "NEZER HAZZANI"
+  },
+  {
+    "cityCode": 435,
+    "hebrewName": "נצר סרני",
+    "aliases": [],
+    "_englishName": "NEZER SERENI"
+  },
+  {
+    "cityCode": 7300,
+    "hebrewName": "נצרת",
+    "aliases": [],
+    "_englishName": "NAZARETH",
+    "latitude": 32.7009,
+    "longitude": 35.2976
+  },
+  {
+    "cityCode": 1061,
+    "hebrewName": "נצרת עילית",
+    "aliases": [],
+    "_englishName": "NAZERAT ILLIT"
+  },
+  {
+    "cityCode": 2500,
+    "hebrewName": "נשר",
+    "aliases": [],
+    "_englishName": "NESHER"
+  },
+  {
+    "cityCode": 3555,
+    "hebrewName": "נתיב הגדוד",
+    "aliases": [],
+    "_englishName": "NETIV HAGEDUD"
+  },
+  {
+    "cityCode": 693,
+    "hebrewName": "נתיב הל\"ה",
+    "aliases": [],
+    "_englishName": "NETIV HALAMED-HE"
+  },
+  {
+    "cityCode": 1242,
+    "hebrewName": "נתיב העשרה",
+    "aliases": [],
+    "_englishName": "NETIV HAASARA"
+  },
+  {
+    "cityCode": 792,
+    "hebrewName": "נתיב השיירה",
+    "aliases": [],
+    "_englishName": "NETIV HASHAYYARA"
+  },
+  {
+    "cityCode": 246,
+    "hebrewName": "נתיבות",
+    "aliases": [],
+    "_englishName": "NETIVOT"
+  },
+  {
+    "cityCode": 7400,
+    "hebrewName": "נתניה",
+    "aliases": [],
+    "_englishName": "NETANYA",
+    "latitude": 32.3215,
+    "longitude": 34.8532
+  },
+  {
+    "cityCode": 525,
+    "hebrewName": "סאג'ור",
+    "aliases": [],
+    "_englishName": "SAJUR"
+  },
+  {
+    "cityCode": 578,
+    "hebrewName": "סאסא",
+    "aliases": [],
+    "_englishName": "SASA"
+  },
+  {
+    "cityCode": 587,
+    "hebrewName": "סביון",
+    "aliases": [],
+    "_englishName": "SAVYON"
+  },
+  {
+    "cityCode": 2046,
+    "hebrewName": "סגולה",
+    "aliases": [],
+    "_englishName": "SEGULA"
+  },
+  {
+    "cityCode": 942,
+    "hebrewName": "סואעד )חמרייה(",
+    "aliases": [],
+    "_englishName": "SAWA'ID(HAMRIYYE)"
+  },
+  {
+    "cityCode": 989,
+    "hebrewName": "סואעד )כמאנה( )שבט(",
+    "aliases": [],
+    "_englishName": "SAWA'ID (KAMANE)"
+  },
+  {
+    "cityCode": 526,
+    "hebrewName": "סולם",
+    "aliases": [],
+    "_englishName": "SULAM"
+  },
+  {
+    "cityCode": 3756,
+    "hebrewName": "סוסיה",
+    "aliases": [],
+    "_englishName": "SUSEYA"
+  },
+  {
+    "cityCode": 1238,
+    "hebrewName": "סופה",
+    "aliases": [],
+    "_englishName": "SUFA"
+  },
+  {
+    "cityCode": 7500,
+    "hebrewName": "סח'נין",
+    "aliases": [],
+    "_englishName": "SAKHNIN"
+  },
+  {
+    "cityCode": 1170,
+    "hebrewName": "סייד )שבט(",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 1245,
+    "hebrewName": "סלמה",
+    "aliases": [],
+    "_englishName": "SALLAMA"
+  },
+  {
+    "cityCode": 3567,
+    "hebrewName": "סלעית",
+    "aliases": [],
+    "_englishName": "SAL'IT"
+  },
+  {
+    "cityCode": 1156,
+    "hebrewName": "סמר",
+    "aliases": [],
+    "_englishName": "SAMAR"
+  },
+  {
+    "cityCode": 3777,
+    "hebrewName": "סנסנה",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 419,
+    "hebrewName": "סעד",
+    "aliases": [],
+    "_englishName": "SA'AD"
+  },
+  {
+    "cityCode": 1360,
+    "hebrewName": "סעוה",
+    "aliases": [],
+    "_englishName": "SA'WA"
+  },
+  {
+    "cityCode": 454,
+    "hebrewName": "סער",
+    "aliases": [],
+    "_englishName": "SA'AR"
+  },
+  {
+    "cityCode": 1176,
+    "hebrewName": "ספיר",
+    "aliases": [],
+    "_englishName": "SAPPIR"
+  },
+  {
+    "cityCode": 610,
+    "hebrewName": "סתריה",
+    "aliases": [],
+    "_englishName": "SITRIYYA"
+  },
+  {
+    "cityCode": 4501,
+    "hebrewName": "ע'ג'ר",
+    "aliases": [],
+    "_englishName": "GHAJAR"
+  },
+  {
+    "cityCode": 376,
+    "hebrewName": "עברון",
+    "aliases": [],
+    "_englishName": "EVRON"
+  },
+  {
+    "cityCode": 794,
+    "hebrewName": "עגור",
+    "aliases": [],
+    "_englishName": "AGUR"
+  },
+  {
+    "cityCode": 1199,
+    "hebrewName": "עדי",
+    "aliases": [],
+    "_englishName": "ADI"
+  },
+  {
+    "cityCode": 2035,
+    "hebrewName": "עדנים",
+    "aliases": [],
+    "_englishName": "ADANIM"
+  },
+  {
+    "cityCode": 826,
+    "hebrewName": "עוזה",
+    "aliases": [],
+    "_englishName": "UZA"
+  },
+  {
+    "cityCode": 528,
+    "hebrewName": "עוזייר",
+    "aliases": [],
+    "_englishName": "UZEIR"
+  },
+  {
+    "cityCode": 737,
+    "hebrewName": "עולש",
+    "aliases": [],
+    "_englishName": "OLESH"
+  },
+  {
+    "cityCode": 666,
+    "hebrewName": "עומר",
+    "aliases": [],
+    "_englishName": "OMER"
+  },
+  {
+    "cityCode": 810,
+    "hebrewName": "עופר",
+    "aliases": [],
+    "_englishName": "OFER"
+  },
+  {
+    "cityCode": 3617,
+    "hebrewName": "עופרה",
+    "aliases": [],
+    "_englishName": "OFRA"
+  },
+  {
+    "cityCode": 32,
+    "hebrewName": "עוצם",
+    "aliases": [],
+    "_englishName": "OZEM"
+  },
+  {
+    "cityCode": 957,
+    "hebrewName": "עוקבי )בנו עוקבה(",
+    "aliases": [],
+    "_englishName": "UQBI (BANU UQBA)"
+  },
+  {
+    "cityCode": 328,
+    "hebrewName": "עזוז",
+    "aliases": [],
+    "_englishName": "EZUZ"
+  },
+  {
+    "cityCode": 1149,
+    "hebrewName": "עזר",
+    "aliases": [],
+    "_englishName": "EZER"
+  },
+  {
+    "cityCode": 837,
+    "hebrewName": "עזריאל",
+    "aliases": [],
+    "_englishName": "AZRI'EL"
+  },
+  {
+    "cityCode": 711,
+    "hebrewName": "עזריה",
+    "aliases": [],
+    "_englishName": "AZARYA"
+  },
+  {
+    "cityCode": 817,
+    "hebrewName": "עזריקם",
+    "aliases": [],
+    "_englishName": "AZRIQAM"
+  },
+  {
+    "cityCode": 969,
+    "hebrewName": "עטאוונה )שבט(",
+    "aliases": [],
+    "_englishName": "ATAWNE"
+  },
+  {
+    "cityCode": 3658,
+    "hebrewName": "עטרת",
+    "aliases": [],
+    "_englishName": "ATERET"
+  },
+  {
+    "cityCode": 1175,
+    "hebrewName": "עידן",
+    "aliases": [],
+    "_englishName": "IDDAN"
+  },
+  {
+    "cityCode": 530,
+    "hebrewName": "עיילבון",
+    "aliases": [],
+    "_englishName": "EILABUN"
+  },
+  {
+    "cityCode": 156,
+    "hebrewName": "עיינות",
+    "aliases": [],
+    "_englishName": "AYANOT"
+  },
+  {
+    "cityCode": 511,
+    "hebrewName": "עילוט",
+    "aliases": [],
+    "_englishName": "ILUT"
+  },
+  {
+    "cityCode": 687,
+    "hebrewName": "עין איילה",
+    "aliases": [],
+    "_englishName": "EN AYYALA"
+  },
+  {
+    "cityCode": 546,
+    "hebrewName": "עין אל-אסד",
+    "aliases": [],
+    "_englishName": "EIN AL-ASAD"
+  },
+  {
+    "cityCode": 273,
+    "hebrewName": "עין גב",
+    "aliases": [],
+    "_englishName": "EN GEV"
+  },
+  {
+    "cityCode": 2042,
+    "hebrewName": "עין גדי",
+    "aliases": [],
+    "_englishName": "EN GEDI"
+  },
+  {
+    "cityCode": 436,
+    "hebrewName": "עין דור",
+    "aliases": [],
+    "_englishName": "EN DOR"
+  },
+  {
+    "cityCode": 1240,
+    "hebrewName": "עין הבשור",
+    "aliases": [],
+    "_englishName": "EN HABESOR"
+  },
+  {
+    "cityCode": 74,
+    "hebrewName": "עין הוד",
+    "aliases": [],
+    "_englishName": "EN HOD"
+  },
+  {
+    "cityCode": 167,
+    "hebrewName": "עין החורש",
+    "aliases": [],
+    "_englishName": "EN HAHORESH"
+  },
+  {
+    "cityCode": 289,
+    "hebrewName": "עין המפרץ",
+    "aliases": [],
+    "_englishName": "EN HAMIFRAZ"
+  },
+  {
+    "cityCode": 383,
+    "hebrewName": "עין הנצי\"ב",
+    "aliases": [],
+    "_englishName": "EN HANAZIV"
+  },
+  {
+    "cityCode": 367,
+    "hebrewName": "עין העמק",
+    "aliases": [],
+    "_englishName": "EN HAEMEQ"
+  },
+  {
+    "cityCode": 270,
+    "hebrewName": "עין השופט",
+    "aliases": [],
+    "_englishName": "EN HASHOFET"
+  },
+  {
+    "cityCode": 157,
+    "hebrewName": "עין ורד",
+    "aliases": [],
+    "_englishName": "EN WERED"
+  },
+  {
+    "cityCode": 4503,
+    "hebrewName": "עין זיוון",
+    "aliases": [],
+    "_englishName": "EN ZIWAN"
+  },
+  {
+    "cityCode": 1320,
+    "hebrewName": "עין חוד",
+    "aliases": [],
+    "_englishName": "EIN HOD"
+  },
+  {
+    "cityCode": 1053,
+    "hebrewName": "עין חצבה",
+    "aliases": [],
+    "_englishName": "EN HAZEVA"
+  },
+  {
+    "cityCode": 89,
+    "hebrewName": "עין חרוד )איחוד(",
+    "aliases": [],
+    "_englishName": "EN HAROD (IHUD)"
+  },
+  {
+    "cityCode": 82,
+    "hebrewName": "עין חרוד )מאוחד(",
+    "aliases": [],
+    "_englishName": "EN HAROD(ME'UHAD)"
+  },
+  {
+    "cityCode": 806,
+    "hebrewName": "עין יהב",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 813,
+    "hebrewName": "עין יעקב",
+    "aliases": [],
+    "_englishName": "EN YA'AQOV"
+  },
+  {
+    "cityCode": 1056,
+    "hebrewName": "עין כרם-בי\"ס חקלאי",
+    "aliases": [],
+    "_englishName": "EN KAREM-B.S.HAQLA'I"
+  },
+  {
+    "cityCode": 426,
+    "hebrewName": "עין כרמל",
+    "aliases": [],
+    "_englishName": "EN KARMEL"
+  },
+  {
+    "cityCode": 532,
+    "hebrewName": "עין מאהל",
+    "aliases": [],
+    "_englishName": "EIN MAHEL"
+  },
+  {
+    "cityCode": 521,
+    "hebrewName": "עין נקובא",
+    "aliases": [],
+    "_englishName": "EIN NAQQUBA"
+  },
+  {
+    "cityCode": 223,
+    "hebrewName": "עין עירון",
+    "aliases": [],
+    "_englishName": "EN IRON"
+  },
+  {
+    "cityCode": 622,
+    "hebrewName": "עין צורים",
+    "aliases": [],
+    "_englishName": "EN ZURIM"
+  },
+  {
+    "cityCode": 4502,
+    "hebrewName": "עין קנייא",
+    "aliases": [],
+    "_englishName": "EIN QINIYYE"
+  },
+  {
+    "cityCode": 514,
+    "hebrewName": "עין ראפה",
+    "aliases": [],
+    "_englishName": "EIN RAFA"
+  },
+  {
+    "cityCode": 139,
+    "hebrewName": "עין שמר",
+    "aliases": [],
+    "_englishName": "EN SHEMER"
+  },
+  {
+    "cityCode": 880,
+    "hebrewName": "עין שריד",
+    "aliases": [],
+    "_englishName": "EN SARID"
+  },
+  {
+    "cityCode": 1251,
+    "hebrewName": "עין תמר",
+    "aliases": [],
+    "_englishName": "EN TAMAR"
+  },
+  {
+    "cityCode": 871,
+    "hebrewName": "עינת",
+    "aliases": [],
+    "_englishName": "ENAT"
+  },
+  {
+    "cityCode": 1187,
+    "hebrewName": "עיר אובות",
+    "aliases": [],
+    "_englishName": "IR OVOT"
+  },
+  {
+    "cityCode": 7600,
+    "hebrewName": "עכו",
+    "aliases": [],
+    "_englishName": "AKKO"
+  },
+  {
+    "cityCode": 1146,
+    "hebrewName": "עלומים",
+    "aliases": [],
+    "_englishName": "ALUMIM"
+  },
+  {
+    "cityCode": 3765,
+    "hebrewName": "עלי",
+    "aliases": [],
+    "_englishName": "ELI"
+  },
+  {
+    "cityCode": 3727,
+    "hebrewName": "עלי זהב",
+    "aliases": [],
+    "_englishName": "ALE ZAHAV"
+  },
+  {
+    "cityCode": 688,
+    "hebrewName": "עלמה",
+    "aliases": [],
+    "_englishName": "ALMA"
+  },
+  {
+    "cityCode": 3715,
+    "hebrewName": "עלמון",
+    "aliases": [],
+    "_englishName": "ALMON"
+  },
+  {
+    "cityCode": 1212,
+    "hebrewName": "עמוקה",
+    "aliases": [],
+    "_englishName": "AMUQQA"
+  },
+  {
+    "cityCode": 3824,
+    "hebrewName": "עמיחי",
+    "aliases": [],
+    "_englishName": "AMMIHAY"
+  },
+  {
+    "cityCode": 779,
+    "hebrewName": "עמינדב",
+    "aliases": [],
+    "_englishName": "AMMINADAV"
+  },
+  {
+    "cityCode": 385,
+    "hebrewName": "עמיעד",
+    "aliases": [],
+    "_englishName": "AMMI'AD"
+  },
+  {
+    "cityCode": 318,
+    "hebrewName": "עמיעוז",
+    "aliases": [],
+    "_englishName": "AMMI'OZ"
+  },
+  {
+    "cityCode": 773,
+    "hebrewName": "עמיקם",
+    "aliases": [],
+    "_englishName": "AMMIQAM"
+  },
+  {
+    "cityCode": 319,
+    "hebrewName": "עמיר",
+    "aliases": [],
+    "_englishName": "AMIR"
+  },
+  {
+    "cityCode": 708,
+    "hebrewName": "עמקה",
+    "aliases": [],
+    "_englishName": "AMQA"
+  },
+  {
+    "cityCode": 3712,
+    "hebrewName": "ענב",
+    "aliases": [],
+    "_englishName": "ENAV"
+  },
+  {
+    "cityCode": 534,
+    "hebrewName": "עספיא",
+    "aliases": [],
+    "_englishName": "ISIFYA"
+  },
+  {
+    "cityCode": 7700,
+    "hebrewName": "עפולה",
+    "aliases": [],
+    "_englishName": "AFULA"
+  },
+  {
+    "cityCode": 3778,
+    "hebrewName": "עץ אפרים",
+    "aliases": [],
+    "_englishName": "EZ EFRAYIM"
+  },
+  {
+    "cityCode": 917,
+    "hebrewName": "עצמון שגב",
+    "aliases": [],
+    "_englishName": "ATSMON-SEGEV"
+  },
+  {
+    "cityCode": 531,
+    "hebrewName": "עראבה",
+    "aliases": [],
+    "_englishName": "ARRABE"
+  },
+  {
+    "cityCode": 1246,
+    "hebrewName": "עראמשה",
+    "aliases": [],
+    "_englishName": "ARAMSHA"
+  },
+  {
+    "cityCode": 1335,
+    "hebrewName": "ערב אל נעים",
+    "aliases": [],
+    "_englishName": "ARRAB AL NAIM"
+  },
+  {
+    "cityCode": 2560,
+    "hebrewName": "ערד",
+    "aliases": [],
+    "_englishName": "ARAD"
+  },
+  {
+    "cityCode": 637,
+    "hebrewName": "ערערה",
+    "aliases": [],
+    "_englishName": "AR'ARA"
+  },
+  {
+    "cityCode": 1192,
+    "hebrewName": "ערערה-בנגב",
+    "aliases": [],
+    "_englishName": "AR'ARA-BANEGEV"
+  },
+  {
+    "cityCode": 591,
+    "hebrewName": "עשרת",
+    "aliases": [],
+    "_englishName": "ASERET"
+  },
+  {
+    "cityCode": 53,
+    "hebrewName": "עתלית",
+    "aliases": [],
+    "_englishName": "ATLIT"
+  },
+  {
+    "cityCode": 3748,
+    "hebrewName": "עתניאל",
+    "aliases": [],
+    "_englishName": "OTNI'EL"
+  },
+  {
+    "cityCode": 1151,
+    "hebrewName": "פארן",
+    "aliases": [],
+    "_englishName": "PARAN"
+  },
+  {
+    "cityCode": 3768,
+    "hebrewName": "פדואל",
+    "aliases": [],
+    "_englishName": "PEDU'EL"
+  },
+  {
+    "cityCode": 750,
+    "hebrewName": "פדויים",
+    "aliases": [],
+    "_englishName": "PEDUYIM"
+  },
+  {
+    "cityCode": 838,
+    "hebrewName": "פדיה",
+    "aliases": [],
+    "_englishName": "PEDAYA"
+  },
+  {
+    "cityCode": 1104,
+    "hebrewName": "פוריה - כפר עבודה",
+    "aliases": [],
+    "_englishName": "PORIYYA-KEFAR AVODA"
+  },
+  {
+    "cityCode": 1105,
+    "hebrewName": "פוריה - נווה עובד",
+    "aliases": [],
+    "_englishName": "PORIYYA-NEWE OVED"
+  },
+  {
+    "cityCode": 1313,
+    "hebrewName": "פוריה עילית",
+    "aliases": [],
+    "_englishName": "PORIYYA ILLIT"
+  },
+  {
+    "cityCode": 537,
+    "hebrewName": "פוריידיס",
+    "aliases": [],
+    "_englishName": "FUREIDIS"
+  },
+  {
+    "cityCode": 767,
+    "hebrewName": "פורת",
+    "aliases": [],
+    "_englishName": "PORAT"
+  },
+  {
+    "cityCode": 749,
+    "hebrewName": "פטיש",
+    "aliases": [],
+    "_englishName": "PATTISH"
+  },
+  {
+    "cityCode": 1185,
+    "hebrewName": "פלך",
+    "aliases": [],
+    "_englishName": "PELEKH"
+  },
+  {
+    "cityCode": 597,
+    "hebrewName": "פלמחים",
+    "aliases": [],
+    "_englishName": "PALMAHIM"
+  },
+  {
+    "cityCode": 3723,
+    "hebrewName": "פני חבר",
+    "aliases": [],
+    "_englishName": "PENE HEVER"
+  },
+  {
+    "cityCode": 3659,
+    "hebrewName": "פסגות",
+    "aliases": [],
+    "_englishName": "PESAGOT"
+  },
+  {
+    "cityCode": 535,
+    "hebrewName": "פסוטה",
+    "aliases": [],
+    "_englishName": "FASSUTA"
+  },
+  {
+    "cityCode": 2059,
+    "hebrewName": "פעמי תש\"ז",
+    "aliases": [],
+    "_englishName": "PA'AME TASHAZ"
+  },
+  {
+    "cityCode": 3615,
+    "hebrewName": "פצאל",
+    "aliases": [],
+    "_englishName": "PEZA'EL"
+  },
+  {
+    "cityCode": 536,
+    "hebrewName": "פקיעין )בוקייעה(",
+    "aliases": [],
+    "_englishName": "PEQI'IN (BUQEI'A)"
+  },
+  {
+    "cityCode": 281,
+    "hebrewName": "פקיעין חדשה",
+    "aliases": [],
+    "_englishName": "PEQI'IN HADASHA"
+  },
+  {
+    "cityCode": 7800,
+    "hebrewName": "פרדס חנה-כרכור",
+    "aliases": [],
+    "_englishName": "PARDES HANNA-KARKUR"
+  },
+  {
+    "cityCode": 171,
+    "hebrewName": "פרדסיה",
+    "aliases": [],
+    "_englishName": "PARDESIYYA"
+  },
+  {
+    "cityCode": 599,
+    "hebrewName": "פרוד",
+    "aliases": [],
+    "_englishName": "PAROD"
+  },
+  {
+    "cityCode": 2053,
+    "hebrewName": "פרזון",
+    "aliases": [],
+    "_englishName": "PERAZON"
+  },
+  {
+    "cityCode": 1231,
+    "hebrewName": "פרי גן",
+    "aliases": [],
+    "_englishName": "PERI GAN"
+  },
+  {
+    "cityCode": 7900,
+    "hebrewName": "פתח תקווה",
+    "aliases": [],
+    "_englishName": "PETAH TIQWA",
+    "latitude": 32.0878,
+    "longitude": 34.8872
+  },
+  {
+    "cityCode": 839,
+    "hebrewName": "פתחיה",
+    "aliases": [],
+    "_englishName": "PETAHYA"
+  },
+  {
+    "cityCode": 413,
+    "hebrewName": "צאלים",
+    "aliases": [],
+    "_englishName": "ZE'ELIM"
+  },
+  {
+    "cityCode": 1180,
+    "hebrewName": "צביה",
+    "aliases": [],
+    "_englishName": "ZVIYYA"
+  },
+  {
+    "cityCode": 1213,
+    "hebrewName": "צבעון",
+    "aliases": [],
+    "_englishName": "ZIV'ON"
+  },
+  {
+    "cityCode": 465,
+    "hebrewName": "צובה",
+    "aliases": [],
+    "_englishName": "ZOVA"
+  },
+  {
+    "cityCode": 1136,
+    "hebrewName": "צוחר",
+    "aliases": [],
+    "_englishName": "ZOHAR"
+  },
+  {
+    "cityCode": 1111,
+    "hebrewName": "צופיה",
+    "aliases": [],
+    "_englishName": "ZOFIYYA"
+  },
+  {
+    "cityCode": 3791,
+    "hebrewName": "צופים",
+    "aliases": [],
+    "_englishName": "ZUFIN"
+  },
+  {
+    "cityCode": 198,
+    "hebrewName": "צופית",
+    "aliases": [],
+    "_englishName": "ZOFIT"
+  },
+  {
+    "cityCode": 1150,
+    "hebrewName": "צופר",
+    "aliases": [],
+    "_englishName": "ZOFAR"
+  },
+  {
+    "cityCode": 1102,
+    "hebrewName": "צוקי ים",
+    "aliases": [],
+    "_englishName": "SHOSHANNAT HAAMAQIM("
+  },
+  {
+    "cityCode": 1262,
+    "hebrewName": "צוקים",
+    "aliases": [],
+    "_englishName": "MAHANE BILDAD"
+  },
+  {
+    "cityCode": 1113,
+    "hebrewName": "צור הדסה",
+    "aliases": [],
+    "_englishName": "ZUR HADASSA"
+  },
+  {
+    "cityCode": 1345,
+    "hebrewName": "צור יצחק",
+    "aliases": [],
+    "_englishName": "ZUR YIZHAQ"
+  },
+  {
+    "cityCode": 276,
+    "hebrewName": "צור משה",
+    "aliases": [],
+    "_englishName": "ZUR MOSHE"
+  },
+  {
+    "cityCode": 1148,
+    "hebrewName": "צור נתן",
+    "aliases": [],
+    "_englishName": "ZUR NATAN"
+  },
+  {
+    "cityCode": 774,
+    "hebrewName": "צוריאל",
+    "aliases": [],
+    "_englishName": "ZURI'EL"
+  },
+  {
+    "cityCode": 1221,
+    "hebrewName": "צורית",
+    "aliases": [],
+    "_englishName": "ZURIT"
+  },
+  {
+    "cityCode": 613,
+    "hebrewName": "ציפורי",
+    "aliases": [],
+    "_englishName": "ZIPPORI"
+  },
+  {
+    "cityCode": 796,
+    "hebrewName": "צלפון",
+    "aliases": [],
+    "_englishName": "ZELAFON"
+  },
+  {
+    "cityCode": 636,
+    "hebrewName": "צנדלה",
+    "aliases": [],
+    "_englishName": "SANDALA"
+  },
+  {
+    "cityCode": 594,
+    "hebrewName": "צפריה",
+    "aliases": [],
+    "_englishName": "ZAFRIYYA"
+  },
+  {
+    "cityCode": 8000,
+    "hebrewName": "צפת",
+    "aliases": [],
+    "_englishName": "ZEFAT",
+    "latitude": 32.965,
+    "longitude": 35.4977
+  },
+  {
+    "cityCode": 612,
+    "hebrewName": "צרופה",
+    "aliases": [],
+    "_englishName": "ZERUFA"
+  },
+  {
+    "cityCode": 567,
+    "hebrewName": "צרעה",
+    "aliases": [],
+    "_englishName": "ZOR'A"
+  },
+  {
+    "cityCode": 1234,
+    "hebrewName": "קבועה )שבט(",
+    "aliases": [],
+    "_englishName": "QABBO'A"
+  },
+  {
+    "cityCode": 334,
+    "hebrewName": "קבוצת יבנה",
+    "aliases": [],
+    "_englishName": "QEVUZAT YAVNE"
+  },
+  {
+    "cityCode": 3557,
+    "hebrewName": "קדומים",
+    "aliases": [],
+    "_englishName": "QEDUMIM"
+  },
+  {
+    "cityCode": 195,
+    "hebrewName": "קדימה-צורן",
+    "aliases": [],
+    "_englishName": "QADIMA-ZORAN"
+  },
+  {
+    "cityCode": 392,
+    "hebrewName": "קדמה",
+    "aliases": [],
+    "_englishName": "QEDMA"
+  },
+  {
+    "cityCode": 4025,
+    "hebrewName": "קדמת צבי",
+    "aliases": [],
+    "_englishName": "QIDMAT ZEVI"
+  },
+  {
+    "cityCode": 3781,
+    "hebrewName": "קדר",
+    "aliases": [],
+    "_englishName": "QEDAR"
+  },
+  {
+    "cityCode": 615,
+    "hebrewName": "קדרון",
+    "aliases": [],
+    "_englishName": "QIDRON"
+  },
+  {
+    "cityCode": 1211,
+    "hebrewName": "קדרים",
+    "aliases": [],
+    "_englishName": "QADDARIM"
+  },
+  {
+    "cityCode": 964,
+    "hebrewName": "קודייראת א-צאנע)שבט(",
+    "aliases": [],
+    "_englishName": "QUDEIRAT AS-SANI"
+  },
+  {
+    "cityCode": 972,
+    "hebrewName": "קוואעין )שבט(",
+    "aliases": [],
+    "_englishName": "QAWA'IN"
+  },
+  {
+    "cityCode": 766,
+    "hebrewName": "קוממיות",
+    "aliases": [],
+    "_englishName": "QOMEMIYYUT"
+  },
+  {
+    "cityCode": 1179,
+    "hebrewName": "קורנית",
+    "aliases": [],
+    "_englishName": "QORANIT"
+  },
+  {
+    "cityCode": 1052,
+    "hebrewName": "קטורה",
+    "aliases": [],
+    "_englishName": "QETURA"
+  },
+  {
+    "cityCode": 1167,
+    "hebrewName": "קי��ריה",
+    "aliases": [],
+    "_englishName": "QESARIYYA"
+  },
+  {
+    "cityCode": 414,
+    "hebrewName": "קלחים",
+    "aliases": [],
+    "_englishName": "QELAHIM"
+  },
+  {
+    "cityCode": 3601,
+    "hebrewName": "קליה",
+    "aliases": [],
+    "_englishName": "QALYA"
+  },
+  {
+    "cityCode": 638,
+    "hebrewName": "קלנסווה",
+    "aliases": [],
+    "_englishName": "QALANSAWE"
+  },
+  {
+    "cityCode": 4024,
+    "hebrewName": "קלע",
+    "aliases": [],
+    "_englishName": "QELA"
+  },
+  {
+    "cityCode": 1243,
+    "hebrewName": "קציר",
+    "aliases": [],
+    "_englishName": "QAZIR"
+  },
+  {
+    "cityCode": 1347,
+    "hebrewName": "קצר א-סר",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 4100,
+    "hebrewName": "קצרין",
+    "aliases": [],
+    "_englishName": "QAZRIN"
+  },
+  {
+    "cityCode": 2620,
+    "hebrewName": "קרית אונו",
+    "aliases": [],
+    "_englishName": "QIRYAT ONO"
+  },
+  {
+    "cityCode": 3611,
+    "hebrewName": "קרית ארבע",
+    "aliases": [],
+    "_englishName": "QIRYAT ARBA"
+  },
+  {
+    "cityCode": 6800,
+    "hebrewName": "קרית אתא",
+    "aliases": [],
+    "_englishName": "QIRYAT ATTA",
+    "latitude": 32.8065,
+    "longitude": 35.1027
+  },
+  {
+    "cityCode": 9500,
+    "hebrewName": "קרית ביאליק",
+    "aliases": [],
+    "_englishName": "QIRYAT BIALIK",
+    "latitude": 32.8345,
+    "longitude": 35.089
+  },
+  {
+    "cityCode": 2630,
+    "hebrewName": "קרית גת",
+    "aliases": [],
+    "_englishName": "QIRYAT GAT",
+    "latitude": 31.61,
+    "longitude": 34.7642
+  },
+  {
+    "cityCode": 2300,
+    "hebrewName": "קרית טבעון",
+    "aliases": [
+      "חולון"
+    ],
+    "_englishName": "QIRYAT TIV'ON"
+  },
+  {
+    "cityCode": 9600,
+    "hebrewName": "קרית ים",
+    "aliases": [],
+    "_englishName": "QIRYAT YAM",
+    "latitude": 32.8381,
+    "longitude": 35.0662
+  },
+  {
+    "cityCode": 1137,
+    "hebrewName": "קרית יערים",
+    "aliases": [],
+    "_englishName": "QIRYAT YE'ARIM"
+  },
+  {
+    "cityCode": 2039,
+    "hebrewName": "קרית יערים)מוסד(",
+    "aliases": [],
+    "_englishName": "QIRYAT YE'ARIM(INSTI"
+  },
+  {
+    "cityCode": 8200,
+    "hebrewName": "קרית מוצקין",
+    "aliases": [],
+    "_englishName": "QIRYAT MOTZKIN",
+    "latitude": 32.8372,
+    "longitude": 35.0754
+  },
+  {
+    "cityCode": 1034,
+    "hebrewName": "קרית מלאכי",
+    "aliases": [],
+    "_englishName": "QIRYAT MAL'AKHI"
+  },
+  {
+    "cityCode": 3746,
+    "hebrewName": "קרית נטפים",
+    "aliases": [],
+    "_englishName": "QIRYAT NETAFIM"
+  },
+  {
+    "cityCode": 78,
+    "hebrewName": "קרית ענבים",
+    "aliases": [],
+    "_englishName": "QIRYAT ANAVIM"
+  },
+  {
+    "cityCode": 469,
+    "hebrewName": "קרית עקרון",
+    "aliases": [],
+    "_englishName": "QIRYAT EQRON"
+  },
+  {
+    "cityCode": 412,
+    "hebrewName": "קרית שלמה",
+    "aliases": [],
+    "_englishName": "QIRYAT SHELOMO"
+  },
+  {
+    "cityCode": 2800,
+    "hebrewName": "קרית שמונה",
+    "aliases": [],
+    "_englishName": "QIRYAT SHEMONA",
+    "latitude": 33.2074,
+    "longitude": 35.5697
+  },
+  {
+    "cityCode": 3640,
+    "hebrewName": "קרני שומרון",
+    "aliases": [],
+    "_englishName": "QARNE SHOMERON"
+  },
+  {
+    "cityCode": 4006,
+    "hebrewName": "קשת",
+    "aliases": [],
+    "_englishName": "QESHET"
+  },
+  {
+    "cityCode": 543,
+    "hebrewName": "ראמה",
+    "aliases": [],
+    "_englishName": "RAME"
+  },
+  {
+    "cityCode": 1334,
+    "hebrewName": "ראס אל-עין",
+    "aliases": [],
+    "_englishName": "RAS AL-EIN"
+  },
+  {
+    "cityCode": 990,
+    "hebrewName": "ראס עלי",
+    "aliases": [],
+    "_englishName": "RAS ALI"
+  },
+  {
+    "cityCode": 2640,
+    "hebrewName": "ראש העין",
+    "aliases": [],
+    "_englishName": "ROSH HAAYIN"
+  },
+  {
+    "cityCode": 26,
+    "hebrewName": "ראש פינה",
+    "aliases": [],
+    "_englishName": "ROSH PINNA"
+  },
+  {
+    "cityCode": 3602,
+    "hebrewName": "ראש צורים",
+    "aliases": [],
+    "_englishName": "ROSH ZURIM"
+  },
+  {
+    "cityCode": 8300,
+    "hebrewName": "ראשון לציון",
+    "aliases": [],
+    "_englishName": "RISHON LEZIYYON",
+    "latitude": 31.973,
+    "longitude": 34.7925
+  },
+  {
+    "cityCode": 3795,
+    "hebrewName": "רבבה",
+    "aliases": [],
+    "_englishName": "REVAVA"
+  },
+  {
+    "cityCode": 564,
+    "hebrewName": "רבדים",
+    "aliases": [],
+    "_englishName": "REVADIM"
+  },
+  {
+    "cityCode": 354,
+    "hebrewName": "רביבים",
+    "aliases": [],
+    "_englishName": "REVIVIM"
+  },
+  {
+    "cityCode": 1225,
+    "hebrewName": "רביד",
+    "aliases": [],
+    "_englishName": "RAVID"
+  },
+  {
+    "cityCode": 390,
+    "hebrewName": "רגבה",
+    "aliases": [],
+    "_englishName": "REGBA"
+  },
+  {
+    "cityCode": 444,
+    "hebrewName": "רגבים",
+    "aliases": [],
+    "_englishName": "REGAVIM"
+  },
+  {
+    "cityCode": 1161,
+    "hebrewName": "רהט",
+    "aliases": [],
+    "_englishName": "RAHAT"
+  },
+  {
+    "cityCode": 2051,
+    "hebrewName": "רוו��ה",
+    "aliases": [],
+    "_englishName": "REWAHA"
+  },
+  {
+    "cityCode": 2016,
+    "hebrewName": "רוויה",
+    "aliases": [],
+    "_englishName": "REWAYA"
+  },
+  {
+    "cityCode": 1341,
+    "hebrewName": "רוח מדבר",
+    "aliases": [],
+    "_englishName": "RUAH MIDBAR"
+  },
+  {
+    "cityCode": 362,
+    "hebrewName": "רוחמה",
+    "aliases": [],
+    "_englishName": "RUHAMA"
+  },
+  {
+    "cityCode": 539,
+    "hebrewName": "רומאנה",
+    "aliases": [],
+    "_englishName": "RUMMANE"
+  },
+  {
+    "cityCode": 997,
+    "hebrewName": "רומת הייב",
+    "aliases": [],
+    "_englishName": "RUMAT HEIB"
+  },
+  {
+    "cityCode": 3619,
+    "hebrewName": "רועי",
+    "aliases": [],
+    "_englishName": "RO'I"
+  },
+  {
+    "cityCode": 3782,
+    "hebrewName": "רותם",
+    "aliases": [],
+    "_englishName": "ROTEM"
+  },
+  {
+    "cityCode": 854,
+    "hebrewName": "רחוב",
+    "aliases": [],
+    "_englishName": "REHOV"
+  },
+  {
+    "cityCode": 8400,
+    "hebrewName": "רחובות",
+    "aliases": [],
+    "_englishName": "REHOVOT",
+    "latitude": 31.8947,
+    "longitude": 34.8113
+  },
+  {
+    "cityCode": 3822,
+    "hebrewName": "רחלים",
+    "aliases": [],
+    "_englishName": "REHELIM"
+  },
+  {
+    "cityCode": 540,
+    "hebrewName": "ריחאניה",
+    "aliases": [],
+    "_englishName": "REIHANIYYE"
+  },
+  {
+    "cityCode": 3568,
+    "hebrewName": "ריחן",
+    "aliases": [],
+    "_englishName": "REHAN"
+  },
+  {
+    "cityCode": 542,
+    "hebrewName": "ריינה",
+    "aliases": [],
+    "_englishName": "REINE"
+  },
+  {
+    "cityCode": 3565,
+    "hebrewName": "רימונים",
+    "aliases": [],
+    "_englishName": "RIMMONIM"
+  },
+  {
+    "cityCode": 616,
+    "hebrewName": "רינתיה",
+    "aliases": [],
+    "_englishName": "RINNATYA"
+  },
+  {
+    "cityCode": 922,
+    "hebrewName": "רכסים",
+    "aliases": [],
+    "_englishName": "REKHASIM"
+  },
+  {
+    "cityCode": 1069,
+    "hebrewName": "רם-און",
+    "aliases": [],
+    "_englishName": "RAM-ON"
+  },
+  {
+    "cityCode": 4702,
+    "hebrewName": "רמות",
+    "aliases": [],
+    "_englishName": "RAMOT"
+  },
+  {
+    "cityCode": 206,
+    "hebrewName": "רמות השבים",
+    "aliases": [],
+    "_englishName": "RAMOT HASHAVIM"
+  },
+  {
+    "cityCode": 735,
+    "hebrewName": "רמות מאיר",
+    "aliases": [],
+    "_englishName": "RAMOT ME'IR"
+  },
+  {
+    "cityCode": 445,
+    "hebrewName": "רמות מנשה",
+    "aliases": [],
+    "_englishName": "RAMOT MENASHE"
+  },
+  {
+    "cityCode": 372,
+    "hebrewName": "רמות נפתלי",
+    "aliases": [],
+    "_englishName": "RAMOT NAFTALI"
+  },
+  {
+    "cityCode": 8500,
+    "hebrewName": "רמלה",
+    "aliases": [],
+    "_englishName": "RAMLA",
+    "latitude": 31.9294,
+    "longitude": 34.8667
+  },
+  {
+    "cityCode": 8600,
+    "hebrewName": "רמת גן",
+    "aliases": [
+      "נתניה"
+    ],
+    "_englishName": "RAMAT GAN",
+    "latitude": 32.0678,
+    "longitude": 34.8237
+  },
+  {
+    "cityCode": 135,
+    "hebrewName": "רמת דוד",
+    "aliases": [],
+    "_englishName": "RAMAT DAWID"
+  },
+  {
+    "cityCode": 184,
+    "hebrewName": "רמת הכובש",
+    "aliases": [],
+    "_englishName": "RAMAT HAKOVESH"
+  },
+  {
+    "cityCode": 335,
+    "hebrewName": "רמת השופט",
+    "aliases": [],
+    "_englishName": "RAMAT HASHOFET"
+  },
+  {
+    "cityCode": 2650,
+    "hebrewName": "רמת השרון",
+    "aliases": [],
+    "_englishName": "RAMAT HASHARON"
+  },
+  {
+    "cityCode": 178,
+    "hebrewName": "רמת יוחנן",
+    "aliases": [],
+    "_englishName": "RAMAT YOHANAN"
+  },
+  {
+    "cityCode": 122,
+    "hebrewName": "רמת ישי",
+    "aliases": [],
+    "_englishName": "RAMAT YISHAY"
+  },
+  {
+    "cityCode": 4701,
+    "hebrewName": "רמת מגשימים",
+    "aliases": [],
+    "_englishName": "RAMAT MAGSHIMIM"
+  },
+  {
+    "cityCode": 339,
+    "hebrewName": "רמת צבי",
+    "aliases": [],
+    "_englishName": "RAMAT ZEVI"
+  },
+  {
+    "cityCode": 460,
+    "hebrewName": "רמת רזיאל",
+    "aliases": [],
+    "_englishName": "RAMAT RAZI'EL"
+  },
+  {
+    "cityCode": 127,
+    "hebrewName": "רמת רחל",
+    "aliases": [],
+    "_englishName": "RAMAT RAHEL"
+  },
+  {
+    "cityCode": 789,
+    "hebrewName": "רנן",
+    "aliases": [],
+    "_englishName": "RANNEN"
+  },
+  {
+    "cityCode": 713,
+    "hebrewName": "רעים",
+    "aliases": [],
+    "_englishName": "RE'IM"
+  },
+  {
+    "cityCode": 8700,
+    "hebrewName": "רעננה",
+    "aliases": [],
+    "_englishName": "RA'ANANA",
+    "latitude": 32.1851,
+    "longitude": 34.8715
+  },
+  {
+    "cityCode": 1228,
+    "hebrewName": "רקפת",
+    "aliases": [],
+    "_englishName": "RAQEFET"
+  },
+  {
+    "cityCode": 247,
+    "hebrewName": "רשפון",
+    "aliases": [],
+    "_englishName": "RISHPON"
+  },
+  {
+    "cityCode": 437,
+    "hebrewName": "רשפים",
+    "aliases": [],
+    "_englishName": "RESHAFIM"
+  },
+  {
+    "cityCode": 1260,
+    "hebrewName": "רתמים",
+    "aliases": [],
+    "_englishName": "RETAMIM"
+  },
+  {
+    "cityCode": 324,
+    "hebrewName": "שאר ישוב",
+    "aliases": [],
+    "_englishName": "SHE'AR YASHUV"
+  },
+  {
+    "cityCode": 1377,
+    "hebrewName": "שבי דרום",
+    "aliases": [],
+    "_englishName": "SHAVE DAROM"
+  },
+  {
+    "cityCode": 282,
+    "hebrewName": "שבי ציון",
+    "aliases": [],
+    "_englishName": "SHAVE ZIYYON"
+  },
+  {
+    "cityCode": 3571,
+    "hebrewName": "שבי שומרון",
+    "aliases": [],
+    "_englishName": "SHAVE SHOMERON"
+  },
+  {
+    "cityCode": 913,
+    "hebrewName": "שבלי - אום אל-גנם",
+    "aliases": [],
+    "_englishName": "SHIBLI"
+  },
+  {
+    "cityCode": 1286,
+    "hebrewName": "שגב-שלום",
+    "aliases": [],
+    "_englishName": "SEGEV-SHALOM"
+  },
+  {
+    "cityCode": 721,
+    "hebrewName": "שדה אילן",
+    "aliases": [],
+    "_englishName": "SEDE ILAN"
+  },
+  {
+    "cityCode": 304,
+    "hebrewName": "שדה אליהו",
+    "aliases": [],
+    "_englishName": "SEDE ELIYYAHU"
+  },
+  {
+    "cityCode": 861,
+    "hebrewName": "שדה אליעזר",
+    "aliases": [],
+    "_englishName": "SEDE ELI'EZER"
+  },
+  {
+    "cityCode": 885,
+    "hebrewName": "שדה בוקר",
+    "aliases": [],
+    "_englishName": "SEDE BOQER"
+  },
+  {
+    "cityCode": 36,
+    "hebrewName": "שדה דוד",
+    "aliases": [],
+    "_englishName": "SEDE DAWID"
+  },
+  {
+    "cityCode": 293,
+    "hebrewName": "שדה יואב",
+    "aliases": [],
+    "_englishName": "SEDE YO'AV"
+  },
+  {
+    "cityCode": 142,
+    "hebrewName": "שדה יעקב",
+    "aliases": [],
+    "_englishName": "SEDE YA'AQOV"
+  },
+  {
+    "cityCode": 2008,
+    "hebrewName": "שדה יצחק",
+    "aliases": [],
+    "_englishName": "SEDE YIZHAQ"
+  },
+  {
+    "cityCode": 18,
+    "hebrewName": "שדה משה",
+    "aliases": [],
+    "_englishName": "SEDE MOSHE"
+  },
+  {
+    "cityCode": 259,
+    "hebrewName": "שדה נחום",
+    "aliases": [],
+    "_englishName": "SEDE NAHUM"
+  },
+  {
+    "cityCode": 329,
+    "hebrewName": "שדה נחמיה",
+    "aliases": [],
+    "_englishName": "SEDE NEHEMYA"
+  },
+  {
+    "cityCode": 1058,
+    "hebrewName": "שדה ניצן",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 739,
+    "hebrewName": "שדה עוזיהו",
+    "aliases": [],
+    "_englishName": "SEDE UZZIYYAHU"
+  },
+  {
+    "cityCode": 2049,
+    "hebrewName": "שדה צבי",
+    "aliases": [],
+    "_englishName": "SEDE ZEVI"
+  },
+  {
+    "cityCode": 327,
+    "hebrewName": "שדות ים",
+    "aliases": [],
+    "_englishName": "SEDOT YAM"
+  },
+  {
+    "cityCode": 27,
+    "hebrewName": "שדות מיכה",
+    "aliases": [],
+    "_englishName": "SEDOT MIKHA"
+  },
+  {
+    "cityCode": 1223,
+    "hebrewName": "שדי אברהם",
+    "aliases": [],
+    "_englishName": "SEDE AVRAHAM"
+  },
+  {
+    "cityCode": 2015,
+    "hebrewName": "שדי חמד",
+    "aliases": [],
+    "_englishName": "SEDE HEMED"
+  },
+  {
+    "cityCode": 2057,
+    "hebrewName": "שדי תרומות",
+    "aliases": [],
+    "_englishName": "SEDE TERUMOT"
+  },
+  {
+    "cityCode": 555,
+    "hebrewName": "שדמה",
+    "aliases": [],
+    "_englishName": "SHEDEMA"
+  },
+  {
+    "cityCode": 306,
+    "hebrewName": "שדמות דבורה",
+    "aliases": [],
+    "_englishName": "SHADMOT DEVORA"
+  },
+  {
+    "cityCode": 3578,
+    "hebrewName": "שדמות מחולה",
+    "aliases": [],
+    "_englishName": "SHADMOT MEHOLA"
+  },
+  {
+    "cityCode": 1031,
+    "hebrewName": "שדרות",
+    "aliases": [],
+    "_englishName": "SEDEROT"
+  },
+  {
+    "cityCode": 741,
+    "hebrewName": "שואבה",
+    "aliases": [],
+    "_englishName": "SHO'EVA"
+  },
+  {
+    "cityCode": 761,
+    "hebrewName": "שובה",
+    "aliases": [],
+    "_englishName": "SHUVA"
+  },
+  {
+    "cityCode": 394,
+    "hebrewName": "שובל",
+    "aliases": [],
+    "_englishName": "SHOVAL"
+  },
+  {
+    "cityCode": 1304,
+    "hebrewName": "שוהם",
+    "aliases": [],
+    "_englishName": "SHOHAM"
+  },
+  {
+    "cityCode": 614,
+    "hebrewName": "שומרה",
+    "aliases": [],
+    "_englishName": "SHOMERA"
+  },
+  {
+    "cityCode": 1265,
+    "hebrewName": "שומריה",
+    "aliases": [],
+    "_englishName": "SHOMERIYYA"
+  },
+  {
+    "cityCode": 415,
+    "hebrewName": "שוקדה",
+    "aliases": [],
+    "_englishName": "SHOQEDA"
+  },
+  {
+    "cityCode": 456,
+    "hebrewName": "שורש",
+    "aliases": [],
+    "_englishName": "SHORESH"
+  },
+  {
+    "cityCode": 1235,
+    "hebrewName": "שורשים",
+    "aliases": [],
+    "_englishName": "SHORASHIM"
+  },
+  {
+    "cityCode": 224,
+    "hebrewName": "שושנת העמקים",
+    "aliases": [],
+    "_englishName": "SHOSHANNAT HAAMAQIM"
+  },
+  {
+    "cityCode": 527,
+    "hebrewName": "שזור",
+    "aliases": [],
+    "_englishName": "SHEZOR"
+  },
+  {
+    "cityCode": 7,
+    "hebrewName": "שחר",
+    "aliases": [],
+    "_englishName": "SHAHAR"
+  },
+  {
+    "cityCode": 1266,
+    "hebrewName": "שחרות",
+    "aliases": [],
+    "_englishName": "SHAHARUT"
+  },
+  {
+    "cityCode": 865,
+    "hebrewName": "שיבולים",
+    "aliases": [],
+    "_englishName": "SHIBBOLIM"
+  },
+  {
+    "cityCode": 1267,
+    "hebrewName": "שיטים",
+    "aliases": [],
+    "_englishName": "NAHAL SHITTIM"
+  },
+  {
+    "cityCode": 658,
+    "hebrewName": "שייח' דנון",
+    "aliases": [],
+    "_englishName": "SHEIKH DANNUN"
+  },
+  {
+    "cityCode": 3641,
+    "hebrewName": "שילה",
+    "aliases": [],
+    "_englishName": "SHILO"
+  },
+  {
+    "cityCode": 1165,
+    "hebrewName": "שילת",
+    "aliases": [],
+    "_englishName": "SHILAT"
+  },
+  {
+    "cityCode": 1160,
+    "hebrewName": "שכניה",
+    "aliases": [],
+    "_englishName": "SHEKHANYA"
+  },
+  {
+    "cityCode": 873,
+    "hebrewName": "שלווה",
+    "aliases": [],
+    "_englishName": "SHALWA"
+  },
+  {
+    "cityCode": 1373,
+    "hebrewName": "שלווה במדבר",
+    "aliases": [],
+    "_englishName": "SHALVA BAMIDBAR"
+  },
+  {
+    "cityCode": 439,
+    "hebrewName": "שלוחות",
+    "aliases": [],
+    "_englishName": "SHELUHOT"
+  },
+  {
+    "cityCode": 812,
+    "hebrewName": "שלומי",
+    "aliases": [],
+    "_englishName": "SHELOMI"
+  },
+  {
+    "cityCode": 1364,
+    "hebrewName": "שלומית",
+    "aliases": [],
+    "_englishName": "SHLOMIT"
+  },
+  {
+    "cityCode": 366,
+    "hebrewName": "שמיר",
+    "aliases": [],
+    "_englishName": "SHAMIR"
+  },
+  {
+    "cityCode": 3784,
+    "hebrewName": "שמעה",
+    "aliases": [],
+    "_englishName": "SHIM'A"
+  },
+  {
+    "cityCode": 432,
+    "hebrewName": "שמרת",
+    "aliases": [],
+    "_englishName": "SHAMERAT"
+  },
+  {
+    "cityCode": 1337,
+    "hebrewName": "שמשית",
+    "aliases": [],
+    "_englishName": "SHIMSHIT"
+  },
+  {
+    "cityCode": 1287,
+    "hebrewName": "שני",
+    "aliases": [],
+    "_englishName": "SHANI"
+  },
+  {
+    "cityCode": 1132,
+    "hebrewName": "שניר",
+    "aliases": [],
+    "_englishName": "SENIR"
+  },
+  {
+    "cityCode": 538,
+    "hebrewName": "שעב",
+    "aliases": [],
+    "_englishName": "SHA'AB"
+  },
+  {
+    "cityCode": 1299,
+    "hebrewName": "שעורים",
+    "aliases": [],
+    "_englishName": "SE'ORIM"
+  },
+  {
+    "cityCode": 4009,
+    "hebrewName": "שעל",
+    "aliases": [],
+    "_englishName": "SHA'AL"
+  },
+  {
+    "cityCode": 856,
+    "hebrewName": "שעלבים",
+    "aliases": [],
+    "_englishName": "SHA'ALVIM"
+  },
+  {
+    "cityCode": 661,
+    "hebrewName": "שער אפרים",
+    "aliases": [],
+    "_englishName": "SHA'AR EFRAYIM"
+  },
+  {
+    "cityCode": 264,
+    "hebrewName": "שער הגולן",
+    "aliases": [],
+    "_englishName": "SHA'AR HAGOLAN"
+  },
+  {
+    "cityCode": 237,
+    "hebrewName": "שער העמקים",
+    "aliases": [],
+    "_englishName": "SHA'AR HAAMAQIM"
+  },
+  {
+    "cityCode": 921,
+    "hebrewName": "שער מנשה",
+    "aliases": [],
+    "_englishName": "SHA'AR MENASHE"
+  },
+  {
+    "cityCode": 3720,
+    "hebrewName": "שערי תקווה",
+    "aliases": [],
+    "_englishName": "SHA'ARE TIQWA"
+  },
+  {
+    "cityCode": 232,
+    "hebrewName": "שפיים",
+    "aliases": [],
+    "_englishName": "SHEFAYIM"
+  },
+  {
+    "cityCode": 692,
+    "hebrewName": "שפיר",
+    "aliases": [],
+    "_englishName": "SHAFIR"
+  },
+  {
+    "cityCode": 8800,
+    "hebrewName": "שפרעם",
+    "aliases": [],
+    "_englishName": "SHEFAR'AM"
+  },
+  {
+    "cityCode": 3649,
+    "hebrewName": "שקד",
+    "aliases": [],
+    "_englishName": "SHAQED"
+  },
+  {
+    "cityCode": 1233,
+    "hebrewName": "שקף",
+    "aliases": [],
+    "_englishName": "SHEQEF"
+  },
+  {
+    "cityCode": 292,
+    "hebrewName": "שרונה",
+    "aliases": [],
+    "_englishName": "SHARONA"
+  },
+  {
+    "cityCode": 1114,
+    "hebrewName": "שריגים )לי-און(",
+    "aliases": [],
+    "_englishName": "LI-ON"
+  },
+  {
+    "cityCode": 126,
+    "hebrewName": "שריד",
+    "aliases": [],
+    "_englishName": "SARID"
+  },
+  {
+    "cityCode": 398,
+    "hebrewName": "שרשרת",
+    "aliases": [],
+    "_englishName": "SHARSHERET"
+  },
+  {
+    "cityCode": 1045,
+    "hebrewName": "שתולה",
+    "aliases": [],
+    "_englishName": "SHETULA"
+  },
+  {
+    "cityCode": 763,
+    "hebrewName": "שתולים",
+    "aliases": [],
+    "_englishName": "SHETULIM"
+  },
+  {
+    "cityCode": 2062,
+    "hebrewName": "תאשור",
+    "aliases": [],
+    "_englishName": "TE'ASHUR"
+  },
+  {
+    "cityCode": 2061,
+    "hebrewName": "תדהר",
+    "aliases": [],
+    "_englishName": "TIDHAR"
+  },
+  {
+    "cityCode": 1172,
+    "hebrewName": "תובל",
+    "aliases": [],
+    "_englishName": "TUVAL"
+  },
+  {
+    "cityCode": 3558,
+    "hebrewName": "תומר",
+    "aliases": [],
+    "_englishName": "TOMER"
+  },
+  {
+    "cityCode": 1083,
+    "hebrewName": "תושיה",
+    "aliases": [],
+    "_englishName": "TUSHIYYA"
+  },
+  {
+    "cityCode": 163,
+    "hebrewName": "תימורים",
+    "aliases": [],
+    "_englishName": "TIMMORIM"
+  },
+  {
+    "cityCode": 10,
+    "hebrewName": "תירוש",
+    "aliases": [],
+    "_englishName": "TIROSH"
+  },
+  {
+    "cityCode": 5000,
+    "hebrewName": "תל אביב - יפו",
+    "aliases": [
+      "תל אביב",
+      "תל אביב יפו",
+      "תל-אביב-יפו"
+    ],
+    "_englishName": "TEL AVIV - YAFO"
+  },
+  {
+    "cityCode": 84,
+    "hebrewName": "תל יוסף",
+    "aliases": [],
+    "_englishName": "TEL YOSEF"
+  },
+  {
+    "cityCode": 287,
+    "hebrewName": "תל יצחק",
+    "aliases": [],
+    "_englishName": "TEL YIZHAQ"
+  },
+  {
+    "cityCode": 154,
+    "hebrewName": "תל מונד",
+    "aliases": [],
+    "_englishName": "TEL MOND"
+  },
+  {
+    "cityCode": 103,
+    "hebrewName": "תל עדשים",
+    "aliases": [],
+    "_englishName": "TEL ADASHIM"
+  },
+  {
+    "cityCode": 719,
+    "hebrewName": "תל קציר",
+    "aliases": [],
+    "_englishName": "TEL QAZIR"
+  },
+  {
+    "cityCode": 1054,
+    "hebrewName": "תל שבע",
+    "aliases": [],
+    "_englishName": "TEL SHEVA"
+  },
+  {
+    "cityCode": 1283,
+    "hebrewName": "תל תאומים",
+    "aliases": [],
+    "_englishName": "TEL TE'OMIM"
+  },
+  {
+    "cityCode": 3719,
+    "hebrewName": "תלם",
+    "aliases": [],
+    "_englishName": "TELEM"
+  },
+  {
+    "cityCode": 1051,
+    "hebrewName": "תלמי אליהו",
+    "aliases": [],
+    "_englishName": "TALME ELIYYAHU"
+  },
+  {
+    "cityCode": 2003,
+    "hebrewName": "תלמי אלעזר",
+    "aliases": [],
+    "_englishName": "TALME EL'AZAR"
+  },
+  {
+    "cityCode": 2050,
+    "hebrewName": "תלמי ביל\"ו",
+    "aliases": [],
+    "_englishName": "TALME BILU"
+  },
+  {
+    "cityCode": 1237,
+    "hebrewName": "תלמי יוסף",
+    "aliases": [],
+    "_englishName": "TALME YOSEF"
+  },
+  {
+    "cityCode": 727,
+    "hebrewName": "תלמי יחיאל",
+    "aliases": [],
+    "_englishName": "TALME YEHI'EL"
+  },
+  {
+    "cityCode": 744,
+    "hebrewName": "תלמי יפה",
+    "aliases": [],
+    "_englishName": "TALME YAFE"
+  },
+  {
+    "cityCode": 814,
+    "hebrewName": "תלמים",
+    "aliases": [],
+    "_englishName": ""
+  },
+  {
+    "cityCode": 1244,
+    "hebrewName": "תמרת",
+    "aliases": [],
+    "_englishName": "TIMRAT"
+  },
+  {
+    "cityCode": 2002,
+    "hebrewName": "תנובות",
+    "aliases": [],
+    "_englishName": "TENUVOT"
+  },
+  {
+    "cityCode": 752,
+    "hebrewName": "תעוז",
+    "aliases": [],
+    "_englishName": "TA'OZ"
+  },
+  {
+    "cityCode": 709,
+    "hebrewName": "תפרח",
+    "aliases": [],
+    "_englishName": "TIFRAH"
+  },
+  {
+    "cityCode": 665,
+    "hebrewName": "תקומה",
+    "aliases": [],
+    "_englishName": "TEQUMA"
+  },
+  {
+    "cityCode": 3563,
+    "hebrewName": "תקוע",
+    "aliases": [],
+    "_englishName": "TEQOA"
+  },
+  {
+    "cityCode": 970,
+    "hebrewName": "תראבין א-צאנע )שבט(",
+    "aliases": [],
+    "_englishName": "TARABIN AS-SANI"
+  },
+  {
+    "cityCode": 1346,
+    "hebrewName": "תראבין א-צאנע)ישוב(",
+    "aliases": [],
+    "_englishName": "TARABIN AS-SANI"
+  },
+  {
+    "cityCode": 778,
+    "hebrewName": "תרום",
+    "aliases": [],
+    "_englishName": "TARUM"
+  }
+]

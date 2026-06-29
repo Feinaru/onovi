@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+client/dist/
+client/build/
+server/dist/
+
+# Database / Prisma local files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+server/prisma/*.db
+server/prisma/*.sqlite
+server/prisma/*.sqlite3
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Python / virtualenv
+.venv/
+venv/
+__pycache__/
+
+# Temporary
+tmp/
+temp/

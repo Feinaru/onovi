@@ -1,0 +1,6287 @@
+[
+  {
+    "code": 967,
+    "nameHeb": "אבו ג'ווייעד )שבט(",
+    "nameEng": "ABU JUWEI'ID"
+  },
+  {
+    "code": 472,
+    "nameHeb": "אבו גוש",
+    "nameEng": "ABU GHOSH"
+  },
+  {
+    "code": 473,
+    "nameHeb": "אבו סנאן",
+    "nameEng": "ABU SINAN"
+  },
+  {
+    "code": 935,
+    "nameHeb": "אבו סריחאן )שבט(",
+    "nameEng": "ABU SUREIHAN"
+  },
+  {
+    "code": 958,
+    "nameHeb": "אבו עבדון )שבט(",
+    "nameEng": "ABU  ABDUN"
+  },
+  {
+    "code": 1042,
+    "nameHeb": "אבו עמאר )שבט(",
+    "nameEng": "ABU  AMMAR"
+  },
+  {
+    "code": 932,
+    "nameHeb": "אבו עמרה )שבט(",
+    "nameEng": "ABU  AMRE"
+  },
+  {
+    "code": 968,
+    "nameHeb": "אבו קורינאת )שבט(",
+    "nameEng": "ABU QUREINAT"
+  },
+  {
+    "code": 1342,
+    "nameHeb": "אבו קרינאת )יישוב(",
+    "nameEng": "ABU QUREINAT"
+  },
+  {
+    "code": 966,
+    "nameHeb": "אבו רובייעה )שבט(",
+    "nameEng": "ABU RUBEI'A"
+  },
+  {
+    "code": 961,
+    "nameHeb": "אבו רוקייק )שבט(",
+    "nameEng": "ABU RUQAYYEQ"
+  },
+  {
+    "code": 1375,
+    "nameHeb": "אבו תלול",
+    "nameEng": "ABU TULUL"
+  },
+  {
+    "code": 652,
+    "nameHeb": "אבטין",
+    "nameEng": "IBTIN"
+  },
+  {
+    "code": 1275,
+    "nameHeb": "אבטליון",
+    "nameEng": "AVTALYON"
+  },
+  {
+    "code": 679,
+    "nameHeb": "אביאל",
+    "nameEng": "AVI'EL"
+  },
+  {
+    "code": 1115,
+    "nameHeb": "אביבים",
+    "nameEng": "AVIVIM"
+  },
+  {
+    "code": 819,
+    "nameHeb": "אביגדור",
+    "nameEng": "AVIGEDOR"
+  },
+  {
+    "code": 175,
+    "nameHeb": "אביחיל",
+    "nameEng": "AVIHAYIL"
+  },
+  {
+    "code": 2052,
+    "nameHeb": "אביטל",
+    "nameEng": "AVITAL"
+  },
+  {
+    "code": 1070,
+    "nameHeb": "אביעזר",
+    "nameEng": "AVI'EZER"
+  },
+  {
+    "code": 1220,
+    "nameHeb": "אבירים",
+    "nameEng": "ABBIRIM"
+  },
+  {
+    "code": 182,
+    "nameHeb": "אבן יהודה",
+    "nameEng": "EVEN YEHUDA"
+  },
+  {
+    "code": 783,
+    "nameHeb": "אבן ספיר",
+    "nameEng": "EVEN SAPPIR"
+  },
+  {
+    "code": 400,
+    "nameHeb": "אבן שמואל",
+    "nameEng": "EVEN SHEMU'EL"
+  },
+  {
+    "code": 4011,
+    "nameHeb": "אבני איתן",
+    "nameEng": "AVNE ETAN"
+  },
+  {
+    "code": 3793,
+    "nameHeb": "אבני חפץ",
+    "nameEng": "AVNE HEFEZ"
+  },
+  {
+    "code": 3786,
+    "nameHeb": "אבנת",
+    "nameEng": "AVENAT"
+  },
+  {
+    "code": 1311,
+    "nameHeb": "אבשלום",
+    "nameEng": "AVSHALOM"
+  },
+  {
+    "code": 3759,
+    "nameHeb": "אדורה",
+    "nameEng": "ADORA"
+  },
+  {
+    "code": 113,
+    "nameHeb": "אדירים",
+    "nameEng": "ADDIRIM"
+  },
+  {
+    "code": 1068,
+    "nameHeb": "אדמית",
+    "nameEng": "ADAMIT"
+  },
+  {
+    "code": 1123,
+    "nameHeb": "אדרת",
+    "nameEng": "ADDERET"
+  },
+  {
+    "code": 446,
+    "nameHeb": "אודים",
+    "nameEng": "UDIM"
+  },
+  {
+    "code": 4010,
+    "nameHeb": "אודם",
+    "nameEng": "ODEM"
+  },
+  {
+    "code": 1046,
+    "nameHeb": "אוהד",
+    "nameEng": "OHAD"
+  },
+  {
+    "code": 2710,
+    "nameHeb": "אום אל-פחם",
+    "nameEng": "UMM AL-FAHM"
+  },
+  {
+    "code": 2024,
+    "nameHeb": "אום אל-קוטוף",
+    "nameEng": "UMM AL-QUTUF"
+  },
+  {
+    "code": 1358,
+    "nameHeb": "אום בטין",
+    "nameEng": "UMM BATIN"
+  },
+  {
+    "code": 1108,
+    "nameHeb": "אומן",
+    "nameEng": "OMEN"
+  },
+  {
+    "code": 680,
+    "nameHeb": "אומץ",
+    "nameEng": "OMEZ"
+  },
+  {
+    "code": 31,
+    "nameHeb": "אופקים",
+    "nameEng": "OFAQIM"
+  },
+  {
+    "code": 1294,
+    "nameHeb": "אור הגנוז",
+    "nameEng": "OR HAGANUZ"
+  },
+  {
+    "code": 2400,
+    "nameHeb": "אור יהודה",
+    "nameEng": "OR YEHUDA"
+  },
+  {
+    "code": 1020,
+    "nameHeb": "אור עקיבא",
+    "nameEng": "OR AQIVA"
+  },
+  {
+    "code": 780,
+    "nameHeb": "אורה",
+    "nameEng": "ORA"
+  },
+  {
+    "code": 2012,
+    "nameHeb": "אורות",
+    "nameEng": "OROT"
+  },
+  {
+    "code": 4013,
+    "nameHeb": "אורטל",
+    "nameEng": "ORTAL"
+  },
+  {
+    "code": 403,
+    "nameHeb": "אורים",
+    "nameEng": "URIM"
+  },
+  {
+    "code": 882,
+    "nameHeb": "אורנים",
+    "nameEng": "ORANIM"
+  },
+  {
+    "code": 3760,
+    "nameHeb": "אורנית",
+    "nameEng": "ORANIT"
+  },
+  {
+    "code": 278,
+    "nameHeb": "אושה",
+    "nameEng": "USHA"
+  },
+  {
+    "code": 565,
+    "nameHeb": "אזור",
+    "nameEng": "AZOR"
+  },
+  {
+    "code": 1157,
+    "nameHeb": "אחווה",
+    "nameEng": "AHAWA"
+  },
+  {
+    "code": 821,
+    "nameHeb": "אחוזם",
+    "nameEng": "AHUZZAM"
+  },
+  {
+    "code": 1330,
+    "nameHeb": "אחוזת ברק",
+    "nameEng": "AHUZZAT BARAQ"
+  },
+  {
+    "code": 785,
+    "nameHeb": "אחיהוד",
+    "nameEng": "AHIHUD"
+  },
+  {
+    "code": 850,
+    "nameHeb": "אחיטוב",
+    "nameEng": "AHITUV"
+  },
+  {
+    "code": 804,
+    "nameHeb": "אחיסמך",
+    "nameEng": "AHISAMAKH"
+  },
+  {
+    "code": 797,
+    "nameHeb": "אחיעזר",
+    "nameEng": "AHI'EZER"
+  },
+  {
+    "code": 965,
+    "nameHeb": "אטרש )שבט(",
+    "nameEng": "ATRASH"
+  },
+  {
+    "code": 338,
+    "nameHeb": "איבים",
+    "nameEng": "IBBIM"
+  },
+  {
+    "code": 716,
+    "nameHeb": "אייל",
+    "nameEng": "EYAL"
+  },
+  {
+    "code": 77,
+    "nameHeb": "איילת השחר",
+    "nameEng": "AYYELET HASHAHAR"
+  },
+  {
+    "code": 294,
+    "nameHeb": "אילון",
+    "nameEng": "ELON"
+  },
+  {
+    "code": 1126,
+    "nameHeb": "אילות",
+    "nameEng": "ELOT"
+  },
+  {
+    "code": 49,
+    "nameHeb": "אילניה",
+    "nameEng": "ILANIYYA"
+  },
+  {
+    "code": 2600,
+    "nameHeb": "אילת",
+    "nameEng": "ELAT"
+  },
+  {
+    "code": 1336,
+    "nameHeb": "אירוס",
+    "nameEng": "IRUS"
+  },
+  {
+    "code": 3762,
+    "nameHeb": "איתמר",
+    "nameEng": "ITAMAR"
+  },
+  {
+    "code": 37,
+    "nameHeb": "איתן",
+    "nameEng": "ETAN"
+  },
+  {
+    "code": 886,
+    "nameHeb": "איתנים",
+    "nameEng": "ETANIM"
+  },
+  {
+    "code": 478,
+    "nameHeb": "אכסאל",
+    "nameEng": "IKSAL"
+  },
+  {
+    "code": 1359,
+    "nameHeb": "אל סייד",
+    "nameEng": "AL SAYYID"
+  },
+  {
+    "code": 1339,
+    "nameHeb": "אל-עזי",
+    "nameEng": "AL-AZY"
+  },
+  {
+    "code": 1316,
+    "nameHeb": "אל-עריאן",
+    "nameEng": "AL-ARYAN"
+  },
+  {
+    "code": 4003,
+    "nameHeb": "אל-רום",
+    "nameEng": "EL-ROM"
+  },
+  {
+    "code": 1145,
+    "nameHeb": "אלומה",
+    "nameEng": "ALUMMA"
+  },
+  {
+    "code": 330,
+    "nameHeb": "אלומות",
+    "nameEng": "ALUMMOT"
+  },
+  {
+    "code": 1182,
+    "nameHeb": "אלון הגליל",
+    "nameEng": "ALLON HAGALIL"
+  },
+  {
+    "code": 3579,
+    "nameHeb": "אלון מורה",
+    "nameEng": "ELON MORE"
+  },
+  {
+    "code": 3604,
+    "nameHeb": "אלון שבות",
+    "nameEng": "ALLON SHEVUT"
+  },
+  {
+    "code": 429,
+    "nameHeb": "אלוני אבא",
+    "nameEng": "ALLONE ABBA"
+  },
+  {
+    "code": 4017,
+    "nameHeb": "אלוני הבשן",
+    "nameEng": "ALLONE HABASHAN"
+  },
+  {
+    "code": 868,
+    "nameHeb": "אלוני יצחק",
+    "nameEng": "ALLONE YIZHAQ"
+  },
+  {
+    "code": 285,
+    "nameHeb": "אלונים",
+    "nameEng": "ALLONIM"
+  },
+  {
+    "code": 4002,
+    "nameHeb": "אלי-עד",
+    "nameEng": "ELI AL"
+  },
+  {
+    "code": 1365,
+    "nameHeb": "אליאב",
+    "nameEng": "ELIAV"
+  },
+  {
+    "code": 41,
+    "nameHeb": "אליכין",
+    "nameEng": "ELYAKHIN"
+  },
+  {
+    "code": 1248,
+    "nameHeb": "אליפז",
+    "nameEng": "ELIFAZ"
+  },
+  {
+    "code": 730,
+    "nameHeb": "אליפלט",
+    "nameEng": "ELIFELET"
+  },
+  {
+    "code": 682,
+    "nameHeb": "אליקים",
+    "nameEng": "ELYAQIM"
+  },
+  {
+    "code": 204,
+    "nameHeb": "אלישיב",
+    "nameEng": "ELYASHIV"
+  },
+  {
+    "code": 841,
+    "nameHeb": "אלישמע",
+    "nameEng": "ELISHAMA"
+  },
+  {
+    "code": 1125,
+    "nameHeb": "אלמגור",
+    "nameEng": "ALMAGOR"
+  },
+  {
+    "code": 3556,
+    "nameHeb": "אלמוג",
+    "nameEng": "ALMOG"
+  },
+  {
+    "code": 1309,
+    "nameHeb": "אלעד",
+    "nameEng": "EL'AD"
+  },
+  {
+    "code": 3618,
+    "nameHeb": "אלעזר",
+    "nameEng": "EL'AZAR"
+  },
+  {
+    "code": 3750,
+    "nameHeb": "אלפי מנשה",
+    "nameEng": "ALFE MENASHE"
+  },
+  {
+    "code": 603,
+    "nameHeb": "אלקוש",
+    "nameEng": "ELQOSH"
+  },
+  {
+    "code": 3560,
+    "nameHeb": "אלקנה",
+    "nameEng": "ELQANA"
+  },
+  {
+    "code": 772,
+    "nameHeb": "אמונים",
+    "nameEng": "EMUNIM"
+  },
+  {
+    "code": 1064,
+    "nameHeb": "אמירים",
+    "nameEng": "AMIRIM"
+  },
+  {
+    "code": 1253,
+    "nameHeb": "אמנון",
+    "nameEng": "AMNUN"
+  },
+  {
+    "code": 23,
+    "nameHeb": "אמציה",
+    "nameEng": "AMAZYA"
+  },
+  {
+    "code": 4012,
+    "nameHeb": "אניעם",
+    "nameEng": "ANI'AM"
+  },
+  {
+    "code": 960,
+    "nameHeb": "אסד )שבט(",
+    "nameEng": "ASAD"
+  },
+  {
+    "code": 3754,
+    "nameHeb": "אספר",
+    "nameEng": "ASEFAR"
+  },
+  {
+    "code": 529,
+    "nameHeb": "אעבלין",
+    "nameEng": "I'BILLIN"
+  },
+  {
+    "code": 963,
+    "nameHeb": "אעצם )שבט(",
+    "nameEng": "A'SAM"
+  },
+  {
+    "code": 959,
+    "nameHeb": "אפיניש )שבט(",
+    "nameEng": "AFEINISH"
+  },
+  {
+    "code": 4301,
+    "nameHeb": "אפיק",
+    "nameEng": "AFIQ"
+  },
+  {
+    "code": 176,
+    "nameHeb": "אפיקים",
+    "nameEng": "AFIQIM"
+  },
+  {
+    "code": 313,
+    "nameHeb": "אפק",
+    "nameEng": "AFEQ"
+  },
+  {
+    "code": 3650,
+    "nameHeb": "אפרת",
+    "nameEng": "EFRAT"
+  },
+  {
+    "code": 701,
+    "nameHeb": "ארבל",
+    "nameEng": "ARBEL"
+  },
+  {
+    "code": 3598,
+    "nameHeb": "ארגמן",
+    "nameEng": "ARGAMAN"
+  },
+  {
+    "code": 714,
+    "nameHeb": "ארז",
+    "nameEng": "EREZ"
+  },
+  {
+    "code": 3570,
+    "nameHeb": "אריאל",
+    "nameEng": "ARI'EL"
+  },
+  {
+    "code": 1324,
+    "nameHeb": "ארסוף",
+    "nameEng": "ARSUF"
+  },
+  {
+    "code": 71,
+    "nameHeb": "אשבול",
+    "nameEng": "ESHBOL"
+  },
+  {
+    "code": 1276,
+    "nameHeb": "אשבל",
+    "nameEng": "NAHAL ESHBAL"
+  },
+  {
+    "code": 70,
+    "nameHeb": "אשדוד",
+    "nameEng": "ASHDOD"
+  },
+  {
+    "code": 199,
+    "nameHeb": "אשדות יעקב  )איחוד(",
+    "nameEng": "ASHDOT YA'AQOV(IHUD)"
+  },
+  {
+    "code": 188,
+    "nameHeb": "אשדות יעקב  )מאוחד(",
+    "nameEng": "ASHDOT YA'AQOV(ME'UH"
+  },
+  {
+    "code": 1188,
+    "nameHeb": "אשחר",
+    "nameEng": "ESHHAR"
+  },
+  {
+    "code": 3722,
+    "nameHeb": "אשכולות",
+    "nameEng": "ESHKOLOT"
+  },
+  {
+    "code": 2021,
+    "nameHeb": "אשל הנשיא",
+    "nameEng": "ESHEL HANASI"
+  },
+  {
+    "code": 1152,
+    "nameHeb": "אשלים",
+    "nameEng": "ASHALIM"
+  },
+  {
+    "code": 7100,
+    "nameHeb": "אשקלון",
+    "nameEng": "ASHQELON"
+  },
+  {
+    "code": 1256,
+    "nameHeb": "אשרת",
+    "nameEng": "ASHERAT"
+  },
+  {
+    "code": 740,
+    "nameHeb": "אשתאול",
+    "nameEng": "ESHTA'OL"
+  },
+  {
+    "code": 6000,
+    "nameHeb": "באקה אל-גרביה",
+    "nameEng": "BAQA AL-GHARBIYYE"
+  },
+  {
+    "code": 21,
+    "nameHeb": "באר אורה",
+    "nameEng": "BE'ER ORA"
+  },
+  {
+    "code": 1376,
+    "nameHeb": "באר גנים",
+    "nameEng": "BEER GANNIM"
+  },
+  {
+    "code": 155,
+    "nameHeb": "באר טוביה",
+    "nameEng": "BE'ER TUVEYA"
+  },
+  {
+    "code": 2530,
+    "nameHeb": "באר יעקב",
+    "nameEng": "BE'ER YA'AQOV"
+  },
+  {
+    "code": 1278,
+    "nameHeb": "באר מילכה",
+    "nameEng": "BE'ER MILKA"
+  },
+  {
+    "code": 9000,
+    "nameHeb": "באר שבע",
+    "nameEng": "BE'ER SHEVA"
+  },
+  {
+    "code": 450,
+    "nameHeb": "בארות יצחק",
+    "nameEng": "BE'EROT YIZHAQ"
+  },
+  {
+    "code": 697,
+    "nameHeb": "בארותיים",
+    "nameEng": "BE'EROTAYIM"
+  },
+  {
+    "code": 399,
+    "nameHeb": "בארי",
+    "nameEng": "BE'ERI"
+  },
+  {
+    "code": 559,
+    "nameHeb": "בוסתן הגליל",
+    "nameEng": "BUSTAN HAGALIL"
+  },
+  {
+    "code": 482,
+    "nameHeb": "בועיינה-נוג'ידאת",
+    "nameEng": "BU'EINE-NUJEIDAT"
+  },
+  {
+    "code": 4001,
+    "nameHeb": "בוקעאתא",
+    "nameEng": "BUQ'ATA"
+  },
+  {
+    "code": 698,
+    "nameHeb": "בורגתה",
+    "nameEng": "BURGETA"
+  },
+  {
+    "code": 2043,
+    "nameHeb": "בחן",
+    "nameEng": "BAHAN"
+  },
+  {
+    "code": 762,
+    "nameHeb": "בטחה",
+    "nameEng": "BITHA"
+  },
+  {
+    "code": 234,
+    "nameHeb": "ביצרון",
+    "nameEng": "BIZZARON"
+  },
+  {
+    "code": 998,
+    "nameHeb": "ביר אל-מכסור",
+    "nameEng": "BIR EL-MAKSUR"
+  },
+  {
+    "code": 1348,
+    "nameHeb": "ביר הדאג'",
+    "nameEng": "BIR HADAGE"
+  },
+  {
+    "code": 368,
+    "nameHeb": "ביריה",
+    "nameEng": "BIRIYYA"
+  },
+  {
+    "code": 317,
+    "nameHeb": "בית אורן",
+    "nameEng": "BET OREN"
+  },
+  {
+    "code": 3574,
+    "nameHeb": "בית אל",
+    "nameEng": "BET EL"
+  },
+  {
+    "code": 562,
+    "nameHeb": "בית אלעזרי",
+    "nameEng": "BET EL'AZARI"
+  },
+  {
+    "code": 95,
+    "nameHeb": "בית אלפא",
+    "nameEng": "BET ALFA"
+  },
+  {
+    "code": 3652,
+    "nameHeb": "בית אריה",
+    "nameEng": "BET ARYE"
+  },
+  {
+    "code": 1076,
+    "nameHeb": "בית ברל",
+    "nameEng": "BET BERL"
+  },
+  {
+    "code": 480,
+    "nameHeb": "בית ג'ן",
+    "nameEng": "BEIT JANN"
+  },
+  {
+    "code": 619,
+    "nameHeb": "בית גוברין",
+    "nameEng": "BET GUVRIN"
+  },
+  {
+    "code": 571,
+    "nameHeb": "בית גמליאל",
+    "nameEng": "BET GAMLI'EL"
+  },
+  {
+    "code": 466,
+    "nameHeb": "בית דגן",
+    "nameEng": "BET DAGAN"
+  },
+  {
+    "code": 723,
+    "nameHeb": "בית הגדי",
+    "nameEng": "BET HAGADDI"
+  },
+  {
+    "code": 373,
+    "nameHeb": "בית הלוי",
+    "nameEng": "BET HALEVI"
+  },
+  {
+    "code": 322,
+    "nameHeb": "בית הלל",
+    "nameEng": "BET HILLEL"
+  },
+  {
+    "code": 572,
+    "nameHeb": "בית העמק",
+    "nameEng": "BET HAEMEQ"
+  },
+  {
+    "code": 3645,
+    "nameHeb": "בית הערבה",
+    "nameEng": "BET HAARAVA"
+  },
+  {
+    "code": 242,
+    "nameHeb": "בית השיטה",
+    "nameEng": "BET HASHITTA"
+  },
+  {
+    "code": 353,
+    "nameHeb": "בית זיד",
+    "nameEng": "BET ZEID"
+  },
+  {
+    "code": 710,
+    "nameHeb": "בית זית",
+    "nameEng": "BET ZAYIT"
+  },
+  {
+    "code": 143,
+    "nameHeb": "בית זרע",
+    "nameEng": "BET ZERA"
+  },
+  {
+    "code": 3575,
+    "nameHeb": "בית חורון",
+    "nameEng": "BET HORON"
+  },
+  {
+    "code": 877,
+    "nameHeb": "בית חירות",
+    "nameEng": "BET HERUT"
+  },
+  {
+    "code": 2033,
+    "nameHeb": "בית חלקיה",
+    "nameEng": "BET HILQIYYA"
+  },
+  {
+    "code": 159,
+    "nameHeb": "בית חנן",
+    "nameEng": "BET HANAN"
+  },
+  {
+    "code": 800,
+    "nameHeb": "בית חנניה",
+    "nameEng": "BET HANANYA"
+  },
+  {
+    "code": 1050,
+    "nameHeb": "בית חשמונאי",
+    "nameEng": "BET HASHMONAY"
+  },
+  {
+    "code": 288,
+    "nameHeb": "בית יהושע",
+    "nameEng": "BET YEHOSHUA"
+  },
+  {
+    "code": 265,
+    "nameHeb": "בית יוסף",
+    "nameEng": "BET YOSEF"
+  },
+  {
+    "code": 200,
+    "nameHeb": "בית ינאי",
+    "nameEng": "BET YANNAY"
+  },
+  {
+    "code": 326,
+    "nameHeb": "בית יצחק-שער חפר",
+    "nameEng": "BET YIZHAQ-SH. HEFER"
+  },
+  {
+    "code": 430,
+    "nameHeb": "בית לחם הגלילית",
+    "nameEng": "BET LEHEM HAGELILIT"
+  },
+  {
+    "code": 751,
+    "nameHeb": "בית מאיר",
+    "nameEng": "BET ME'IR"
+  },
+  {
+    "code": 784,
+    "nameHeb": "בית נחמיה",
+    "nameEng": "BET NEHEMYA"
+  },
+  {
+    "code": 16,
+    "nameHeb": "בית ניר",
+    "nameEng": "BET NIR"
+  },
+  {
+    "code": 672,
+    "nameHeb": "בית נקופה",
+    "nameEng": "BET NEQOFA"
+  },
+  {
+    "code": 202,
+    "nameHeb": "בית עובד",
+    "nameEng": "BET OVED"
+  },
+  {
+    "code": 301,
+    "nameHeb": "בית עוזיאל",
+    "nameEng": "BET UZZI'EL"
+  },
+  {
+    "code": 756,
+    "nameHeb": "בית עזרא",
+    "nameEng": "BET EZRA"
+  },
+  {
+    "code": 604,
+    "nameHeb": "בית עריף",
+    "nameEng": "BET ARIF"
+  },
+  {
+    "code": 212,
+    "nameHeb": "בית צבי",
+    "nameEng": "BET ZEVI"
+  },
+  {
+    "code": 598,
+    "nameHeb": "בית קמה",
+    "nameEng": "BET QAMA"
+  },
+  {
+    "code": 365,
+    "nameHeb": "בית קשת",
+    "nameEng": "BET QESHET"
+  },
+  {
+    "code": 848,
+    "nameHeb": "בית רבן",
+    "nameEng": "BET RABBAN"
+  },
+  {
+    "code": 1162,
+    "nameHeb": "בית רימון",
+    "nameEng": "BET RIMMON"
+  },
+  {
+    "code": 9200,
+    "nameHeb": "בית שאן",
+    "nameEng": "BET SHE'AN"
+  },
+  {
+    "code": 2610,
+    "nameHeb": "בית שמש",
+    "nameEng": "BET SHEMESH"
+  },
+  {
+    "code": 248,
+    "nameHeb": "בית שערים",
+    "nameEng": "BET SHE'ARIM"
+  },
+  {
+    "code": 747,
+    "nameHeb": "בית שקמה",
+    "nameEng": "BET SHIQMA"
+  },
+  {
+    "code": 252,
+    "nameHeb": "ביתן אהרן",
+    "nameEng": "BITAN AHARON"
+  },
+  {
+    "code": 3780,
+    "nameHeb": "ביתר עילית",
+    "nameEng": "BETAR ILLIT"
+  },
+  {
+    "code": 94,
+    "nameHeb": "בלפוריה",
+    "nameEng": "BALFURIYYA"
+  },
+  {
+    "code": 712,
+    "nameHeb": "בן עמי",
+    "nameEng": "BEN AMMI"
+  },
+  {
+    "code": 1084,
+    "nameHeb": "בן שמן )כפר נוער(",
+    "nameEng": "BEN SHEMEN(K.NO'AR)"
+  },
+  {
+    "code": 2013,
+    "nameHeb": "בן שמן )מושב(",
+    "nameEng": "BEN SHEMEN (MOSHAV)"
+  },
+  {
+    "code": 6100,
+    "nameHeb": "בני ברק",
+    "nameEng": "BENE BERAQ"
+  },
+  {
+    "code": 1368,
+    "nameHeb": "בני דקלים",
+    "nameEng": "BNE DKALIM"
+  },
+  {
+    "code": 592,
+    "nameHeb": "בני דרום",
+    "nameEng": "BENE DAROM"
+  },
+  {
+    "code": 386,
+    "nameHeb": "בני דרור",
+    "nameEng": "BENE DEROR"
+  },
+  {
+    "code": 4015,
+    "nameHeb": "בני יהודה",
+    "nameEng": "BENE YEHUDA"
+  },
+  {
+    "code": 1363,
+    "nameHeb": "בני נצרים",
+    "nameEng": "BENE NEZARIM"
+  },
+  {
+    "code": 448,
+    "nameHeb": "בני עטרות",
+    "nameEng": "BENE ATAROT"
+  },
+  {
+    "code": 1066,
+    "nameHeb": "בני עי\"ש",
+    "nameEng": "BENE AYISH"
+  },
+  {
+    "code": 418,
+    "nameHeb": "בני ציון",
+    "nameEng": "BENE ZIYYON"
+  },
+  {
+    "code": 588,
+    "nameHeb": "בני ראם",
+    "nameEng": "BENE RE'EM"
+  },
+  {
+    "code": 685,
+    "nameHeb": "בניה",
+    "nameEng": "BENAYA"
+  },
+  {
+    "code": 9800,
+    "nameHeb": "בנימינה-גבעת עדה",
+    "nameEng": "BINYAMINA"
+  },
+  {
+    "code": 1326,
+    "nameHeb": "בסמ\"ה",
+    "nameEng": "BASMA"
+  },
+  {
+    "code": 944,
+    "nameHeb": "בסמת טבעון",
+    "nameEng": "BASMAT TAB'UN"
+  },
+  {
+    "code": 483,
+    "nameHeb": "��ענה",
+    "nameEng": "BI NE"
+  },
+  {
+    "code": 389,
+    "nameHeb": "בצרה",
+    "nameEng": "BAZRA"
+  },
+  {
+    "code": 589,
+    "nameHeb": "בצת",
+    "nameEng": "BEZET"
+  },
+  {
+    "code": 864,
+    "nameHeb": "בקוע",
+    "nameEng": "BEQOA"
+  },
+  {
+    "code": 3612,
+    "nameHeb": "בקעות",
+    "nameEng": "BEQA'OT"
+  },
+  {
+    "code": 823,
+    "nameHeb": "בר גיורא",
+    "nameEng": "BAR GIYYORA"
+  },
+  {
+    "code": 1191,
+    "nameHeb": "בר יוחאי",
+    "nameEng": "BAR YOHAY"
+  },
+  {
+    "code": 3744,
+    "nameHeb": "ברוכין",
+    "nameEng": "BRUKHIN"
+  },
+  {
+    "code": 428,
+    "nameHeb": "ברור חיל",
+    "nameEng": "BEROR HAYIL"
+  },
+  {
+    "code": 2060,
+    "nameHeb": "ברוש",
+    "nameEng": "BEROSH"
+  },
+  {
+    "code": 3710,
+    "nameHeb": "ברכה",
+    "nameEng": "BERAKHA"
+  },
+  {
+    "code": 746,
+    "nameHeb": "ברכיה",
+    "nameEng": "BEREKHYA"
+  },
+  {
+    "code": 667,
+    "nameHeb": "ברעם",
+    "nameEng": "BAR'AM"
+  },
+  {
+    "code": 141,
+    "nameHeb": "ברק",
+    "nameEng": "BARAQ"
+  },
+  {
+    "code": 617,
+    "nameHeb": "ברקאי",
+    "nameEng": "BARQAY"
+  },
+  {
+    "code": 3654,
+    "nameHeb": "ברקן",
+    "nameEng": "BARQAN"
+  },
+  {
+    "code": 2038,
+    "nameHeb": "ברקת",
+    "nameEng": "BAREQET"
+  },
+  {
+    "code": 1323,
+    "nameHeb": "בת הדר",
+    "nameEng": "BAT HADAR"
+  },
+  {
+    "code": 1319,
+    "nameHeb": "בת חפר",
+    "nameEng": "BAT HEFER"
+  },
+  {
+    "code": 1401,
+    "nameHeb": "בת חצור",
+    "nameEng": "BAT HAZOR"
+  },
+  {
+    "code": 6200,
+    "nameHeb": "בת ים",
+    "nameEng": "BAT YAM"
+  },
+  {
+    "code": 3794,
+    "nameHeb": "בת עין",
+    "nameEng": "BAT AYIN"
+  },
+  {
+    "code": 33,
+    "nameHeb": "בת שלמה",
+    "nameEng": "BAT SHELOMO"
+  },
+  {
+    "code": 1292,
+    "nameHeb": "ג'דיידה-מכר",
+    "nameEng": "JUDEIDE-MAKER"
+  },
+  {
+    "code": 485,
+    "nameHeb": "ג'ולס",
+    "nameEng": "JULIS"
+  },
+  {
+    "code": 627,
+    "nameHeb": "ג'לג'וליה",
+    "nameEng": "JALJULYE"
+  },
+  {
+    "code": 976,
+    "nameHeb": "ג'נאביב )שבט(",
+    "nameEng": "JUNNABIB"
+  },
+  {
+    "code": 541,
+    "nameHeb": "ג'סר א-זרקא",
+    "nameEng": "JISR AZ-ZARQA"
+  },
+  {
+    "code": 487,
+    "nameHeb": "ג'ש )גוש חלב(",
+    "nameEng": "JISH(GUSH HALAV)"
+  },
+  {
+    "code": 628,
+    "nameHeb": "ג'ת",
+    "nameEng": "JAAT"
+  },
+  {
+    "code": 872,
+    "nameHeb": "גאולי תימן",
+    "nameEng": "GE'ULE TEMAN"
+  },
+  {
+    "code": 379,
+    "nameHeb": "גאולים",
+    "nameEng": "GE'ULIM"
+  },
+  {
+    "code": 853,
+    "nameHeb": "גאליה",
+    "nameEng": "GE'ALYA"
+  },
+  {
+    "code": 352,
+    "nameHeb": "גבולות",
+    "nameEng": "GEVULOT"
+  },
+  {
+    "code": 424,
+    "nameHeb": "גבים",
+    "nameEng": "GEVIM"
+  },
+  {
+    "code": 86,
+    "nameHeb": "גבע",
+    "nameEng": "GEVA"
+  },
+  {
+    "code": 3763,
+    "nameHeb": "גבע בנימין",
+    "nameEng": "GEVA BINYAMIN"
+  },
+  {
+    "code": 683,
+    "nameHeb": "גבע כרמל",
+    "nameEng": "GEVA  KARMEL"
+  },
+  {
+    "code": 2014,
+    "nameHeb": "גבעולים",
+    "nameEng": "GIV'OLIM"
+  },
+  {
+    "code": 3644,
+    "nameHeb": "גבעון החדשה",
+    "nameEng": "GIV'ON HAHADASHA"
+  },
+  {
+    "code": 1344,
+    "nameHeb": "גבעות בר",
+    "nameEng": "GEVA'OT BAR"
+  },
+  {
+    "code": 1293,
+    "nameHeb": "גבעת אבני",
+    "nameEng": "GIV'AT AVNI"
+  },
+  {
+    "code": 1288,
+    "nameHeb": "גבעת אלה",
+    "nameEng": "GIV'AT ELA"
+  },
+  {
+    "code": 147,
+    "nameHeb": "גבעת ברנר",
+    "nameEng": "GIV'AT BRENNER"
+  },
+  {
+    "code": 870,
+    "nameHeb": "גבעת השלושה",
+    "nameEng": "GIV'AT HASHELOSHA"
+  },
+  {
+    "code": 3730,
+    "nameHeb": "גבעת זאב",
+    "nameEng": "GIV'AT ZE'EV"
+  },
+  {
+    "code": 207,
+    "nameHeb": "גבעת ח\"ן",
+    "nameEng": "GIV'AT HEN"
+  },
+  {
+    "code": 2018,
+    "nameHeb": "גבעת חיים )איחוד(",
+    "nameEng": "GIV'AT HAYYIM (IHUD)"
+  },
+  {
+    "code": 173,
+    "nameHeb": "גבעת חיים )מאוחד(",
+    "nameEng": "GIV'AT HAYYIM(ME'UHA"
+  },
+  {
+    "code": 4021,
+    "nameHeb": "גבעת יואב",
+    "nameEng": "GIV'AT YO'AV"
+  },
+  {
+    "code": 787,
+    "nameHeb": "גבעת יערים",
+    "nameEng": "GIV'AT YE'ARIM"
+  },
+  {
+    "code": 919,
+    "nameHeb": "גבעת ישעיהו",
+    "nameEng": "GIV'AT YESHA'YAHU"
+  },
+  {
+    "code": 802,
+    "nameHeb": "גבעת כ\"ח",
+    "nameEng": "GIV'AT KOAH"
+  },
+  {
+    "code": 360,
+    "nameHeb": "גבעת ניל\"י",
+    "nameEng": "GIV'AT NILI"
+  },
+  {
+    "code": 703,
+    "nameHeb": "גבעת עוז",
+    "nameEng": "GIV'AT OZ"
+  },
+  {
+    "code": 681,
+    "nameHeb": "גבעת שמואל",
+    "nameEng": "GIV'AT SHEMU'EL"
+  },
+  {
+    "code": 566,
+    "nameHeb": "גבעת שמש",
+    "nameEng": "GIV'AT SHEMESH"
+  },
+  {
+    "code": 1077,
+    "nameHeb": "גבעת שפירא",
+    "nameEng": "GIV'AT SHAPPIRA"
+  },
+  {
+    "code": 793,
+    "nameHeb": "גבעתי",
+    "nameEng": "GIV'ATI"
+  },
+  {
+    "code": 6300,
+    "nameHeb": "גבעתיים",
+    "nameEng": "GIV'ATAYIM"
+  },
+  {
+    "code": 342,
+    "nameHeb": "גברעם",
+    "nameEng": "GEVAR'AM"
+  },
+  {
+    "code": 133,
+    "nameHeb": "גבת",
+    "nameEng": "GEVAT"
+  },
+  {
+    "code": 35,
+    "nameHeb": "גדות",
+    "nameEng": "GADOT"
+  },
+  {
+    "code": 145,
+    "nameHeb": "גדיש",
+    "nameEng": "GADISH"
+  },
+  {
+    "code": 442,
+    "nameHeb": "גדעונה",
+    "nameEng": "GID'ONA"
+  },
+  {
+    "code": 2550,
+    "nameHeb": "גדרה",
+    "nameEng": "GEDERA"
+  },
+  {
+    "code": 852,
+    "nameHeb": "גונן",
+    "nameEng": "GONEN"
+  },
+  {
+    "code": 755,
+    "nameHeb": "גורן",
+    "nameEng": "GOREN"
+  },
+  {
+    "code": 1219,
+    "nameHeb": "גורנות הגליל",
+    "nameEng": "GORNOT HAGALIL"
+  },
+  {
+    "code": 457,
+    "nameHeb": "גזית",
+    "nameEng": "GAZIT"
+  },
+  {
+    "code": 370,
+    "nameHeb": "גזר",
+    "nameEng": "GEZER"
+  },
+  {
+    "code": 706,
+    "nameHeb": "גיאה",
+    "nameEng": "GE'A"
+  },
+  {
+    "code": 196,
+    "nameHeb": "גיבתון",
+    "nameEng": "GIBBETON"
+  },
+  {
+    "code": 1043,
+    "nameHeb": "גיזו",
+    "nameEng": "GIZO"
+  },
+  {
+    "code": 1204,
+    "nameHeb": "גילון",
+    "nameEng": "GILON"
+  },
+  {
+    "code": 736,
+    "nameHeb": "גילת",
+    "nameEng": "GILAT"
+  },
+  {
+    "code": 262,
+    "nameHeb": "גינוסר",
+    "nameEng": "GINNOSAR"
+  },
+  {
+    "code": 92,
+    "nameHeb": "גיניגר",
+    "nameEng": "GINNEGAR"
+  },
+  {
+    "code": 863,
+    "nameHeb": "גינתון",
+    "nameEng": "GINNATON"
+  },
+  {
+    "code": 1206,
+    "nameHeb": "גיתה",
+    "nameEng": "GITTA"
+  },
+  {
+    "code": 3613,
+    "nameHeb": "גיתית",
+    "nameEng": "GITTIT"
+  },
+  {
+    "code": 393,
+    "nameHeb": "גלאון",
+    "nameEng": "GAL'ON"
+  },
+  {
+    "code": 3606,
+    "nameHeb": "גלגל",
+    "nameEng": "GILGAL"
+  },
+  {
+    "code": 346,
+    "nameHeb": "גליל ים",
+    "nameEng": "GELIL YAM"
+  },
+  {
+    "code": 369,
+    "nameHeb": "גלעד )אבן יצחק(",
+    "nameEng": "EVEN YIZHAQ(GAL'ED)"
+  },
+  {
+    "code": 745,
+    "nameHeb": "גמזו",
+    "nameEng": "GIMZO"
+  },
+  {
+    "code": 1072,
+    "nameHeb": "גן הדרום",
+    "nameEng": "GAN HADAROM"
+  },
+  {
+    "code": 225,
+    "nameHeb": "גן השומרון",
+    "nameEng": "GAN HASHOMERON"
+  },
+  {
+    "code": 239,
+    "nameHeb": "גן חיים",
+    "nameEng": "GAN HAYYIM"
+  },
+  {
+    "code": 734,
+    "nameHeb": "גן יאשיה",
+    "nameEng": "GAN YOSHIYYA"
+  },
+  {
+    "code": 166,
+    "nameHeb": "גן יבנה",
+    "nameEng": "GAN YAVNE"
+  },
+  {
+    "code": 1274,
+    "nameHeb": "גן נר",
+    "nameEng": "GAN NER"
+  },
+  {
+    "code": 311,
+    "nameHeb": "גן שורק",
+    "nameEng": "GAN SOREQ"
+  },
+  {
+    "code": 144,
+    "nameHeb": "גן שלמה",
+    "nameEng": "GAN SHELOMO"
+  },
+  {
+    "code": 72,
+    "nameHeb": "גן שמואל",
+    "nameEng": "GAN SHEMU'EL"
+  },
+  {
+    "code": 836,
+    "nameHeb": "גנות",
+    "nameEng": "GANNOT"
+  },
+  {
+    "code": 549,
+    "nameHeb": "גנות הדר",
+    "nameEng": "GANNOT HADAR"
+  },
+  {
+    "code": 1103,
+    "nameHeb": "גני הדר",
+    "nameEng": "GANNE HADAR"
+  },
+  {
+    "code": 1371,
+    "nameHeb": "גני טל",
+    "nameEng": "GANNE TAL"
+  },
+  {
+    "code": 862,
+    "nameHeb": "גני יוחנן",
+    "nameEng": "GANNE YOHANAN"
+  },
+  {
+    "code": 3823,
+    "nameHeb": "גני מודיעין",
+    "nameEng": "GANNE MODIIN"
+  },
+  {
+    "code": 218,
+    "nameHeb": "גני עם",
+    "nameEng": "GANNE AM"
+  },
+  {
+    "code": 229,
+    "nameHeb": "גני תקווה",
+    "nameEng": "GANNE TIQWA"
+  },
+  {
+    "code": 842,
+    "nameHeb": "געש",
+    "nameEng": "GA'ASH"
+  },
+  {
+    "code": 463,
+    "nameHeb": "געתון",
+    "nameEng": "GA'TON"
+  },
+  {
+    "code": 39,
+    "nameHeb": "גפן",
+    "nameEng": "GEFEN"
+  },
+  {
+    "code": 1129,
+    "nameHeb": "גרופית",
+    "nameEng": "GEROFIT"
+  },
+  {
+    "code": 4022,
+    "nameHeb": "גשור",
+    "nameEng": "GESHUR"
+  },
+  {
+    "code": 305,
+    "nameHeb": "גשר",
+    "nameEng": "GESHER"
+  },
+  {
+    "code": 574,
+    "nameHeb": "גשר הזיו",
+    "nameEng": ""
+  },
+  {
+    "code": 340,
+    "nameHeb": "גת )קיבוץ(",
+    "nameEng": "GAT(QIBBUZ)"
+  },
+  {
+    "code": 128,
+    "nameHeb": "גת רימון",
+    "nameEng": "GAT RIMMON"
+  },
+  {
+    "code": 494,
+    "nameHeb": "דאלית אל-כרמל",
+    "nameEng": "DALIYAT AL-KARMEL"
+  },
+  {
+    "code": 146,
+    "nameHeb": "דבורה",
+    "nameEng": "DEVORA"
+  },
+  {
+    "code": 489,
+    "nameHeb": "דבוריה",
+    "nameEng": "DABBURYE"
+  },
+  {
+    "code": 849,
+    "nameHeb": "דבירה",
+    "nameEng": "DEVIRA"
+  },
+  {
+    "code": 407,
+    "nameHeb": "דברת",
+    "nameEng": "DAVERAT"
+  },
+  {
+    "code": 62,
+    "nameHeb": "דגניה א'",
+    "nameEng": "DEGANYA ALEF"
+  },
+  {
+    "code": 79,
+    "nameHeb": "דגניה ב'",
+    "nameEng": "DEGANYA BET"
+  },
+  {
+    "code": 1067,
+    "nameHeb": "דוב\"ב",
+    "nameEng": "DOVEV"
+  },
+  {
+    "code": 3747,
+    "nameHeb": "דולב",
+    "nameEng": "DOLEV"
+  },
+  {
+    "code": 738,
+    "nameHeb": "דור",
+    "nameEng": "DOR"
+  },
+  {
+    "code": 336,
+    "nameHeb": "דורות",
+    "nameEng": "DOROT"
+  },
+  {
+    "code": 475,
+    "nameHeb": "דחי",
+    "nameEng": "DAHI"
+  },
+  {
+    "code": 490,
+    "nameHeb": "דייר אל-אסד",
+    "nameEng": "DEIR AL-ASAD"
+  },
+  {
+    "code": 492,
+    "nameHeb": "דייר חנא",
+    "nameEng": "DEIR HANNA"
+  },
+  {
+    "code": 493,
+    "nameHeb": "דייר ראפאת",
+    "nameEng": "DEIR RAFAT"
+  },
+  {
+    "code": 2200,
+    "nameHeb": "דימונה",
+    "nameEng": "DIMONA"
+  },
+  {
+    "code": 2063,
+    "nameHeb": "דישון",
+    "nameEng": "DISHON"
+  },
+  {
+    "code": 300,
+    "nameHeb": "דליה",
+    "nameEng": "DALIYYA"
+  },
+  {
+    "code": 431,
+    "nameHeb": "דלתון",
+    "nameEng": "DALTON"
+  },
+  {
+    "code": 1317,
+    "nameHeb": "דמיידה",
+    "nameEng": "DEMEIDE"
+  },
+  {
+    "code": 303,
+    "nameHeb": "דן",
+    "nameEng": "DAN"
+  },
+  {
+    "code": 302,
+    "nameHeb": "דפנה",
+    "nameEng": "DAFNA"
+  },
+  {
+    "code": 1241,
+    "nameHeb": "דקל",
+    "nameEng": "DEQEL"
+  },
+  {
+    "code": 1349,
+    "nameHeb": "דריג'את",
+    "nameEng": "DERIG'AT"
+  },
+  {
+    "code": 702,
+    "nameHeb": "האון",
+    "nameEng": "HAON"
+  },
+  {
+    "code": 675,
+    "nameHeb": "הבונים",
+    "nameEng": "HABONIM"
+  },
+  {
+    "code": 356,
+    "nameHeb": "הגושרים",
+    "nameEng": "HAGOSHERIM"
+  },
+  {
+    "code": 191,
+    "nameHeb": "הדר עם",
+    "nameEng": "HADAR AM"
+  },
+  {
+    "code": 9700,
+    "nameHeb": "הוד השרון",
+    "nameEng": "HOD HASHARON"
+  },
+  {
+    "code": 726,
+    "nameHeb": "הודיה",
+    "nameEng": "HODIYYA"
+  },
+  {
+    "code": 1322,
+    "nameHeb": "הודיות",
+    "nameEng": "HODAYOT"
+  },
+  {
+    "code": 1169,
+    "nameHeb": "הוואשלה )שבט(",
+    "nameEng": "HAWASHLA"
+  },
+  {
+    "code": 956,
+    "nameHeb": "הוזייל )שבט(",
+    "nameEng": "HUZAYYEL"
+  },
+  {
+    "code": 1186,
+    "nameHeb": "הושעיה",
+    "nameEng": "HOSHA'AYA"
+  },
+  {
+    "code": 250,
+    "nameHeb": "הזורע",
+    "nameEng": "HAZOREA"
+  },
+  {
+    "code": 307,
+    "nameHeb": "הזורעים",
+    "nameEng": "HAZORE'IM"
+  },
+  {
+    "code": 434,
+    "nameHeb": "החותר��ם",
+    "nameEng": "HAHOTERIM"
+  },
+  {
+    "code": 684,
+    "nameHeb": "היוגב",
+    "nameEng": "HAYOGEV"
+  },
+  {
+    "code": 1208,
+    "nameHeb": "הילה",
+    "nameEng": "HILLA"
+  },
+  {
+    "code": 377,
+    "nameHeb": "המעפיל",
+    "nameEng": "HAMA'PIL"
+  },
+  {
+    "code": 677,
+    "nameHeb": "הסוללים",
+    "nameEng": "HASOLELIM"
+  },
+  {
+    "code": 423,
+    "nameHeb": "העוגן",
+    "nameEng": "HAOGEN"
+  },
+  {
+    "code": 3769,
+    "nameHeb": "הר אדר",
+    "nameEng": "HAR ADAR"
+  },
+  {
+    "code": 3603,
+    "nameHeb": "הר גילה",
+    "nameEng": "HAR GILLO"
+  },
+  {
+    "code": 1261,
+    "nameHeb": "הר עמשא",
+    "nameEng": "HAR AMASA"
+  },
+  {
+    "code": 464,
+    "nameHeb": "הראל",
+    "nameEng": "HAR'EL"
+  },
+  {
+    "code": 1249,
+    "nameHeb": "הרדוף",
+    "nameEng": "HARDUF"
+  },
+  {
+    "code": 6400,
+    "nameHeb": "הרצליה",
+    "nameEng": "HERZELIYYA"
+  },
+  {
+    "code": 1203,
+    "nameHeb": "הררית",
+    "nameEng": "HARARIT"
+  },
+  {
+    "code": 3639,
+    "nameHeb": "ורד יריחו",
+    "nameEng": "WERED YERIHO"
+  },
+  {
+    "code": 1133,
+    "nameHeb": "ורדון",
+    "nameEng": "WARDON"
+  },
+  {
+    "code": 2742,
+    "nameHeb": "זבארגה )שבט(",
+    "nameEng": "ZABARGA"
+  },
+  {
+    "code": 815,
+    "nameHeb": "זבדיאל",
+    "nameEng": "ZAVDI'EL"
+  },
+  {
+    "code": 44,
+    "nameHeb": "זוהר",
+    "nameEng": "ZOHAR"
+  },
+  {
+    "code": 584,
+    "nameHeb": "זיקים",
+    "nameEng": "ZIQIM"
+  },
+  {
+    "code": 788,
+    "nameHeb": "זיתן",
+    "nameEng": "ZETAN"
+  },
+  {
+    "code": 9300,
+    "nameHeb": "זכרון יעקב",
+    "nameEng": "ZIKHRON YA'AQOV"
+  },
+  {
+    "code": 799,
+    "nameHeb": "זכריה",
+    "nameEng": "ZEKHARYA"
+  },
+  {
+    "code": 1290,
+    "nameHeb": "זמר",
+    "nameEng": "ZEMER"
+  },
+  {
+    "code": 1065,
+    "nameHeb": "זמרת",
+    "nameEng": "ZIMRAT"
+  },
+  {
+    "code": 816,
+    "nameHeb": "זנוח",
+    "nameEng": "ZANOAH"
+  },
+  {
+    "code": 2064,
+    "nameHeb": "זרועה",
+    "nameEng": "ZERU'A"
+  },
+  {
+    "code": 975,
+    "nameHeb": "זרזיר",
+    "nameEng": "ZARZIR"
+  },
+  {
+    "code": 818,
+    "nameHeb": "זרחיה",
+    "nameEng": "ZERAHYA"
+  },
+  {
+    "code": 1321,
+    "nameHeb": "ח'ואלד",
+    "nameEng": "KHAWALED"
+  },
+  {
+    "code": 986,
+    "nameHeb": "ח'ואלד )שבט(",
+    "nameEng": "KHAWALED"
+  },
+  {
+    "code": 235,
+    "nameHeb": "חבצלת השרון",
+    "nameEng": "HAVAZZELET HASHARON"
+  },
+  {
+    "code": 1110,
+    "nameHeb": "חבר",
+    "nameEng": "HEVER"
+  },
+  {
+    "code": 3400,
+    "nameHeb": "חברון",
+    "nameEng": ""
+  },
+  {
+    "code": 717,
+    "nameHeb": "חגור",
+    "nameEng": "HAGOR"
+  },
+  {
+    "code": 3764,
+    "nameHeb": "חגי",
+    "nameEng": "HAGGAI"
+  },
+  {
+    "code": 205,
+    "nameHeb": "חגלה",
+    "nameEng": "HOGLA"
+  },
+  {
+    "code": 4026,
+    "nameHeb": "חד-נס",
+    "nameEng": "HAD-NES"
+  },
+  {
+    "code": 618,
+    "nameHeb": "חדיד",
+    "nameEng": "HADID"
+  },
+  {
+    "code": 6500,
+    "nameHeb": "חדרה",
+    "nameEng": "HADERA"
+  },
+  {
+    "code": 948,
+    "nameHeb": "חוג'ייראת )ד'הרה(",
+    "nameEng": "HUJEIRAT (DAHRA)"
+  },
+  {
+    "code": 160,
+    "nameHeb": "חולדה",
+    "nameEng": "HULDA"
+  },
+  {
+    "code": 6600,
+    "nameHeb": "חולון",
+    "nameEng": "HOLON"
+  },
+  {
+    "code": 1239,
+    "nameHeb": "חולית",
+    "nameEng": "HOLIT"
+  },
+  {
+    "code": 253,
+    "nameHeb": "חולתה",
+    "nameEng": "HULATA"
+  },
+  {
+    "code": 662,
+    "nameHeb": "חוסן",
+    "nameEng": "HOSEN"
+  },
+  {
+    "code": 1332,
+    "nameHeb": "חוסנייה",
+    "nameEng": "HUSSNIYYA"
+  },
+  {
+    "code": 115,
+    "nameHeb": "חופית",
+    "nameEng": "HOFIT"
+  },
+  {
+    "code": 374,
+    "nameHeb": "חוקוק",
+    "nameEng": "HUQOQ"
+  },
+  {
+    "code": 1303,
+    "nameHeb": "חורה",
+    "nameEng": "HURA"
+  },
+  {
+    "code": 496,
+    "nameHeb": "חורפיש",
+    "nameEng": "HURFEISH"
+  },
+  {
+    "code": 355,
+    "nameHeb": "חורשים",
+    "nameEng": "HORESHIM"
+  },
+  {
+    "code": 1047,
+    "nameHeb": "חזון",
+    "nameEng": "HAZON"
+  },
+  {
+    "code": 219,
+    "nameHeb": "חיבת ציון",
+    "nameEng": "HIBBAT ZIYYON"
+  },
+  {
+    "code": 3643,
+    "nameHeb": "חיננית",
+    "nameEng": "HINNANIT"
+  },
+  {
+    "code": 4000,
+    "nameHeb": "חיפה",
+    "nameEng": "HAIFA"
+  },
+  {
+    "code": 162,
+    "nameHeb": "חירות",
+    "nameEng": "HERUT"
+  },
+  {
+    "code": 1272,
+    "nameHeb": "חלוץ",
+    "nameEng": "HALUZ"
+  },
+  {
+    "code": 3573,
+    "nameHeb": "חלמיש",
+    "nameEng": "HALLAMISH"
+  },
+  {
+    "code": 820,
+    "nameHeb": "חלץ",
+    "nameEng": "HELEZ"
+  },
+  {
+    "code": 993,
+    "nameHeb": "חמאם",
+    "nameEng": "HAMAM"
+  },
+  {
+    "code": 801,
+    "nameHeb": "חמד",
+    "nameEng": "HEMED"
+  },
+  {
+    "code": 343,
+    "nameHeb": "חמדיה",
+    "nameEng": "HAMADYA"
+  },
+  {
+    "code": 3646,
+    "nameHeb": "חמדת",
+    "nameEng": "NAHAL HEMDAT"
+  },
+  {
+    "code": 3609,
+    "nameHeb": "חמרה",
+    "nameEng": "HAMRA"
+  },
+  {
+    "code": 807,
+    "nameHeb": "חניא��",
+    "nameEng": "HANNI'EL"
+  },
+  {
+    "code": 280,
+    "nameHeb": "חניתה",
+    "nameEng": "HANITA"
+  },
+  {
+    "code": 1257,
+    "nameHeb": "חנתון",
+    "nameEng": "HANNATON"
+  },
+  {
+    "code": 4005,
+    "nameHeb": "חספין",
+    "nameEng": "HASPIN"
+  },
+  {
+    "code": 363,
+    "nameHeb": "חפץ חיים",
+    "nameEng": "HAFEZ HAYYIM"
+  },
+  {
+    "code": 90,
+    "nameHeb": "חפצי-בה",
+    "nameEng": "HEFZI-BAH"
+  },
+  {
+    "code": 700,
+    "nameHeb": "חצב",
+    "nameEng": "HAZAV"
+  },
+  {
+    "code": 13,
+    "nameHeb": "חצבה",
+    "nameEng": "HAZEVA"
+  },
+  {
+    "code": 2034,
+    "nameHeb": "חצור הגלילית",
+    "nameEng": "HAZOR HAGELILIT"
+  },
+  {
+    "code": 406,
+    "nameHeb": "חצור-אשדוד",
+    "nameEng": "HAZOR-ASHDOD"
+  },
+  {
+    "code": 1409,
+    "nameHeb": "חצר בארותיים",
+    "nameEng": "HAZAR BE'EROTAYIM"
+  },
+  {
+    "code": 1402,
+    "nameHeb": "חצרות חולדה",
+    "nameEng": "HAZROT HULDA"
+  },
+  {
+    "code": 1404,
+    "nameHeb": "חצרות יסף",
+    "nameEng": "HAZROT YASAF"
+  },
+  {
+    "code": 1405,
+    "nameHeb": "חצרות כ\"ח",
+    "nameEng": "HAZROT KOAH"
+  },
+  {
+    "code": 397,
+    "nameHeb": "חצרים",
+    "nameEng": "HAZERIM"
+  },
+  {
+    "code": 422,
+    "nameHeb": "חרב לאת",
+    "nameEng": "HEREV LE'ET"
+  },
+  {
+    "code": 1024,
+    "nameHeb": "חרוצים",
+    "nameEng": "HARUZIM"
+  },
+  {
+    "code": 1247,
+    "nameHeb": "חריש",
+    "nameEng": "HARISH"
+  },
+  {
+    "code": 3717,
+    "nameHeb": "חרמש",
+    "nameEng": "HERMESH"
+  },
+  {
+    "code": 1209,
+    "nameHeb": "חרשים",
+    "nameEng": "HARASHIM"
+  },
+  {
+    "code": 3770,
+    "nameHeb": "חשמונאים",
+    "nameEng": "HASHMONA'IM"
+  },
+  {
+    "code": 6700,
+    "nameHeb": "טבריה",
+    "nameEng": "TIBERIAS"
+  },
+  {
+    "code": 962,
+    "nameHeb": "טובא-זנגריה",
+    "nameEng": "TUBA-ZANGARIYYE"
+  },
+  {
+    "code": 498,
+    "nameHeb": "טורעאן",
+    "nameEng": "TUR'AN"
+  },
+  {
+    "code": 2730,
+    "nameHeb": "טייבה",
+    "nameEng": "TAYIBE"
+  },
+  {
+    "code": 497,
+    "nameHeb": "טייבה )בעמק(",
+    "nameEng": "TAYIBE(BAEMEQ)"
+  },
+  {
+    "code": 2720,
+    "nameHeb": "טירה",
+    "nameEng": "TIRE"
+  },
+  {
+    "code": 663,
+    "nameHeb": "טירת יהודה",
+    "nameEng": "TIRAT YEHUDA"
+  },
+  {
+    "code": 2100,
+    "nameHeb": "טירת כרמל",
+    "nameEng": "TIRAT KARMEL"
+  },
+  {
+    "code": 268,
+    "nameHeb": "טירת צבי",
+    "nameEng": "TIRAT ZEVI"
+  },
+  {
+    "code": 462,
+    "nameHeb": "טל שחר",
+    "nameEng": "TAL SHAHAR"
+  },
+  {
+    "code": 1181,
+    "nameHeb": "טל-אל",
+    "nameEng": "TAL-EL"
+  },
+  {
+    "code": 1177,
+    "nameHeb": "טללים",
+    "nameEng": "TELALIM"
+  },
+  {
+    "code": 3788,
+    "nameHeb": "טלמון",
+    "nameEng": "TALMON"
+  },
+  {
+    "code": 8900,
+    "nameHeb": "טמרה",
+    "nameEng": "TAMRA"
+  },
+  {
+    "code": 547,
+    "nameHeb": "טמרה )יזרעאל(",
+    "nameEng": "TAMRA (YIZRE'EL)"
+  },
+  {
+    "code": 3743,
+    "nameHeb": "טנא",
+    "nameEng": "TENE"
+  },
+  {
+    "code": 1214,
+    "nameHeb": "טפחות",
+    "nameEng": "TEFAHOT"
+  },
+  {
+    "code": 1295,
+    "nameHeb": "יאנוח-ג'ת",
+    "nameEng": "YANUH-JAT"
+  },
+  {
+    "code": 1232,
+    "nameHeb": "יבול",
+    "nameEng": "YEVUL"
+  },
+  {
+    "code": 46,
+    "nameHeb": "יבנאל",
+    "nameEng": "YAVNE'EL"
+  },
+  {
+    "code": 2660,
+    "nameHeb": "יבנה",
+    "nameEng": "YAVNE"
+  },
+  {
+    "code": 96,
+    "nameHeb": "יגור",
+    "nameEng": "YAGUR"
+  },
+  {
+    "code": 798,
+    "nameHeb": "יגל",
+    "nameEng": "YAGEL"
+  },
+  {
+    "code": 577,
+    "nameHeb": "יד בנימין",
+    "nameEng": "YAD BINYAMIN"
+  },
+  {
+    "code": 1134,
+    "nameHeb": "יד השמונה",
+    "nameEng": "YAD HASHEMONA"
+  },
+  {
+    "code": 758,
+    "nameHeb": "יד חנה",
+    "nameEng": "YAD HANNA"
+  },
+  {
+    "code": 358,
+    "nameHeb": "יד מרדכי",
+    "nameEng": "YAD MORDEKHAY"
+  },
+  {
+    "code": 775,
+    "nameHeb": "יד נתן",
+    "nameEng": "YAD NATAN"
+  },
+  {
+    "code": 64,
+    "nameHeb": "יד רמב\"ם",
+    "nameEng": "YAD RAMBAM"
+  },
+  {
+    "code": 1144,
+    "nameHeb": "ידידה",
+    "nameEng": "YEDIDA"
+  },
+  {
+    "code": 9400,
+    "nameHeb": "יהוד-מונוסון",
+    "nameEng": "YEHUD-MONOSON"
+  },
+  {
+    "code": 1158,
+    "nameHeb": "יהל",
+    "nameEng": "YAHEL"
+  },
+  {
+    "code": 2009,
+    "nameHeb": "יובל",
+    "nameEng": "YUVAL"
+  },
+  {
+    "code": 1226,
+    "nameHeb": "יובלים",
+    "nameEng": "YUVALIM"
+  },
+  {
+    "code": 1112,
+    "nameHeb": "יודפת",
+    "nameEng": "YODEFAT"
+  },
+  {
+    "code": 4007,
+    "nameHeb": "יונתן",
+    "nameEng": "YONATAN"
+  },
+  {
+    "code": 803,
+    "nameHeb": "יושיביה",
+    "nameEng": "YOSHIVYA"
+  },
+  {
+    "code": 452,
+    "nameHeb": "יזרעאל",
+    "nameEng": "YIZRE'EL"
+  },
+  {
+    "code": 409,
+    "nameHeb": "יחיעם",
+    "nameEng": "YEHI'AM"
+  },
+  {
+    "code": 866,
+    "nameHeb": "יטבתה",
+    "nameEng": "YOTVATA"
+  },
+  {
+    "code": 3607,
+    "nameHeb": "ייט\"ב",
+    "nameEng": "YITAV"
+  },
+  {
+    "code": 811,
+    "nameHeb": "יכיני",
+    "nameEng": "YAKHINI"
+  },
+  {
+    "code": 753,
+    "nameHeb": "ינוב",
+    "nameEng": "YANUV"
+  },
+  {
+    "code": 2011,
+    "nameHeb": "ינון",
+    "nameEng": "YINNON"
+  },
+  {
+    "code": 29,
+    "nameHeb": "יסוד המעלה",
+    "nameEng": "YESUD HAMA'ALA"
+  },
+  {
+    "code": 440,
+    "nameHeb": "יסודות",
+    "nameEng": "YESODOT"
+  },
+  {
+    "code": 575,
+    "nameHeb": "יסעור",
+    "nameEng": "YAS'UR"
+  },
+  {
+    "code": 1138,
+    "nameHeb": "יעד",
+    "nameEng": "YA'AD"
+  },
+  {
+    "code": 1117,
+    "nameHeb": "יעל",
+    "nameEng": "YA'EL"
+  },
+  {
+    "code": 1044,
+    "nameHeb": "יעף",
+    "nameEng": "YE'AF"
+  },
+  {
+    "code": 795,
+    "nameHeb": "יערה",
+    "nameEng": "YA'ARA"
+  },
+  {
+    "code": 499,
+    "nameHeb": "יפיע",
+    "nameEng": "YAFI"
+  },
+  {
+    "code": 3566,
+    "nameHeb": "יפית",
+    "nameEng": "YAFIT"
+  },
+  {
+    "code": 134,
+    "nameHeb": "יפעת",
+    "nameEng": "YIF'AT"
+  },
+  {
+    "code": 453,
+    "nameHeb": "יפתח",
+    "nameEng": "YIFTAH"
+  },
+  {
+    "code": 3749,
+    "nameHeb": "יצהר",
+    "nameEng": "YIZHAR"
+  },
+  {
+    "code": 759,
+    "nameHeb": "יציץ",
+    "nameEng": "YAZIZ"
+  },
+  {
+    "code": 417,
+    "nameHeb": "יקום",
+    "nameEng": "YAQUM"
+  },
+  {
+    "code": 3647,
+    "nameHeb": "יקיר",
+    "nameEng": "YAQIR"
+  },
+  {
+    "code": 241,
+    "nameHeb": "יקנעם )מושבה(",
+    "nameEng": "YOQNE'AM(MOSHAVA)"
+  },
+  {
+    "code": 240,
+    "nameHeb": "יקנעם עילית",
+    "nameEng": "YOQNE'AM ILLIT"
+  },
+  {
+    "code": 623,
+    "nameHeb": "יראון",
+    "nameEng": "YIR'ON"
+  },
+  {
+    "code": 2026,
+    "nameHeb": "ירדנ��",
+    "nameEng": "YARDENA"
+  },
+  {
+    "code": 831,
+    "nameHeb": "ירוחם",
+    "nameEng": "YEROHAM"
+  },
+  {
+    "code": 3000,
+    "nameHeb": "ירושלים",
+    "nameEng": "JERUSALEM"
+  },
+  {
+    "code": 718,
+    "nameHeb": "ירחיב",
+    "nameEng": "YARHIV"
+  },
+  {
+    "code": 502,
+    "nameHeb": "ירכא",
+    "nameEng": "YIRKA"
+  },
+  {
+    "code": 183,
+    "nameHeb": "ירקונה",
+    "nameEng": "YARQONA"
+  },
+  {
+    "code": 916,
+    "nameHeb": "ישע",
+    "nameEng": "YESHA"
+  },
+  {
+    "code": 805,
+    "nameHeb": "ישעי",
+    "nameEng": "YISH'I"
+  },
+  {
+    "code": 828,
+    "nameHeb": "ישרש",
+    "nameEng": "YASHRESH"
+  },
+  {
+    "code": 1227,
+    "nameHeb": "יתד",
+    "nameEng": "YATED"
+  },
+  {
+    "code": 1329,
+    "nameHeb": "יתיר",
+    "nameEng": ""
+  },
+  {
+    "code": 504,
+    "nameHeb": "כאבול",
+    "nameEng": "KABUL"
+  },
+  {
+    "code": 505,
+    "nameHeb": "כאוכב אבו אל-היג'א",
+    "nameEng": "KAOKAB ABU AL-HIJA"
+  },
+  {
+    "code": 576,
+    "nameHeb": "כברי",
+    "nameEng": "KABRI"
+  },
+  {
+    "code": 371,
+    "nameHeb": "כדורי",
+    "nameEng": "KADOORIE"
+  },
+  {
+    "code": 1338,
+    "nameHeb": "כדיתה",
+    "nameEng": "KADDITA"
+  },
+  {
+    "code": 3564,
+    "nameHeb": "כוכב השחר",
+    "nameEng": "KOKHAV HASHAHAR"
+  },
+  {
+    "code": 1224,
+    "nameHeb": "כוכב יאיר",
+    "nameEng": "KOKHAV YA'IR"
+  },
+  {
+    "code": 3779,
+    "nameHeb": "כוכב יעקב",
+    "nameEng": "KOKHAV YA'AQOV"
+  },
+  {
+    "code": 824,
+    "nameHeb": "כוכב מיכאל",
+    "nameEng": "KOKHAV MIKHA'EL"
+  },
+  {
+    "code": 1252,
+    "nameHeb": "כורזים",
+    "nameEng": "KORAZIM"
+  },
+  {
+    "code": 1210,
+    "nameHeb": "כחל",
+    "nameEng": "KAHAL"
+  },
+  {
+    "code": 1367,
+    "nameHeb": "כחלה",
+    "nameEng": "KOCHLEA"
+  },
+  {
+    "code": 840,
+    "nameHeb": "כיסופים",
+    "nameEng": "KISSUFIM"
+  },
+  {
+    "code": 1183,
+    "nameHeb": "כליל",
+    "nameEng": "KELIL"
+  },
+  {
+    "code": 1229,
+    "nameHeb": "כלנית",
+    "nameEng": "KALLANIT"
+  },
+  {
+    "code": 1331,
+    "nameHeb": "כמאנה",
+    "nameEng": ""
+  },
+  {
+    "code": 1291,
+    "nameHeb": "כמהין",
+    "nameEng": "KEMEHIN"
+  },
+  {
+    "code": 1201,
+    "nameHeb": "כמון",
+    "nameEng": "KAMMON"
+  },
+  {
+    "code": 2006,
+    "nameHeb": "כנות",
+    "nameEng": "KANNOT"
+  },
+  {
+    "code": 4028,
+    "nameHeb": "כנף",
+    "nameEng": "KANAF"
+  },
+  {
+    "code": 63,
+    "nameHeb": "כנרת )מושבה(",
+    "nameEng": "KINNERET(MOSHAVA)"
+  },
+  {
+    "code": 57,
+    "nameHeb": "כנרת )קבוצה(",
+    "nameEng": "KINNERET(QEVUZA)"
+  },
+  {
+    "code": 1059,
+    "nameHeb": "כסיפה",
+    "nameEng": "KUSEIFE"
+  },
+  {
+    "code": 859,
+    "nameHeb": "כסלון",
+    "nameEng": "KESALON"
+  },
+  {
+    "code": 1296,
+    "nameHeb": "כסרא-סמיע",
+    "nameEng": "KISRA-SUMEI"
+  },
+  {
+    "code": 978,
+    "nameHeb": "כעביה-טבאש-חג'אג'רה",
+    "nameEng": "KA'ABIYYE-TABBASH-HA"
+  },
+  {
+    "code": 857,
+    "nameHeb": "כפר אביב",
+    "nameEng": "KEFAR AVIV"
+  },
+  {
+    "code": 3638,
+    "nameHeb": "כפר אדומים",
+    "nameEng": "KEFAR ADUMMIM"
+  },
+  {
+    "code": 364,
+    "nameHeb": "כפר אוריה",
+    "nameEng": "KEFAR URIYYA"
+  },
+  {
+    "code": 690,
+    "nameHeb": "כפר אחים",
+    "nameEng": "KEFAR AHIM"
+  },
+  {
+    "code": 220,
+    "nameHeb": "כפר ביאליק",
+    "nameEng": "KEFAR BIALIK"
+  },
+  {
+    "code": 177,
+    "nameHeb": "כפר ביל\"ו",
+    "nameEng": "KEFAR BILU"
+  },
+  {
+    "code": 357,
+    "nameHeb": "כפר בלום",
+    "nameEng": "KEFAR BLUM"
+  },
+  {
+    "code": 2010,
+    "nameHeb": "כפר בן נון",
+    "nameEng": "KEFAR BIN NUN"
+  },
+  {
+    "code": 633,
+    "nameHeb": "כפר ברא",
+    "nameEng": "KAFAR BARA"
+  },
+  {
+    "code": 132,
+    "nameHeb": "כפר ברוך",
+    "nameEng": "KEFAR BARUKH"
+  },
+  {
+    "code": 106,
+    "nameHeb": "כפר גדעון",
+    "nameEng": "KEFAR GID'ON"
+  },
+  {
+    "code": 427,
+    "nameHeb": "כפר גלים",
+    "nameEng": "KEFAR GALLIM"
+  },
+  {
+    "code": 310,
+    "nameHeb": "כפר גליקסון",
+    "nameEng": "KEFAR GLIKSON"
+  },
+  {
+    "code": 76,
+    "nameHeb": "כפר גלעדי",
+    "nameEng": "KEFAR GIL'ADI"
+  },
+  {
+    "code": 707,
+    "nameHeb": "כפר דניאל",
+    "nameEng": "KEFAR DANIYYEL"
+  },
+  {
+    "code": 3796,
+    "nameHeb": "כפר האורנים",
+    "nameEng": "KEFAR HAORANIM"
+  },
+  {
+    "code": 192,
+    "nameHeb": "כפר החורש",
+    "nameEng": "KEFAR HAHORESH"
+  },
+  {
+    "code": 254,
+    "nameHeb": "כפר המכבי",
+    "nameEng": "KEFAR HAMAKKABI"
+  },
+  {
+    "code": 582,
+    "nameHeb": "כפר הנגיד",
+    "nameEng": "KEFAR HANAGID"
+  },
+  {
+    "code": 890,
+    "nameHeb": "כפר הנוער הדתי",
+    "nameEng": "KEFAR HANO'AR HADATI"
+  },
+  {
+    "code": 443,
+    "nameHeb": "כפר הנשיא",
+    "nameEng": "KEFAR HANASI"
+  },
+  {
+    "code": 187,
+    "nameHeb": "כפר הס",
+    "nameEng": "KEFAR HESS"
+  },
+  {
+    "code": 217,
+    "nameHeb": "כפר הרא\"ה",
+    "nameEng": "KEFAR HARO'E"
+  },
+  {
+    "code": 888,
+    "nameHeb": "כפר הרי\"ף",
+    "nameEng": "KEFAR HARIF"
+  },
+  {
+    "code": 190,
+    "nameHeb": "כפר ויתקין",
+    "nameEng": "KEFAR VITKIN"
+  },
+  {
+    "code": 320,
+    "nameHeb": "כפר ורבורג",
+    "nameEng": "KEFAR WARBURG"
+  },
+  {
+    "code": 1263,
+    "nameHeb": "כפר ורדים",
+    "nameEng": "KEFAR WERADIM"
+  },
+  {
+    "code": 1325,
+    "nameHeb": "כפר זוהרים",
+    "nameEng": "KEFAR ZOHARIM"
+  },
+  {
+    "code": 786,
+    "nameHeb": "כפר זיתים",
+    "nameEng": "KEFAR ZETIM"
+  },
+  {
+    "code": 696,
+    "nameHeb": "כפר חב\"ד",
+    "nameEng": "KEFAR HABAD"
+  },
+  {
+    "code": 609,
+    "nameHeb": "כפר חושן",
+    "nameEng": "KEFAR HOSHEN"
+  },
+  {
+    "code": 255,
+    "nameHeb": "כפר חיטים",
+    "nameEng": "KEFAR HITTIM"
+  },
+  {
+    "code": 193,
+    "nameHeb": "כפר חיים",
+    "nameEng": "KEFAR HAYYIM"
+  },
+  {
+    "code": 1297,
+    "nameHeb": "כפר חנניה",
+    "nameEng": "KEFAR HANANYA"
+  },
+  {
+    "code": 112,
+    "nameHeb": "כפר חסידים א'",
+    "nameEng": "KEFAR HASIDIM ALEF"
+  },
+  {
+    "code": 889,
+    "nameHeb": "כפר חסידים ב'",
+    "nameEng": "KEFAR HASIDIM BET"
+  },
+  {
+    "code": 4004,
+    "nameHeb": "כפר חרוב",
+    "nameEng": "KEFAR HARUV"
+  },
+  {
+    "code": 673,
+    "nameHeb": "כפר טרומן",
+    "nameEng": "KEFAR TRUMAN"
+  },
+  {
+    "code": 507,
+    "nameHeb": "כפר יאסיף",
+    "nameEng": "KAFAR YASIF"
+  },
+  {
+    "code": 233,
+    "nameHeb": "כפר ידידיה",
+    "nameEng": "YEDIDYA"
+  },
+  {
+    "code": 140,
+    "nameHeb": "כפר יהושע",
+    "nameEng": "KEFAR YEHOSHUA"
+  },
+  {
+    "code": 168,
+    "nameHeb": "כפר יונה",
+    "nameEng": "KEFAR YONA"
+  },
+  {
+    "code": 85,
+    "nameHeb": "כפר יחזקאל",
+    "nameEng": "KEFAR YEHEZQEL"
+  },
+  {
+    "code": 170,
+    "nameHeb": "כפר יעבץ",
+    "nameEng": "KEFAR YA'BEZ"
+  },
+  {
+    "code": 508,
+    "nameHeb": "כפר כמא",
+    "nameEng": "KAFAR KAMA"
+  },
+  {
+    "code": 509,
+    "nameHeb": "כפר כנא",
+    "nameEng": "KAFAR KANNA"
+  },
+  {
+    "code": 387,
+    "nameHeb": "כפר מונש",
+    "nameEng": "KEFAR MONASH"
+  },
+  {
+    "code": 1095,
+    "nameHeb": "כפר מימון",
+    "nameEng": "KEFAR MAYMON"
+  },
+  {
+    "code": 98,
+    "nameHeb": "כפר מל\"ל",
+    "nameEng": "KEFAR MALAL"
+  },
+  {
+    "code": 510,
+    "nameHeb": "כפר מנדא",
+    "nameEng": "KAFAR MANDA"
+  },
+  {
+    "code": 274,
+    "nameHeb": "כפר מנחם",
+    "nameEng": "KEFAR MENAHEM"
+  },
+  {
+    "code": 297,
+    "nameHeb": "כפר מסריק",
+    "nameEng": "KEFAR MASARYK"
+  },
+  {
+    "code": 512,
+    "nameHeb": "כפר מצר",
+    "nameEng": "KAFAR MISR"
+  },
+  {
+    "code": 764,
+    "nameHeb": "כפר מרדכי",
+    "nameEng": "KEFAR MORDEKHAY"
+  },
+  {
+    "code": 316,
+    "nameHeb": "כפר נטר",
+    "nameEng": "KEFAR NETTER"
+  },
+  {
+    "code": 345,
+    "nameHeb": "כפר סאלד",
+    "nameEng": "KEFAR SZOLD"
+  },
+  {
+    "code": 6900,
+    "nameHeb": "כפר סבא",
+    "nameEng": "KEFAR SAVA"
+  },
+  {
+    "code": 107,
+    "nameHeb": "כפר סילבר",
+    "nameEng": "KEFAR SILVER"
+  },
+  {
+    "code": 249,
+    "nameHeb": "כפר סירקין",
+    "nameEng": "KEFAR SIRKIN"
+  },
+  {
+    "code": 875,
+    "nameHeb": "כפר עבודה",
+    "nameEng": "KEFAR AVODA"
+  },
+  {
+    "code": 845,
+    "nameHeb": "כפר עזה",
+    "nameEng": "KEFAR AZZA"
+  },
+  {
+    "code": 3488,
+    "nameHeb": "כפר עציון",
+    "nameEng": "KEFAR EZYON"
+  },
+  {
+    "code": 189,
+    "nameHeb": "כפר פינס",
+    "nameEng": "KEFAR PINES"
+  },
+  {
+    "code": 634,
+    "nameHeb": "כפר קאסם",
+    "nameEng": "KAFAR QASEM"
+  },
+  {
+    "code": 388,
+    "nameHeb": "כפר קיש",
+    "nameEng": "KEFAR KISH"
+  },
+  {
+    "code": 654,
+    "nameHeb": "כפר קרע",
+    "nameEng": "KAFAR QARA"
+  },
+  {
+    "code": 579,
+    "nameHeb": "כפר ראש הנקרה",
+    "nameEng": "KEFAR ROSH HANIQRA"
+  },
+  {
+    "code": 1130,
+    "nameHeb": "כפר רוזנואלד )זרעית(",
+    "nameEng": "KEFAR ROZENWALD(ZAR."
+  },
+  {
+    "code": 295,
+    "nameHeb": "כפר רופין",
+    "nameEng": "KEFAR RUPPIN"
+  },
+  {
+    "code": 1166,
+    "nameHeb": "כפר רות",
+    "nameEng": "KEFAR RUT"
+  },
+  {
+    "code": 605,
+    "nameHeb": "כפר שמאי",
+    "nameEng": "KEFAR SHAMMAY"
+  },
+  {
+    "code": 743,
+    "nameHeb": "כפר שמואל",
+    "nameEng": "KEFAR SHEMU'EL"
+  },
+  {
+    "code": 267,
+    "nameHeb": "כפר שמריהו",
+    "nameEng": "KEFAR SHEMARYAHU"
+  },
+  {
+    "code": 47,
+    "nameHeb": "כפר תבור",
+    "nameEng": "KEFAR TAVOR"
+  },
+  {
+    "code": 3572,
+    "nameHeb": "כפר תפוח",
+    "nameEng": "KEFAR TAPPUAH"
+  },
+  {
+    "code": 38,
+    "nameHeb": "כרי דשא",
+    "nameEng": "KARE DESHE"
+  },
+  {
+    "code": 1285,
+    "nameHeb": "כרכום",
+    "nameEng": "KARKOM"
+  },
+  {
+    "code": 664,
+    "nameHeb": "כרם בן זמרה",
+    "nameEng": "KEREM BEN ZIMRA"
+  },
+  {
+    "code": 88,
+    "nameHeb": "כרם בן שמן",
+    "nameEng": "KEREM BEN SHEMEN"
+  },
+  {
+    "code": 1094,
+    "nameHeb": "כרם יבנה )ישיבה(",
+    "nameEng": "KEREM YAVNE(YESHIVA)"
+  },
+  {
+    "code": 580,
+    "nameHeb": "כרם מהר\"ל",
+    "nameEng": "KEREM MAHARAL"
+  },
+  {
+    "code": 1085,
+    "nameHeb": "כרם שלום",
+    "nameEng": "KEREM SHALOM"
+  },
+  {
+    "code": 1264,
+    "nameHeb": "כרמי יוסף",
+    "nameEng": "KARME YOSEF"
+  },
+  {
+    "code": 3766,
+    "nameHeb": "כרמי צור",
+    "nameEng": "KARME ZUR"
+  },
+  {
+    "code": 1374,
+    "nameHeb": "כרמי קטיף",
+    "nameEng": "KARME QATIF"
+  },
+  {
+    "code": 1139,
+    "nameHeb": "כרמיאל",
+    "nameEng": "KARMI'EL"
+  },
+  {
+    "code": 768,
+    "nameHeb": "כרמיה",
+    "nameEng": "KARMIYYA"
+  },
+  {
+    "code": 1198,
+    "nameHeb": "כרמים",
+    "nameEng": "KERAMIM"
+  },
+  {
+    "code": 3656,
+    "nameHeb": "כרמל",
+    "nameEng": "KARMEL"
+  },
+  {
+    "code": 1207,
+    "nameHeb": "לבון",
+    "nameEng": "LAVON"
+  },
+  {
+    "code": 585,
+    "nameHeb": "לביא",
+    "nameEng": "LAVI"
+  },
+  {
+    "code": 1230,
+    "nameHeb": "לבנים",
+    "nameEng": "LIVNIM"
+  },
+  {
+    "code": 2023,
+    "nameHeb": "להב",
+    "nameEng": "LAHAV"
+  },
+  {
+    "code": 380,
+    "nameHeb": "להבות הבשן",
+    "nameEng": "LAHAVOT HABASHAN"
+  },
+  {
+    "code": 715,
+    "nameHeb": "להבות חביבה",
+    "nameEng": "LAHAVOT HAVIVA"
+  },
+  {
+    "code": 1271,
+    "nameHeb": "להבים",
+    "nameEng": "LEHAVIM"
+  },
+  {
+    "code": 7000,
+    "nameHeb": "לוד",
+    "nameEng": "LOD"
+  },
+  {
+    "code": 52,
+    "nameHeb": "לוזית",
+    "nameEng": "LUZIT"
+  },
+  {
+    "code": 595,
+    "nameHeb": "לוחמי הגיטאות",
+    "nameEng": "LOHAME HAGETA'OT"
+  },
+  {
+    "code": 1171,
+    "nameHeb": "לוטם",
+    "nameEng": "LOTEM"
+  },
+  {
+    "code": 1255,
+    "nameHeb": "לוטן",
+    "nameEng": "LOTAN"
+  },
+  {
+    "code": 674,
+    "nameHeb": "לימן",
+    "nameEng": "LIMAN"
+  },
+  {
+    "code": 24,
+    "nameHeb": "לכיש",
+    "nameEng": "LAKHISH"
+  },
+  {
+    "code": 1310,
+    "nameHeb": "לפיד",
+    "nameEng": "LAPPID"
+  },
+  {
+    "code": 1173,
+    "nameHeb": "לפידות",
+    "nameEng": "LAPPIDOT"
+  },
+  {
+    "code": 1060,
+    "nameHeb": "לקיה",
+    "nameEng": "LAQYE"
+  },
+  {
+    "code": 2055,
+    "nameHeb": "מאור",
+    "nameEng": "MA'OR"
+  },
+  {
+    "code": 102,
+    "nameHeb": "מאיר שפיה",
+    "nameEng": "ME'IR SHEFEYA"
+  },
+  {
+    "code": 771,
+    "nameHeb": "מבוא ביתר",
+    "nameEng": "MEVO BETAR"
+  },
+  {
+    "code": 3569,
+    "nameHeb": "מבוא דותן",
+    "nameEng": "MEVO DOTAN"
+  },
+  {
+    "code": 3709,
+    "nameHeb": "מבוא חורון",
+    "nameEng": "MEVO HORON"
+  },
+  {
+    "code": 4204,
+    "nameHeb": "מבוא חמה",
+    "nameEng": "MEVO HAMMA"
+  },
+  {
+    "code": 1141,
+    "nameHeb": "מבוא מודיעים",
+    "nameEng": "MEVO MODI'IM"
+  },
+  {
+    "code": 1318,
+    "nameHeb": "מבואות ים",
+    "nameEng": "MEVO'OT YAM"
+  },
+  {
+    "code": 1080,
+    "nameHeb": "מבועים",
+    "nameEng": "MABBU'IM"
+  },
+  {
+    "code": 829,
+    "nameHeb": "מבטחים",
+    "nameEng": "MIVTAHIM"
+  },
+  {
+    "code": 573,
+    "nameHeb": "מבקיעים",
+    "nameEng": "MAVQI'IM"
+  },
+  {
+    "code": 1015,
+    "nameHeb": "מבשרת ציון",
+    "nameEng": "MEVASSERET ZIYYON"
+  },
+  {
+    "code": 516,
+    "nameHeb": "מג'ד אל-כרום",
+    "nameEng": "MAJD AL-KURUM"
+  },
+  {
+    "code": 4201,
+    "nameHeb": "מג'דל שמס",
+    "nameEng": "MAJDAL SHAMS"
+  },
+  {
+    "code": 481,
+    "nameHeb": "מגאר",
+    "nameEng": "MUGHAR"
+  },
+  {
+    "code": 689,
+    "nameHeb": "מגדים",
+    "nameEng": "MEGADIM"
+  },
+  {
+    "code": 65,
+    "nameHeb": "מגדל",
+    "nameEng": "MIGDAL"
+  },
+  {
+    "code": 874,
+    "nameHeb": "מגדל העמק",
+    "nameEng": "MIGDAL HAEMEQ"
+  },
+  {
+    "code": 3561,
+    "nameHeb": "מגדל עוז",
+    "nameEng": "MIGDAL OZ"
+  },
+  {
+    "code": 586,
+    "nameHeb": "מגידו",
+    "nameEng": "MEGIDDO"
+  },
+  {
+    "code": 375,
+    "nameHeb": "מגל",
+    "nameEng": "MAGGAL"
+  },
+  {
+    "code": 695,
+    "nameHeb": "מגן",
+    "nameEng": "MAGEN"
+  },
+  {
+    "code": 1155,
+    "nameHeb": "מגן שאול",
+    "nameEng": "MAGEN SHA'UL"
+  },
+  {
+    "code": 722,
+    "nameHeb": "מגשימים",
+    "nameEng": "MAGSHIMIM"
+  },
+  {
+    "code": 2029,
+    "nameHeb": "מדרך עוז",
+    "nameEng": "MIDRAKH OZ"
+  },
+  {
+    "code": 1140,
+    "nameHeb": "מדרשת בן גוריון",
+    "nameEng": "MIDRESHET BEN GURION"
+  },
+  {
+    "code": 897,
+    "nameHeb": "מדרשת רופין",
+    "nameEng": "MIDRESHET RUPPIN"
+  },
+  {
+    "code": 3797,
+    "nameHeb": "מודיעין עילית",
+    "nameEng": "MODI'IN ILLIT"
+  },
+  {
+    "code": 1200,
+    "nameHeb": "מודיעין-מכבים-רעות",
+    "nameEng": "MODI'IN-MAKKABBIM-RE"
+  },
+  {
+    "code": 269,
+    "nameHeb": "מולדת",
+    "nameEng": "MOLEDET"
+  },
+  {
+    "code": 208,
+    "nameHeb": "מוצא עילית",
+    "nameEng": "MOZA ILLIT"
+  },
+  {
+    "code": 635,
+    "nameHeb": "מוקייבלה",
+    "nameEng": "MUQEIBLE"
+  },
+  {
+    "code": 1163,
+    "nameHeb": "מורן",
+    "nameEng": "MORAN"
+  },
+  {
+    "code": 1178,
+    "nameHeb": "מורשת",
+    "nameEng": "MORESHET"
+  },
+  {
+    "code": 606,
+    "nameHeb": "מזור",
+    "nameEng": "MAZOR"
+  },
+  {
+    "code": 28,
+    "nameHeb": "מזכרת בתיה",
+    "nameEng": "MAZKERET BATYA"
+  },
+  {
+    "code": 104,
+    "nameHeb": "מזרע",
+    "nameEng": "MIZRA"
+  },
+  {
+    "code": 517,
+    "nameHeb": "מזרעה",
+    "nameEng": "MAZRA'A"
+  },
+  {
+    "code": 3599,
+    "nameHeb": "מחולה",
+    "nameEng": "MEHOLA"
+  },
+  {
+    "code": 1411,
+    "nameHeb": "מחנה הילה",
+    "nameEng": "MAHANE HILLA"
+  },
+  {
+    "code": 1418,
+    "nameHeb": "מחנה טלי",
+    "nameEng": "MAHANE TALI"
+  },
+  {
+    "code": 1413,
+    "nameHeb": "מחנה יהודית",
+    "nameEng": "MAHANE YEHUDIT"
+  },
+  {
+    "code": 1416,
+    "nameHeb": "מחנה יוכבד",
+    "nameEng": "MAHANE YOKHVED"
+  },
+  {
+    "code": 1415,
+    "nameHeb": "מחנה יפה",
+    "nameEng": "MAHANE YAFA"
+  },
+  {
+    "code": 1196,
+    "nameHeb": "מחנה יתיר",
+    "nameEng": "MAHANE YATTIR"
+  },
+  {
+    "code": 1414,
+    "nameHeb": "מחנה מרים",
+    "nameEng": "MAHANE MIRYAM"
+  },
+  {
+    "code": 1412,
+    "nameHeb": "מחנה תל נוף",
+    "nameEng": "MAHANE TEL NOF"
+  },
+  {
+    "code": 308,
+    "nameHeb": "מחניים",
+    "nameEng": "MAHANAYIM"
+  },
+  {
+    "code": 776,
+    "nameHeb": "מחסיה",
+    "nameEng": "MAHSEYA"
+  },
+  {
+    "code": 43,
+    "nameHeb": "מטולה",
+    "nameEng": "METULA"
+  },
+  {
+    "code": 822,
+    "nameHeb": "מטע",
+    "nameEng": "MATTA"
+  },
+  {
+    "code": 1128,
+    "nameHeb": "מי עמי",
+    "nameEng": "ME AMMI"
+  },
+  {
+    "code": 2054,
+    "nameHeb": "מיטב",
+    "nameEng": "METAV"
+  },
+  {
+    "code": 649,
+    "nameHeb": "מייסר",
+    "nameEng": "MEISER"
+  },
+  {
+    "code": 4019,
+    "nameHeb": "מיצר",
+    "nameEng": "MEZAR"
+  },
+  {
+    "code": 1282,
+    "nameHeb": "מירב",
+    "nameEng": "MERAV"
+  },
+  {
+    "code": 607,
+    "nameHeb": "מירון",
+    "nameEng": "MERON"
+  },
+  {
+    "code": 731,
+    "nameHeb": "מישר",
+    "nameEng": "MESHAR"
+  },
+  {
+    "code": 1268,
+    "nameHeb": "מיתר",
+    "nameEng": "METAR"
+  },
+  {
+    "code": 3614,
+    "nameHeb": "מכורה",
+    "nameEng": "MEKHORA"
+  },
+  {
+    "code": 1343,
+    "nameHeb": "מכחול",
+    "nameEng": "MAKCHUL"
+  },
+  {
+    "code": 382,
+    "nameHeb": "מכמורת",
+    "nameEng": "MIKHMORET"
+  },
+  {
+    "code": 1202,
+    "nameHeb": "מכמנים",
+    "nameEng": "MIKHMANNIM"
+  },
+  {
+    "code": 164,
+    "nameHeb": "מלאה",
+    "nameEng": "MELE'A"
+  },
+  {
+    "code": 2044,
+    "nameHeb": "מלילות",
+    "nameEng": "MELILOT"
+  },
+  {
+    "code": 596,
+    "nameHeb": "מלכיה",
+    "nameEng": "MALKIYYA"
+  },
+  {
+    "code": 1154,
+    "nameHeb": "מלכישוע",
+    "nameEng": "MALKISHUA"
+  },
+  {
+    "code": 2030,
+    "nameHeb": "מנוחה",
+    "nameEng": "MENUHA"
+  },
+  {
+    "code": 1174,
+    "nameHeb": "מנוף",
+    "nameEng": "MANOF"
+  },
+  {
+    "code": 1205,
+    "nameHeb": "מנות",
+    "nameEng": "MANOT"
+  },
+  {
+    "code": 48,
+    "nameHeb": "מנחמיה",
+    "nameEng": "MENAHEMYA"
+  },
+  {
+    "code": 347,
+    "nameHeb": "מנרה",
+    "nameEng": "MENNARA"
+  },
+  {
+    "code": 994,
+    "nameHeb": "מנשית זבדה",
+    "nameEng": "MANSHIYYET ZABDA"
+  },
+  {
+    "code": 1258,
+    "nameHeb": "מסד",
+    "nameEng": "MASSAD"
+  },
+  {
+    "code": 263,
+    "nameHeb": "מסדה",
+    "nameEng": "MASSADA"
+  },
+  {
+    "code": 298,
+    "nameHeb": "מסילות",
+    "nameEng": "MESILLOT"
+  },
+  {
+    "code": 742,
+    "nameHeb": "מסילת ציון",
+    "nameEng": "MESILLAT ZIYYON"
+  },
+  {
+    "code": 748,
+    "nameHeb": "מסלול",
+    "nameEng": "MASLUL"
+  },
+  {
+    "code": 4203,
+    "nameHeb": "מסעדה",
+    "nameEng": "MAS'ADE"
+  },
+  {
+    "code": 939,
+    "nameHeb": "מסעודין אל-עזאזמה",
+    "nameEng": "MAS'UDIN AL-'AZAZME"
+  },
+  {
+    "code": 197,
+    "nameHeb": "מעברות",
+    "nameEng": "MA'BAROT"
+  },
+  {
+    "code": 1082,
+    "nameHeb": "מעגלים",
+    "nameEng": "MA'GALIM"
+  },
+  {
+    "code": 678,
+    "nameHeb": "מעגן",
+    "nameEng": "MA'AGAN"
+  },
+  {
+    "code": 694,
+    "nameHeb": "מעגן מיכאל",
+    "nameEng": "MA'AGAN MIKHA'EL"
+  },
+  {
+    "code": 272,
+    "nameHeb": "מעוז חיים",
+    "nameEng": "MA'OZ HAYYIM"
+  },
+  {
+    "code": 3657,
+    "nameHeb": "מעון",
+    "nameEng": "MA'ON"
+  },
+  {
+    "code": 570,
+    "nameHeb": "מעונה",
+    "nameEng": "ME'ONA"
+  },
+  {
+    "code": 518,
+    "nameHeb": "מעיליא",
+    "nameEng": "MI'ELYA"
+  },
+  {
+    "code": 416,
+    "nameHeb": "מעין ברוך",
+    "nameEng": "MA'YAN BARUKH"
+  },
+  {
+    "code": 290,
+    "nameHeb": "מעין צבי",
+    "nameEng": "MA'YAN ZEVI"
+  },
+  {
+    "code": 3616,
+    "nameHeb": "מעלה אדומים",
+    "nameEng": "MA'ALE ADUMMIM"
+  },
+  {
+    "code": 3608,
+    "nameHeb": "מעלה אפרים",
+    "nameEng": "MA'ALE EFRAYIM"
+  },
+  {
+    "code": 1127,
+    "nameHeb": "מעלה גלבוע",
+    "nameEng": "MA'ALE GILBOA"
+  },
+  {
+    "code": 4008,
+    "nameHeb": "מעלה גמלא",
+    "nameEng": "MA'ALE GAMLA"
+  },
+  {
+    "code": 286,
+    "nameHeb": "מעלה החמישה",
+    "nameEng": "MA'ALE HAHAMISHA"
+  },
+  {
+    "code": 3752,
+    "nameHeb": "מעלה לבונה",
+    "nameEng": "MA'ALE LEVONA"
+  },
+  {
+    "code": 3651,
+    "nameHeb": "מעלה מכמש",
+    "nameEng": "MA'ALE MIKHMAS"
+  },
+  {
+    "code": 1327,
+    "nameHeb": "מעלה עירון",
+    "nameEng": "MA'ALE IRON"
+  },
+  {
+    "code": 3653,
+    "nameHeb": "מעלה עמוס",
+    "nameEng": "MA'ALE AMOS"
+  },
+  {
+    "code": 3637,
+    "nameHeb": "מעלה שומרון",
+    "nameEng": "MA'ALE SHOMERON"
+  },
+  {
+    "code": 1063,
+    "nameHeb": "מעלות-תרשיחא",
+    "nameEng": "MA'ALOT-TARSHIHA"
+  },
+  {
+    "code": 344,
+    "nameHeb": "מענית",
+    "nameEng": "MA'ANIT"
+  },
+  {
+    "code": 230,
+    "nameHeb": "מעש",
+    "nameEng": "MA'AS"
+  },
+  {
+    "code": 668,
+    "nameHeb": "מפלסים",
+    "nameEng": "MEFALLESIM"
+  },
+  {
+    "code": 3745,
+    "nameHeb": "מצדות יהודה",
+    "nameEng": "MEZADOT YEHUDA"
+  },
+  {
+    "code": 325,
+    "nameHeb": "מצובה",
+    "nameEng": "MAZZUVA"
+  },
+  {
+    "code": 757,
+    "nameHeb": "מצליח",
+    "nameEng": "MAZLIAH"
+  },
+  {
+    "code": 58,
+    "nameHeb": "מצפה",
+    "nameEng": "MIZPA"
+  },
+  {
+    "code": 1222,
+    "nameHeb": "מצפה אבי\"ב",
+    "nameEng": "MIZPE AVIV"
+  },
+  {
+    "code": 1370,
+    "nameHeb": "מצפה אילן",
+    "nameEng": "MITSPE ILAN"
+  },
+  {
+    "code": 3576,
+    "nameHeb": "מצפה יריחו",
+    "nameEng": "MIZPE YERIHO"
+  },
+  {
+    "code": 1190,
+    "nameHeb": "מצפה נטופה",
+    "nameEng": "MIZPE NETOFA"
+  },
+  {
+    "code": 99,
+    "nameHeb": "מצפה רמון",
+    "nameEng": "MIZPE RAMON"
+  },
+  {
+    "code": 3610,
+    "nameHeb": "מצפה שלם",
+    "nameEng": "MIZPE SHALEM"
+  },
+  {
+    "code": 648,
+    "nameHeb": "מצר",
+    "nameEng": "MEZER"
+  },
+  {
+    "code": 22,
+    "nameHeb": "מקווה ישראל",
+    "nameEng": "MIQWE YISRA'EL"
+  },
+  {
+    "code": 843,
+    "nameHeb": "מרגליות",
+    "nameEng": "MARGALIYYOT"
+  },
+  {
+    "code": 4101,
+    "nameHeb": "מרום גולן",
+    "nameEng": "MEROM GOLAN"
+  },
+  {
+    "code": 1340,
+    "nameHeb": "מרחב עם",
+    "nameEng": "MERHAV AM"
+  },
+  {
+    "code": 97,
+    "nameHeb": "מרחביה )מושב(",
+    "nameEng": "MERHAVYA(MOSHAV)"
+  },
+  {
+    "code": 66,
+    "nameHeb": "מרחביה )קיבוץ(",
+    "nameEng": "MERHAVYA(QIBBUZ)"
+  },
+  {
+    "code": 1098,
+    "nameHeb": "מרכז שפירא",
+    "nameEng": "MERKAZ SHAPPIRA"
+  },
+  {
+    "code": 421,
+    "nameHeb": "משאבי שדה",
+    "nameEng": "MASH'ABBE SADE"
+  },
+  {
+    "code": 765,
+    "nameHeb": "משגב דב",
+    "nameEng": "MISGAV DOV"
+  },
+  {
+    "code": 378,
+    "nameHeb": "משגב עם",
+    "nameEng": "MISGAV AM"
+  },
+  {
+    "code": 520,
+    "nameHeb": "משהד",
+    "nameEng": "MESHHED"
+  },
+  {
+    "code": 3605,
+    "nameHeb": "משואה",
+    "nameEng": "MASSU'A"
+  },
+  {
+    "code": 620,
+    "nameHeb": "משואות יצחק",
+    "nameEng": "MASSUOT YIZHAQ"
+  },
+  {
+    "code": 3785,
+    "nameHeb": "משכיות",
+    "nameEng": "MASKIYYOT"
+  },
+  {
+    "code": 670,
+    "nameHeb": "משמר איילון",
+    "nameEng": "MISHMAR AYYALON"
+  },
+  {
+    "code": 563,
+    "nameHeb": "משמר דוד",
+    "nameEng": "MISHMAR DAWID"
+  },
+  {
+    "code": 732,
+    "nameHeb": "משמר הירדן",
+    "nameEng": "MISHMAR HAYARDEN"
+  },
+  {
+    "code": 395,
+    "nameHeb": "משמר הנגב",
+    "nameEng": "MISHMAR HANEGEV"
+  },
+  {
+    "code": 130,
+    "nameHeb": "משמר העמק",
+    "nameEng": "MISHMAR HAEMEQ"
+  },
+  {
+    "code": 729,
+    "nameHeb": "משמר השבעה",
+    "nameEng": "MISHMAR HASHIV'A"
+  },
+  {
+    "code": 194,
+    "nameHeb": "משמר השרון",
+    "nameEng": "MISHMAR HASHARON"
+  },
+  {
+    "code": 213,
+    "nameHeb": "משמרות",
+    "nameEng": "MISHMAROT"
+  },
+  {
+    "code": 425,
+    "nameHeb": "משמרת",
+    "nameEng": "MISHMERET"
+  },
+  {
+    "code": 791,
+    "nameHeb": "משען",
+    "nameEng": "MASH'EN"
+  },
+  {
+    "code": 1315,
+    "nameHeb": "מתן",
+    "nameEng": "MATTAN"
+  },
+  {
+    "code": 1184,
+    "nameHeb": "מתת",
+    "nameEng": "MATTAT"
+  },
+  {
+    "code": 3648,
+    "nameHeb": "מתתיהו",
+    "nameEng": "MATTITYAHU"
+  },
+  {
+    "code": 4551,
+    "nameHeb": "נאות גולן",
+    "nameEng": "NE'OT GOLAN"
+  },
+  {
+    "code": 1124,
+    "nameHeb": "נאות הכיכר",
+    "nameEng": "NE'OT HAKIKKAR"
+  },
+  {
+    "code": 408,
+    "nameHeb": "נאות מרדכי",
+    "nameEng": "NE'OT MORDEKHAY"
+  },
+  {
+    "code": 1197,
+    "nameHeb": "נאות סמדר",
+    "nameEng": "SHIZZAFON"
+  },
+  {
+    "code": 524,
+    "nameHeb": "נאעורה",
+    "nameEng": "NA'URA"
+  },
+  {
+    "code": 396,
+    "nameHeb": "נבטים",
+    "nameEng": "NEVATIM"
+  },
+  {
+    "code": 315,
+    "nameHeb": "נגבה",
+    "nameEng": "NEGBA"
+  },
+  {
+    "code": 3724,
+    "nameHeb": "נגוהות",
+    "nameEng": "NEGOHOT"
+  },
+  {
+    "code": 309,
+    "nameHeb": "נהורה",
+    "nameEng": "NEHORA"
+  },
+  {
+    "code": 80,
+    "nameHeb": "נהלל",
+    "nameEng": "NAHALAL"
+  },
+  {
+    "code": 9100,
+    "nameHeb": "נהריה",
+    "nameEng": "NAHARIYYA"
+  },
+  {
+    "code": 4304,
+    "nameHeb": "נוב",
+    "nameEng": "NOV"
+  },
+  {
+    "code": 55,
+    "nameHeb": "נוגה",
+    "nameEng": "NOGAH"
+  },
+  {
+    "code": 1366,
+    "nameHeb": "נווה",
+    "nameEng": "NAVE"
+  },
+  {
+    "code": 926,
+    "nameHeb": "נווה אבות",
+    "nameEng": "NEWE AVOT"
+  },
+  {
+    "code": 590,
+    "nameHeb": "נווה אור",
+    "nameEng": "NEWE UR"
+  },
+  {
+    "code": 4303,
+    "nameHeb": "נווה אטי\"ב",
+    "nameEng": "NEWE ATIV"
+  },
+  {
+    "code": 405,
+    "nameHeb": "נווה אילן",
+    "nameEng": "NEWE ILAN"
+  },
+  {
+    "code": 296,
+    "nameHeb": "נווה איתן",
+    "nameEng": "NEWE ETAN"
+  },
+  {
+    "code": 3725,
+    "nameHeb": "נווה דניאל",
+    "nameEng": "NEWE DANIYYEL"
+  },
+  {
+    "code": 1057,
+    "nameHeb": "נווה זוהר",
+    "nameEng": "NEWE ZOHAR"
+  },
+  {
+    "code": 1314,
+    "nameHeb": "נווה זיו",
+    "nameEng": "NEWE ZIV"
+  },
+  {
+    "code": 1279,
+    "nameHeb": "נווה חריף",
+    "nameEng": "NEWE HARIF"
+  },
+  {
+    "code": 312,
+    "nameHeb": "נווה ים",
+    "nameEng": "NEWE YAM"
+  },
+  {
+    "code": 686,
+    "nameHeb": "נווה ימין",
+    "nameEng": "NEWE YAMIN"
+  },
+  {
+    "code": 858,
+    "nameHeb": "נווה ירק",
+    "nameEng": "NEWE YARAQ"
+  },
+  {
+    "code": 827,
+    "nameHeb": "נווה מבטח",
+    "nameEng": "NEWE MIVTAH"
+  },
+  {
+    "code": 1071,
+    "nameHeb": "נווה מיכאל",
+    "nameEng": "NEWE MIKHA'EL"
+  },
+  {
+    "code": 1259,
+    "nameHeb": "נווה שלום",
+    "nameEng": "NEWE SHALOM"
+  },
+  {
+    "code": 15,
+    "nameHeb": "נועם",
+    "nameEng": "NO'AM"
+  },
+  {
+    "code": 1333,
+    "nameHeb": "נוף איילון",
+    "nameEng": "NOF AYYALON"
+  },
+  {
+    "code": 3790,
+    "nameHeb": "נופים",
+    "nameEng": "NOFIM"
+  },
+  {
+    "code": 1284,
+    "nameHeb": "נופית",
+    "nameEng": "NOFIT"
+  },
+  {
+    "code": 257,
+    "nameHeb": "נופך",
+    "nameEng": "NOFEKH"
+  },
+  {
+    "code": 3726,
+    "nameHeb": "נוקדים",
+    "nameEng": "NOQEDIM"
+  },
+  {
+    "code": 447,
+    "nameHeb": "נורדיה",
+    "nameEng": "NORDIYYA"
+  },
+  {
+    "code": 833,
+    "nameHeb": "נורית",
+    "nameEng": "NURIT"
+  },
+  {
+    "code": 59,
+    "nameHeb": "נחושה",
+    "nameEng": "NEHUSHA"
+  },
+  {
+    "code": 844,
+    "nameHeb": "נחל עוז",
+    "nameEng": "NAHAL OZ"
+  },
+  {
+    "code": 2045,
+    "nameHeb": "נחלה",
+    "nameEng": "NAHALA"
+  },
+  {
+    "code": 3767,
+    "nameHeb": "נחליאל",
+    "nameEng": "NAHALI'EL"
+  },
+  {
+    "code": 449,
+    "nameHeb": "נחלים",
+    "nameEng": "NEHALIM"
+  },
+  {
+    "code": 809,
+    "nameHeb": "נחם",
+    "nameEng": "NAHAM"
+  },
+  {
+    "code": 522,
+    "nameHeb": "נחף",
+    "nameEng": "NAHEF"
+  },
+  {
+    "code": 433,
+    "nameHeb": "נחשולים",
+    "nameEng": "NAHSHOLIM"
+  },
+  {
+    "code": 777,
+    "nameHeb": "נחשון",
+    "nameEng": "NAHSHON"
+  },
+  {
+    "code": 705,
+    "nameHeb": "נחשונים",
+    "nameEng": "NAHSHONIM"
+  },
+  {
+    "code": 1147,
+    "nameHeb": "נטועה",
+    "nameEng": "NETU'A"
+  },
+  {
+    "code": 4014,
+    "nameHeb": "נטור",
+    "nameEng": "NATUR"
+  },
+  {
+    "code": 1369,
+    "nameHeb": "נטע",
+    "nameEng": "NETA"
+  },
+  {
+    "code": 174,
+    "nameHeb": "נטעים",
+    "nameEng": "NETA'IM"
+  },
+  {
+    "code": 1254,
+    "nameHeb": "נטף",
+    "nameEng": "NATAF"
+  },
+  {
+    "code": 523,
+    "nameHeb": "ניין",
+    "nameEng": "NEIN"
+  },
+  {
+    "code": 3655,
+    "nameHeb": "ניל\"י",
+    "nameEng": "NILI"
+  },
+  {
+    "code": 351,
+    "nameHeb": "ניצן",
+    "nameEng": "NIZZAN"
+  },
+  {
+    "code": 1419,
+    "nameHeb": "ניצן ב'",
+    "nameEng": "NIZZAN B"
+  },
+  {
+    "code": 1195,
+    "nameHeb": "ניצנה )קהילת חינוך(",
+    "nameEng": "NIZZANA (QEHILAT HIN"
+  },
+  {
+    "code": 1280,
+    "nameHeb": "ניצני סיני",
+    "nameEng": "NIZZANE SINAY"
+  },
+  {
+    "code": 851,
+    "nameHeb": "ניצני עוז",
+    "nameEng": "NIZZANE OZ"
+  },
+  {
+    "code": 359,
+    "nameHeb": "ניצנים",
+    "nameEng": "NIZZANIM"
+  },
+  {
+    "code": 808,
+    "nameHeb": "ניר אליהו",
+    "nameEng": "NIR ELIYYAHU"
+  },
+  {
+    "code": 553,
+    "nameHeb": "ניר בנים",
+    "nameEng": "NIR BANIM"
+  },
+  {
+    "code": 720,
+    "nameHeb": "ניר גלים",
+    "nameEng": "NIR GALLIM"
+  },
+  {
+    "code": 256,
+    "nameHeb": "ניר דוד )תל עמל(",
+    "nameEng": "NIR DAWID (TEL AMAL)"
+  },
+  {
+    "code": 11,
+    "nameHeb": "ניר ח\"ן",
+    "nameEng": "NIR HEN"
+  },
+  {
+    "code": 165,
+    "nameHeb": "ניר יפה",
+    "nameEng": "NIR YAFE"
+  },
+  {
+    "code": 402,
+    "nameHeb": "ניר יצחק",
+    "nameEng": "NIR YIZHAQ"
+  },
+  {
+    "code": 699,
+    "nameHeb": "ניר ישראל",
+    "nameEng": "NIR YISRA'EL"
+  },
+  {
+    "code": 2047,
+    "nameHeb": "ניר משה",
+    "nameEng": "NIR MOSHE"
+  },
+  {
+    "code": 69,
+    "nameHeb": "ניר עוז",
+    "nameEng": "NIR OZ"
+  },
+  {
+    "code": 348,
+    "nameHeb": "ניר עם",
+    "nameEng": "NIR AM"
+  },
+  {
+    "code": 769,
+    "nameHeb": "ניר עציון",
+    "nameEng": "NIR EZYON"
+  },
+  {
+    "code": 2048,
+    "nameHeb": "ניר עקיבא",
+    "nameEng": "NIR AQIVA"
+  },
+  {
+    "code": 331,
+    "nameHeb": "ניר צבי",
+    "nameEng": "NIR ZEVI"
+  },
+  {
+    "code": 602,
+    "nameHeb": "נירים",
+    "nameEng": "NIRIM"
+  },
+  {
+    "code": 1236,
+    "nameHeb": "נירית",
+    "nameEng": "NIRIT"
+  },
+  {
+    "code": 3620,
+    "nameHeb": "נירן",
+    "nameEng": "NIRAN"
+  },
+  {
+    "code": 4035,
+    "nameHeb": "נמרוד",
+    "nameEng": "NIMROD"
+  },
+  {
+    "code": 825,
+    "nameHeb": "נס הרים",
+    "nameEng": ""
+  },
+  {
+    "code": 1143,
+    "nameHeb": "נס עמים",
+    "nameEng": "NES AMMIM"
+  },
+  {
+    "code": 7200,
+    "nameHeb": "נס ציונה",
+    "nameEng": "NES ZIYYONA"
+  },
+  {
+    "code": 186,
+    "nameHeb": "נעורים",
+    "nameEng": "NE'URIM"
+  },
+  {
+    "code": 3787,
+    "nameHeb": "נעלה",
+    "nameEng": "NA'ALE"
+  },
+  {
+    "code": 3713,
+    "nameHeb": "נעמ\"ה",
+    "nameEng": "NAAMA"
+  },
+  {
+    "code": 158,
+    "nameHeb": "נען",
+    "nameEng": "NA'AN"
+  },
+  {
+    "code": 1041,
+    "nameHeb": "נצאצרה )שבט(",
+    "nameEng": "NASASRA"
+  },
+  {
+    "code": 1372,
+    "nameHeb": "נצר חזני",
+    "nameEng": "NEZER HAZZANI"
+  },
+  {
+    "code": 435,
+    "nameHeb": "נצר סרני",
+    "nameEng": "NEZER SERENI"
+  },
+  {
+    "code": 7300,
+    "nameHeb": "נצרת",
+    "nameEng": "NAZARETH"
+  },
+  {
+    "code": 1061,
+    "nameHeb": "נצרת עילית",
+    "nameEng": "NAZERAT ILLIT"
+  },
+  {
+    "code": 2500,
+    "nameHeb": "נשר",
+    "nameEng": "NESHER"
+  },
+  {
+    "code": 3555,
+    "nameHeb": "נתיב הגדוד",
+    "nameEng": "NETIV HAGEDUD"
+  },
+  {
+    "code": 693,
+    "nameHeb": "נתיב הל\"ה",
+    "nameEng": "NETIV HALAMED-HE"
+  },
+  {
+    "code": 1242,
+    "nameHeb": "נתיב העשרה",
+    "nameEng": "NETIV HAASARA"
+  },
+  {
+    "code": 792,
+    "nameHeb": "נתיב השיירה",
+    "nameEng": "NETIV HASHAYYARA"
+  },
+  {
+    "code": 246,
+    "nameHeb": "נתיבות",
+    "nameEng": "NETIVOT"
+  },
+  {
+    "code": 7400,
+    "nameHeb": "נתניה",
+    "nameEng": "NETANYA"
+  },
+  {
+    "code": 525,
+    "nameHeb": "סאג'ור",
+    "nameEng": "SAJUR"
+  },
+  {
+    "code": 578,
+    "nameHeb": "סאסא",
+    "nameEng": "SASA"
+  },
+  {
+    "code": 587,
+    "nameHeb": "סביון",
+    "nameEng": "SAVYON"
+  },
+  {
+    "code": 2046,
+    "nameHeb": "סגולה",
+    "nameEng": "SEGULA"
+  },
+  {
+    "code": 942,
+    "nameHeb": "סואעד )חמרייה(",
+    "nameEng": "SAWA'ID(HAMRIYYE)"
+  },
+  {
+    "code": 989,
+    "nameHeb": "סואעד )כמאנה( )שבט(",
+    "nameEng": "SAWA'ID (KAMANE)"
+  },
+  {
+    "code": 526,
+    "nameHeb": "סולם",
+    "nameEng": "SULAM"
+  },
+  {
+    "code": 3756,
+    "nameHeb": "סוסיה",
+    "nameEng": "SUSEYA"
+  },
+  {
+    "code": 1238,
+    "nameHeb": "סופה",
+    "nameEng": "SUFA"
+  },
+  {
+    "code": 7500,
+    "nameHeb": "סח'נין",
+    "nameEng": "SAKHNIN"
+  },
+  {
+    "code": 1170,
+    "nameHeb": "סייד )שבט(",
+    "nameEng": ""
+  },
+  {
+    "code": 1245,
+    "nameHeb": "סלמה",
+    "nameEng": "SALLAMA"
+  },
+  {
+    "code": 3567,
+    "nameHeb": "סלעית",
+    "nameEng": "SAL'IT"
+  },
+  {
+    "code": 1156,
+    "nameHeb": "סמר",
+    "nameEng": "SAMAR"
+  },
+  {
+    "code": 3777,
+    "nameHeb": "סנסנה",
+    "nameEng": ""
+  },
+  {
+    "code": 419,
+    "nameHeb": "סעד",
+    "nameEng": "SA'AD"
+  },
+  {
+    "code": 1360,
+    "nameHeb": "סעוה",
+    "nameEng": "SA'WA"
+  },
+  {
+    "code": 454,
+    "nameHeb": "סער",
+    "nameEng": "SA'AR"
+  },
+  {
+    "code": 1176,
+    "nameHeb": "ספיר",
+    "nameEng": "SAPPIR"
+  },
+  {
+    "code": 610,
+    "nameHeb": "סתריה",
+    "nameEng": "SITRIYYA"
+  },
+  {
+    "code": 4501,
+    "nameHeb": "ע'ג'ר",
+    "nameEng": "GHAJAR"
+  },
+  {
+    "code": 376,
+    "nameHeb": "עברון",
+    "nameEng": "EVRON"
+  },
+  {
+    "code": 794,
+    "nameHeb": "עגור",
+    "nameEng": "AGUR"
+  },
+  {
+    "code": 1199,
+    "nameHeb": "עדי",
+    "nameEng": "ADI"
+  },
+  {
+    "code": 2035,
+    "nameHeb": "עדנים",
+    "nameEng": "ADANIM"
+  },
+  {
+    "code": 826,
+    "nameHeb": "עוזה",
+    "nameEng": "UZA"
+  },
+  {
+    "code": 528,
+    "nameHeb": "עוזייר",
+    "nameEng": "UZEIR"
+  },
+  {
+    "code": 737,
+    "nameHeb": "עולש",
+    "nameEng": "OLESH"
+  },
+  {
+    "code": 666,
+    "nameHeb": "עומר",
+    "nameEng": "OMER"
+  },
+  {
+    "code": 810,
+    "nameHeb": "עופר",
+    "nameEng": "OFER"
+  },
+  {
+    "code": 3617,
+    "nameHeb": "עופרה",
+    "nameEng": "OFRA"
+  },
+  {
+    "code": 32,
+    "nameHeb": "עוצם",
+    "nameEng": "OZEM"
+  },
+  {
+    "code": 957,
+    "nameHeb": "עוקבי )בנו עוקבה(",
+    "nameEng": "UQBI (BANU UQBA)"
+  },
+  {
+    "code": 328,
+    "nameHeb": "עזוז",
+    "nameEng": "EZUZ"
+  },
+  {
+    "code": 1149,
+    "nameHeb": "עזר",
+    "nameEng": "EZER"
+  },
+  {
+    "code": 837,
+    "nameHeb": "עזריאל",
+    "nameEng": "AZRI'EL"
+  },
+  {
+    "code": 711,
+    "nameHeb": "עזריה",
+    "nameEng": "AZARYA"
+  },
+  {
+    "code": 817,
+    "nameHeb": "עזריקם",
+    "nameEng": "AZRIQAM"
+  },
+  {
+    "code": 969,
+    "nameHeb": "עטאוונה )שבט(",
+    "nameEng": "ATAWNE"
+  },
+  {
+    "code": 3658,
+    "nameHeb": "עטרת",
+    "nameEng": "ATERET"
+  },
+  {
+    "code": 1175,
+    "nameHeb": "עידן",
+    "nameEng": "IDDAN"
+  },
+  {
+    "code": 530,
+    "nameHeb": "עיילבון",
+    "nameEng": "EILABUN"
+  },
+  {
+    "code": 156,
+    "nameHeb": "עיינות",
+    "nameEng": "AYANOT"
+  },
+  {
+    "code": 511,
+    "nameHeb": "עילוט",
+    "nameEng": "ILUT"
+  },
+  {
+    "code": 687,
+    "nameHeb": "עין איילה",
+    "nameEng": "EN AYYALA"
+  },
+  {
+    "code": 546,
+    "nameHeb": "עין אל-אסד",
+    "nameEng": "EIN AL-ASAD"
+  },
+  {
+    "code": 273,
+    "nameHeb": "עין גב",
+    "nameEng": "EN GEV"
+  },
+  {
+    "code": 2042,
+    "nameHeb": "עין גדי",
+    "nameEng": "EN GEDI"
+  },
+  {
+    "code": 436,
+    "nameHeb": "עין דור",
+    "nameEng": "EN DOR"
+  },
+  {
+    "code": 1240,
+    "nameHeb": "עין הבשור",
+    "nameEng": "EN HABESOR"
+  },
+  {
+    "code": 74,
+    "nameHeb": "עין הוד",
+    "nameEng": "EN HOD"
+  },
+  {
+    "code": 167,
+    "nameHeb": "עין החורש",
+    "nameEng": "EN HAHORESH"
+  },
+  {
+    "code": 289,
+    "nameHeb": "עין המפרץ",
+    "nameEng": "EN HAMIFRAZ"
+  },
+  {
+    "code": 383,
+    "nameHeb": "עין הנצי\"ב",
+    "nameEng": "EN HANAZIV"
+  },
+  {
+    "code": 367,
+    "nameHeb": "עין העמק",
+    "nameEng": "EN HAEMEQ"
+  },
+  {
+    "code": 270,
+    "nameHeb": "עין השופט",
+    "nameEng": "EN HASHOFET"
+  },
+  {
+    "code": 157,
+    "nameHeb": "עין ורד",
+    "nameEng": "EN WERED"
+  },
+  {
+    "code": 4503,
+    "nameHeb": "עין זיוון",
+    "nameEng": "EN ZIWAN"
+  },
+  {
+    "code": 1320,
+    "nameHeb": "עין חוד",
+    "nameEng": "EIN HOD"
+  },
+  {
+    "code": 1053,
+    "nameHeb": "עין חצבה",
+    "nameEng": "EN HAZEVA"
+  },
+  {
+    "code": 89,
+    "nameHeb": "עין חרוד )איחוד(",
+    "nameEng": "EN HAROD (IHUD)"
+  },
+  {
+    "code": 82,
+    "nameHeb": "עין חרוד )מאוחד(",
+    "nameEng": "EN HAROD(ME'UHAD)"
+  },
+  {
+    "code": 806,
+    "nameHeb": "עין יהב",
+    "nameEng": ""
+  },
+  {
+    "code": 813,
+    "nameHeb": "עין יעקב",
+    "nameEng": "EN YA'AQOV"
+  },
+  {
+    "code": 1056,
+    "nameHeb": "עין כרם-בי\"ס חקלאי",
+    "nameEng": "EN KAREM-B.S.HAQLA'I"
+  },
+  {
+    "code": 426,
+    "nameHeb": "עין כרמל",
+    "nameEng": "EN KARMEL"
+  },
+  {
+    "code": 532,
+    "nameHeb": "עין מאהל",
+    "nameEng": "EIN MAHEL"
+  },
+  {
+    "code": 521,
+    "nameHeb": "עין נקובא",
+    "nameEng": "EIN NAQQUBA"
+  },
+  {
+    "code": 223,
+    "nameHeb": "עין עירון",
+    "nameEng": "EN IRON"
+  },
+  {
+    "code": 622,
+    "nameHeb": "עין צורים",
+    "nameEng": "EN ZURIM"
+  },
+  {
+    "code": 4502,
+    "nameHeb": "עין קנייא",
+    "nameEng": "EIN QINIYYE"
+  },
+  {
+    "code": 514,
+    "nameHeb": "עין ראפה",
+    "nameEng": "EIN RAFA"
+  },
+  {
+    "code": 139,
+    "nameHeb": "עין שמר",
+    "nameEng": "EN SHEMER"
+  },
+  {
+    "code": 880,
+    "nameHeb": "עין שריד",
+    "nameEng": "EN SARID"
+  },
+  {
+    "code": 1251,
+    "nameHeb": "עין תמר",
+    "nameEng": "EN TAMAR"
+  },
+  {
+    "code": 871,
+    "nameHeb": "עינת",
+    "nameEng": "ENAT"
+  },
+  {
+    "code": 1187,
+    "nameHeb": "עיר אובות",
+    "nameEng": "IR OVOT"
+  },
+  {
+    "code": 7600,
+    "nameHeb": "עכו",
+    "nameEng": "AKKO"
+  },
+  {
+    "code": 1146,
+    "nameHeb": "עלומים",
+    "nameEng": "ALUMIM"
+  },
+  {
+    "code": 3765,
+    "nameHeb": "עלי",
+    "nameEng": "ELI"
+  },
+  {
+    "code": 3727,
+    "nameHeb": "עלי זהב",
+    "nameEng": "ALE ZAHAV"
+  },
+  {
+    "code": 688,
+    "nameHeb": "עלמה",
+    "nameEng": "ALMA"
+  },
+  {
+    "code": 3715,
+    "nameHeb": "עלמון",
+    "nameEng": "ALMON"
+  },
+  {
+    "code": 1212,
+    "nameHeb": "עמוקה",
+    "nameEng": "AMUQQA"
+  },
+  {
+    "code": 3824,
+    "nameHeb": "עמיחי",
+    "nameEng": "AMMIHAY"
+  },
+  {
+    "code": 779,
+    "nameHeb": "עמינדב",
+    "nameEng": "AMMINADAV"
+  },
+  {
+    "code": 385,
+    "nameHeb": "עמיעד",
+    "nameEng": "AMMI'AD"
+  },
+  {
+    "code": 318,
+    "nameHeb": "עמיעוז",
+    "nameEng": "AMMI'OZ"
+  },
+  {
+    "code": 773,
+    "nameHeb": "עמיקם",
+    "nameEng": "AMMIQAM"
+  },
+  {
+    "code": 319,
+    "nameHeb": "עמיר",
+    "nameEng": "AMIR"
+  },
+  {
+    "code": 708,
+    "nameHeb": "עמקה",
+    "nameEng": "AMQA"
+  },
+  {
+    "code": 3712,
+    "nameHeb": "ענב",
+    "nameEng": "ENAV"
+  },
+  {
+    "code": 534,
+    "nameHeb": "עספיא",
+    "nameEng": "ISIFYA"
+  },
+  {
+    "code": 7700,
+    "nameHeb": "עפולה",
+    "nameEng": "AFULA"
+  },
+  {
+    "code": 3778,
+    "nameHeb": "עץ אפרים",
+    "nameEng": "EZ EFRAYIM"
+  },
+  {
+    "code": 917,
+    "nameHeb": "עצמון שגב",
+    "nameEng": "ATSMON-SEGEV"
+  },
+  {
+    "code": 531,
+    "nameHeb": "עראבה",
+    "nameEng": "ARRABE"
+  },
+  {
+    "code": 1246,
+    "nameHeb": "עראמשה",
+    "nameEng": "ARAMSHA"
+  },
+  {
+    "code": 1335,
+    "nameHeb": "ערב אל נעים",
+    "nameEng": "ARRAB AL NAIM"
+  },
+  {
+    "code": 2560,
+    "nameHeb": "ערד",
+    "nameEng": "ARAD"
+  },
+  {
+    "code": 637,
+    "nameHeb": "ערערה",
+    "nameEng": "AR'ARA"
+  },
+  {
+    "code": 1192,
+    "nameHeb": "ערערה-בנגב",
+    "nameEng": "AR'ARA-BANEGEV"
+  },
+  {
+    "code": 591,
+    "nameHeb": "עשרת",
+    "nameEng": "ASERET"
+  },
+  {
+    "code": 53,
+    "nameHeb": "עתלית",
+    "nameEng": "ATLIT"
+  },
+  {
+    "code": 3748,
+    "nameHeb": "עתניאל",
+    "nameEng": "OTNI'EL"
+  },
+  {
+    "code": 1151,
+    "nameHeb": "פארן",
+    "nameEng": "PARAN"
+  },
+  {
+    "code": 3768,
+    "nameHeb": "פדואל",
+    "nameEng": "PEDU'EL"
+  },
+  {
+    "code": 750,
+    "nameHeb": "פדויים",
+    "nameEng": "PEDUYIM"
+  },
+  {
+    "code": 838,
+    "nameHeb": "פדיה",
+    "nameEng": "PEDAYA"
+  },
+  {
+    "code": 1104,
+    "nameHeb": "פוריה - כפר עבודה",
+    "nameEng": "PORIYYA-KEFAR AVODA"
+  },
+  {
+    "code": 1105,
+    "nameHeb": "פוריה - נווה עובד",
+    "nameEng": "PORIYYA-NEWE OVED"
+  },
+  {
+    "code": 1313,
+    "nameHeb": "פוריה עילית",
+    "nameEng": "PORIYYA ILLIT"
+  },
+  {
+    "code": 537,
+    "nameHeb": "פוריידיס",
+    "nameEng": "FUREIDIS"
+  },
+  {
+    "code": 767,
+    "nameHeb": "פורת",
+    "nameEng": "PORAT"
+  },
+  {
+    "code": 749,
+    "nameHeb": "פטיש",
+    "nameEng": "PATTISH"
+  },
+  {
+    "code": 1185,
+    "nameHeb": "פלך",
+    "nameEng": "PELEKH"
+  },
+  {
+    "code": 597,
+    "nameHeb": "פלמחים",
+    "nameEng": "PALMAHIM"
+  },
+  {
+    "code": 3723,
+    "nameHeb": "פני חבר",
+    "nameEng": "PENE HEVER"
+  },
+  {
+    "code": 3659,
+    "nameHeb": "פסגות",
+    "nameEng": "PESAGOT"
+  },
+  {
+    "code": 535,
+    "nameHeb": "פסוטה",
+    "nameEng": "FASSUTA"
+  },
+  {
+    "code": 2059,
+    "nameHeb": "פעמי תש\"ז",
+    "nameEng": "PA'AME TASHAZ"
+  },
+  {
+    "code": 3615,
+    "nameHeb": "פצאל",
+    "nameEng": "PEZA'EL"
+  },
+  {
+    "code": 536,
+    "nameHeb": "פקיעין )בוקייעה(",
+    "nameEng": "PEQI'IN (BUQEI'A)"
+  },
+  {
+    "code": 281,
+    "nameHeb": "פקיעין חדשה",
+    "nameEng": "PEQI'IN HADASHA"
+  },
+  {
+    "code": 7800,
+    "nameHeb": "פרדס חנה-כרכור",
+    "nameEng": "PARDES HANNA-KARKUR"
+  },
+  {
+    "code": 171,
+    "nameHeb": "פרדסיה",
+    "nameEng": "PARDESIYYA"
+  },
+  {
+    "code": 599,
+    "nameHeb": "פרוד",
+    "nameEng": "PAROD"
+  },
+  {
+    "code": 2053,
+    "nameHeb": "פרזון",
+    "nameEng": "PERAZON"
+  },
+  {
+    "code": 1231,
+    "nameHeb": "פרי גן",
+    "nameEng": "PERI GAN"
+  },
+  {
+    "code": 7900,
+    "nameHeb": "פתח תקווה",
+    "nameEng": "PETAH TIQWA"
+  },
+  {
+    "code": 839,
+    "nameHeb": "פתחיה",
+    "nameEng": "PETAHYA"
+  },
+  {
+    "code": 413,
+    "nameHeb": "צאלים",
+    "nameEng": "ZE'ELIM"
+  },
+  {
+    "code": 1180,
+    "nameHeb": "צביה",
+    "nameEng": "ZVIYYA"
+  },
+  {
+    "code": 1213,
+    "nameHeb": "צבעון",
+    "nameEng": "ZIV'ON"
+  },
+  {
+    "code": 465,
+    "nameHeb": "צובה",
+    "nameEng": "ZOVA"
+  },
+  {
+    "code": 1136,
+    "nameHeb": "צוחר",
+    "nameEng": "ZOHAR"
+  },
+  {
+    "code": 1111,
+    "nameHeb": "צופיה",
+    "nameEng": "ZOFIYYA"
+  },
+  {
+    "code": 3791,
+    "nameHeb": "צופים",
+    "nameEng": "ZUFIN"
+  },
+  {
+    "code": 198,
+    "nameHeb": "צופית",
+    "nameEng": "ZOFIT"
+  },
+  {
+    "code": 1150,
+    "nameHeb": "צופר",
+    "nameEng": "ZOFAR"
+  },
+  {
+    "code": 1102,
+    "nameHeb": "צוקי ים",
+    "nameEng": "SHOSHANNAT HAAMAQIM("
+  },
+  {
+    "code": 1262,
+    "nameHeb": "צוקים",
+    "nameEng": "MAHANE BILDAD"
+  },
+  {
+    "code": 1113,
+    "nameHeb": "צור הדסה",
+    "nameEng": "ZUR HADASSA"
+  },
+  {
+    "code": 1345,
+    "nameHeb": "צור יצחק",
+    "nameEng": "ZUR YIZHAQ"
+  },
+  {
+    "code": 276,
+    "nameHeb": "צור משה",
+    "nameEng": "ZUR MOSHE"
+  },
+  {
+    "code": 1148,
+    "nameHeb": "צור נתן",
+    "nameEng": "ZUR NATAN"
+  },
+  {
+    "code": 774,
+    "nameHeb": "צוריאל",
+    "nameEng": "ZURI'EL"
+  },
+  {
+    "code": 1221,
+    "nameHeb": "צורית",
+    "nameEng": "ZURIT"
+  },
+  {
+    "code": 613,
+    "nameHeb": "ציפורי",
+    "nameEng": "ZIPPORI"
+  },
+  {
+    "code": 796,
+    "nameHeb": "צלפון",
+    "nameEng": "ZELAFON"
+  },
+  {
+    "code": 636,
+    "nameHeb": "צנדלה",
+    "nameEng": "SANDALA"
+  },
+  {
+    "code": 594,
+    "nameHeb": "צפריה",
+    "nameEng": "ZAFRIYYA"
+  },
+  {
+    "code": 8000,
+    "nameHeb": "צפת",
+    "nameEng": "ZEFAT"
+  },
+  {
+    "code": 612,
+    "nameHeb": "צרופה",
+    "nameEng": "ZERUFA"
+  },
+  {
+    "code": 567,
+    "nameHeb": "צרעה",
+    "nameEng": "ZOR'A"
+  },
+  {
+    "code": 1234,
+    "nameHeb": "קבועה )שבט(",
+    "nameEng": "QABBO'A"
+  },
+  {
+    "code": 334,
+    "nameHeb": "קבוצת יבנה",
+    "nameEng": "QEVUZAT YAVNE"
+  },
+  {
+    "code": 3557,
+    "nameHeb": "קדומים",
+    "nameEng": "QEDUMIM"
+  },
+  {
+    "code": 195,
+    "nameHeb": "קדימה-צורן",
+    "nameEng": "QADIMA-ZORAN"
+  },
+  {
+    "code": 392,
+    "nameHeb": "קדמה",
+    "nameEng": "QEDMA"
+  },
+  {
+    "code": 4025,
+    "nameHeb": "קדמת צבי",
+    "nameEng": "QIDMAT ZEVI"
+  },
+  {
+    "code": 3781,
+    "nameHeb": "קדר",
+    "nameEng": "QEDAR"
+  },
+  {
+    "code": 615,
+    "nameHeb": "קדרון",
+    "nameEng": "QIDRON"
+  },
+  {
+    "code": 1211,
+    "nameHeb": "קדרים",
+    "nameEng": "QADDARIM"
+  },
+  {
+    "code": 964,
+    "nameHeb": "קודייראת א-צאנע)שבט(",
+    "nameEng": "QUDEIRAT AS-SANI"
+  },
+  {
+    "code": 972,
+    "nameHeb": "קוואעין )שבט(",
+    "nameEng": "QAWA'IN"
+  },
+  {
+    "code": 766,
+    "nameHeb": "קוממיות",
+    "nameEng": "QOMEMIYYUT"
+  },
+  {
+    "code": 1179,
+    "nameHeb": "קורנית",
+    "nameEng": "QORANIT"
+  },
+  {
+    "code": 1052,
+    "nameHeb": "קטורה",
+    "nameEng": "QETURA"
+  },
+  {
+    "code": 1167,
+    "nameHeb": "קי��ריה",
+    "nameEng": "QESARIYYA"
+  },
+  {
+    "code": 414,
+    "nameHeb": "קלחים",
+    "nameEng": "QELAHIM"
+  },
+  {
+    "code": 3601,
+    "nameHeb": "קליה",
+    "nameEng": "QALYA"
+  },
+  {
+    "code": 638,
+    "nameHeb": "קלנסווה",
+    "nameEng": "QALANSAWE"
+  },
+  {
+    "code": 4024,
+    "nameHeb": "קלע",
+    "nameEng": "QELA"
+  },
+  {
+    "code": 1243,
+    "nameHeb": "קציר",
+    "nameEng": "QAZIR"
+  },
+  {
+    "code": 1347,
+    "nameHeb": "קצר א-סר",
+    "nameEng": ""
+  },
+  {
+    "code": 4100,
+    "nameHeb": "קצרין",
+    "nameEng": "QAZRIN"
+  },
+  {
+    "code": 2620,
+    "nameHeb": "קרית אונו",
+    "nameEng": "QIRYAT ONO"
+  },
+  {
+    "code": 3611,
+    "nameHeb": "קרית ארבע",
+    "nameEng": "QIRYAT ARBA"
+  },
+  {
+    "code": 6800,
+    "nameHeb": "קרית אתא",
+    "nameEng": "QIRYAT ATTA"
+  },
+  {
+    "code": 9500,
+    "nameHeb": "קרית ביאליק",
+    "nameEng": "QIRYAT BIALIK"
+  },
+  {
+    "code": 2630,
+    "nameHeb": "קרית גת",
+    "nameEng": "QIRYAT GAT"
+  },
+  {
+    "code": 2300,
+    "nameHeb": "קרית טבעון",
+    "nameEng": "QIRYAT TIV'ON"
+  },
+  {
+    "code": 9600,
+    "nameHeb": "קרית ים",
+    "nameEng": "QIRYAT YAM"
+  },
+  {
+    "code": 1137,
+    "nameHeb": "קרית יערים",
+    "nameEng": "QIRYAT YE'ARIM"
+  },
+  {
+    "code": 2039,
+    "nameHeb": "קרית יערים)מוסד(",
+    "nameEng": "QIRYAT YE'ARIM(INSTI"
+  },
+  {
+    "code": 8200,
+    "nameHeb": "קרית מוצקין",
+    "nameEng": "QIRYAT MOTZKIN"
+  },
+  {
+    "code": 1034,
+    "nameHeb": "קרית מלאכי",
+    "nameEng": "QIRYAT MAL'AKHI"
+  },
+  {
+    "code": 3746,
+    "nameHeb": "קרית נטפים",
+    "nameEng": "QIRYAT NETAFIM"
+  },
+  {
+    "code": 78,
+    "nameHeb": "קרית ענבים",
+    "nameEng": "QIRYAT ANAVIM"
+  },
+  {
+    "code": 469,
+    "nameHeb": "קרית עקרון",
+    "nameEng": "QIRYAT EQRON"
+  },
+  {
+    "code": 412,
+    "nameHeb": "קרית שלמה",
+    "nameEng": "QIRYAT SHELOMO"
+  },
+  {
+    "code": 2800,
+    "nameHeb": "קרית שמונה",
+    "nameEng": "QIRYAT SHEMONA"
+  },
+  {
+    "code": 3640,
+    "nameHeb": "קרני שומרון",
+    "nameEng": "QARNE SHOMERON"
+  },
+  {
+    "code": 4006,
+    "nameHeb": "קשת",
+    "nameEng": "QESHET"
+  },
+  {
+    "code": 543,
+    "nameHeb": "ראמה",
+    "nameEng": "RAME"
+  },
+  {
+    "code": 1334,
+    "nameHeb": "ראס אל-עין",
+    "nameEng": "RAS AL-EIN"
+  },
+  {
+    "code": 990,
+    "nameHeb": "ראס עלי",
+    "nameEng": "RAS ALI"
+  },
+  {
+    "code": 2640,
+    "nameHeb": "ראש העין",
+    "nameEng": "ROSH HAAYIN"
+  },
+  {
+    "code": 26,
+    "nameHeb": "ראש פינה",
+    "nameEng": "ROSH PINNA"
+  },
+  {
+    "code": 3602,
+    "nameHeb": "ראש צורים",
+    "nameEng": "ROSH ZURIM"
+  },
+  {
+    "code": 8300,
+    "nameHeb": "ראשון לציון",
+    "nameEng": "RISHON LEZIYYON"
+  },
+  {
+    "code": 3795,
+    "nameHeb": "רבבה",
+    "nameEng": "REVAVA"
+  },
+  {
+    "code": 564,
+    "nameHeb": "רבדים",
+    "nameEng": "REVADIM"
+  },
+  {
+    "code": 354,
+    "nameHeb": "רביבים",
+    "nameEng": "REVIVIM"
+  },
+  {
+    "code": 1225,
+    "nameHeb": "רביד",
+    "nameEng": "RAVID"
+  },
+  {
+    "code": 390,
+    "nameHeb": "רגבה",
+    "nameEng": "REGBA"
+  },
+  {
+    "code": 444,
+    "nameHeb": "רגבים",
+    "nameEng": "REGAVIM"
+  },
+  {
+    "code": 1161,
+    "nameHeb": "רהט",
+    "nameEng": "RAHAT"
+  },
+  {
+    "code": 2051,
+    "nameHeb": "רוו��ה",
+    "nameEng": "REWAHA"
+  },
+  {
+    "code": 2016,
+    "nameHeb": "רוויה",
+    "nameEng": "REWAYA"
+  },
+  {
+    "code": 1341,
+    "nameHeb": "רוח מדבר",
+    "nameEng": "RUAH MIDBAR"
+  },
+  {
+    "code": 362,
+    "nameHeb": "רוחמה",
+    "nameEng": "RUHAMA"
+  },
+  {
+    "code": 539,
+    "nameHeb": "רומאנה",
+    "nameEng": "RUMMANE"
+  },
+  {
+    "code": 997,
+    "nameHeb": "רומת הייב",
+    "nameEng": "RUMAT HEIB"
+  },
+  {
+    "code": 3619,
+    "nameHeb": "רועי",
+    "nameEng": "RO'I"
+  },
+  {
+    "code": 3782,
+    "nameHeb": "רותם",
+    "nameEng": "ROTEM"
+  },
+  {
+    "code": 854,
+    "nameHeb": "רחוב",
+    "nameEng": "REHOV"
+  },
+  {
+    "code": 8400,
+    "nameHeb": "רחובות",
+    "nameEng": "REHOVOT"
+  },
+  {
+    "code": 3822,
+    "nameHeb": "רחלים",
+    "nameEng": "REHELIM"
+  },
+  {
+    "code": 540,
+    "nameHeb": "ריחאניה",
+    "nameEng": "REIHANIYYE"
+  },
+  {
+    "code": 3568,
+    "nameHeb": "ריחן",
+    "nameEng": "REHAN"
+  },
+  {
+    "code": 542,
+    "nameHeb": "ריינה",
+    "nameEng": "REINE"
+  },
+  {
+    "code": 3565,
+    "nameHeb": "רימונים",
+    "nameEng": "RIMMONIM"
+  },
+  {
+    "code": 616,
+    "nameHeb": "רינתיה",
+    "nameEng": "RINNATYA"
+  },
+  {
+    "code": 922,
+    "nameHeb": "רכסים",
+    "nameEng": "REKHASIM"
+  },
+  {
+    "code": 1069,
+    "nameHeb": "רם-און",
+    "nameEng": "RAM-ON"
+  },
+  {
+    "code": 4702,
+    "nameHeb": "רמות",
+    "nameEng": "RAMOT"
+  },
+  {
+    "code": 206,
+    "nameHeb": "רמות השבים",
+    "nameEng": "RAMOT HASHAVIM"
+  },
+  {
+    "code": 735,
+    "nameHeb": "רמות מאיר",
+    "nameEng": "RAMOT ME'IR"
+  },
+  {
+    "code": 445,
+    "nameHeb": "רמות מנשה",
+    "nameEng": "RAMOT MENASHE"
+  },
+  {
+    "code": 372,
+    "nameHeb": "רמות נפתלי",
+    "nameEng": "RAMOT NAFTALI"
+  },
+  {
+    "code": 8500,
+    "nameHeb": "רמלה",
+    "nameEng": "RAMLA"
+  },
+  {
+    "code": 8600,
+    "nameHeb": "רמת גן",
+    "nameEng": "RAMAT GAN"
+  },
+  {
+    "code": 135,
+    "nameHeb": "רמת דוד",
+    "nameEng": "RAMAT DAWID"
+  },
+  {
+    "code": 184,
+    "nameHeb": "רמת הכובש",
+    "nameEng": "RAMAT HAKOVESH"
+  },
+  {
+    "code": 335,
+    "nameHeb": "רמת השופט",
+    "nameEng": "RAMAT HASHOFET"
+  },
+  {
+    "code": 2650,
+    "nameHeb": "רמת השרון",
+    "nameEng": "RAMAT HASHARON"
+  },
+  {
+    "code": 178,
+    "nameHeb": "רמת יוחנן",
+    "nameEng": "RAMAT YOHANAN"
+  },
+  {
+    "code": 122,
+    "nameHeb": "רמת ישי",
+    "nameEng": "RAMAT YISHAY"
+  },
+  {
+    "code": 4701,
+    "nameHeb": "רמת מגשימים",
+    "nameEng": "RAMAT MAGSHIMIM"
+  },
+  {
+    "code": 339,
+    "nameHeb": "רמת צבי",
+    "nameEng": "RAMAT ZEVI"
+  },
+  {
+    "code": 460,
+    "nameHeb": "רמת רזיאל",
+    "nameEng": "RAMAT RAZI'EL"
+  },
+  {
+    "code": 127,
+    "nameHeb": "רמת רחל",
+    "nameEng": "RAMAT RAHEL"
+  },
+  {
+    "code": 789,
+    "nameHeb": "רנן",
+    "nameEng": "RANNEN"
+  },
+  {
+    "code": 713,
+    "nameHeb": "רעים",
+    "nameEng": "RE'IM"
+  },
+  {
+    "code": 8700,
+    "nameHeb": "רעננה",
+    "nameEng": "RA'ANANA"
+  },
+  {
+    "code": 1228,
+    "nameHeb": "רקפת",
+    "nameEng": "RAQEFET"
+  },
+  {
+    "code": 247,
+    "nameHeb": "רשפון",
+    "nameEng": "RISHPON"
+  },
+  {
+    "code": 437,
+    "nameHeb": "רשפים",
+    "nameEng": "RESHAFIM"
+  },
+  {
+    "code": 1260,
+    "nameHeb": "רתמים",
+    "nameEng": "RETAMIM"
+  },
+  {
+    "code": 324,
+    "nameHeb": "שאר ישוב",
+    "nameEng": "SHE'AR YASHUV"
+  },
+  {
+    "code": 1377,
+    "nameHeb": "שבי דרום",
+    "nameEng": "SHAVE DAROM"
+  },
+  {
+    "code": 282,
+    "nameHeb": "שבי ציון",
+    "nameEng": "SHAVE ZIYYON"
+  },
+  {
+    "code": 3571,
+    "nameHeb": "שבי שומרון",
+    "nameEng": "SHAVE SHOMERON"
+  },
+  {
+    "code": 913,
+    "nameHeb": "שבלי - אום אל-גנם",
+    "nameEng": "SHIBLI"
+  },
+  {
+    "code": 1286,
+    "nameHeb": "שגב-שלום",
+    "nameEng": "SEGEV-SHALOM"
+  },
+  {
+    "code": 721,
+    "nameHeb": "שדה אילן",
+    "nameEng": "SEDE ILAN"
+  },
+  {
+    "code": 304,
+    "nameHeb": "שדה אליהו",
+    "nameEng": "SEDE ELIYYAHU"
+  },
+  {
+    "code": 861,
+    "nameHeb": "שדה אליעזר",
+    "nameEng": "SEDE ELI'EZER"
+  },
+  {
+    "code": 885,
+    "nameHeb": "שדה בוקר",
+    "nameEng": "SEDE BOQER"
+  },
+  {
+    "code": 36,
+    "nameHeb": "שדה דוד",
+    "nameEng": "SEDE DAWID"
+  },
+  {
+    "code": 293,
+    "nameHeb": "שדה יואב",
+    "nameEng": "SEDE YO'AV"
+  },
+  {
+    "code": 142,
+    "nameHeb": "שדה יעקב",
+    "nameEng": "SEDE YA'AQOV"
+  },
+  {
+    "code": 2008,
+    "nameHeb": "שדה יצחק",
+    "nameEng": "SEDE YIZHAQ"
+  },
+  {
+    "code": 18,
+    "nameHeb": "שדה משה",
+    "nameEng": "SEDE MOSHE"
+  },
+  {
+    "code": 259,
+    "nameHeb": "שדה נחום",
+    "nameEng": "SEDE NAHUM"
+  },
+  {
+    "code": 329,
+    "nameHeb": "שדה נחמיה",
+    "nameEng": "SEDE NEHEMYA"
+  },
+  {
+    "code": 1058,
+    "nameHeb": "שדה ניצן",
+    "nameEng": ""
+  },
+  {
+    "code": 739,
+    "nameHeb": "שדה עוזיהו",
+    "nameEng": "SEDE UZZIYYAHU"
+  },
+  {
+    "code": 2049,
+    "nameHeb": "שדה צבי",
+    "nameEng": "SEDE ZEVI"
+  },
+  {
+    "code": 327,
+    "nameHeb": "שדות ים",
+    "nameEng": "SEDOT YAM"
+  },
+  {
+    "code": 27,
+    "nameHeb": "שדות מיכה",
+    "nameEng": "SEDOT MIKHA"
+  },
+  {
+    "code": 1223,
+    "nameHeb": "שדי אברהם",
+    "nameEng": "SEDE AVRAHAM"
+  },
+  {
+    "code": 2015,
+    "nameHeb": "שדי חמד",
+    "nameEng": "SEDE HEMED"
+  },
+  {
+    "code": 2057,
+    "nameHeb": "שדי תרומות",
+    "nameEng": "SEDE TERUMOT"
+  },
+  {
+    "code": 555,
+    "nameHeb": "שדמה",
+    "nameEng": "SHEDEMA"
+  },
+  {
+    "code": 306,
+    "nameHeb": "שדמות דבורה",
+    "nameEng": "SHADMOT DEVORA"
+  },
+  {
+    "code": 3578,
+    "nameHeb": "שדמות מחולה",
+    "nameEng": "SHADMOT MEHOLA"
+  },
+  {
+    "code": 1031,
+    "nameHeb": "שדרות",
+    "nameEng": "SEDEROT"
+  },
+  {
+    "code": 741,
+    "nameHeb": "שואבה",
+    "nameEng": "SHO'EVA"
+  },
+  {
+    "code": 761,
+    "nameHeb": "שובה",
+    "nameEng": "SHUVA"
+  },
+  {
+    "code": 394,
+    "nameHeb": "שובל",
+    "nameEng": "SHOVAL"
+  },
+  {
+    "code": 1304,
+    "nameHeb": "שוהם",
+    "nameEng": "SHOHAM"
+  },
+  {
+    "code": 614,
+    "nameHeb": "שומרה",
+    "nameEng": "SHOMERA"
+  },
+  {
+    "code": 1265,
+    "nameHeb": "שומריה",
+    "nameEng": "SHOMERIYYA"
+  },
+  {
+    "code": 415,
+    "nameHeb": "שוקדה",
+    "nameEng": "SHOQEDA"
+  },
+  {
+    "code": 456,
+    "nameHeb": "שורש",
+    "nameEng": "SHORESH"
+  },
+  {
+    "code": 1235,
+    "nameHeb": "שורשים",
+    "nameEng": "SHORASHIM"
+  },
+  {
+    "code": 224,
+    "nameHeb": "שושנת העמקים",
+    "nameEng": "SHOSHANNAT HAAMAQIM"
+  },
+  {
+    "code": 527,
+    "nameHeb": "שזור",
+    "nameEng": "SHEZOR"
+  },
+  {
+    "code": 7,
+    "nameHeb": "שחר",
+    "nameEng": "SHAHAR"
+  },
+  {
+    "code": 1266,
+    "nameHeb": "שחרות",
+    "nameEng": "SHAHARUT"
+  },
+  {
+    "code": 865,
+    "nameHeb": "שיבולים",
+    "nameEng": "SHIBBOLIM"
+  },
+  {
+    "code": 1267,
+    "nameHeb": "שיטים",
+    "nameEng": "NAHAL SHITTIM"
+  },
+  {
+    "code": 658,
+    "nameHeb": "שייח' דנון",
+    "nameEng": "SHEIKH DANNUN"
+  },
+  {
+    "code": 3641,
+    "nameHeb": "שילה",
+    "nameEng": "SHILO"
+  },
+  {
+    "code": 1165,
+    "nameHeb": "שילת",
+    "nameEng": "SHILAT"
+  },
+  {
+    "code": 1160,
+    "nameHeb": "שכניה",
+    "nameEng": "SHEKHANYA"
+  },
+  {
+    "code": 873,
+    "nameHeb": "שלווה",
+    "nameEng": "SHALWA"
+  },
+  {
+    "code": 1373,
+    "nameHeb": "שלווה במדבר",
+    "nameEng": "SHALVA BAMIDBAR"
+  },
+  {
+    "code": 439,
+    "nameHeb": "שלוחות",
+    "nameEng": "SHELUHOT"
+  },
+  {
+    "code": 812,
+    "nameHeb": "שלומי",
+    "nameEng": "SHELOMI"
+  },
+  {
+    "code": 1364,
+    "nameHeb": "שלומית",
+    "nameEng": "SHLOMIT"
+  },
+  {
+    "code": 366,
+    "nameHeb": "שמיר",
+    "nameEng": "SHAMIR"
+  },
+  {
+    "code": 3784,
+    "nameHeb": "שמעה",
+    "nameEng": "SHIM'A"
+  },
+  {
+    "code": 432,
+    "nameHeb": "שמרת",
+    "nameEng": "SHAMERAT"
+  },
+  {
+    "code": 1337,
+    "nameHeb": "שמשית",
+    "nameEng": "SHIMSHIT"
+  },
+  {
+    "code": 1287,
+    "nameHeb": "שני",
+    "nameEng": "SHANI"
+  },
+  {
+    "code": 1132,
+    "nameHeb": "שניר",
+    "nameEng": "SENIR"
+  },
+  {
+    "code": 538,
+    "nameHeb": "שעב",
+    "nameEng": "SHA'AB"
+  },
+  {
+    "code": 1299,
+    "nameHeb": "שעורים",
+    "nameEng": "SE'ORIM"
+  },
+  {
+    "code": 4009,
+    "nameHeb": "שעל",
+    "nameEng": "SHA'AL"
+  },
+  {
+    "code": 856,
+    "nameHeb": "שעלבים",
+    "nameEng": "SHA'ALVIM"
+  },
+  {
+    "code": 661,
+    "nameHeb": "שער אפרים",
+    "nameEng": "SHA'AR EFRAYIM"
+  },
+  {
+    "code": 264,
+    "nameHeb": "שער הגולן",
+    "nameEng": "SHA'AR HAGOLAN"
+  },
+  {
+    "code": 237,
+    "nameHeb": "שער העמקים",
+    "nameEng": "SHA'AR HAAMAQIM"
+  },
+  {
+    "code": 921,
+    "nameHeb": "שער מנשה",
+    "nameEng": "SHA'AR MENASHE"
+  },
+  {
+    "code": 3720,
+    "nameHeb": "שערי תקווה",
+    "nameEng": "SHA'ARE TIQWA"
+  },
+  {
+    "code": 232,
+    "nameHeb": "שפיים",
+    "nameEng": "SHEFAYIM"
+  },
+  {
+    "code": 692,
+    "nameHeb": "שפיר",
+    "nameEng": "SHAFIR"
+  },
+  {
+    "code": 8800,
+    "nameHeb": "שפרעם",
+    "nameEng": "SHEFAR'AM"
+  },
+  {
+    "code": 3649,
+    "nameHeb": "שקד",
+    "nameEng": "SHAQED"
+  },
+  {
+    "code": 1233,
+    "nameHeb": "שקף",
+    "nameEng": "SHEQEF"
+  },
+  {
+    "code": 292,
+    "nameHeb": "שרונה",
+    "nameEng": "SHARONA"
+  },
+  {
+    "code": 1114,
+    "nameHeb": "שריגים )לי-און(",
+    "nameEng": "LI-ON"
+  },
+  {
+    "code": 126,
+    "nameHeb": "שריד",
+    "nameEng": "SARID"
+  },
+  {
+    "code": 398,
+    "nameHeb": "שרשרת",
+    "nameEng": "SHARSHERET"
+  },
+  {
+    "code": 1045,
+    "nameHeb": "שתולה",
+    "nameEng": "SHETULA"
+  },
+  {
+    "code": 763,
+    "nameHeb": "שתולים",
+    "nameEng": "SHETULIM"
+  },
+  {
+    "code": 2062,
+    "nameHeb": "תאשור",
+    "nameEng": "TE'ASHUR"
+  },
+  {
+    "code": 2061,
+    "nameHeb": "תדהר",
+    "nameEng": "TIDHAR"
+  },
+  {
+    "code": 1172,
+    "nameHeb": "תובל",
+    "nameEng": "TUVAL"
+  },
+  {
+    "code": 3558,
+    "nameHeb": "תומר",
+    "nameEng": "TOMER"
+  },
+  {
+    "code": 1083,
+    "nameHeb": "תושיה",
+    "nameEng": "TUSHIYYA"
+  },
+  {
+    "code": 163,
+    "nameHeb": "תימורים",
+    "nameEng": "TIMMORIM"
+  },
+  {
+    "code": 10,
+    "nameHeb": "תירוש",
+    "nameEng": "TIROSH"
+  },
+  {
+    "code": 5000,
+    "nameHeb": "תל אביב - יפו",
+    "nameEng": "TEL AVIV - YAFO"
+  },
+  {
+    "code": 84,
+    "nameHeb": "תל יוסף",
+    "nameEng": "TEL YOSEF"
+  },
+  {
+    "code": 287,
+    "nameHeb": "תל יצחק",
+    "nameEng": "TEL YIZHAQ"
+  },
+  {
+    "code": 154,
+    "nameHeb": "תל מונד",
+    "nameEng": "TEL MOND"
+  },
+  {
+    "code": 103,
+    "nameHeb": "תל עדשים",
+    "nameEng": "TEL ADASHIM"
+  },
+  {
+    "code": 719,
+    "nameHeb": "תל קציר",
+    "nameEng": "TEL QAZIR"
+  },
+  {
+    "code": 1054,
+    "nameHeb": "תל שבע",
+    "nameEng": "TEL SHEVA"
+  },
+  {
+    "code": 1283,
+    "nameHeb": "תל תאומים",
+    "nameEng": "TEL TE'OMIM"
+  },
+  {
+    "code": 3719,
+    "nameHeb": "תלם",
+    "nameEng": "TELEM"
+  },
+  {
+    "code": 1051,
+    "nameHeb": "תלמי אליהו",
+    "nameEng": "TALME ELIYYAHU"
+  },
+  {
+    "code": 2003,
+    "nameHeb": "תלמי אלעזר",
+    "nameEng": "TALME EL'AZAR"
+  },
+  {
+    "code": 2050,
+    "nameHeb": "תלמי ביל\"ו",
+    "nameEng": "TALME BILU"
+  },
+  {
+    "code": 1237,
+    "nameHeb": "תלמי יוסף",
+    "nameEng": "TALME YOSEF"
+  },
+  {
+    "code": 727,
+    "nameHeb": "תלמי יחיאל",
+    "nameEng": "TALME YEHI'EL"
+  },
+  {
+    "code": 744,
+    "nameHeb": "תלמי יפה",
+    "nameEng": "TALME YAFE"
+  },
+  {
+    "code": 814,
+    "nameHeb": "תלמים",
+    "nameEng": ""
+  },
+  {
+    "code": 1244,
+    "nameHeb": "תמרת",
+    "nameEng": "TIMRAT"
+  },
+  {
+    "code": 2002,
+    "nameHeb": "תנובות",
+    "nameEng": "TENUVOT"
+  },
+  {
+    "code": 752,
+    "nameHeb": "תעוז",
+    "nameEng": "TA'OZ"
+  },
+  {
+    "code": 709,
+    "nameHeb": "תפרח",
+    "nameEng": "TIFRAH"
+  },
+  {
+    "code": 665,
+    "nameHeb": "תקומה",
+    "nameEng": "TEQUMA"
+  },
+  {
+    "code": 3563,
+    "nameHeb": "תקוע",
+    "nameEng": "TEQOA"
+  },
+  {
+    "code": 970,
+    "nameHeb": "תראבין א-צאנע )שבט(",
+    "nameEng": "TARABIN AS-SANI"
+  },
+  {
+    "code": 1346,
+    "nameHeb": "תראבין א-צאנע)ישוב(",
+    "nameEng": "TARABIN AS-SANI"
+  },
+  {
+    "code": 778,
+    "nameHeb": "תרום",
+    "nameEng": "TARUM"
+  }
+]
