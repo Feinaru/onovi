@@ -1,13 +1,37 @@
 {
   "name": "onovi-server",
   "version": "1.0.0",
+  "description": "Onovi Backend API - Appointment booking platform",
   "main": "index.js",
-  "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "seed": "node prisma/seed.js",
-    "test:flow": "bash test-flow.sh"
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "db:migrate": "npx prisma migrate deploy",
+    "db:migrate:dev": "npx prisma migrate dev",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "npx prisma studio",
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:reset": "npx prisma migrate reset",
+    "test:flow": "bash test-flow.sh",
+    "test:addresses": "node test-addresses.js",
+    "test:crm": "node test-crm-api.js",
+    "lint": "echo 'No linter configured'",
+    "postinstall": "npx prisma generate"
+  },
+  "keywords": [
+    "appointment",
+    "booking",
+    "scheduling",
+    "calendar",
+    "israel"
+  ],
+  "author": "Onovi Team",
+  "license": "UNLICENSED",
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "bcryptjs": "^3.0.3",
