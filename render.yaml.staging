@@ -1,0 +1,79 @@
+# Render Blueprint for Onovi - STAGING Environment
+# Minimizes cost while keeping the application functional for testing
+# Monthly Cost: $7 (Database Starter only)
+
+# Database - PAID (Required for persistence)
+databases:
+  - name: onovi-db-staging
+    databaseName: onovi_staging
+    user: onovi_staging
+    region: oregon
+    plan: starter  # $7/month - Required for persistent staging database
+    ipAllowList: []
+
+# Backend API Service - FREE (Accepts sleep)
+services:
+  - type: web
+    name: onovi-api-staging
+    env: node
+    region: oregon
+    plan: free  # $0/month - Sleeps after 15 min, but functional for staging
+    buildCommand: cd server && npm install && npx prisma generate
+    startCommand: cd server && npm run db:migrate && npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: onovi-db-staging
+          property: connectionString
+      - key: NODE_ENV
+        value: staging
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: NOMINATIM_USER_AGENT
+        value: Onovi-Staging-App/1.0
+    healthCheckPath: /
+
+  # Frontend Static Site - FREE (Always free)
+  - type: web
+    name: onovi-client-staging
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: ./client/dist
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+# Configuration Notes:
+# - Database: starter ($7/month) - Required for long-term staging
+# - Backend: free ($0/month) - Sleeps after 15 min inactivity (acceptable for staging)
+# - Frontend: free ($0/month) - Static sites are always free
+# - TOTAL: $7/month
+#
+# Limitations:
+# - Backend cold start: 30-60 seconds after sleep
+# - First request after inactivity will be slow
+# - Acceptable for staging/testing purposes
+#
+# To deploy staging:
+# 1. Rename this file temporarily: mv render.yaml render.yaml.production
+# 2. Rename staging: mv render.yaml.staging render.yaml
+# 3. Deploy via Render Blueprint
+# 4. Restore: mv render.yaml render.yaml.staging && mv render.yaml.production render.yaml
+#
+# Or better: Use Render Dashboard to create services manually with these settings
