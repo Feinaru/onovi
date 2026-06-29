@@ -259,7 +259,7 @@ export default function BusinessAddressForm({ value, onChange, required = true }
     }
 
     geocodeAddress();
-  }, [selectedCity, selectedStreet, houseNumber, refinedLocation, addressChanged, initialSavedCoords]);
+  }, [selectedCity, selectedStreet, houseNumber, addressChanged, initialSavedCoords]);
 
   // City autocomplete
   const handleCityInputChange = async (e) => {
