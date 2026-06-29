@@ -70,6 +70,23 @@ function App() {
     );
   }
 
+  // Show customer page for non-logged-in users (browse/search/book)
+  if (!user && view === 'customer') {
+    return (
+      <>
+        <PublicLayout
+          user={user}
+          onNavigate={handleNavigate}
+          onLogout={logout}
+          showBackButton={true}
+        >
+          <CustomerPage user={user} setView={setView} />
+        </PublicLayout>
+        <Toast message={message} />
+      </>
+    );
+  }
+
   // Show auth page
   if (view === 'auth') {
     return (
