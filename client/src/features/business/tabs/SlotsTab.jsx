@@ -1,5 +1,7 @@
 import React from 'react';
 import { api } from '../../../api';
+import SlotForm from '../components/SlotForm';
+import SlotCard from '../components/SlotCard';
 
 /**
  * SlotsTab - Slot management (create, list, edit, delete)
@@ -65,89 +67,13 @@ function SlotsTab({
           <h3 className="card-title">פרסום תור פנוי</h3>
           <p className="card-description">פרסם תורים פנויים כדי למלא את היומן שלך</p>
         </div>
-        <form onSubmit={createSlot}>
-          <div className="grid grid-2">
-            <div className="form-group">
-              <label className="form-label">עסק *</label>
-              <select
-                value={slotForm.businessId}
-                onChange={e => setSlotForm({ ...slotForm, businessId: Number(e.target.value) })}
-                required
-              >
-                <option value="">בחר עסק</option>
-                {businesses.map(b => (
-                  <option key={b.id} value={b.id}>{b.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">שירות *</label>
-              <select
-                value={slotForm.serviceId}
-                onChange={e => setSlotForm({ ...slotForm, serviceId: Number(e.target.value) })}
-                required
-              >
-                <option value="">בחר שירות</option>
-                {services.map(s => (
-                  <option key={s.id} value={s.id}>{s.name}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="grid grid-3">
-            <div className="form-group">
-              <label className="form-label">תאריך *</label>
-              <input
-                type="date"
-                value={slotForm.date}
-                onChange={e => setSlotForm({ ...slotForm, date: e.target.value })}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">שעת התחלה *</label>
-              <input
-                type="time"
-                placeholder="09:00"
-                value={slotForm.startTime}
-                onChange={e => setSlotForm({ ...slotForm, startTime: e.target.value })}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">שעת סיום *</label>
-              <input
-                type="time"
-                placeholder="10:00"
-                value={slotForm.endTime}
-                onChange={e => setSlotForm({ ...slotForm, endTime: e.target.value })}
-                required
-              />
-            </div>
-          </div>
-          <div className="grid grid-2">
-            <div className="form-group">
-              <label className="form-label">מחיר רגיל *</label>
-              <input
-                type="number"
-                placeholder="250"
-                value={slotForm.regularPrice}
-                onChange={e => setSlotForm({ ...slotForm, regularPrice: Number(e.target.value) })}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">מחיר מבצע (אופציונלי)</label>
-              <input
-                type="number"
-                placeholder="190"
-                value={slotForm.dealPrice}
-                onChange={e => setSlotForm({ ...slotForm, dealPrice: Number(e.target.value) })}
-              />
-            </div>
-          </div>
-          <button className="btn-primary">📅 פרסם תור</button>
-        </form>
+        <SlotForm
+          businesses={businesses}
+          services={services}
+          slotForm={slotForm}
+          setSlotForm={setSlotForm}
+          onSubmit={createSlot}
+        />
       </div>
 
       <div className="card">
@@ -178,53 +104,12 @@ function SlotsTab({
             </thead>
             <tbody>
               {slots.map(sl => (
-                <tr key={sl.id}>
-                  <td style={{ fontWeight: 'var(--font-semibold)' }}>
-                    {sl.service?.name || 'שירות'}
-                  </td>
-                  <td>{sl.date}</td>
-                  <td>{sl.startTime}-{sl.endTime}</td>
-                  <td>
-                    {sl.dealPrice && sl.dealPrice < sl.regularPrice ? (
-                      <span>
-                        <span style={{ color: 'var(--primary-600)', fontWeight: 'var(--font-bold)' }}>
-                          ₪{sl.dealPrice}
-                        </span>
-                        {' '}
-                        <span style={{
-                          textDecoration: 'line-through',
-                          color: 'var(--text-tertiary)',
-                          fontSize: 'var(--text-sm)'
-                        }}>
-                          ₪{sl.regularPrice}
-                        </span>
-                      </span>
-                    ) : (
-                      <span>₪{sl.regularPrice}</span>
-                    )}
-                  </td>
-                  <td>
-                    <span className={`badge ${
-                      sl.status === 'OPEN' ? 'badge-success' :
-                      sl.status === 'BOOKED' ? 'badge-primary' :
-                      'badge-gray'
-                    }`}>
-                      {sl.status === 'OPEN' ? '✓ פתוח' :
-                       sl.status === 'BOOKED' ? '📋 מוזמן' :
-                       sl.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="flex gap-2">
-                      <button className="btn-sm btn-secondary" onClick={() => setEditingSlot(sl)}>
-                        ✏️ ערוך
-                      </button>
-                      <button className="btn-sm btn-danger" onClick={() => deleteSlot(sl.id)}>
-                        🗑️ מחק
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                <SlotCard
+                  key={sl.id}
+                  slot={sl}
+                  onEdit={setEditingSlot}
+                  onDelete={deleteSlot}
+                />
               ))}
             </tbody>
           </table>
