@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './pages/CustomerPage';
-import BusinessPage from './pages/BusinessPage';
+import BusinessPage from './features/business/BusinessPage';
 import AdminPage from './pages/AdminPage';
 import LandingPage from './pages/LandingPage';
 import CRMPage from './pages/CRMPage';
