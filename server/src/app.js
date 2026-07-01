@@ -16,6 +16,7 @@ const adminServiceTemplateRoutes = require('./routes/admin-servicetemplate.route
 const addressRoutes = require('./routes/address.routes');
 const leadRoutes = require('./routes/lead.routes');
 const calendarRoutes = require('./routes/calendar.routes');
+const registrationRoutes = require('./routes/registration.routes');
 
 const app = express();
 app.use(cors());
@@ -40,6 +41,7 @@ app.use('/api/admin/service-templates', adminServiceTemplateRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/leads', leadRoutes);
 app.use('/api/calendar', calendarRoutes);
+app.use('/api/register', registrationRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
