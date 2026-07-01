@@ -1,0 +1,28 @@
+/* CalendarPage - Main calendar workspace */
+
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--surface-primary, #ffffff);
+}
+
+.calendar-page-content {
+  flex: 1;
+  overflow: hidden;
+  padding: var(--space-4, 16px);
+}
+
+.calendar-loading,
+.calendar-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.calendar-error {
+  color: var(--error, #dc2626);
+}

@@ -7,6 +7,7 @@ import ServicesTab from './tabs/ServicesTab';
 import SlotsTab from './tabs/SlotsTab';
 import BookingsTab from './tabs/BookingsTab';
 import SettingsTab from './tabs/SettingsTab';
+import CalendarPage from './calendar/CalendarPage';
 
 /**
  * BusinessPage - Main business management page
@@ -92,6 +93,12 @@ function BusinessPage({ user, setView }) {
           📅 תורים
         </button>
         <button
+          className={activeTab === 'calendar' ? 'btn-primary' : 'btn-secondary'}
+          onClick={() => setActiveTab('calendar')}
+        >
+          🗓️ לוח שנה
+        </button>
+        <button
           className={activeTab === 'bookings' ? 'btn-primary' : 'btn-secondary'}
           onClick={() => setActiveTab('bookings')}
         >
@@ -138,6 +145,14 @@ function BusinessPage({ user, setView }) {
           setSlotForm={setSlotForm}
           editingSlot={editingSlot}
           setEditingSlot={setEditingSlot}
+          showMessage={showMessage}
+          reload={reload}
+        />
+      )}
+
+      {activeTab === 'calendar' && (
+        <CalendarPage
+          businesses={businesses}
           showMessage={showMessage}
           reload={reload}
         />

@@ -69,11 +69,11 @@ function UserFilters({ filters, tags, onChange }) {
             <label key={tag.id} className="user-filters-tag-checkbox">
               <input
                 type="checkbox"
-                checked={filters.tags.includes(tag.name)}
+                checked={filters.tags.includes(tag.id)}
                 onChange={e => {
                   const newTags = e.target.checked
-                    ? [...filters.tags, tag.name]
-                    : filters.tags.filter(t => t !== tag.name);
+                    ? [...filters.tags, tag.id]
+                    : filters.tags.filter(t => t !== tag.id);
                   onChange('tags', newTags);
                 }}
               />

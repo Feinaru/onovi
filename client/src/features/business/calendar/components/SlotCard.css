@@ -1,0 +1,159 @@
+/* SlotCard - Published gap container */
+
+.slot-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  padding: 12px;
+  border-left: 3px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.slot-card:hover {
+  filter: brightness(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slot-card.unpublished {
+  opacity: 0.6;
+}
+
+/* Header */
+.slot-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slot-card-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slot-card-icon {
+  font-size: 14px;
+}
+
+.slot-card-status-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success, #059669);
+}
+
+.slot-card.unpublished .slot-card-status-text {
+  color: var(--text-secondary, #6b7280);
+}
+
+.slot-card-menu {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.slot-card-menu:hover {
+  background: var(--surface-hover, #f3f4f6);
+}
+
+/* Service info */
+.slot-card-service {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+/* Bookings list */
+.slot-card-bookings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 4px -4px;
+}
+
+/* Mini booking card inside slot */
+.booking-card-mini {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  background: #3b82f640;
+  border-left: 2px solid #3b82f6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.booking-card-mini:hover {
+  background: #3b82f660;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.booking-card-mini-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.booking-card-mini-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.booking-card-mini-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.booking-card-mini-phone {
+  font-size: 12px;
+  color: var(--primary, #3b82f6);
+  margin-top: 2px;
+}
+
+/* Capacity indicator */
+.slot-card-capacity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: var(--surface-primary, #ffffff);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.slot-card-capacity-icon {
+  font-size: 14px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .slot-card {
+    padding: 10px;
+  }
+
+  .slot-card-service {
+    font-size: 13px;
+  }
+
+  .booking-card-mini-name {
+    font-size: 12px;
+  }
+
+  .booking-card-mini-phone {
+    font-size: 11px;
+  }
+}

@@ -1,8 +1,35 @@
-/* UserDrawer Component Styles */
+/* UserDrawer Component Styles - Now using modal-v2 */
 
+/* Modal sizing for user details */
+.user-details-modal {
+  max-width: 800px;
+  max-height: 85vh;
+}
+
+/* Header */
+.user-drawer-header {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.user-drawer-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.user-drawer-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+  font-weight: 500;
+}
+
+/* Loading & Error States */
 .user-drawer-loading,
 .user-drawer-error {
-  padding: 40px 20px;
+  padding: 60px 20px;
   text-align: center;
   font-size: 16px;
   color: var(--text-secondary, #6b7280);
@@ -12,16 +39,14 @@
   color: var(--error, #dc2626);
 }
 
+/* Tabs */
 .user-drawer-tabs {
   display: flex;
   gap: 4px;
   border-bottom: 2px solid var(--border-subtle, #e5e7eb);
-  margin: -24px -24px 0 -24px;
-  padding: 0 24px;
+  margin: 0 calc(var(--space-8) * -1) var(--space-6) calc(var(--space-8) * -1);
+  padding: 0 var(--space-8);
   background: var(--surface-primary, #ffffff);
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .user-drawer-tab {
@@ -54,6 +79,34 @@
   font-size: 16px;
 }
 
+/* Tab Content */
 .user-drawer-tab-content {
-  padding-top: 24px;
+  /* Content scrolls, tabs stay fixed */
+  max-height: calc(85vh - 280px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-details-modal {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .user-drawer-tabs {
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .user-drawer-tab {
+    padding: 10px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .user-drawer-tab-content {
+    max-height: calc(100vh - 280px);
+  }
 }
