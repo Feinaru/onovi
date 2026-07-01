@@ -1,0 +1,59 @@
+/* UserDrawer Component Styles */
+
+.user-drawer-loading,
+.user-drawer-error {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.user-drawer-error {
+  color: var(--error, #dc2626);
+}
+
+.user-drawer-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--border-subtle, #e5e7eb);
+  margin: -24px -24px 0 -24px;
+  padding: 0 24px;
+  background: var(--surface-primary, #ffffff);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.user-drawer-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s ease;
+}
+
+.user-drawer-tab:hover {
+  color: var(--text-primary, #111827);
+  background: var(--surface-hover, #f9fafb);
+}
+
+.user-drawer-tab.active {
+  color: var(--primary, #3b82f6);
+  border-bottom-color: var(--primary, #3b82f6);
+}
+
+.user-drawer-tab-icon {
+  font-size: 16px;
+}
+
+.user-drawer-tab-content {
+  padding-top: 24px;
+}

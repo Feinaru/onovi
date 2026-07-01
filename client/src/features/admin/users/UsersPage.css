@@ -1,0 +1,41 @@
+/* UsersPage Component Styles */
+
+.users-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.users-page-header {
+  margin-bottom: 32px;
+}
+
+.users-page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+  margin: 0 0 8px 0;
+}
+
+.users-page-description {
+  font-size: 15px;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+}
+
+.users-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .users-page {
+    padding: 16px;
+  }
+
+  .users-page-header h1 {
+    font-size: 24px;
+  }
+}

@@ -7,14 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ===== ENUMS =====
+
 enum UserRole {
-  CUSTOMER
-  BUSINESS
+  CUSTOMER // Legacy - will migrate to SERVICE_RECIPIENT
+  BUSINESS // Legacy - will migrate to SERVICE_PROVIDER
+  SERVICE_RECIPIENT
+  SERVICE_PROVIDER
   ADMIN
 }
 
 enum UserStatus {
   ACTIVE
+  PENDING
+  HIDDEN
+  SUSPENDED
   BLOCKED
 }
 
@@ -79,6 +86,53 @@ enum TimelineEventType {
   FOLLOW_UP_COMPLETED
 }
 
+// ===== NEW ENUMS FOR PHASE 1 =====
+
+enum LifecycleStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum ServiceColor {
+  GREEN
+  YELLOW
+  RED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum RegistrationStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+enum SuggestionRequestType {
+  FIELD
+  PROFESSION
+  SERVICE
+}
+
+enum SuggestionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum DocumentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ===== EXISTING MODELS (MODIFIED) =====
+
 model User {
   id           Int        @id @default(autoincrement())
   fullName     String
@@ -87,11 +141,28 @@ model User {
   passwordHash String
   role         UserRole
   status       UserStatus @default(ACTIVE)
+  lastLoginAt  DateTime?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  businesses Business[] @relation("BusinessOwner")
-  bookings   Booking[]
+  // Existing relations
+  businesses   Business[]        @relation("BusinessOwner")
+  bookings     Booking[]
+  notes        UserNote[]        @relation("UserNotes")
+  notesCreated UserNote[]        @relation("NotesCreated")
+  tags         UserToTag[]
+  activities   UserActivityLog[] @relation("UserActivities")
+  adminActions UserActivityLog[] @relation("AdminActions")
+
+  // New Phase 1 relations
+  approvalReviews            ServiceProviderApproval[] @relation("ApprovalReviews")
+  uploadedDocuments          UploadedDocument[]
+  consents                   UserConsent[]
+  suggestionRequests         SuggestionRequest[]       @relation("SuggestionRequester")
+  reviewedSuggestions        SuggestionRequest[]       @relation("SuggestionReviewer")
+  reviewedDocuments          UploadedDocument[]        @relation("DocumentReviewer")
+  approvedServices           BusinessService[]         @relation("ServiceApprover")
+  applicationSettingsUpdates ApplicationSetting[]
 }
 
 model Category {
@@ -108,69 +179,97 @@ model Category {
 }
 
 model Business {
-  id               Int            @id @default(autoincrement())
-  ownerId          Int?
-  categoryId       Int
-  name             String
-  description      String?
-  phone            String
+  id              Int     @id @default(autoincrement())
+  publicId        String? @unique @default(uuid()) @map("public_id")
+  ownerId         Int?
+  categoryId      Int? // Made nullable for migration
+  name            String
+  description     String?
+  phone           String
+  phoneNormalized String? // For lead matching
 
   // Official identifier - MANDATORY and UNIQUE
-  identifierType   IdentifierType
-  identifierValue  String
+  identifierType  IdentifierType
+  identifierValue String
 
   // Code-based address fields
-  cityCode         Int?           // Official Israeli city code
-  cityNameHebrew   String?        // Hebrew city name
-  streetCode       Int?           // Official Israeli street code
-  streetNameHebrew String?        // Hebrew street name
-  houseNumber      String?        // House number
-  formattedAddress String?        // Full formatted address (Hebrew only)
+  cityCode         Int?
+  cityNameHebrew   String?
+  streetCode       Int?
+  streetNameHebrew String?
+  houseNumber      String?
+  formattedAddress String?
 
-  // Legacy fields (kept for backwards compatibility, will be deprecated)
-  city             String?
-  street           String?
-  address          String?
+  // Legacy fields (kept for backwards compatibility)
+  city    String?
+  street  String?
+  address String?
 
   // Coordinate fields
-  latitude                    Float?
-  longitude                   Float?
-  hasExactCoordinates         Boolean @default(false)   // True if geocoded from exact address
-  isEstimatedLocation         Boolean @default(true)    // False only if exact geocode succeeded
-  locationVerifiedByBusiness  Boolean @default(false)   // True if manually adjusted by business owner
+  latitude                   Float?
+  longitude                  Float?
+  hasExactCoordinates        Boolean @default(false)
+  isEstimatedLocation        Boolean @default(true)
+  locationVerifiedByBusiness Boolean @default(false)
 
-  status           BusinessStatus @default(PENDING_APPROVAL)
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  // Lead integration
+  sourceLeadId Int? @unique
 
-  owner      User?     @relation("BusinessOwner", fields: [ownerId], references: [id])
-  category   Category @relation(fields: [categoryId], references: [id])
-  services   Service[]
-  slots      Slot[]
-  bookings   Booking[]
-  linkedLeads Lead[]   @relation("LeadToBusiness")
+  status    BusinessStatus @default(PENDING_APPROVAL)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  // Relations
+  owner          User?                     @relation("BusinessOwner", fields: [ownerId], references: [id])
+  category       Category?                 @relation(fields: [categoryId], references: [id])
+  sourceLead     Lead?                     @relation("ConvertedLead", fields: [sourceLeadId], references: [id], onDelete: SetNull)
+  services       BusinessService[]
+  slots          Slot[]
+  bookings       Booking[]
+  linkedLeads    Lead[]                    @relation("LeadToBusiness")
+  calendarEvents CalendarEvent[]
+  timeBlocks     TimeBlock[]
+  vacations      Vacation[]
+  professions    BusinessProfession[]
+  approvals      ServiceProviderApproval[]
 
   @@unique([identifierType, identifierValue])
 }
 
-model Service {
-  id              Int      @id @default(autoincrement())
+model BusinessService {
+  id              Int     @id @default(autoincrement())
+  publicId        String? @unique @default(uuid()) @map("public_id")
   businessId      Int
   name            String
   description     String?
   durationMinutes Int
   regularPrice    Int
-  active          Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  active          Boolean @default(true)
 
-  business Business  @relation(fields: [businessId], references: [id])
-  slots    Slot[]
-  bookings Booking[]
+  // New Phase 1 fields
+  serviceTemplateId Int? // Nullable during migration
+  customName        String?
+  approvalStatus    ApprovalStatus @default(PENDING)
+  approvedAt        DateTime?
+  approvedById      Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  business        Business                  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  serviceTemplate ServiceTemplate?          @relation(fields: [serviceTemplateId], references: [id], onDelete: Restrict)
+  approvedBy      User?                     @relation("ServiceApprover", fields: [approvedById], references: [id])
+  slots           Slot[]
+  bookings        Booking[]
+  documents       BusinessServiceDocument[]
+
+  @@map("Service") // Keep existing table name in database
 }
 
 model Slot {
   id           Int        @id @default(autoincrement())
+  publicId     String?    @unique @default(uuid()) @map("public_id")
   businessId   Int
   serviceId    Int
   date         String
@@ -180,16 +279,29 @@ model Slot {
   dealPrice    Int?
   status       SlotStatus @default(OPEN)
   note         String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
 
-  business Business  @relation(fields: [businessId], references: [id])
-  service  Service   @relation(fields: [serviceId], references: [id])
+  // Calendar metadata
+  color String? @default("#10b981")
+  title String?
+
+  // External sync
+  externalSource String?
+  externalId     String?
+  importedAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  service  BusinessService @relation(fields: [serviceId], references: [id])
   bookings Booking[]
+
+  @@index([businessId, date])
 }
 
 model Booking {
   id            Int           @id @default(autoincrement())
+  publicId      String?       @unique @default(uuid()) @map("public_id")
   customerId    Int?
   businessId    Int
   serviceId     Int
@@ -204,69 +316,293 @@ model Booking {
   cancelledAt   DateTime?
   updatedAt     DateTime      @updatedAt
 
-  customer User?    @relation(fields: [customerId], references: [id])
-  business Business @relation(fields: [businessId], references: [id])
-  service  Service  @relation(fields: [serviceId], references: [id])
-  slot     Slot     @relation(fields: [slotId], references: [id])
+  customer User?           @relation(fields: [customerId], references: [id])
+  business Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  service  BusinessService @relation(fields: [serviceId], references: [id])
+  slot     Slot            @relation(fields: [slotId], references: [id])
 }
 
 model Lead {
-  id                 Int            @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  // Official identifier - MANDATORY and UNIQUE
-  identifierType     IdentifierType
-  identifierValue    String
+  // Official identifier
+  identifierType  IdentifierType
+  identifierValue String
 
   // Contact information
-  businessName       String
-  contactPersonName  String?
-  phone              String
-  email              String?
+  businessName      String
+  contactPersonName String?
+  phone             String
+  phoneNormalized   String? // For matching with Business
+  email             String?
 
-  // Address (optional for lead)
-  cityCode           Int?
-  cityNameHebrew     String?
-  streetCode         Int?
-  streetNameHebrew   String?
-  houseNumber        String?
-  formattedAddress   String?
+  // Address
+  cityCode         Int?
+  cityNameHebrew   String?
+  streetCode       Int?
+  streetNameHebrew String?
+  houseNumber      String?
+  formattedAddress String?
 
   // Lead management
-  status             LeadStatus     @default(NEW)
-  categoryId         Int?
-  source             String?        // Where lead came from (website, referral, etc.)
+  status     LeadStatus @default(NEW)
+  categoryId Int?
+  source     String?
 
-  // Auto-linking (prepared for future implementation)
-  linkedBusinessId   Int?           // Auto-linked to Business if identifier matches
+  // Auto-linking
+  linkedBusinessId Int?
+
+  // New Phase 1 field
+  convertedToBusinessId   Int?      @unique
+  registrationCompletedAt DateTime?
 
   // Follow-up tracking
-  nextAction         String?        // Next action to take (Call, WhatsApp, Email, Meeting, Send Proposal, Other)
-  nextActionAt       DateTime?      // When the next action is scheduled
-  lastContactedAt    DateTime?
+  nextAction      String?
+  nextActionAt    DateTime?
+  lastContactedAt DateTime?
 
   // Metadata
-  createdAt          DateTime       @default(now())
-  updatedAt          DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relationships
-  category           Category?      @relation(fields: [categoryId], references: [id])
-  linkedBusiness     Business?      @relation("LeadToBusiness", fields: [linkedBusinessId], references: [id])
-  timelineEvents     TimelineEvent[]
-  notes              LeadNote[]
+  category            Category?       @relation(fields: [categoryId], references: [id])
+  linkedBusiness      Business?       @relation("LeadToBusiness", fields: [linkedBusinessId], references: [id])
+  convertedToBusiness Business?       @relation("ConvertedLead")
+  timelineEvents      TimelineEvent[]
+  notes               LeadNote[]
 
-  // Unique constraint on identifier
   @@unique([identifierType, identifierValue])
   @@index([status])
   @@index([nextActionAt])
   @@index([createdAt])
 }
 
+// ===== NEW PHASE 1 MODELS =====
+
+model Field {
+  id           Int             @id @default(autoincrement())
+  publicId     String          @unique @default(uuid())
+  name         String          @unique
+  nameHebrew   String
+  icon         String?
+  displayOrder Int             @default(0)
+  status       LifecycleStatus @default(ACTIVE)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  professions Profession[]
+}
+
+model Profession {
+  id           Int             @id @default(autoincrement())
+  publicId     String          @unique @default(uuid())
+  fieldId      Int
+  name         String
+  nameHebrew   String
+  displayOrder Int             @default(0)
+  status       LifecycleStatus @default(ACTIVE)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  field            Field                @relation(fields: [fieldId], references: [id], onDelete: Restrict)
+  serviceTemplates ServiceTemplate[]
+  businesses       BusinessProfession[]
+
+  @@unique([fieldId, name])
+}
+
+model ServiceTemplate {
+  id                     Int             @id @default(autoincrement())
+  publicId               String          @unique @default(uuid())
+  professionId           Int
+  name                   String
+  nameHebrew             String
+  description            String?
+  defaultDurationMinutes Int
+  defaultPrice           Int?
+  colorLevel             ServiceColor    @default(GREEN)
+  colorNote              String?
+  displayOrder           Int             @default(0)
+  status                 LifecycleStatus @default(ACTIVE)
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime        @updatedAt
+
+  profession           Profession                   @relation(fields: [professionId], references: [id], onDelete: Restrict)
+  businessServices     BusinessService[]
+  documentRequirements ServiceDocumentRequirement[]
+}
+
+model DocumentType {
+  id              Int             @id @default(autoincrement())
+  publicId        String          @unique @default(uuid())
+  name            String          @unique
+  nameHebrew      String
+  description     String?
+  acceptedFormats String // JSON array as string: ["PDF", "JPG", "PNG"]
+  maxSizeKB       Int
+  status          LifecycleStatus @default(ACTIVE)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  serviceRequirements ServiceDocumentRequirement[]
+  uploadedDocuments   UploadedDocument[]
+}
+
+model ServiceDocumentRequirement {
+  id                Int      @id @default(autoincrement())
+  serviceTemplateId Int
+  documentTypeId    Int
+  instruction       String?
+  instructionHebrew String?
+  isMandatory       Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  serviceTemplate   ServiceTemplate           @relation(fields: [serviceTemplateId], references: [id], onDelete: Cascade)
+  documentType      DocumentType              @relation(fields: [documentTypeId], references: [id], onDelete: Restrict)
+  businessDocuments BusinessServiceDocument[]
+
+  @@unique([serviceTemplateId, documentTypeId])
+}
+
+model UploadedDocument {
+  id                Int            @id @default(autoincrement())
+  publicId          String         @unique @default(uuid())
+  userId            Int
+  documentTypeId    Int
+  fileName          String
+  fileUrl           String
+  fileSizeKB        Int
+  uploadedAt        DateTime       @default(now())
+  expiresAt         DateTime?
+  status            DocumentStatus @default(PENDING)
+  adminNotes        String? // Visible to service provider
+  reviewedById      Int?
+  reviewedAt        DateTime?
+  isPubliclyVisible Boolean        @default(false)
+
+  user              User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documentType      DocumentType              @relation(fields: [documentTypeId], references: [id], onDelete: Restrict)
+  reviewedBy        User?                     @relation("DocumentReviewer", fields: [reviewedById], references: [id])
+  businessDocuments BusinessServiceDocument[]
+}
+
+model BusinessProfession {
+  id           Int      @id @default(autoincrement())
+  businessId   Int
+  professionId Int
+  addedAt      DateTime @default(now())
+
+  business   Business   @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  profession Profession @relation(fields: [professionId], references: [id], onDelete: Restrict)
+
+  @@unique([businessId, professionId])
+}
+
+model BusinessServiceDocument {
+  id                           Int      @id @default(autoincrement())
+  businessServiceId            Int
+  uploadedDocumentId           Int
+  serviceDocumentRequirementId Int
+  attachedAt                   DateTime @default(now())
+
+  businessService            BusinessService            @relation(fields: [businessServiceId], references: [id], onDelete: Cascade)
+  uploadedDocument           UploadedDocument           @relation(fields: [uploadedDocumentId], references: [id], onDelete: Cascade)
+  serviceDocumentRequirement ServiceDocumentRequirement @relation(fields: [serviceDocumentRequirementId], references: [id], onDelete: Cascade)
+
+  @@unique([businessServiceId, serviceDocumentRequirementId])
+}
+
+model ServiceProviderApproval {
+  id                Int                @id @default(autoincrement())
+  publicId          String             @unique @default(uuid())
+  serviceProviderId Int // References Business.id
+  status            RegistrationStatus @default(DRAFT)
+  adminNote         String? // Visible to service provider
+  reviewedById      Int?
+  reviewedAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  serviceProvider Business @relation(fields: [serviceProviderId], references: [id], onDelete: Cascade)
+  reviewedBy      User?    @relation("ApprovalReviews", fields: [reviewedById], references: [id])
+
+  // Note: User relation is via serviceProvider.owner
+  @@index([serviceProviderId])
+  @@index([status])
+}
+
+model SuggestionRequest {
+  id            Int                   @id @default(autoincrement())
+  publicId      String                @unique @default(uuid())
+  requestType   SuggestionRequestType
+  requestedName String
+  reason        String
+  contextInfo   String? // JSON: {fieldId, professionId} for context
+  requestedById Int
+  status        SuggestionStatus      @default(PENDING)
+  adminNotes    String?
+  reviewedById  Int?
+  reviewedAt    DateTime?
+  createdAt     DateTime              @default(now())
+
+  requestedBy User  @relation("SuggestionRequester", fields: [requestedById], references: [id], onDelete: Cascade)
+  reviewedBy  User? @relation("SuggestionReviewer", fields: [reviewedById], references: [id])
+}
+
+model ConsentType {
+  id             Int      @id @default(autoincrement())
+  code           String   @unique
+  titleHe        String
+  titleEn        String
+  contentHe      String   @db.Text
+  contentEn      String   @db.Text
+  isMandatory    Boolean  @default(true)
+  requiresScroll Boolean  @default(false)
+  version        Int      @default(1)
+  displayOrder   Int      @default(0)
+  isActive       Boolean  @default(true)
+  updatedAt      DateTime @updatedAt
+
+  userConsents UserConsent[]
+}
+
+model UserConsent {
+  id                       Int      @id @default(autoincrement())
+  publicId                 String   @unique @default(uuid())
+  userId                   Int
+  consentTypeId            Int
+  agreedAt                 DateTime @default(now())
+  consentVersion           Int
+  wasScrolled              Boolean
+  ipAddress                String?
+  userAgent                String?
+  selectedServicesSnapshot String?  @db.Text // JSON snapshot
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consentType ConsentType @relation(fields: [consentTypeId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, consentTypeId, consentVersion])
+}
+
+model ApplicationSetting {
+  key         String   @id
+  value       String   @db.Text
+  updatedAt   DateTime @updatedAt
+  updatedById Int
+
+  updatedBy User @relation(fields: [updatedById], references: [id])
+}
+
+// ===== EXISTING MODELS (NO CHANGES) =====
+
 model TimelineEvent {
   id          Int               @id @default(autoincrement())
   leadId      Int
   type        TimelineEventType
-  description String?           // Auto-generated or custom description
-  metadata    String?           // JSON string for additional data
+  description String?
+  metadata    String?
   createdAt   DateTime          @default(now())
 
   lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
@@ -284,4 +620,133 @@ model LeadNote {
   lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([leadId, createdAt])
+}
+
+model UserNote {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  adminId   Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User @relation("UserNotes", fields: [userId], references: [id], onDelete: Cascade)
+  admin User @relation("NotesCreated", fields: [adminId], references: [id])
+
+  @@index([userId, createdAt])
+}
+
+model UserTag {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  color       String
+  description String?
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  users UserToTag[]
+}
+
+model UserToTag {
+  userId    Int
+  tagId     Int
+  createdAt DateTime @default(now())
+
+  user User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tag  UserTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tagId])
+  @@index([userId])
+  @@index([tagId])
+}
+
+model UserActivityLog {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  adminId     Int?
+  action      String
+  description String?
+  metadata    String?
+  createdAt   DateTime @default(now())
+
+  user  User  @relation("UserActivities", fields: [userId], references: [id], onDelete: Cascade)
+  admin User? @relation("AdminActions", fields: [adminId], references: [id])
+
+  @@index([userId, createdAt])
+}
+
+model CalendarEvent {
+  id            Int     @id @default(autoincrement())
+  businessId    Int
+  title         String
+  description   String?
+  date          String
+  startTime     String
+  endTime       String
+  color         String  @default("#9ca3af")
+  eventType     String  @default("APPOINTMENT")
+  category      String?
+  customerName  String?
+  customerPhone String?
+  customerEmail String?
+  isBlocker     Boolean @default(true)
+  isAllDay      Boolean @default(false)
+  location      String?
+  notes         String?
+
+  // External sync
+  externalSource String?
+  externalId     String?
+  importedAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, date])
+}
+
+model TimeBlock {
+  id               Int     @id @default(autoincrement())
+  businessId       Int
+  title            String
+  description      String?
+  date             String
+  startTime        String
+  endTime          String
+  color            String  @default("#eab308")
+  blockType        String  @default("BREAK")
+  isRecurring      Boolean @default(false)
+  recurringPattern String?
+  notes            String?
+
+  // External sync
+  externalSource String?
+  externalId     String?
+  importedAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, date])
+}
+
+model Vacation {
+  id          Int      @id @default(autoincrement())
+  businessId  Int
+  title       String
+  description String?
+  startDate   String
+  endDate     String
+  color       String   @default("#a855f7")
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, startDate, endDate])
 }

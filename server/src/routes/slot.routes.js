@@ -8,12 +8,28 @@ async function assertOwnBusiness(user, businessId) {
   return business && business.ownerId === user.id;
 }
 
+/**
+ * GET /slots - Customer slot discovery
+ *
+ * ⚠️ CRITICAL BUSINESS RULE: Opt-In Availability Model
+ * ====================================================
+ * Customers should ONLY see explicitly published slots.
+ *
+ * ✅ DO: Show slots with status: OPEN (explicitly published by business)
+ * ❌ DON'T: Calculate availability from working hours
+ * ❌ DON'T: Show external appointments
+ * ❌ DON'T: Auto-generate slots from calendar
+ *
+ * Onovi is a gap-filling platform, not a general booking platform.
+ * See: /AVAILABILITY_MODEL.md for full documentation
+ */
 router.get('/', async (req, res, next) => {
   try {
     const { categoryId, city, cityCode, date, includeAll } = req.query;
 
     console.log('[SlotRoutes] GET /slots query params:', JSON.stringify({ categoryId, city, cityCode, date, includeAll }));
 
+    // CRITICAL: Only show OPEN slots to customers (unless includeAll for admin/business)
     const where = includeAll === 'true' ? {} : { status: 'OPEN' };
     if (date) where.date = date;
 
@@ -84,6 +100,22 @@ router.get('/', async (req, res, next) => {
   } catch (e) { next(e); }
 });
 
+/**
+ * POST /slots - Business explicitly publishes a slot
+ *
+ * This is the ONLY way slots become visible to customers.
+ * The business owner manually creates each slot - this is an opt-in action.
+ *
+ * Typical use cases:
+ * - Last-minute cancellation → publish the gap with a discount
+ * - Unexpected free time → publish to fill the slot
+ * - Slow hours → publish with special pricing
+ *
+ * This is NOT for:
+ * - Syncing working hours
+ * - Auto-generating availability
+ * - Importing calendar events
+ */
 router.post('/', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
   try {
     const { businessId, serviceId, date, startTime, endTime, regularPrice, dealPrice, note } = req.body;
@@ -93,6 +125,8 @@ router.post('/', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next
     if (regularPrice <= 0) return res.status(400).json({ message: 'regularPrice must be positive' });
     if (startTime >= endTime) return res.status(400).json({ message: 'startTime must be before endTime' });
     if (!(await assertOwnBusiness(req.user, businessId))) return res.status(403).json({ message: 'Forbidden for this business' });
+
+    // Create slot with status: OPEN by default (immediately visible to customers)
     const slot = await prisma.slot.create({
       data: { businessId: Number(businessId), serviceId: Number(serviceId), date, startTime, endTime, regularPrice: Number(regularPrice), dealPrice: dealPrice ? Number(dealPrice) : null, note }
     });

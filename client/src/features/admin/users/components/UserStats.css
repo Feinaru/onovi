@@ -1,0 +1,75 @@
+/* UserStats Component Styles */
+
+.user-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-card-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.stat-card-content {
+  flex: 1;
+}
+
+.stat-card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary, #111827);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-card-label {
+  font-size: 13px;
+  color: var(--text-secondary, #6b7280);
+  font-weight: 500;
+}
+
+/* Color variants */
+.stat-card--blue {
+  border-right: 4px solid #3b82f6;
+}
+
+.stat-card--green {
+  border-right: 4px solid #10b981;
+}
+
+.stat-card--purple {
+  border-right: 4px solid #8b5cf6;
+}
+
+.stat-card--orange {
+  border-right: 4px solid #f59e0b;
+}
+
+.stat-card--yellow {
+  border-right: 4px solid #eab308;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-stats {
+    grid-template-columns: 1fr;
+  }
+}

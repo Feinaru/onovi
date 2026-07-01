@@ -1,0 +1,79 @@
+/* UserActivityTab Component Styles */
+
+.user-activity-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-tab-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0;
+}
+
+.activity-tab-loading {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.activity-tab-empty {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.activity-tab-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.activity-tab-empty p {
+  font-size: 15px;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-item {
+  padding: 16px;
+  background: var(--surface-secondary, #f9fafb);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 8px;
+}
+
+.activity-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.activity-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+}
+
+.activity-item-status {
+  font-size: 13px;
+  padding: 4px 8px;
+  background: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 4px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.activity-item-details {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary, #6b7280);
+}

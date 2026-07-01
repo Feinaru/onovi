@@ -1,0 +1,103 @@
+/* UserOverviewTab Component Styles */
+
+.user-overview-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overview-section {
+  padding: 20px;
+  background: var(--surface-secondary, #f9fafb);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 8px;
+}
+
+.overview-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.overview-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0 0 16px 0;
+}
+
+.overview-section-header .overview-section-title {
+  margin: 0;
+}
+
+.overview-section-action {
+  padding: 6px 12px;
+  background: var(--primary, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.overview-section-action:hover {
+  background: var(--primary-dark, #2563eb);
+}
+
+.overview-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.overview-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.overview-detail-row:last-child {
+  border-bottom: none;
+}
+
+.overview-detail-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+}
+
+.overview-detail-value {
+  font-size: 14px;
+  color: var(--text-primary, #111827);
+}
+
+.overview-status-display {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.overview-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.overview-tag {
+  padding: 6px 12px;
+  border: 2px solid;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  background: white;
+}
+
+.overview-empty {
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+  font-style: italic;
+}

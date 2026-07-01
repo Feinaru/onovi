@@ -9,8 +9,10 @@ const serviceRoutes = require('./routes/service.routes');
 const slotRoutes = require('./routes/slot.routes');
 const bookingRoutes = require('./routes/booking.routes');
 const adminRoutes = require('./routes/admin.routes');
+const adminUsersRoutes = require('./routes/admin-users.routes');
 const addressRoutes = require('./routes/address.routes');
 const leadRoutes = require('./routes/lead.routes');
+const calendarRoutes = require('./routes/calendar.routes');
 
 const app = express();
 app.use(cors());
@@ -28,8 +30,10 @@ app.use('/services', serviceRoutes);
 app.use('/slots', slotRoutes);
 app.use('/bookings', bookingRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api/admin/users', adminUsersRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/leads', leadRoutes);
+app.use('/api/calendar', calendarRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
