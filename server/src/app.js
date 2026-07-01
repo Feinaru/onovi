@@ -19,6 +19,8 @@ const calendarRoutes = require('./routes/calendar.routes');
 const registrationRoutes = require('./routes/registration.routes');
 const adminDocumentsRoutes = require('./routes/admin-documents.routes');
 const serviceProviderDocumentsRoutes = require('./routes/service-provider-documents.routes');
+const adminLegalRoutes = require('./routes/admin-legal.routes');
+const serviceProviderLegalRoutes = require('./routes/service-provider-legal.routes');
 
 const app = express();
 app.use(cors());
@@ -46,6 +48,8 @@ app.use('/api/calendar', calendarRoutes);
 app.use('/api/register', registrationRoutes);
 app.use('/api/admin/documents', adminDocumentsRoutes);
 app.use('/api/service-provider/documents', serviceProviderDocumentsRoutes);
+app.use('/api/admin/legal', adminLegalRoutes);
+app.use('/api/service-provider/legal', serviceProviderLegalRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
