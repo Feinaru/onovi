@@ -16,7 +16,7 @@ export default function LandingPage({ setView }) {
             <button className="btn-primary btn-lg landing-cta-primary" onClick={() => setView('customer')}>
               🔍 מצא תור עכשיו
             </button>
-            <button className="btn-outline btn-lg landing-cta-secondary" onClick={() => setView('auth')}>
+            <button className="btn-outline btn-lg landing-cta-secondary" onClick={() => setView('register-entry')}>
               הרשמת עסק
             </button>
           </div>
@@ -98,7 +98,7 @@ export default function LandingPage({ setView }) {
           </div>
 
           <div className="landing-business-cta">
-            <button className="btn-primary btn-lg" onClick={() => setView('auth')}>
+            <button className="btn-primary btn-lg" onClick={() => setView('register-entry')}>
               💼 התחילו בחינם עכשיו
             </button>
           </div>

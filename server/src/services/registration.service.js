@@ -95,6 +95,38 @@ async function checkEmailOrPhoneExists(email, phone) {
 }
 
 /**
+ * Check if user has accepted all mandatory consents
+ */
+async function checkMandatoryConsents(userId) {
+  // Get all mandatory consent types
+  const mandatoryTypes = await prisma.consentType.findMany({
+    where: { isMandatory: true, isActive: true }
+  });
+
+  if (mandatoryTypes.length === 0) {
+    return { valid: true };
+  }
+
+  // Get user's accepted consents
+  const userConsents = await prisma.userConsent.findMany({
+    where: { userId }
+  });
+
+  const acceptedConsentTypeIds = userConsents.map(uc => uc.consentTypeId);
+  const missingMandatory = mandatoryTypes.filter(mt => !acceptedConsentTypeIds.includes(mt.id));
+
+  if (missingMandatory.length > 0) {
+    return {
+      valid: false,
+      error: 'Missing required consents',
+      details: missingMandatory.map(mt => mt.titleHe || mt.titleEn)
+    };
+  }
+
+  return { valid: true };
+}
+
+/**
  * Validate phone number (normalize and validate format)
  */
 function validatePhone(phone) {
@@ -203,6 +235,16 @@ async function createServiceProviderRegistration(data) {
     return { success: false, error: 'One or more service IDs are invalid' };
   }
 
+  // Validate that all ServiceTemplates are ACTIVE
+  const inactiveServices = serviceTemplates.filter(st => st.status !== 'ACTIVE');
+  if (inactiveServices.length > 0) {
+    return {
+      success: false,
+      error: 'Cannot register with inactive service templates',
+      details: inactiveServices.map(s => `Service "${s.name}" is ${s.status}`)
+    };
+  }
+
   // Validate hierarchy
   const hierarchyValidation = await validateCompleteHierarchy(
     fieldIds,
@@ -233,6 +275,10 @@ async function createServiceProviderRegistration(data) {
           phone: phoneValidation.normalized
         }
       });
+
+      // Check mandatory consents before proceeding
+      const consentCheck = await checkMandatoryConsents(user.id);
+      const registrationStatus = consentCheck.valid ? 'PENDING_APPROVAL' : 'DRAFT';
 
       // Create business
       const business = await tx.business.create({
@@ -282,11 +328,11 @@ async function createServiceProviderRegistration(data) {
         )
       );
 
-      // Create ServiceProviderApproval record
+      // Create ServiceProviderApproval record with appropriate status
       const approval = await tx.serviceProviderApproval.create({
         data: {
           serviceProviderId: business.id,
-          status: 'PENDING_APPROVAL'
+          status: registrationStatus
         }
       });
 
@@ -295,7 +341,8 @@ async function createServiceProviderRegistration(data) {
         business,
         businessProfessions,
         businessServices,
-        approval
+        approval,
+        consentStatus: consentCheck
       };
     });
 
@@ -305,7 +352,8 @@ async function createServiceProviderRegistration(data) {
         userId: result.user.id,
         businessId: result.business.id,
         approvalId: result.approval.id,
-        status: 'PENDING_APPROVAL'
+        status: result.approval.status,
+        consentStatus: result.consentStatus
       }
     };
   } catch (error) {
@@ -580,11 +628,73 @@ async function createSuggestionRequest(data) {
   }
 }
 
+/**
+ * Get combined business status (approval, documents, consents, visibility)
+ */
+async function getCombinedBusinessStatus(businessId) {
+  try {
+    const business = await prisma.business.findUnique({
+      where: { id: parseInt(businessId) },
+      select: { ownerId: true }
+    });
+
+    if (!business) {
+      return { success: false, error: 'Business not found' };
+    }
+
+    // Get approval status
+    const approval = await prisma.serviceProviderApproval.findFirst({
+      where: { serviceProviderId: parseInt(businessId) },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    // Get consent status
+    const consentCheck = await checkMandatoryConsents(business.ownerId);
+
+    // Get document status
+    const documentService = require('./document.service');
+    const docStatusResult = await documentService.getDocumentStatus(businessId);
+    const documentStatus = docStatusResult.success ? docStatusResult.data : null;
+
+    // Determine if business can appear publicly
+    const canAppearPublicly =
+      approval?.status === 'APPROVED' &&
+      consentCheck.valid &&
+      (documentStatus?.statusCode === 'COMPLETE' || documentStatus?.approvedCount === documentStatus?.requiredCount);
+
+    return {
+      success: true,
+      data: {
+        approvalStatus: approval?.status || 'UNKNOWN',
+        consentStatus: consentCheck.valid ? 'COMPLETE' : 'INCOMPLETE',
+        consentDetails: consentCheck.valid ? null : consentCheck.details,
+        documentStatus: documentStatus?.statusCode || 'UNKNOWN',
+        documentCounts: {
+          required: documentStatus?.requiredCount || 0,
+          uploaded: documentStatus?.uploadedCount || 0,
+          approved: documentStatus?.approvedCount || 0,
+          pending: documentStatus?.pendingCount || 0,
+          rejected: documentStatus?.rejectedCount || 0
+        },
+        canAppearPublicly
+      }
+    };
+  } catch (error) {
+    console.error('Get combined business status error:', error);
+    return {
+      success: false,
+      error: 'Failed to get combined status',
+      details: error.message
+    };
+  }
+}
+
 module.exports = {
   createServiceProviderRegistration,
   getRegistrationStatus,
   updateRegistration,
   createSuggestionRequest,
   validateServiceHierarchy,
-  validateCompleteHierarchy
+  validateCompleteHierarchy,
+  getCombinedBusinessStatus
 };

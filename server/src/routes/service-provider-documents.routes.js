@@ -139,4 +139,46 @@ router.get('/status', async (req, res) => {
   }
 });
 
+// Get uploaded documents
+router.get('/uploaded', async (req, res) => {
+  try {
+    // Get user's business
+    const { PrismaClient } = require('@prisma/client');
+    const prisma = new PrismaClient();
+
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      include: {
+        businesses: {
+          where: { status: { in: ['PENDING_APPROVAL', 'ACTIVE'] } },
+          take: 1
+        }
+      }
+    });
+
+    if (!user || !user.businesses || user.businesses.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'No business found for this user'
+      });
+    }
+
+    const businessId = user.businesses[0].id;
+    const result = await documentService.getServiceProviderUploadedDocuments(businessId);
+
+    if (result.success) {
+      res.status(200).json(result);
+    } else {
+      res.status(500).json(result);
+    }
+  } catch (error) {
+    console.error('Get uploaded documents error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get uploaded documents',
+      details: error.message
+    });
+  }
+});
+
 module.exports = router;

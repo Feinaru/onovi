@@ -554,6 +554,60 @@ async function uploadDocument(businessId, data) {
 
 /**
  * ============================================
+ * SERVICE PROVIDER - Get Own Uploaded Documents
+ * ============================================
+ */
+
+async function getServiceProviderUploadedDocuments(businessId) {
+  try {
+    // Get business owner userId
+    const business = await prisma.business.findUnique({
+      where: { id: parseInt(businessId) },
+      select: { ownerId: true }
+    });
+
+    if (!business || !business.ownerId) {
+      return { success: false, error: 'Business not found or has no owner' };
+    }
+
+    const documents = await prisma.uploadedDocument.findMany({
+      where: {
+        userId: business.ownerId
+      },
+      include: {
+        documentType: {
+          select: {
+            id: true,
+            name: true,
+            nameHebrew: true
+          }
+        },
+        reviewedBy: {
+          select: {
+            id: true,
+            fullName: true
+          }
+        }
+      },
+      orderBy: { uploadedAt: 'desc' }
+    });
+
+    return {
+      success: true,
+      data: documents
+    };
+  } catch (error) {
+    console.error('Get SP uploaded documents error:', error);
+    return {
+      success: false,
+      error: 'Failed to get uploaded documents',
+      details: error.message
+    };
+  }
+}
+
+/**
+ * ============================================
  * ADMIN - Review Documents
  * ============================================
  */
@@ -815,6 +869,7 @@ module.exports = {
   getRequiredDocuments,
   uploadDocument,
   getDocumentStatus,
+  getServiceProviderUploadedDocuments,
 
   // Admin - Review
   listUploadedDocuments,
