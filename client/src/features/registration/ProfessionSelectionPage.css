@@ -1,0 +1,369 @@
+/* Profession Selection Page */
+.profession-selection {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--accent-50) 100%);
+  padding: var(--space-6);
+}
+
+.profession-selection-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Selected Field Badge */
+.selected-field-badge {
+  display: inline-block;
+  background: var(--primary-600);
+  color: white;
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-6);
+}
+
+.profession-selection-header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.profession-selection-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.profession-selection-subtitle {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Search Input */
+.profession-selection-search {
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+/* Profession Grid */
+.profession-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+.profession-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--border-subtle);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profession-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-400);
+}
+
+.profession-card:focus {
+  outline: 3px solid var(--primary-400);
+  outline-offset: 2px;
+}
+
+.profession-card-selected {
+  border-color: var(--primary-600);
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--bg-elevated) 100%);
+  box-shadow: 0 8px 16px rgba(20, 184, 166, 0.2);
+}
+
+.profession-card-icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.profession-card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Footer Buttons */
+.profession-selection-footer {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+.profession-selection-footer button {
+  min-width: 180px;
+}
+
+/* Profession Request Section */
+.profession-request-section {
+  text-align: center;
+  padding: var(--space-6);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profession-request-text {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3) 0;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: var(--space-16);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.empty-state .selected-field-badge {
+  margin-bottom: var(--space-8);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+}
+
+.empty-state h2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.empty-state p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-8) 0;
+}
+
+.empty-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.btn-link-large {
+  background: none;
+  border: none;
+  color: var(--primary-600);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: var(--space-3) var(--space-6);
+  transition: color 0.2s ease;
+}
+
+.btn-link-large:hover {
+  color: var(--primary-700);
+}
+
+.btn-link-large:focus {
+  outline: 2px solid var(--primary-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: var(--space-16);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--border-subtle);
+  border-top-color: var(--primary-500);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto var(--space-6);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-state p {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+}
+
+/* Error State */
+.error-state {
+  text-align: center;
+  padding: var(--space-16);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+}
+
+.error-state h2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.error-state p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-8) 0;
+}
+
+.error-state button {
+  margin: var(--space-2);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: var(--space-12);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-10);
+}
+
+.no-results p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-6);
+}
+
+.modal-content {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+}
+
+.modal-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.modal-text {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-8) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profession-selection {
+    padding: var(--space-4);
+  }
+
+  .profession-selection-title {
+    font-size: var(--text-3xl);
+  }
+
+  .profession-selection-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  .profession-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .profession-card {
+    padding: var(--space-6);
+    min-height: 150px;
+  }
+
+  .profession-card-icon {
+    font-size: 2.5rem;
+  }
+
+  .profession-card-title {
+    font-size: var(--text-lg);
+  }
+
+  .profession-selection-footer {
+    flex-direction: column;
+  }
+
+  .profession-selection-footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profession-selection-title {
+    font-size: var(--text-2xl);
+  }
+
+  .profession-selection-subtitle {
+    font-size: var(--text-base);
+  }
+
+  .profession-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profession-card-icon {
+    font-size: 2rem;
+  }
+
+  .profession-card-title {
+    font-size: var(--text-base);
+  }
+}

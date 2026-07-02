@@ -1,0 +1,126 @@
+.consent-placeholder {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.consent-placeholder-container {
+  width: 100%;
+  max-width: 600px;
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 60px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.consent-placeholder-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+}
+
+.consent-placeholder-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 16px 0;
+}
+
+.consent-placeholder-description {
+  font-size: 18px;
+  color: var(--color-text-light);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.consent-placeholder-info {
+  background: var(--color-background);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  text-align: right;
+}
+
+.consent-placeholder-info p {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 12px 0;
+}
+
+.consent-placeholder-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.consent-placeholder-info li {
+  font-size: 15px;
+  color: var(--color-text-light);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.consent-placeholder-info li:last-child {
+  border-bottom: none;
+}
+
+.consent-placeholder-info li::before {
+  content: '✓ ';
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.consent-placeholder-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .consent-placeholder {
+    padding: 30px 16px;
+  }
+
+  .consent-placeholder-container {
+    padding: 50px 30px;
+  }
+
+  .consent-placeholder-title {
+    font-size: 26px;
+  }
+
+  .consent-placeholder-description {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .consent-placeholder {
+    padding: 20px 12px;
+  }
+
+  .consent-placeholder-container {
+    padding: 40px 20px;
+  }
+
+  .consent-placeholder-icon {
+    font-size: 64px;
+  }
+
+  .consent-placeholder-title {
+    font-size: 22px;
+  }
+
+  .consent-placeholder-description {
+    font-size: 15px;
+  }
+
+  .consent-placeholder-actions button {
+    width: 100%;
+  }
+}

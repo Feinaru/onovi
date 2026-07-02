@@ -1,0 +1,102 @@
+.service-group-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: box-shadow 0.2s ease;
+}
+
+.service-group-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-group-card-compact {
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.service-group-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.service-group-field {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.service-group-profession {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.service-group-services {
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.service-name {
+  display: inline;
+}
+
+.service-group-card-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.service-group-action-btn {
+  font-size: 14px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+.service-group-remove-btn {
+  color: var(--color-error);
+}
+
+.service-group-remove-btn:hover {
+  color: var(--color-error-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .service-group-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-group-card-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-group-card {
+    padding: 16px;
+  }
+
+  .service-group-field {
+    font-size: 16px;
+  }
+
+  .service-group-profession {
+    font-size: 14px;
+  }
+
+  .service-group-services {
+    font-size: 13px;
+  }
+}

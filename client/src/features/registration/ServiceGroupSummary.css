@@ -1,0 +1,147 @@
+.service-group-summary {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.service-group-summary-container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-group-summary-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.service-group-summary-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 12px 0;
+}
+
+.service-group-summary-subtitle {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.service-group-list {
+  margin-bottom: 32px;
+}
+
+.service-group-summary-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Modal Styles */
+.modal-group-preview {
+  background: var(--color-background);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: right;
+}
+
+.modal-group-field {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.modal-group-profession {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.modal-group-services {
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.modal-icon.warning {
+  font-size: 48px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: var(--color-error-dark);
+}
+
+.btn-danger:disabled {
+  background-color: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .service-group-summary {
+    padding: 30px 16px;
+  }
+
+  .service-group-summary-container {
+    padding: 30px 20px;
+  }
+
+  .service-group-summary-title {
+    font-size: 26px;
+  }
+
+  .service-group-summary-actions {
+    flex-direction: column;
+  }
+
+  .service-group-summary-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-group-summary {
+    padding: 20px 12px;
+  }
+
+  .service-group-summary-container {
+    padding: 24px 16px;
+  }
+
+  .service-group-summary-title {
+    font-size: 22px;
+  }
+
+  .service-group-summary-subtitle {
+    font-size: 14px;
+  }
+}

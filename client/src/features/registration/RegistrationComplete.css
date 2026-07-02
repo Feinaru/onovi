@@ -1,0 +1,110 @@
+/* ============================================
+   Registration Complete
+   ============================================ */
+
+.registration-complete {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-complete-container {
+  max-width: 600px;
+  width: 100%;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 3rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.complete-icon {
+  font-size: 5rem;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.complete-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.complete-message {
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 500px;
+}
+
+.registration-complete-container .btn-primary {
+  margin-top: 1rem;
+  min-width: 200px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .registration-complete-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .complete-icon {
+    font-size: 4rem;
+  }
+
+  .complete-title {
+    font-size: 1.5rem;
+  }
+
+  .complete-message {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-complete {
+    padding: 1rem 0.5rem;
+  }
+
+  .registration-complete-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .complete-icon {
+    font-size: 3rem;
+  }
+
+  .complete-title {
+    font-size: 1.25rem;
+  }
+
+  .complete-message {
+    font-size: 0.95rem;
+  }
+
+  .registration-complete-container .btn-primary {
+    width: 100%;
+  }
+}

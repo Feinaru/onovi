@@ -1,0 +1,75 @@
+/* Profession Selection Placeholder */
+.profession-placeholder {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--accent-50) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.profession-placeholder-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-16);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.profession-placeholder-icon {
+  font-size: 6rem;
+  margin-bottom: var(--space-8);
+}
+
+.profession-placeholder-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.profession-placeholder-description {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-10) 0;
+}
+
+.profession-placeholder button {
+  min-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profession-placeholder-container {
+    padding: var(--space-12);
+  }
+
+  .profession-placeholder-icon {
+    font-size: 4rem;
+  }
+
+  .profession-placeholder-title {
+    font-size: var(--text-3xl);
+  }
+
+  .profession-placeholder-description {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .profession-placeholder-container {
+    padding: var(--space-8);
+  }
+
+  .profession-placeholder-title {
+    font-size: var(--text-2xl);
+  }
+
+  .profession-placeholder-description {
+    font-size: var(--text-base);
+  }
+}

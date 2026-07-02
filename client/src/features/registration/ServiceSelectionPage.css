@@ -1,0 +1,238 @@
+.service-selection {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.service-selection-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.selected-profession-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--color-white);
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.badge-field {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  opacity: 0.95;
+}
+
+.badge-profession {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.service-selection-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.service-selection-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 12px 0;
+}
+
+.service-selection-subtitle {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.service-selection-search {
+  margin-bottom: 24px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.service-card {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.service-card:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.service-card-selected {
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+
+.service-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 6px 0;
+}
+
+.service-card-description {
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.service-selection-footer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.service-request-section {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.service-request-text {
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin: 0 0 8px 0;
+}
+
+/* Loading, Error, Empty States */
+.loading-state,
+.error-state,
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-icon,
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.error-state h2,
+.empty-state h2 {
+  font-size: 24px;
+  color: var(--color-text);
+  margin: 0 0 12px 0;
+}
+
+.error-state p,
+.empty-state p {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin: 0 0 24px 0;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .service-selection {
+    padding: 30px 16px;
+  }
+
+  .service-selection-container {
+    padding: 30px 20px;
+  }
+
+  .service-selection-title {
+    font-size: 26px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .service-selection-footer {
+    flex-direction: column;
+  }
+
+  .service-selection-footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-selection {
+    padding: 20px 12px;
+  }
+
+  .service-selection-container {
+    padding: 24px 16px;
+  }
+
+  .service-selection-title {
+    font-size: 22px;
+  }
+
+  .service-selection-subtitle {
+    font-size: 14px;
+  }
+
+  .badge-field {
+    font-size: 12px;
+  }
+
+  .badge-profession {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,85 @@
+/* Coming Soon Page */
+.coming-soon {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--accent-50) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.coming-soon-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-16);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon-icon {
+  font-size: 6rem;
+  margin-bottom: var(--space-8);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.coming-soon-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.coming-soon-description {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-10) 0;
+}
+
+.coming-soon button {
+  min-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coming-soon-container {
+    padding: var(--space-12);
+  }
+
+  .coming-soon-icon {
+    font-size: 4rem;
+  }
+
+  .coming-soon-title {
+    font-size: var(--text-3xl);
+  }
+
+  .coming-soon-description {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-container {
+    padding: var(--space-8);
+  }
+
+  .coming-soon-title {
+    font-size: var(--text-2xl);
+  }
+
+  .coming-soon-description {
+    font-size: var(--text-base);
+  }
+}

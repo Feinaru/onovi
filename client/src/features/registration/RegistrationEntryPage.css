@@ -1,0 +1,154 @@
+/* Registration Entry Page */
+.registration-entry {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--accent-50) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.registration-entry-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.registration-entry-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.registration-entry-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.registration-entry-subtitle {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.registration-entry-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-8);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Registration Card */
+.registration-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--border-subtle);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.registration-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-400);
+}
+
+.registration-card:focus {
+  outline: 3px solid var(--primary-400);
+  outline-offset: 2px;
+}
+
+.registration-card-selected {
+  border-color: var(--primary-600);
+  box-shadow: 0 8px 16px rgba(20, 184, 166, 0.2);
+}
+
+.registration-card-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-6);
+  filter: grayscale(0.3);
+  transition: filter 0.3s ease;
+}
+
+.registration-card:hover .registration-card-icon {
+  filter: grayscale(0);
+}
+
+.registration-card-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.registration-card-description {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--space-8) 0;
+  min-height: 3em;
+}
+
+.registration-card-button {
+  width: 100%;
+  min-height: 56px;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  padding: var(--space-4) var(--space-8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .registration-entry {
+    padding: var(--space-4);
+  }
+
+  .registration-entry-title {
+    font-size: var(--text-3xl);
+  }
+
+  .registration-entry-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  .registration-entry-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .registration-card {
+    padding: var(--space-8);
+  }
+
+  .registration-card-icon {
+    font-size: 3rem;
+  }
+
+  .registration-card-button {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-entry-title {
+    font-size: var(--text-2xl);
+  }
+
+  .registration-entry-subtitle {
+    font-size: var(--text-base);
+  }
+
+  .registration-card-title {
+    font-size: var(--text-xl);
+  }
+
+  .registration-card-description {
+    font-size: var(--text-base);
+  }
+}
