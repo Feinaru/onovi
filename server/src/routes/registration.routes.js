@@ -78,8 +78,21 @@ router.post('/service-provider', async (req, res) => {
     });
 
     if (!result.success) {
-      return res.status(400).json({
+      // Map error types to appropriate HTTP status codes
+      let statusCode = 400;
+
+      if (result.errorType === 'DUPLICATE_ERROR') {
+        statusCode = 409; // Conflict
+      } else if (result.errorType === 'DATABASE_ERROR') {
+        statusCode = 500; // Internal Server Error
+      } else if (result.errorType === 'VALIDATION_ERROR') {
+        statusCode = 400; // Bad Request
+      }
+
+      return res.status(statusCode).json({
         error: result.error,
+        errorType: result.errorType,
+        field: result.field,
         details: result.details
       });
     }
@@ -90,7 +103,10 @@ router.post('/service-provider', async (req, res) => {
     });
   } catch (error) {
     console.error('Registration route error:', error);
-    res.status(500).json({ error: 'Registration failed' });
+    res.status(500).json({
+      error: 'Internal server error',
+      errorType: 'SERVER_ERROR'
+    });
   }
 });
 

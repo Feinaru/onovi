@@ -173,120 +173,145 @@ async function createServiceProviderRegistration(data) {
     serviceTemplateIds
   } = data;
 
-  // Validation
+  // Pre-transaction validation (format checks only - no DB queries)
   if (!validateEmail(email)) {
-    return { success: false, error: 'Invalid email format' };
+    return { success: false, errorType: 'VALIDATION_ERROR', error: 'Invalid email format' };
   }
 
   const phoneValidation = validatePhone(phone);
   if (!phoneValidation.valid) {
-    return { success: false, error: phoneValidation.error };
-  }
-
-  const existing = await checkEmailOrPhoneExists(email, phone);
-  if (existing) {
-    if (existing.email?.toLowerCase() === email.toLowerCase()) {
-      return { success: false, error: 'Email already registered' };
-    }
-    if (existing.phone === phoneValidation.normalized) {
-      return { success: false, error: 'Phone number already registered' };
-    }
+    return { success: false, errorType: 'VALIDATION_ERROR', error: phoneValidation.error };
   }
 
   const passwordValidation = validatePassword(password);
   if (!passwordValidation.valid) {
-    return { success: false, error: passwordValidation.error };
+    return { success: false, errorType: 'VALIDATION_ERROR', error: passwordValidation.error };
   }
 
   if (!businessIdentificationNumber) {
-    return { success: false, error: 'Business identification number is required' };
+    return { success: false, errorType: 'VALIDATION_ERROR', error: 'Business identification number is required' };
   }
 
-  // Check for duplicates first (before checking if IDs exist)
+  // Check for duplicate arrays (before DB queries)
   const uniqueServices = new Set(serviceTemplateIds);
   if (uniqueServices.size !== serviceTemplateIds.length) {
-    return { success: false, error: 'Duplicate services selected' };
+    return { success: false, errorType: 'VALIDATION_ERROR', error: 'Duplicate services selected' };
   }
 
   const uniqueProfessions = new Set(professionIds);
   if (uniqueProfessions.size !== professionIds.length) {
-    return { success: false, error: 'Duplicate professions selected' };
-  }
-
-  // Validate that all IDs exist
-  const fields = await prisma.field.findMany({
-    where: { id: { in: fieldIds } }
-  });
-  if (fields.length !== fieldIds.length) {
-    return { success: false, error: 'One or more field IDs are invalid' };
-  }
-
-  const professions = await prisma.profession.findMany({
-    where: { id: { in: professionIds } }
-  });
-  if (professions.length !== professionIds.length) {
-    return { success: false, error: 'One or more profession IDs are invalid' };
-  }
-
-  const serviceTemplates = await prisma.serviceTemplate.findMany({
-    where: { id: { in: serviceTemplateIds } }
-  });
-  if (serviceTemplates.length !== serviceTemplateIds.length) {
-    return { success: false, error: 'One or more service IDs are invalid' };
-  }
-
-  // Validate that all ServiceTemplates are ACTIVE
-  const inactiveServices = serviceTemplates.filter(st => st.status !== 'ACTIVE');
-  if (inactiveServices.length > 0) {
-    return {
-      success: false,
-      error: 'Cannot register with inactive service templates',
-      details: inactiveServices.map(s => `Service "${s.name}" is ${s.status}`)
-    };
-  }
-
-  // Validate hierarchy
-  const hierarchyValidation = await validateCompleteHierarchy(
-    fieldIds,
-    professionIds,
-    serviceTemplateIds
-  );
-
-  if (!hierarchyValidation.valid) {
-    return {
-      success: false,
-      error: 'Invalid hierarchy',
-      details: hierarchyValidation.errors
-    };
+    return { success: false, errorType: 'VALIDATION_ERROR', error: 'Duplicate professions selected' };
   }
 
   try {
-    // Create user account
+    // Hash password before transaction
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // ALL database operations in a single atomic transaction
     const result = await prisma.$transaction(async (tx) => {
-      // Create user
-      const user = await tx.user.create({
-        data: {
-          email: email.toLowerCase(),
-          passwordHash: hashedPassword,
-          role: 'SERVICE_PROVIDER',
-          fullName: serviceProviderName,
-          phone: phoneValidation.normalized
+      // 1. Check for existing email/phone INSIDE transaction to prevent race conditions
+      const normalizedEmail = email.toLowerCase();
+      const normalizedPhone = phoneValidation.normalized;
+
+      const existing = await tx.user.findFirst({
+        where: {
+          OR: [
+            { email: normalizedEmail },
+            { phone: normalizedPhone }
+          ]
         }
       });
 
-      // Check mandatory consents before proceeding
-      const consentCheck = await checkMandatoryConsents(user.id);
+      if (existing) {
+        if (existing.email?.toLowerCase() === normalizedEmail) {
+          throw new Error('EMAIL_ALREADY_REGISTERED');
+        }
+        if (existing.phone === normalizedPhone) {
+          throw new Error('PHONE_ALREADY_REGISTERED');
+        }
+      }
+
+      // 2. Validate that all field IDs exist
+      const fields = await tx.field.findMany({
+        where: { id: { in: fieldIds } }
+      });
+      if (fields.length !== fieldIds.length) {
+        throw new Error('INVALID_FIELD_IDS');
+      }
+
+      // 3. Validate that all profession IDs exist
+      const professions = await tx.profession.findMany({
+        where: { id: { in: professionIds } }
+      });
+      if (professions.length !== professionIds.length) {
+        throw new Error('INVALID_PROFESSION_IDS');
+      }
+
+      // 4. Validate that all service IDs exist and are ACTIVE
+      const serviceTemplates = await tx.serviceTemplate.findMany({
+        where: { id: { in: serviceTemplateIds } }
+      });
+      if (serviceTemplates.length !== serviceTemplateIds.length) {
+        throw new Error('INVALID_SERVICE_IDS');
+      }
+
+      const inactiveServices = serviceTemplates.filter(st => st.status !== 'ACTIVE');
+      if (inactiveServices.length > 0) {
+        throw new Error(`INACTIVE_SERVICES: ${inactiveServices.map(s => s.name).join(', ')}`);
+      }
+
+      // 5. Validate hierarchy (professions belong to fields, services belong to professions)
+      const fieldIdSet = new Set(fieldIds);
+      for (const prof of professions) {
+        if (!fieldIdSet.has(prof.fieldId)) {
+          throw new Error(`HIERARCHY_ERROR: Profession "${prof.name}" does not belong to selected fields`);
+        }
+      }
+
+      const professionIdSet = new Set(professionIds);
+      for (const service of serviceTemplates) {
+        if (!professionIdSet.has(service.professionId)) {
+          throw new Error(`HIERARCHY_ERROR: Service "${service.name}" does not belong to selected professions`);
+        }
+      }
+
+      // 6. Create user
+      const user = await tx.user.create({
+        data: {
+          email: normalizedEmail,
+          passwordHash: hashedPassword,
+          role: 'SERVICE_PROVIDER',
+          fullName: serviceProviderName,
+          phone: normalizedPhone
+        }
+      });
+
+      // 7. Check mandatory consents (using transaction context)
+      const mandatoryTypes = await tx.consentType.findMany({
+        where: { isMandatory: true, isActive: true }
+      });
+
+      const userConsents = await tx.userConsent.findMany({
+        where: { userId: user.id }
+      });
+
+      const acceptedConsentTypeIds = userConsents.map(uc => uc.consentTypeId);
+      const missingMandatory = mandatoryTypes.filter(mt => !acceptedConsentTypeIds.includes(mt.id));
+
+      const consentCheck = {
+        valid: missingMandatory.length === 0,
+        missing: missingMandatory.map(mt => mt.titleHe || mt.titleEn)
+      };
+
       const registrationStatus = consentCheck.valid ? 'PENDING_APPROVAL' : 'DRAFT';
 
-      // Create business
+      // 8. Create business
       const business = await tx.business.create({
         data: {
           name: businessName,
           ownerId: user.id,
-          phone: phoneValidation.normalized,
-          phoneNormalized: phoneValidation.normalized,
+          phone: normalizedPhone,
+          phoneNormalized: normalizedPhone,
           identifierType: 'COMPANY_NUMBER',
           identifierValue: businessIdentificationNumber,
           address,
@@ -295,7 +320,7 @@ async function createServiceProviderRegistration(data) {
         }
       });
 
-      // Create BusinessProfession records
+      // 9. Create BusinessProfession records
       const businessProfessions = await Promise.all(
         professionIds.map(professionId =>
           tx.businessProfession.create({
@@ -307,11 +332,7 @@ async function createServiceProviderRegistration(data) {
         )
       );
 
-      // Create BusinessService records
-      const serviceTemplates = await tx.serviceTemplate.findMany({
-        where: { id: { in: serviceTemplateIds } }
-      });
-
+      // 10. Create BusinessService records
       const businessServices = await Promise.all(
         serviceTemplates.map(template =>
           tx.businessService.create({
@@ -328,7 +349,7 @@ async function createServiceProviderRegistration(data) {
         )
       );
 
-      // Create ServiceProviderApproval record with appropriate status
+      // 11. Create ServiceProviderApproval record
       const approval = await tx.serviceProviderApproval.create({
         data: {
           serviceProviderId: business.id,
@@ -358,9 +379,106 @@ async function createServiceProviderRegistration(data) {
     };
   } catch (error) {
     console.error('Registration error:', error);
+
+    // Handle specific error types
+    if (error.message === 'EMAIL_ALREADY_REGISTERED') {
+      return {
+        success: false,
+        errorType: 'DUPLICATE_ERROR',
+        error: 'Email already registered',
+        field: 'email'
+      };
+    }
+
+    if (error.message === 'PHONE_ALREADY_REGISTERED') {
+      return {
+        success: false,
+        errorType: 'DUPLICATE_ERROR',
+        error: 'Phone number already registered',
+        field: 'phone'
+      };
+    }
+
+    if (error.message === 'INVALID_FIELD_IDS') {
+      return {
+        success: false,
+        errorType: 'VALIDATION_ERROR',
+        error: 'One or more field IDs are invalid'
+      };
+    }
+
+    if (error.message === 'INVALID_PROFESSION_IDS') {
+      return {
+        success: false,
+        errorType: 'VALIDATION_ERROR',
+        error: 'One or more profession IDs are invalid'
+      };
+    }
+
+    if (error.message === 'INVALID_SERVICE_IDS') {
+      return {
+        success: false,
+        errorType: 'VALIDATION_ERROR',
+        error: 'One or more service IDs are invalid'
+      };
+    }
+
+    if (error.message.startsWith('INACTIVE_SERVICES:')) {
+      const services = error.message.replace('INACTIVE_SERVICES: ', '');
+      return {
+        success: false,
+        errorType: 'VALIDATION_ERROR',
+        error: 'Cannot register with inactive service templates',
+        details: `Inactive services: ${services}`
+      };
+    }
+
+    if (error.message.startsWith('HIERARCHY_ERROR:')) {
+      const details = error.message.replace('HIERARCHY_ERROR: ', '');
+      return {
+        success: false,
+        errorType: 'VALIDATION_ERROR',
+        error: 'Invalid hierarchy',
+        details
+      };
+    }
+
+    // Handle Prisma unique constraint violations (P2002)
+    if (error.code === 'P2002') {
+      const target = error.meta?.target;
+      if (Array.isArray(target)) {
+        if (target[0] === 'email') {
+          return {
+            success: false,
+            errorType: 'DUPLICATE_ERROR',
+            error: 'Email already registered',
+            field: 'email'
+          };
+        }
+        if (target[0] === 'phone') {
+          return {
+            success: false,
+            errorType: 'DUPLICATE_ERROR',
+            error: 'Phone number already registered',
+            field: 'phone'
+          };
+        }
+        if (target.includes('identifierType') && target.includes('identifierValue')) {
+          return {
+            success: false,
+            errorType: 'DUPLICATE_ERROR',
+            error: 'Business identification number already registered',
+            field: 'businessIdentificationNumber'
+          };
+        }
+      }
+    }
+
+    // Generic database error
     return {
       success: false,
-      error: 'Registration failed',
+      errorType: 'DATABASE_ERROR',
+      error: 'Registration failed due to database error',
       details: error.message
     };
   }
