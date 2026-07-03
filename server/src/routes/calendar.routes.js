@@ -10,7 +10,7 @@ const metricsService = require('../services/calendarMetrics.service');
  * The calendar is the main workspace for business owners.
  * It shows ALL events: Slots (Published Gaps), Bookings, Calendar Events, Time Blocks, Vacations
  *
- * IMPORTANT: Slot = Published Onovi Gap (customer-visible availability)
+ * IMPORTANT: Slot = Published Lomea Gap (customer-visible availability)
  */
 
 async function assertOwnBusiness(user, businessId) {
@@ -48,7 +48,7 @@ router.get('/:businessId', auth(), async (req, res, next) => {
         orderBy: [{ date: 'asc' }, { startTime: 'asc' }]
       }),
 
-      // Onovi Bookings (confirmed appointments)
+      // Lomea Bookings (confirmed appointments)
       prisma.booking.findMany({
         where: {
           businessId,

@@ -20,7 +20,7 @@ async function assertOwnBusiness(user, businessId) {
  * ❌ DON'T: Show external appointments
  * ❌ DON'T: Auto-generate slots from calendar
  *
- * Onovi is a gap-filling platform, not a general booking platform.
+ * Lomea is a gap-filling platform, not a general booking platform.
  * See: /AVAILABILITY_MODEL.md for full documentation
  */
 router.get('/', async (req, res, next) => {

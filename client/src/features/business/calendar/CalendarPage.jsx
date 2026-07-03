@@ -103,7 +103,7 @@ function CalendarPage({ businesses }) {
   function getEventTypeLabel(eventType) {
     const labels = {
       SLOT: 'חלון זמן פנוי',
-      BOOKING: 'תור Onovi',
+      BOOKING: 'תור Lomea',
       CALENDAR_EVENT: 'אירוע ביומן',
       TIME_BLOCK: 'חסימת זמן',
       VACATION: 'חופשה'

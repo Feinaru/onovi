@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Shadow Tokens
+ * Lomea Design System - Shadow Tokens
  *
  * Subtle, premium elevation system
  */

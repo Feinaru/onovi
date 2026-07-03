@@ -14,7 +14,7 @@ function AppLayout({ user, view, navItems, onNavigate, onLogout, children }) {
           onClick={() => onNavigate(user.role === 'ADMIN' ? 'admin' : user.role === 'BUSINESS' ? 'business' : 'customer')}
           style={{ cursor: 'pointer' }}
         >
-          <img src="/assets/onovi-logo.png" alt="Onovi" style={{ height: '36px' }} />
+          <img src="/assets/lomea-logo.png" alt="Lomea" style={{ height: '36px' }} />
         </div>
 
         <nav className="sidebar-nav">

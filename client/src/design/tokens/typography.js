@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Typography Tokens
+ * Lomea Design System - Typography Tokens
  *
  * Clean, readable type scale
  */

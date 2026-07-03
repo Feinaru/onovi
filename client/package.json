@@ -1,7 +1,7 @@
 {
-  "name": "onovi-client",
+  "name": "lomea-client",
   "version": "1.0.0",
-  "description": "Onovi Frontend - Appointment booking platform",
+  "description": "Lomea Frontend - Appointment booking platform",
   "type": "module",
   "engines": {
     "node": ">=18.0.0",
@@ -20,7 +20,7 @@
     "react",
     "vite"
   ],
-  "author": "Onovi Team",
+  "author": "Lomea Team",
   "license": "UNLICENSED",
   "dependencies": {
     "@vitejs/plugin-react": "latest",

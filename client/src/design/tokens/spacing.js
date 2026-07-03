@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Spacing Tokens
+ * Lomea Design System - Spacing Tokens
  *
  * 4px base unit for consistent spacing
  */

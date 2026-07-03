@@ -48,7 +48,7 @@ export async function searchStreetsInCity(city, query) {
       `accept-language=he`,
       {
         headers: {
-          'User-Agent': 'Onovi-App/1.0'
+          'User-Agent': 'Lomea-App/1.0'
         }
       }
     );
@@ -174,7 +174,7 @@ export async function getAddressCoordinates(city, street, houseNumber) {
       `accept-language=he`,
       {
         headers: {
-          'User-Agent': 'Onovi-App/1.0'
+          'User-Agent': 'Lomea-App/1.0'
         }
       }
     );

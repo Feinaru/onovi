@@ -260,7 +260,7 @@ export default function LocationSelector({ onLocationSelect, currentLocation }) 
                   <div className="location-step-icon">🔒</div>
                   <h2 className="location-step-title">הרשאת מיקום</h2>
                   <p className="location-step-description">
-                    Onovi משתמש במיקום שלך רק כדי למצוא עסקים זמינים בקרבתך.
+                    Lomea משתמש במיקום שלך רק כדי למצוא עסקים זמינים בקרבתך.
                   </p>
                 </div>
 

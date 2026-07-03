@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Render build script for Onovi API
+# Render build script for Lomea API
 
 set -o errexit  # Exit on error
 

@@ -5,7 +5,7 @@ export default function LandingPage({ setView }) {
       <section className="landing-hero">
         <div className="landing-hero-content">
           <div className="landing-logo">
-            <img src="/assets/onovi-logo.png" alt="Onovi" style={{ maxWidth: '280px', height: 'auto' }} />
+            <img src="/assets/lomea-logo.png" alt="Lomea" style={{ maxWidth: '280px', height: 'auto' }} />
           </div>
           <h2 className="landing-tagline">התור שלך, בזמן שלך</h2>
           <p className="landing-description">
@@ -62,7 +62,7 @@ export default function LandingPage({ setView }) {
       {/* For Businesses */}
       <section className="landing-section landing-section-alt">
         <div className="landing-container">
-          <h2 className="landing-section-title">למה עסקים בוחרים ב-Onovi?</h2>
+          <h2 className="landing-section-title">למה עסקים בוחרים ב-Lomea?</h2>
           <div className="landing-features">
             <div className="landing-feature">
               <div className="landing-feature-icon">📅</div>
@@ -111,7 +111,7 @@ export default function LandingPage({ setView }) {
           <div className="landing-footer-content">
             <div className="landing-footer-brand">
               <div className="landing-logo-small">
-                <img src="/assets/onovi-logo.png" alt="Onovi" style={{ height: '32px' }} />
+                <img src="/assets/lomea-logo.png" alt="Lomea" style={{ height: '32px' }} />
               </div>
               <p>התור שלך, בזמן שלך</p>
             </div>

@@ -17,7 +17,7 @@ export default function RegistrationComplete({ setView }) {
         <div className="complete-icon">✅</div>
         <h1 className="complete-title">הבקשה התקבלה</h1>
         <p className="complete-message">
-          פרטי נותן השירות והמסמכים שהועלו ייבדקו על ידי צוות Onovi.
+          פרטי נותן השירות והמסמכים שהועלו ייבדקו על ידי צוות Lomea.
           <br />
           לאחר האישור, הפרופיל יוכל להופיע באתר.
         </p>

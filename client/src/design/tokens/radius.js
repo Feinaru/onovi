@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Border Radius Tokens
+ * Lomea Design System - Border Radius Tokens
  *
  * Soft, approachable radius for premium feel
  */

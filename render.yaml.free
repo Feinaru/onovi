@@ -1,13 +1,13 @@
-# Render Blueprint for Onovi - FREE TIER (Testing Only)
+# Render Blueprint for Lomea - FREE TIER (Testing Only)
 # ⚠️ WARNING: Database expires after 90 days
 # Monthly Cost: $0 (but database will be deleted after 90 days)
 # Use only for: Short-term testing, demos, proof of concepts
 
 # Database - FREE (⚠️ EXPIRES AFTER 90 DAYS)
 databases:
-  - name: onovi-db-free
-    databaseName: onovi_free
-    user: onovi_free
+  - name: lomea-db-free
+    databaseName: lomea_free
+    user: lomea_free
     region: oregon
     plan: free  # $0/month - ⚠️ EXPIRES AFTER 90 DAYS, NO BACKUPS
     ipAllowList: []
@@ -15,7 +15,7 @@ databases:
 # Backend API Service - FREE (Sleeps after 15 min)
 services:
   - type: web
-    name: onovi-api-free
+    name: lomea-api-free
     env: node
     region: oregon
     plan: free  # $0/month - Sleeps after 15 min inactivity
@@ -24,7 +24,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: onovi-db-free
+          name: lomea-db-free
           property: connectionString
       - key: NODE_ENV
         value: development
@@ -35,12 +35,12 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: NOMINATIM_USER_AGENT
-        value: Onovi-Free-Test-App/1.0
+        value: Lomea-Free-Test-App/1.0
     healthCheckPath: /
 
   # Frontend Static Site - FREE (Always free)
   - type: web
-    name: onovi-client-free
+    name: lomea-client-free
     env: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/dist

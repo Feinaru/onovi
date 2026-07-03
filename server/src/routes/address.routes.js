@@ -211,7 +211,7 @@ router.get('/reverse-geocode', async (req, res) => {
 
     const response = await fetch(nominatimUrl, {
       headers: {
-        'User-Agent': 'Onovi-Israel-Address-App/1.0'
+        'User-Agent': 'Lomea-Israel-Address-App/1.0'
       }
     });
 
@@ -369,7 +369,7 @@ router.get('/forward-geocode', async (req, res) => {
 
     const response = await fetch(nominatimUrl, {
       headers: {
-        'User-Agent': 'Onovi-Israel-Address-App/1.0'
+        'User-Agent': 'Lomea-Israel-Address-App/1.0'
       }
     });
 

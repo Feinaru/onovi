@@ -1,12 +1,12 @@
-# Render Blueprint for Onovi - STAGING Environment
+# Render Blueprint for Lomea - STAGING Environment
 # Minimizes cost while keeping the application functional for testing
 # Monthly Cost: $7 (Database Starter only)
 
 # Database - PAID (Required for persistence)
 databases:
-  - name: onovi-db-staging
-    databaseName: onovi_staging
-    user: onovi_staging
+  - name: lomea-db-staging
+    databaseName: lomea_staging
+    user: lomea_staging
     region: oregon
     plan: starter  # $7/month - Required for persistent staging database
     ipAllowList: []
@@ -14,7 +14,7 @@ databases:
 # Backend API Service - FREE (Accepts sleep)
 services:
   - type: web
-    name: onovi-api-staging
+    name: lomea-api-staging
     env: node
     region: oregon
     plan: free  # $0/month - Sleeps after 15 min, but functional for staging
@@ -23,7 +23,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: onovi-db-staging
+          name: lomea-db-staging
           property: connectionString
       - key: NODE_ENV
         value: staging
@@ -34,12 +34,12 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: NOMINATIM_USER_AGENT
-        value: Onovi-Staging-App/1.0
+        value: Lomea-Staging-App/1.0
     healthCheckPath: /
 
   # Frontend Static Site - FREE (Always free)
   - type: web
-    name: onovi-client-staging
+    name: lomea-client-staging
     env: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/dist

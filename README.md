@@ -1,8 +1,8 @@
-# Onovi - התור שלך, בזמן שלך
+# Lomea - התור שלך, בזמן שלך
 
-![Onovi Logo](./client/public/assets/onovi-logo.png)
+![Lomea Logo](./client/public/assets/lomea-logo.png)
 
-**Onovi** is a modern appointment booking platform that connects customers with local businesses. Find available time slots, book appointments instantly, and manage your schedule - all in one place.
+**Lomea** is a modern appointment booking platform that connects customers with local businesses. Find available time slots, book appointments instantly, and manage your schedule - all in one place.
 
 ## 🌟 Features
 
@@ -97,7 +97,7 @@ cd fillApp
 ```bash
 # Install PostgreSQL if not already installed
 # Create a new database
-createdb onovi_dev
+createdb lomea_dev
 ```
 
 3. **Configure environment variables:**
@@ -145,7 +145,7 @@ npm run dev
 
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/onovi_dev"
+DATABASE_URL="postgresql://user:password@localhost:5432/lomea_dev"
 
 # Server
 PORT=3000
@@ -155,7 +155,7 @@ NODE_ENV=development
 JWT_SECRET="your-secure-secret-key-change-in-production"
 
 # Optional: External APIs
-NOMINATIM_USER_AGENT="Onovi-Israel-Address-App/1.0"
+NOMINATIM_USER_AGENT="Lomea-Israel-Address-App/1.0"
 ```
 
 See `server/.env.example` for complete configuration.
@@ -195,7 +195,7 @@ npm start
 
 ## 🚢 Deployment
 
-Onovi is configured for deployment on Render.com with PostgreSQL database.
+Lomea is configured for deployment on Render.com with PostgreSQL database.
 
 See `/docs/deployment/` for detailed deployment instructions.
 
@@ -210,7 +210,7 @@ See `/docs/deployment/` for detailed deployment instructions.
 
 ## 🎨 Design System
 
-Onovi uses a clean, modern design system with:
+Lomea uses a clean, modern design system with:
 
 **Colors:**
 - Primary: Mint/Teal gradient (#14b8a6)
@@ -262,8 +262,8 @@ This is a private project. For questions or issues, please contact the developme
 ## 📞 Support
 
 For support and inquiries, please contact:
-- Email: support@onovi.com
-- Website: https://onovi.com
+- Email: support@lomea.com
+- Website: https://lomea.com
 
 ---
 

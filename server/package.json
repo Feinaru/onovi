@@ -1,7 +1,7 @@
 {
-  "name": "onovi-server",
+  "name": "lomea-server",
   "version": "1.0.0",
-  "description": "Onovi Backend API - Appointment booking platform",
+  "description": "Lomea Backend API - Appointment booking platform",
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0",
@@ -30,7 +30,7 @@
     "calendar",
     "israel"
   ],
-  "author": "Onovi Team",
+  "author": "Lomea Team",
   "license": "UNLICENSED",
   "dependencies": {
     "@prisma/client": "^6.19.3",

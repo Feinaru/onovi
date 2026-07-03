@@ -30,7 +30,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Onovi API is running' });
+  res.json({ message: 'Lomea API is running' });
 });
 
 app.use('/auth', authRoutes);

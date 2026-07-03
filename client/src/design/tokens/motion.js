@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Motion Tokens
+ * Lomea Design System - Motion Tokens
  *
  * Calm, smooth transitions
  */

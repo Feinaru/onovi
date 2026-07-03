@@ -17,7 +17,7 @@ function PublicLayout({ user, onNavigate, onLogout, showBackButton = false, chil
             )}
             style={{ cursor: 'pointer' }}
           >
-            <img src="/assets/onovi-logo.png" alt="Onovi" style={{ height: '40px' }} />
+            <img src="/assets/lomea-logo.png" alt="Lomea" style={{ height: '40px' }} />
           </div>
           {!user && showBackButton && (
             <button className="btn-secondary" onClick={() => onNavigate('landing')}>

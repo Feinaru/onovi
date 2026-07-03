@@ -11,7 +11,7 @@ import './SlotCard.css';
 function SlotCard({ slot, onClick, onEdit, onDelete, onToggleStatus }) {
   const getStatusLabel = () => {
     if (slot.status === 'OPEN') {
-      return 'Live on Onovi';
+      return 'Live on Lomea';
     }
     if (slot.status === 'CANCELLED' || slot.status === 'EXPIRED') {
       return 'Unpublished';

@@ -20,7 +20,7 @@ export default function RegistrationEntryPage({ setView }) {
     <div className="registration-entry">
       <div className="registration-entry-container">
         <div className="registration-entry-header">
-          <h1 className="registration-entry-title">הצטרפו ל-Onovi</h1>
+          <h1 className="registration-entry-title">הצטרפו ל-Lomea</h1>
           <p className="registration-entry-subtitle">בחרו את סוג החשבון המתאים לכם</p>
         </div>
 

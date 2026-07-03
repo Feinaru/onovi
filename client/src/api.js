@@ -1,6 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
-// Migrate old storage keys to Onovi (safe migration)
+// Migrate old storage keys (safe migration)
+// Note: localStorage keys remain as 'onovi_*' to preserve existing user sessions
 function migrateStorageKeys() {
   // Migrate from pickme to onovi
   const pickmeToken = localStorage.getItem('pickme_token');

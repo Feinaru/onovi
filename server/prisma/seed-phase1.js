@@ -181,8 +181,8 @@ async function main() {
       code: 'marketing',
       titleHe: 'דיוור שיווקי',
       titleEn: 'Marketing Emails',
-      contentHe: 'אני מסכים/ה לקבל מיילים שיווקיים מ-Onovi',
-      contentEn: 'I agree to receive marketing emails from Onovi',
+      contentHe: 'אני מסכים/ה לקבל מיילים שיווקיים מ-Lomea',
+      contentEn: 'I agree to receive marketing emails from Lomea',
       isMandatory: false,
       requiresScroll: false,
       version: 1,
@@ -214,12 +214,12 @@ async function main() {
     const settings = [
       {
         key: 'document_disclaimer_he',
-        value: 'המסמכים המוצגים הועלו על ידי נותן השירות ונבדקו על ידי הצוות שלנו. Onovi אינה אחראית לתוכן המסמכים.',
+        value: 'המסמכים המוצגים הועלו על ידי נותן השירות ונבדקו על ידי הצוות שלנו. Lomea אינה אחראית לתוכן המסמכים.',
         updatedById: adminUser.id
       },
       {
         key: 'document_disclaimer_en',
-        value: 'The documents displayed were uploaded by the service provider and reviewed by our team. Onovi is not responsible for the content of the documents.',
+        value: 'The documents displayed were uploaded by the service provider and reviewed by our team. Lomea is not responsible for the content of the documents.',
         updatedById: adminUser.id
       }
     ];

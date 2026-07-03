@@ -27,7 +27,7 @@ function EventDetailsModal({ event, businessId, onClose, onEventUpdated, onEdit,
   const getEventTypeLabel = (eventType) => {
     const labels = {
       SLOT: 'חלון זמן פנוי',
-      BOOKING: 'תור Onovi',
+      BOOKING: 'תור Lomea',
       CALENDAR_EVENT: 'אירוע ביומן',
       TIME_BLOCK: 'חסימת זמן',
       VACATION: 'חופשה'
@@ -172,7 +172,7 @@ function EventDetailsModal({ event, businessId, onClose, onEventUpdated, onEdit,
             <label>סטטוס</label>
             <div className="event-details-value">
               <span className={`status-badge status-${event.status.toLowerCase()}`}>
-                {event.status === 'OPEN' ? '🟢 Live on Onovi' : '💤 לא מפורסם'}
+                {event.status === 'OPEN' ? '🟢 Live on Lomea' : '💤 לא מפורסם'}
               </span>
             </div>
           </div>

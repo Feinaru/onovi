@@ -37,7 +37,7 @@ export default function AuthPanel({ onLogin }) {
   return (
     <div style={{ maxWidth: '480px', margin: '0 auto' }}>
       <div className="page-header text-center">
-        <h1 className="page-title">{mode === 'login' ? 'כניסה ל-Onovi' : 'הרשמה ל-Onovi'}</h1>
+        <h1 className="page-title">{mode === 'login' ? 'כניסה ל-Lomea' : 'הרשמה ל-Lomea'}</h1>
         <p className="page-description">
           {mode === 'login'
             ? 'התחברו כדי לנהל את התורים שלכם'

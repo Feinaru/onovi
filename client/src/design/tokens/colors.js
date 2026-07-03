@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Color Tokens
+ * Lomea Design System - Color Tokens
  *
  * Visual direction: Premium, calm, clean
  * - Deep teal primary for trust and professionalism

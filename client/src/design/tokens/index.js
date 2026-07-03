@@ -1,5 +1,5 @@
 /**
- * Onovi Design System - Token Exports
+ * Lomea Design System - Token Exports
  *
  * Central export for all design tokens
  */
