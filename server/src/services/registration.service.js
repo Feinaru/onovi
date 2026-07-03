@@ -813,7 +813,7 @@ async function getCombinedBusinessStatus(businessId) {
  */
 async function submitForApproval(userId) {
   try {
-    // Get user's business
+    // 1. Get user's business
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: {
@@ -825,25 +825,68 @@ async function submitForApproval(userId) {
     });
 
     if (!user || !user.businesses || user.businesses.length === 0) {
-      return { success: false, error: 'No business found for this user' };
+      return { success: false, error: 'Cannot submit: No business found for this user' };
     }
 
     const business = user.businesses[0];
 
-    // Check if already submitted or approved
+    // 2. Check if already submitted or approved
     const currentApproval = await prisma.serviceProviderApproval.findFirst({
       where: { serviceProviderId: business.id },
       orderBy: { createdAt: 'desc' }
     });
 
-    if (currentApproval && currentApproval.status !== 'DRAFT') {
+    if (!currentApproval) {
+      return { success: false, error: 'Cannot submit: No approval record found' };
+    }
+
+    if (currentApproval.status !== 'DRAFT') {
       return {
         success: false,
-        error: `Registration already ${currentApproval.status.toLowerCase()}. Cannot resubmit.`
+        error: `Cannot submit: Registration already ${currentApproval.status.toLowerCase()}`
       };
     }
 
-    // Check mandatory consents
+    // 3. Validate business details are complete
+    if (!business.name || !business.identifierValue || !business.phone) {
+      return {
+        success: false,
+        error: 'Cannot submit: Business details incomplete',
+        details: {
+          missingFields: [
+            !business.name && 'Business name',
+            !business.identifierValue && 'Business identification number',
+            !business.phone && 'Phone number'
+          ].filter(Boolean)
+        }
+      };
+    }
+
+    // 4. Validate at least one profession exists
+    const professionCount = await prisma.businessProfession.count({
+      where: { businessId: business.id }
+    });
+
+    if (professionCount === 0) {
+      return {
+        success: false,
+        error: 'Cannot submit: At least one profession must be selected'
+      };
+    }
+
+    // 5. Validate at least one service exists
+    const serviceCount = await prisma.businessService.count({
+      where: { businessId: business.id }
+    });
+
+    if (serviceCount === 0) {
+      return {
+        success: false,
+        error: 'Cannot submit: At least one service must be registered'
+      };
+    }
+
+    // 6. Check mandatory consents
     const consentCheck = await checkMandatoryConsents(userId);
     if (!consentCheck.valid) {
       return {
@@ -853,7 +896,7 @@ async function submitForApproval(userId) {
       };
     }
 
-    // Check document requirements
+    // 7. Check document requirements
     const documentService = require('./document.service');
     const docStatus = await documentService.getDocumentStatus(business.id);
 
@@ -878,7 +921,7 @@ async function submitForApproval(userId) {
       };
     }
 
-    // Update ServiceProviderApproval status to PENDING_APPROVAL
+    // All validations passed - Update ServiceProviderApproval status to PENDING_APPROVAL
     const updatedApproval = await prisma.serviceProviderApproval.update({
       where: { id: currentApproval.id },
       data: {
