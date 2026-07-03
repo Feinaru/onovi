@@ -807,6 +807,103 @@ async function getCombinedBusinessStatus(businessId) {
   }
 }
 
+/**
+ * Submit registration for approval
+ * Updates ServiceProviderApproval status to PENDING_APPROVAL if all requirements met
+ */
+async function submitForApproval(userId) {
+  try {
+    // Get user's business
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        businesses: {
+          take: 1,
+          orderBy: { createdAt: 'desc' }
+        }
+      }
+    });
+
+    if (!user || !user.businesses || user.businesses.length === 0) {
+      return { success: false, error: 'No business found for this user' };
+    }
+
+    const business = user.businesses[0];
+
+    // Check if already submitted or approved
+    const currentApproval = await prisma.serviceProviderApproval.findFirst({
+      where: { serviceProviderId: business.id },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    if (currentApproval && currentApproval.status !== 'DRAFT') {
+      return {
+        success: false,
+        error: `Registration already ${currentApproval.status.toLowerCase()}. Cannot resubmit.`
+      };
+    }
+
+    // Check mandatory consents
+    const consentCheck = await checkMandatoryConsents(userId);
+    if (!consentCheck.valid) {
+      return {
+        success: false,
+        error: 'Cannot submit: Missing required consents',
+        details: consentCheck.missing || consentCheck.details
+      };
+    }
+
+    // Check document requirements
+    const documentService = require('./document.service');
+    const docStatus = await documentService.getDocumentStatus(business.id);
+
+    if (!docStatus.success) {
+      return {
+        success: false,
+        error: 'Cannot submit: Unable to verify document status',
+        details: docStatus.error
+      };
+    }
+
+    // Require all documents to be uploaded (not necessarily approved yet)
+    if (docStatus.data.uploadedCount < docStatus.data.requiredCount) {
+      return {
+        success: false,
+        error: 'Cannot submit: Not all required documents have been uploaded',
+        details: {
+          required: docStatus.data.requiredCount,
+          uploaded: docStatus.data.uploadedCount,
+          missing: docStatus.data.requiredCount - docStatus.data.uploadedCount
+        }
+      };
+    }
+
+    // Update ServiceProviderApproval status to PENDING_APPROVAL
+    const updatedApproval = await prisma.serviceProviderApproval.update({
+      where: { id: currentApproval.id },
+      data: {
+        status: 'PENDING_APPROVAL'
+      }
+    });
+
+    return {
+      success: true,
+      data: {
+        approvalId: updatedApproval.id,
+        status: updatedApproval.status,
+        updatedAt: updatedApproval.updatedAt
+      }
+    };
+  } catch (error) {
+    console.error('Submit for approval error:', error);
+    return {
+      success: false,
+      error: 'Failed to submit for approval',
+      details: error.message
+    };
+  }
+}
+
 module.exports = {
   createServiceProviderRegistration,
   getRegistrationStatus,
@@ -814,5 +911,6 @@ module.exports = {
   createSuggestionRequest,
   validateServiceHierarchy,
   validateCompleteHierarchy,
-  getCombinedBusinessStatus
+  getCombinedBusinessStatus,
+  submitForApproval
 };

@@ -264,4 +264,31 @@ router.post('/suggestion', auth(), async (req, res) => {
   }
 });
 
+/**
+ * POST /api/register/service-provider/submit
+ * Submit registration for approval (requires authentication)
+ */
+router.post('/service-provider/submit', auth(), async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const result = await registrationService.submitForApproval(userId);
+
+    if (!result.success) {
+      return res.status(400).json({
+        error: result.error,
+        details: result.details
+      });
+    }
+
+    res.json({
+      message: 'Registration submitted for approval successfully',
+      data: result.data
+    });
+  } catch (error) {
+    console.error('Submit for approval route error:', error);
+    res.status(500).json({ error: 'Failed to submit for approval' });
+  }
+});
+
 module.exports = router;
