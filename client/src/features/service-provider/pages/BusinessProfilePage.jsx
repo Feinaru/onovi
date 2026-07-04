@@ -135,6 +135,16 @@ export default function BusinessProfilePage() {
     return labels[status] || status;
   }
 
+  function getApprovalStatusDescription(status) {
+    const descriptions = {
+      DRAFT: 'יש להשלים את ההרשמה',
+      PENDING_APPROVAL: 'הבקשה נשלחה ונבדקת',
+      APPROVED: 'ניתן להתחיל לקבל הזמנות',
+      REJECTED: 'יש לעדכן את הפרטים בהתאם להערות'
+    };
+    return descriptions[status] || '';
+  }
+
   function getApprovalStatusClass(status) {
     const classes = {
       DRAFT: 'status-draft',
@@ -211,11 +221,16 @@ export default function BusinessProfilePage() {
             <span className="info-label">מספר מזהה:</span>
             <span className="info-value">{profile.identifierValue}</span>
           </div>
-          <div className="info-item">
+          <div className="info-item full-width">
             <span className="info-label">סטטוס אישור:</span>
-            <span className={`status-badge ${getApprovalStatusClass(profile.approvalStatus)}`}>
-              {getApprovalStatusLabel(profile.approvalStatus)}
-            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <span className={`status-badge ${getApprovalStatusClass(profile.approvalStatus)}`}>
+                {getApprovalStatusLabel(profile.approvalStatus)}
+              </span>
+              <span style={{ fontSize: '0.9rem', color: '#666' }}>
+                {getApprovalStatusDescription(profile.approvalStatus)}
+              </span>
+            </div>
           </div>
           {profile.adminNote && (
             <div className="info-item full-width">
@@ -263,10 +278,10 @@ export default function BusinessProfilePage() {
             />
           </div>
 
-          {/* Email */}
+          {/* Email - Account email (read-only) */}
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              אימייל
+              אימייל חשבון
             </label>
             <input
               type="email"
@@ -274,8 +289,12 @@ export default function BusinessProfilePage() {
               name="email"
               className="form-input"
               value={formData.email}
-              onChange={handleInputChange}
+              disabled
+              title="אימייל החשבון אינו ניתן לשינוי כאן"
             />
+            <small style={{ display: 'block', marginTop: '4px', color: '#666', fontSize: '0.85rem' }}>
+              לשינוי אימייל החשבון, עבור להגדרות חשבון
+            </small>
           </div>
 
           {/* City */}

@@ -62,7 +62,7 @@ router.get('/profile', async (req, res) => {
       where: { id: req.user.id },
       include: {
         businesses: {
-          where: { status: { in: ['DRAFT', 'PENDING_APPROVAL', 'ACTIVE', 'SUSPENDED'] } },
+          where: { status: { in: ['PENDING_APPROVAL', 'ACTIVE', 'SUSPENDED'] } },
           take: 1,
           include: {
             approvals: {
@@ -143,7 +143,7 @@ router.put('/profile', async (req, res) => {
       where: { id: req.user.id },
       include: {
         businesses: {
-          where: { status: { in: ['DRAFT', 'PENDING_APPROVAL', 'ACTIVE', 'SUSPENDED'] } },
+          where: { status: { in: ['PENDING_APPROVAL', 'ACTIVE', 'SUSPENDED'] } },
           take: 1
         }
       }

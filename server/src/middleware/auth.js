@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 function auth(required = true) {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const header = req.headers.authorization || '';
     const token = header.startsWith('Bearer ') ? header.slice(7) : null;
 
@@ -11,7 +13,19 @@ function auth(required = true) {
     }
 
     try {
-      req.user = jwt.verify(token, process.env.JWT_SECRET);
+      const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+      // Fetch full user from database
+      const user = await prisma.user.findUnique({
+        where: { id: payload.id },
+        select: { id: true, role: true, email: true, phone: true, fullName: true }
+      });
+
+      if (!user) {
+        return res.status(401).json({ message: 'User not found' });
+      }
+
+      req.user = user;
       return next();
     } catch (error) {
       return res.status(401).json({ message: 'Invalid token' });
