@@ -149,7 +149,7 @@ export default function AuthPanel({ onLogin }) {
             🧪 חשבונות דמו לבדיקה
           </div>
           <div style={{ display: 'grid', gap: 'var(--space-2)', color: 'var(--text-primary)' }}>
-            <div><strong>👨‍💼 אדמין:</strong> 0500000001 / 123456</div>
+            <div><strong>👨‍💼 אדמין:</strong> 0500000001 / admin123</div>
             <div><strong>💼 עסק:</strong> 0500000002 / 123456</div>
             <div><strong>👤 לקוח:</strong> 0500000003 / 123456</div>
           </div>

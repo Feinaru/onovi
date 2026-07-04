@@ -5,6 +5,7 @@ import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './features/customer/CustomerPage';
 import BusinessPage from './features/business/BusinessPage';
+import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
 import AdminPage from './pages/AdminPage';
 import LandingPage from './pages/LandingPage';
 import CRMPage from './pages/CRMPage';
@@ -417,6 +418,9 @@ function App() {
 
         {/* Business View */}
         {view === 'business' && <BusinessPage user={user} setView={setView} />}
+
+        {/* Service Provider Workspace */}
+        {view === 'service-provider' && <ServiceProviderWorkspace user={user} setView={setView} />}
 
         {/* Admin View */}
         {view === 'admin' && user.role === 'ADMIN' && <AdminPage user={user} setView={setView} />}

@@ -11,9 +11,14 @@ export function getNavItems(user) {
     items.push({ id: 'customer', label: 'מצא תורים', icon: '🔍' });
   }
 
-  // Business navigation
+  // Business navigation (legacy)
   if (user.role === 'BUSINESS') {
     items.push({ id: 'business', label: 'ניהול עסק', icon: '💼' });
+  }
+
+  // Service Provider navigation
+  if (user.role === 'SERVICE_PROVIDER') {
+    items.push({ id: 'service-provider', label: 'אזור העבודה', icon: '💼' });
   }
 
   // Admin navigation
@@ -30,6 +35,7 @@ export function getNavItems(user) {
 export function getHomeView(user) {
   if (!user) return 'landing';
   if (user.role === 'ADMIN') return 'admin';
+  if (user.role === 'SERVICE_PROVIDER') return 'service-provider';
   if (user.role === 'BUSINESS') return 'business';
   return 'customer';
 }
