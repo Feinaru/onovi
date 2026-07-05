@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getToken } from '../../../api';
 import './ServicesPage.css';
 
 /**
@@ -41,7 +42,7 @@ export default function ServicesPage({ user }) {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
+      const token = getToken();
       const response = await fetch('/api/service-provider/services', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -124,7 +125,7 @@ export default function ServicesPage({ user }) {
       setSubmitting(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
+      const token = getToken();
       const response = await fetch(`/api/service-provider/services/${editingService.id}`, {
         method: 'PUT',
         headers: {
@@ -165,7 +166,7 @@ export default function ServicesPage({ user }) {
     try {
       setError(null);
 
-      const token = localStorage.getItem('token');
+      const token = getToken();
       const response = await fetch(`/api/service-provider/services/${service.id}`, {
         method: 'PUT',
         headers: {

@@ -32,11 +32,12 @@ enum BusinessStatus {
 }
 
 enum SlotStatus {
-  OPEN
-  RESERVED
-  BOOKED
-  CANCELLED
-  EXPIRED
+  OPEN      // At least one legal booking time remains
+  RESERVED  // Legacy - avoid using for new code
+  BOOKED    // Legacy - avoid using for new code
+  FULL      // No legal booking time remains for any allowed service
+  CANCELLED // Provider cancelled the slot
+  EXPIRED   // Slot date/time has passed
 }
 
 enum BookingStatus {
@@ -272,12 +273,14 @@ model BusinessService {
   updatedAt DateTime @updatedAt
 
   // Relations
-  business        Business                  @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  serviceTemplate ServiceTemplate?          @relation(fields: [serviceTemplateId], references: [id], onDelete: Restrict)
-  approvedBy      User?                     @relation("ServiceApprover", fields: [approvedById], references: [id])
-  slots           Slot[]
-  bookings        Booking[]
-  documents       BusinessServiceDocument[]
+  business             Business                  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  serviceTemplate      ServiceTemplate?          @relation(fields: [serviceTemplateId], references: [id], onDelete: Restrict)
+  approvedBy           User?                     @relation("ServiceApprover", fields: [approvedById], references: [id])
+  slots                Slot[]
+  bookingsLegacy       Booking[]                 @relation("BookingLegacyService")
+  bookings             Booking[]                 @relation("BookingBusinessService")
+  documents            BusinessServiceDocument[]
+  slotAllowedServices  SlotAllowedService[]
 
   @@map("Service") // Keep existing table name in database
 }
@@ -286,11 +289,11 @@ model Slot {
   id           Int        @id @default(autoincrement())
   publicId     String?    @unique @default(uuid()) @map("public_id")
   businessId   Int
-  serviceId    Int
+  serviceId    Int?       // Legacy field - will be removed after migration
   date         String
   startTime    String
   endTime      String
-  regularPrice Int
+  regularPrice Int?       // Made optional for multi-service slots
   dealPrice    Int?
   status       SlotStatus @default(OPEN)
   note         String?
@@ -307,20 +310,40 @@ model Slot {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  business Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  service  BusinessService @relation(fields: [serviceId], references: [id])
-  bookings Booking[]
+  business        Business             @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  service         BusinessService?     @relation(fields: [serviceId], references: [id])
+  bookings        Booking[]
+  allowedServices SlotAllowedService[] // Junction to allowed services
 
   @@index([businessId, date])
+  @@index([businessId, date, status])
+}
+
+model SlotAllowedService {
+  id                Int @id @default(autoincrement())
+  slotId            Int
+  businessServiceId Int
+
+  slot            Slot            @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  businessService BusinessService @relation(fields: [businessServiceId], references: [id], onDelete: Cascade)
+
+  @@unique([slotId, businessServiceId])
+  @@index([slotId])
 }
 
 model Booking {
-  id            Int           @id @default(autoincrement())
-  publicId      String?       @unique @default(uuid()) @map("public_id")
-  customerId    Int?
-  businessId    Int
-  serviceId     Int
-  slotId        Int
+  id                Int           @id @default(autoincrement())
+  publicId          String?       @unique @default(uuid()) @map("public_id")
+  customerId        Int?
+  businessId        Int
+  serviceId         Int?          // Legacy field - will be removed after migration
+  businessServiceId Int?          // New field - references BusinessService
+  slotId            Int           // No longer unique - multiple bookings per slot
+
+  // Track exact time within slot
+  startTime    String? // e.g., "10:15"
+  endTime      String? // e.g., "10:45"
+
   customerName  String
   customerPhone String
   customerNote  String?
@@ -331,10 +354,15 @@ model Booking {
   cancelledAt   DateTime?
   updatedAt     DateTime      @updatedAt
 
-  customer User?           @relation(fields: [customerId], references: [id])
-  business Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  service  BusinessService @relation(fields: [serviceId], references: [id])
-  slot     Slot            @relation(fields: [slotId], references: [id])
+  customer        User?           @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  business        Business        @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  service         BusinessService? @relation("BookingLegacyService", fields: [serviceId], references: [id])
+  businessService BusinessService? @relation("BookingBusinessService", fields: [businessServiceId], references: [id])
+  slot            Slot            @relation(fields: [slotId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, status])
+  @@index([slotId, status])
+  @@index([slotId, startTime])
 }
 
 model Lead {

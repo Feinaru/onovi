@@ -6,6 +6,8 @@ import ServicesPage from './pages/ServicesPage';
 import ServiceGroupsPage from './pages/ServiceGroupsPage';
 import SettingsPage from './pages/SettingsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
+import CalendarPage from './pages/CalendarPage';
+import BookingsPage from './pages/BookingsPage';
 
 /**
  * ServiceProviderWorkspace - Main workspace for service providers
@@ -15,13 +17,13 @@ import ComingSoonPage from './pages/ComingSoonPage';
  * - Business (active)
  * - Services (active)
  * - Service Groups (active)
- * - Calendar (coming soon)
- * - Bookings (coming soon)
+ * - Calendar (active - Epic 2)
+ * - Bookings (active - Epic 2)
  * - Customers (coming soon)
  * - Reports (coming soon)
  * - Settings (active)
  */
-export default function ServiceProviderWorkspace({ user, setView }) {
+export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
   const [activePage, setActivePage] = useState('dashboard');
   const [approvalStatus, setApprovalStatus] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,8 +49,8 @@ export default function ServiceProviderWorkspace({ user, setView }) {
     { id: 'business', label: 'פרטי העסק', icon: '🏢', active: true },
     { id: 'services', label: 'שירותים', icon: '✂️', active: true },
     { id: 'service-groups', label: 'קבוצות שירותים', icon: '📦', active: true },
-    { id: 'calendar', label: 'יומן', icon: '📅', active: false },
-    { id: 'bookings', label: 'הזמנות', icon: '📋', active: false },
+    { id: 'calendar', label: 'תורים', icon: '📅', active: true },
+    { id: 'bookings', label: 'הזמנות', icon: '📋', active: true },
     { id: 'customers', label: 'לקוחות', icon: '👥', active: false },
     { id: 'reports', label: 'דוחות', icon: '📈', active: false },
     { id: 'settings', label: 'הגדרות', icon: '⚙️', active: true }
@@ -91,6 +93,10 @@ export default function ServiceProviderWorkspace({ user, setView }) {
         return <ServicesPage user={user} />;
       case 'service-groups':
         return <ServiceGroupsPage user={user} />;
+      case 'calendar':
+        return <CalendarPage user={user} />;
+      case 'bookings':
+        return <BookingsPage user={user} />;
       case 'settings':
         return <SettingsPage user={user} />;
       default:
@@ -120,6 +126,17 @@ export default function ServiceProviderWorkspace({ user, setView }) {
             </button>
           ))}
         </nav>
+
+        {/* Logout button at bottom */}
+        <div style={{ marginTop: 'auto', padding: 'var(--space-4)' }}>
+          <button
+            className="btn-secondary"
+            style={{ width: '100%' }}
+            onClick={onLogout}
+          >
+            התנתק
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}

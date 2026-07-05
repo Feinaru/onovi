@@ -47,7 +47,7 @@ function AppLayout({ user, view, navItems, onNavigate, onLogout, children }) {
             </div>
           </div>
           <button className="btn-secondary" style={{ width: '100%' }} onClick={onLogout}>
-            יציאה
+            התנתק
           </button>
         </div>
       </aside>
@@ -72,7 +72,7 @@ function AppLayout({ user, view, navItems, onNavigate, onLogout, children }) {
           ))}
           <button className="mobile-nav-item" onClick={onLogout}>
             <span style={{ fontSize: '20px' }}>🚪</span>
-            <span>יציאה</span>
+            <span>התנתק</span>
           </button>
         </div>
       </nav>

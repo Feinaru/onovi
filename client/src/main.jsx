@@ -403,7 +403,17 @@ function App() {
     );
   }
 
-  // Show app shell with role-based navigation for logged-in users
+  // Service Provider Workspace has its own layout (not wrapped in AppLayout)
+  if (user && view === 'service-provider') {
+    return (
+      <>
+        <ServiceProviderWorkspace user={user} setView={setView} onLogout={logout} />
+        <Toast message={message} />
+      </>
+    );
+  }
+
+  // Show app shell with role-based navigation for logged-in users (Customer, Business, Admin, CRM)
   return (
     <>
       <AppLayout
@@ -418,9 +428,6 @@ function App() {
 
         {/* Business View */}
         {view === 'business' && <BusinessPage user={user} setView={setView} />}
-
-        {/* Service Provider Workspace */}
-        {view === 'service-provider' && <ServiceProviderWorkspace user={user} setView={setView} />}
 
         {/* Admin View */}
         {view === 'admin' && user.role === 'ADMIN' && <AdminPage user={user} setView={setView} />}

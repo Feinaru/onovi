@@ -266,14 +266,19 @@ router.get('/:businessId', auth(), async (req, res, next) => {
 /**
  * POST /api/calendar/:businessId/slots
  * Create a new slot (published gap)
+ *
+ * Epic 2 - Sprint B: Now supports allowedServiceIds for multi-booking
+ *
+ * IMPORTANT: serviceId is kept ONLY for backward compatibility.
+ * New flow should use allowedServiceIds (array of BusinessService IDs).
  */
-router.post('/:businessId/slots', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
+router.post('/:businessId/slots', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 'ADMIN'), async (req, res, next) => {
   try {
     const businessId = Number(req.params.businessId);
-    const { serviceId, date, startTime, endTime, regularPrice, dealPrice, note, title, color } = req.body;
+    const { serviceId, date, startTime, endTime, regularPrice, dealPrice, note, title, color, allowedServiceIds } = req.body;
 
-    if (!serviceId || !date || !startTime || !endTime || !regularPrice) {
-      return res.status(400).json({ message: 'serviceId, date, startTime, endTime, and regularPrice are required' });
+    if (!date || !startTime || !endTime || !regularPrice) {
+      return res.status(400).json({ message: 'date, startTime, endTime, and regularPrice are required' });
     }
 
     if (!(await assertOwnBusiness(req.user, businessId))) {
@@ -286,10 +291,52 @@ router.post('/:businessId/slots', auth(), requireRole('BUSINESS', 'ADMIN'), asyn
       return res.status(409).json({ message: 'Slot conflicts detected', conflicts });
     }
 
+    // Epic 2 - Sprint B: Validate and prepare allowedServiceIds
+    let allowedServiceIdsToUse = allowedServiceIds;
+
+    // If no allowedServiceIds provided, default to all active + customer-visible services
+    if (!allowedServiceIdsToUse || allowedServiceIdsToUse.length === 0) {
+      const activeServices = await prisma.businessService.findMany({
+        where: {
+          businessId,
+          active: true,
+          visibleToCustomers: true,
+          approvalStatus: 'APPROVED'
+        },
+        select: { id: true }
+      });
+      allowedServiceIdsToUse = activeServices.map(s => s.id);
+    } else {
+      // Validate all allowedServiceIds belong to this business and are active + visible
+      const serviceIds = allowedServiceIdsToUse.map(id => Number(id));
+      const validServices = await prisma.businessService.findMany({
+        where: {
+          id: { in: serviceIds },
+          businessId,
+          active: true,
+          visibleToCustomers: true
+        },
+        select: { id: true }
+      });
+
+      if (validServices.length !== serviceIds.length) {
+        return res.status(400).json({
+          message: 'Invalid allowedServiceIds: all services must belong to this business and be active + visible to customers'
+        });
+      }
+    }
+
+    // Determine serviceId for legacy compatibility
+    const legacyServiceId = serviceId || (allowedServiceIdsToUse.length > 0 ? allowedServiceIdsToUse[0] : null);
+
+    if (!legacyServiceId) {
+      return res.status(400).json({ message: 'No services available for this slot. Please add services to your business first.' });
+    }
+
     const slot = await prisma.slot.create({
       data: {
         businessId,
-        serviceId: Number(serviceId),
+        serviceId: Number(legacyServiceId), // Legacy field
         date,
         startTime,
         endTime,
@@ -303,7 +350,32 @@ router.post('/:businessId/slots', auth(), requireRole('BUSINESS', 'ADMIN'), asyn
       include: { service: true }
     });
 
-    res.status(201).json(slot);
+    // Epic 2 - Sprint B: Create SlotAllowedService records
+    if (allowedServiceIdsToUse && allowedServiceIdsToUse.length > 0) {
+      await prisma.slotAllowedService.createMany({
+        data: allowedServiceIdsToUse.map(sid => ({
+          slotId: slot.id,
+          businessServiceId: Number(sid)
+        }))
+      });
+    }
+
+    // Fetch and return slot with allowed services
+    const slotWithServices = await prisma.slot.findUnique({
+      where: { id: slot.id },
+      include: {
+        service: true,
+        allowedServices: {
+          include: {
+            businessService: {
+              include: { serviceTemplate: true }
+            }
+          }
+        }
+      }
+    });
+
+    res.status(201).json(slotWithServices);
   } catch (e) {
     next(e);
   }

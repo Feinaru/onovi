@@ -20,6 +20,12 @@ function SlotsTab({
   async function createSlot(e) {
     e.preventDefault();
 
+    // Validate allowedServiceIds
+    if (!slotForm.allowedServiceIds || slotForm.allowedServiceIds.length === 0) {
+      showMessage('חובה לבחור לפחות שירות אחד');
+      return;
+    }
+
     try {
       await api('/slots', {
         method: 'POST',

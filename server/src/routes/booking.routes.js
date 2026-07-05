@@ -1,125 +1,544 @@
+/**
+ * Booking Routes - Epic 2 Sprint C
+ *
+ * Implements atomic booking creation with row locking, legal time validation,
+ * status management, cancellation, and reschedule.
+ */
+
 const router = require('express').Router();
 const prisma = require('../lib/prisma');
 const { auth, requireRole } = require('../middleware/auth');
+const { getLegalStartTimes } = require('../services/slotAvailability.service');
+const { recalculateSlotStatus } = require('../services/slotStatus.service');
+const { ACTIVE_BOOKING_STATUSES, CANCELLED_BOOKING_STATUSES } = require('../constants/bookingStatuses');
 
+/**
+ * Helper: Calculate end time from start time and duration
+ */
+function calculateEndTime(startTime, durationMinutes) {
+  const [hours, minutes] = startTime.split(':').map(Number);
+  const totalMinutes = hours * 60 + minutes + durationMinutes;
+  const endHours = Math.floor(totalMinutes / 60);
+  const endMinutes = totalMinutes % 60;
+  return `${String(endHours).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`;
+}
+
+/**
+ * Helper: Parse time string to minutes
+ */
+function timeToMinutes(timeStr) {
+  const [hours, minutes] = timeStr.split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
+/**
+ * GET /bookings - List bookings
+ */
 router.get('/', auth(false), async (req, res, next) => {
   try {
     const where = {};
-    if (req.query.mine === 'true' && req.user?.role === 'CUSTOMER') where.customerId = req.user.id;
-    if (req.query.businessId) where.businessId = Number(req.query.businessId);
+
+    // Filter by customer (authenticated)
+    if (req.query.mine === 'true' && req.user?.id) {
+      where.customerId = req.user.id;
+    }
+
+    // Filter by business
+    if (req.query.businessId) {
+      where.businessId = Number(req.query.businessId);
+    }
+
+    // Filter by slot
+    if (req.query.slotId) {
+      where.slotId = Number(req.query.slotId);
+    }
+
     const bookings = await prisma.booking.findMany({
       where,
-      include: { business: true, service: true, slot: true, customer: { select: { id: true, fullName: true, phone: true, email: true } } },
-      orderBy: { id: 'desc' }
+      include: {
+        business: true,
+        businessService: {
+          include: { serviceTemplate: true }
+        },
+        slot: true,
+        customer: {
+          select: { id: true, fullName: true, phone: true, email: true }
+        }
+      },
+      orderBy: [
+        { createdAt: 'desc' }
+      ]
     });
+
     res.json(bookings);
-  } catch (e) { next(e); }
+  } catch (e) {
+    next(e);
+  }
 });
 
+/**
+ * POST /bookings - Create booking with atomic locking and legal time validation
+ */
 router.post('/', auth(false), async (req, res, next) => {
   try {
-    const { slotId, customerName, customerPhone, customerNote } = req.body;
-    if (!slotId || !customerName || !customerPhone) return res.status(400).json({ message: 'slotId, customerName and customerPhone are required' });
+    const {
+      slotId,
+      businessServiceId,
+      startTime,
+      customerName,
+      customerPhone,
+      customerEmail,
+      customerNote
+    } = req.body;
 
-    const result = await prisma.$transaction(async (tx) => {
-      const slot = await tx.slot.findUnique({ where: { id: Number(slotId) } });
-      if (!slot) {
-        const err = new Error('Slot not found'); err.status = 404; throw err;
-      }
-      if (slot.status !== 'OPEN') {
-        const err = new Error('התור הזה כבר לא זמין'); err.status = 409; throw err;
-      }
-      const activeBooking = await tx.booking.findFirst({
-        where: { slotId: slot.id, status: { in: ['PENDING', 'CONFIRMED'] } }
+    // Validation
+    if (!slotId || !businessServiceId || !startTime || !customerName || !customerPhone) {
+      return res.status(400).json({
+        message: 'slotId, businessServiceId, startTime, customerName, customerPhone are required'
       });
-      if (activeBooking) {
-        const err = new Error('התור הזה כבר לא זמין'); err.status = 409; throw err;
+    }
+
+    // Execute in transaction with row locking
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Lock the slot row using SELECT ... FOR UPDATE
+      const slot = await tx.$queryRaw`
+        SELECT * FROM "Slot"
+        WHERE "id" = ${Number(slotId)}
+        FOR UPDATE
+      `;
+
+      if (!slot || slot.length === 0) {
+        const err = new Error('Slot not found');
+        err.status = 404;
+        throw err;
       }
-      await tx.slot.update({ where: { id: slot.id }, data: { status: 'RESERVED' } });
-      return tx.booking.create({
+
+      const lockedSlot = slot[0];
+
+      // 2. Get full slot details with allowed services
+      const slotDetails = await tx.slot.findUnique({
+        where: { id: Number(slotId) },
+        include: {
+          allowedServices: {
+            where: { businessServiceId: Number(businessServiceId) },
+            include: {
+              businessService: {
+                include: { serviceTemplate: true }
+              }
+            }
+          }
+        }
+      });
+
+      // 3. Verify service is allowed in this slot
+      if (!slotDetails.allowedServices || slotDetails.allowedServices.length === 0) {
+        const err = new Error('השירות הזה לא זמין בתור הזה');
+        err.status = 400;
+        throw err;
+      }
+
+      const allowedService = slotDetails.allowedServices[0];
+      const businessService = allowedService.businessService;
+
+      // Get service duration
+      const durationMinutes = businessService.serviceTemplate
+        ? businessService.serviceTemplate.defaultDurationMinutes
+        : businessService.durationMinutes;
+
+      // 4. Recalculate legal start times inside transaction
+      const legalTimes = await getLegalStartTimes(
+        tx,
+        Number(slotId),
+        Number(businessServiceId),
+        null // no excludeBookingId for new booking
+      );
+
+      // 5. Verify requested time is legal
+      const requestedTime = startTime;
+      const isLegal = legalTimes.some(t => {
+        const tStr = typeof t === 'string' ? t : t.startTime;
+        return tStr === requestedTime;
+      });
+
+      if (!isLegal) {
+        const err = new Error('השעה המבוקשת כבר לא זמינה. אנא רענן את הדף ובחר שעה אחרת');
+        err.status = 409;
+        err.availableTimes = legalTimes.map(t => typeof t === 'string' ? t : t.startTime);
+        throw err;
+      }
+
+      // 6. Calculate end time
+      const endTime = calculateEndTime(startTime, durationMinutes);
+
+      // 7. Create booking
+      const booking = await tx.booking.create({
         data: {
-          customerId: req.user?.role === 'CUSTOMER' ? req.user.id : null,
-          businessId: slot.businessId,
-          serviceId: slot.serviceId,
-          slotId: slot.id,
+          customerId: req.user?.id || null,
+          businessId: lockedSlot.businessId,
+          businessServiceId: Number(businessServiceId),
+          slotId: Number(slotId),
+          startTime,
+          endTime,
+          price: businessService.regularPrice,
           customerName,
           customerPhone,
           customerNote,
-          price: slot.dealPrice || slot.regularPrice,
           status: 'PENDING'
         }
       });
+
+      // 8. Recalculate slot status
+      await recalculateSlotStatus(tx, Number(slotId));
+
+      // 9. Return complete booking with all fields
+      return tx.booking.findUnique({
+        where: { id: booking.id },
+        include: {
+          businessService: {
+            include: { serviceTemplate: true }
+          },
+          slot: true,
+          business: true
+        }
+      });
+    }, {
+      timeout: 10000, // 10 second timeout
+      isolationLevel: 'Serializable' // Highest isolation level for concurrency safety
     });
+
     res.status(201).json(result);
-  } catch (e) { next(e); }
+  } catch (e) {
+    // Enhanced error handling for conflicts
+    if (e.status === 409) {
+      return res.status(409).json({
+        message: e.message,
+        availableTimes: e.availableTimes
+      });
+    }
+
+    // Handle Postgres serialization failures from concurrent bookings
+    if (e.code === '40001' || e.message?.includes('could not serialize')) {
+      return res.status(409).json({
+        message: 'השעה המבוקשת כבר לא זמינה. אנא רענן את הדף ובחר שעה אחרת'
+      });
+    }
+
+    next(e);
+  }
 });
 
-router.patch('/:id/confirm', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
-  try {
-    const bookingId = Number(req.params.id);
-    const booking = await prisma.booking.findUnique({ where: { id: bookingId }, include: { business: true } });
-    if (!booking) return res.status(404).json({ message: 'Booking not found' });
-    if (req.user.role !== 'ADMIN' && booking.business.ownerId !== req.user.id) return res.status(403).json({ message: 'Forbidden' });
-    const result = await prisma.$transaction(async (tx) => {
-      await tx.slot.update({ where: { id: booking.slotId }, data: { status: 'BOOKED' } });
-      return tx.booking.update({ where: { id: bookingId }, data: { status: 'CONFIRMED', confirmedAt: new Date() } });
-    });
-    res.json(result);
-  } catch (e) { next(e); }
-});
-
-router.patch('/:id/status', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
+/**
+ * PATCH /bookings/:id/status - Update booking status
+ */
+router.patch('/:id/status', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 'ADMIN'), async (req, res, next) => {
   try {
     const bookingId = Number(req.params.id);
     const { status } = req.body;
 
-    const validStatuses = ['PENDING', 'APPROVED', 'REJECTED', 'COMPLETED', 'CANCELLED'];
+    // Validate status
+    const validStatuses = [
+      'CONFIRMED',
+      'REJECTED',
+      'CANCELLED_BY_BUSINESS',
+      'COMPLETED',
+      'NO_SHOW'
+    ];
+
     if (!status || !validStatuses.includes(status)) {
-      return res.status(400).json({ message: 'Valid status required: PENDING, APPROVED, REJECTED, COMPLETED, CANCELLED' });
+      return res.status(400).json({
+        message: `Valid status required: ${validStatuses.join(', ')}`
+      });
     }
 
-    const booking = await prisma.booking.findUnique({ where: { id: bookingId }, include: { business: true } });
-    if (!booking) return res.status(404).json({ message: 'Booking not found' });
-    if (req.user.role !== 'ADMIN' && booking.business.ownerId !== req.user.id) {
-      return res.status(403).json({ message: 'Forbidden' });
-    }
-
-    const updateData = { status };
-    if (status === 'APPROVED') updateData.confirmedAt = new Date();
-    if (status === 'CANCELLED' || status === 'REJECTED') updateData.cancelledAt = new Date();
-
-    const result = await prisma.$transaction(async (tx) => {
-      // Update slot status based on booking status
-      if (status === 'APPROVED') {
-        await tx.slot.update({ where: { id: booking.slotId }, data: { status: 'BOOKED' } });
-      } else if (status === 'CANCELLED' || status === 'REJECTED') {
-        await tx.slot.update({ where: { id: booking.slotId }, data: { status: 'OPEN' } });
-      }
-      return tx.booking.update({ where: { id: bookingId }, data: updateData });
+    // Get booking and verify ownership
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { business: true }
     });
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    // Authorization check
+    if (req.user.role !== 'ADMIN') {
+      const business = await prisma.business.findUnique({
+        where: { id: booking.businessId }
+      });
+
+      if (!business || business.ownerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    }
+
+    // Update booking in transaction
+    const result = await prisma.$transaction(async (tx) => {
+      const updateData = { status };
+
+      // Set timestamps based on status
+      if (status === 'CONFIRMED') {
+        updateData.confirmedAt = new Date();
+      } else if (CANCELLED_BOOKING_STATUSES.includes(status)) {
+        updateData.cancelledAt = new Date();
+      }
+
+      const updatedBooking = await tx.booking.update({
+        where: { id: bookingId },
+        data: updateData
+      });
+
+      // Recalculate slot status if booking was cancelled/rejected
+      if (CANCELLED_BOOKING_STATUSES.includes(status)) {
+        await recalculateSlotStatus(tx, booking.slotId);
+      }
+
+      // Return complete booking with all fields
+      return tx.booking.findUnique({
+        where: { id: bookingId },
+        include: {
+          businessService: {
+            include: { serviceTemplate: true }
+          },
+          slot: true,
+          business: true
+        }
+      });
+    });
+
     res.json(result);
-  } catch (e) { next(e); }
+  } catch (e) {
+    next(e);
+  }
 });
 
-router.patch('/:id/cancel', auth(false), async (req, res, next) => {
+/**
+ * PATCH /bookings/:id/cancel - Cancel booking
+ * Requires authentication. Guest cancellation not allowed without token/code mechanism.
+ */
+router.patch('/:id/cancel', auth(), async (req, res, next) => {
   try {
     const bookingId = Number(req.params.id);
-    const booking = await prisma.booking.findUnique({ where: { id: bookingId }, include: { business: true } });
-    if (!booking) return res.status(404).json({ message: 'Booking not found' });
 
-    let status = 'CANCELLED_BY_CUSTOMER';
-    if (req.user?.role === 'BUSINESS') {
-      if (booking.business.ownerId !== req.user.id) return res.status(403).json({ message: 'Forbidden' });
-      status = 'CANCELLED_BY_BUSINESS';
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { business: true }
+    });
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
     }
-    if (req.user?.role === 'ADMIN') status = 'CANCELLED_BY_BUSINESS';
+
+    // Determine cancellation type based on user role
+    let status = 'CANCELLED_BY_CUSTOMER';
+
+    if (req.user.role === 'ADMIN') {
+      status = 'CANCELLED_BY_BUSINESS';
+    } else if (req.user.role === 'BUSINESS' || req.user.role === 'SERVICE_PROVIDER') {
+      // Verify ownership
+      const business = await prisma.business.findUnique({
+        where: { id: booking.businessId }
+      });
+
+      if (!business || business.ownerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+
+      status = 'CANCELLED_BY_BUSINESS';
+    } else if (req.user.role === 'CUSTOMER') {
+      // Verify customer owns this booking
+      if (booking.customerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    }
 
     const result = await prisma.$transaction(async (tx) => {
-      await tx.slot.update({ where: { id: booking.slotId }, data: { status: 'OPEN' } });
-      return tx.booking.update({ where: { id: bookingId }, data: { status, cancelledAt: new Date() } });
+      await tx.booking.update({
+        where: { id: bookingId },
+        data: {
+          status,
+          cancelledAt: new Date()
+        }
+      });
+
+      // Recalculate slot status to potentially reopen
+      await recalculateSlotStatus(tx, booking.slotId);
+
+      // Return complete booking with all fields
+      return tx.booking.findUnique({
+        where: { id: bookingId },
+        include: {
+          businessService: {
+            include: { serviceTemplate: true }
+          },
+          slot: true,
+          business: true
+        }
+      });
     });
+
     res.json(result);
-  } catch (e) { next(e); }
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
+ * PATCH /bookings/:id/reschedule - Reschedule booking atomically
+ * Requires authentication. Guest reschedule not allowed without token/code mechanism.
+ */
+router.patch('/:id/reschedule', auth(), async (req, res, next) => {
+  try {
+    const bookingId = Number(req.params.id);
+    const { newSlotId, newBusinessServiceId, newStartTime } = req.body;
+
+    if (!newSlotId || !newBusinessServiceId || !newStartTime) {
+      return res.status(400).json({
+        message: 'newSlotId, newBusinessServiceId, newStartTime are required'
+      });
+    }
+
+    // Get original booking
+    const originalBooking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { business: true }
+    });
+
+    if (!originalBooking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    // Authorization: Customer can only manage own bookings, Provider can manage business bookings
+    if (req.user.role === 'CUSTOMER' && originalBooking.customerId !== req.user.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    } else if (req.user.role === 'BUSINESS' || req.user.role === 'SERVICE_PROVIDER') {
+      const business = await prisma.business.findUnique({
+        where: { id: originalBooking.businessId }
+      });
+
+      if (!business || business.ownerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    }
+
+    // Execute reschedule in transaction
+    const result = await prisma.$transaction(async (tx) => {
+      const oldSlotId = originalBooking.slotId;
+      const newSlotIdNum = Number(newSlotId);
+
+      // Lock both slots one-by-one in deterministic order to prevent deadlocks
+      // Collect unique slot IDs and sort ascending
+      const slotIdsSet = new Set([oldSlotId, newSlotIdNum]);
+      const slotIds = Array.from(slotIdsSet).sort((a, b) => a - b);
+
+      // Lock each slot individually in order
+      for (const slotId of slotIds) {
+        await tx.$queryRaw`
+          SELECT * FROM "Slot"
+          WHERE "id" = ${slotId}
+          FOR UPDATE
+        `;
+      }
+
+      // Get new slot details
+      const newSlot = await tx.slot.findUnique({
+        where: { id: newSlotIdNum },
+        include: {
+          allowedServices: {
+            where: { businessServiceId: Number(newBusinessServiceId) },
+            include: {
+              businessService: {
+                include: { serviceTemplate: true }
+              }
+            }
+          }
+        }
+      });
+
+      if (!newSlot) {
+        const err = new Error('New slot not found');
+        err.status = 404;
+        throw err;
+      }
+
+      // Verify service is allowed
+      if (!newSlot.allowedServices || newSlot.allowedServices.length === 0) {
+        const err = new Error('השירות הזה לא זמין בתור החדש');
+        err.status = 400;
+        throw err;
+      }
+
+      const businessService = newSlot.allowedServices[0].businessService;
+      const durationMinutes = businessService.serviceTemplate
+        ? businessService.serviceTemplate.defaultDurationMinutes
+        : businessService.durationMinutes;
+
+      // Get legal times for new slot, excluding THIS booking
+      const legalTimes = await getLegalStartTimes(
+        tx,
+        newSlotIdNum,
+        Number(newBusinessServiceId),
+        bookingId // Exclude this booking so it doesn't block itself
+      );
+
+      // Verify new time is legal
+      const isLegal = legalTimes.some(t => {
+        const tStr = typeof t === 'string' ? t : t.startTime;
+        return tStr === newStartTime;
+      });
+
+      if (!isLegal) {
+        const err = new Error('השעה החדשה לא זמינה');
+        err.status = 409;
+        err.availableTimes = legalTimes.map(t => typeof t === 'string' ? t : t.startTime);
+        throw err;
+      }
+
+      // Calculate new end time
+      const newEndTime = calculateEndTime(newStartTime, durationMinutes);
+
+      // Update booking
+      await tx.booking.update({
+        where: { id: bookingId },
+        data: {
+          slotId: newSlotIdNum,
+          businessServiceId: Number(newBusinessServiceId),
+          startTime: newStartTime,
+          endTime: newEndTime,
+          price: businessService.regularPrice
+        }
+      });
+
+      // Recalculate status for BOTH old and new slots
+      await recalculateSlotStatus(tx, oldSlotId, bookingId);
+      await recalculateSlotStatus(tx, newSlotIdNum);
+
+      // Return complete booking with all fields
+      return tx.booking.findUnique({
+        where: { id: bookingId },
+        include: {
+          businessService: {
+            include: { serviceTemplate: true }
+          },
+          slot: true,
+          business: true
+        }
+      });
+
+    }, {
+      timeout: 10000,
+      isolationLevel: 'Serializable'
+    });
+
+    res.json(result);
+  } catch (e) {
+    if (e.status === 409) {
+      return res.status(409).json({
+        message: e.message,
+        availableTimes: e.availableTimes
+      });
+    }
+    next(e);
+  }
 });
 
 module.exports = router;

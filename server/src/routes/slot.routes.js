@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const prisma = require('../lib/prisma');
 const { auth, requireRole } = require('../middleware/auth');
+const { getLegalStartTimes } = require('../services/slotAvailability.service');
 
 async function assertOwnBusiness(user, businessId) {
   if (user.role === 'ADMIN') return true;
@@ -22,6 +23,8 @@ async function assertOwnBusiness(user, businessId) {
  *
  * Lomea is a gap-filling platform, not a general booking platform.
  * See: /AVAILABILITY_MODEL.md for full documentation
+ *
+ * Epic 2 - Sprint B: Now includes allowed services for multi-booking support
  */
 router.get('/', async (req, res, next) => {
   try {
@@ -57,7 +60,17 @@ router.get('/', async (req, res, next) => {
     // Get all slots (before filter for debugging)
     const allSlots = await prisma.slot.findMany({
       where: includeAll === 'true' ? {} : { status: 'OPEN' },
-      include: { business: { include: { category: true } }, service: true },
+      include: {
+        business: { include: { category: true } },
+        service: true,
+        allowedServices: {
+          include: {
+            businessService: {
+              include: { serviceTemplate: true }
+            }
+          }
+        }
+      },
     });
 
     console.log('[SlotRoutes] Total slots in DB (status filter only):', allSlots.length);
@@ -65,7 +78,17 @@ router.get('/', async (req, res, next) => {
     // Get filtered slots
     const slots = await prisma.slot.findMany({
       where,
-      include: { business: { include: { category: true } }, service: true },
+      include: {
+        business: { include: { category: true } },
+        service: true,
+        allowedServices: {
+          include: {
+            businessService: {
+              include: { serviceTemplate: true }
+            }
+          }
+        }
+      },
       orderBy: [{ date: 'asc' }, { startTime: 'asc' }]
     });
 
@@ -96,7 +119,19 @@ router.get('/', async (req, res, next) => {
       }
     }
 
-    res.json(slots);
+    // Format response to include allowed services
+    const slotsWithServices = slots.map(slot => ({
+      ...slot,
+      allowedServices: slot.allowedServices.map(as => ({
+        id: as.businessService.id,
+        name: as.businessService.name,
+        durationMinutes: as.businessService.durationMinutes,
+        regularPrice: as.businessService.regularPrice,
+        serviceTemplateId: as.businessService.serviceTemplateId
+      }))
+    }));
+
+    res.json(slotsWithServices);
   } catch (e) { next(e); }
 });
 
@@ -115,22 +150,104 @@ router.get('/', async (req, res, next) => {
  * - Syncing working hours
  * - Auto-generating availability
  * - Importing calendar events
+ *
+ * Epic 2 - Sprint B: Now supports allowedServiceIds for multi-booking
+ *
+ * IMPORTANT: serviceId is kept ONLY for backward compatibility with legacy slots.
+ * New flow should use allowedServiceIds (array of BusinessService IDs).
  */
 router.post('/', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
   try {
-    const { businessId, serviceId, date, startTime, endTime, regularPrice, dealPrice, note } = req.body;
-    if (!businessId || !serviceId || !date || !startTime || !endTime || !regularPrice) {
-      return res.status(400).json({ message: 'businessId, serviceId, date, startTime, endTime and regularPrice are required' });
+    const { businessId, serviceId, date, startTime, endTime, regularPrice, dealPrice, note, allowedServiceIds } = req.body;
+    if (!businessId || !date || !startTime || !endTime || !regularPrice) {
+      return res.status(400).json({ message: 'businessId, date, startTime, endTime and regularPrice are required' });
     }
     if (regularPrice <= 0) return res.status(400).json({ message: 'regularPrice must be positive' });
     if (startTime >= endTime) return res.status(400).json({ message: 'startTime must be before endTime' });
     if (!(await assertOwnBusiness(req.user, businessId))) return res.status(403).json({ message: 'Forbidden for this business' });
 
+    // Epic 2 - Sprint B: Validate and prepare allowedServiceIds
+    let allowedServiceIdsToUse = allowedServiceIds;
+
+    // If no allowedServiceIds provided, default to all active + customer-visible services
+    if (!allowedServiceIdsToUse || allowedServiceIdsToUse.length === 0) {
+      const activeServices = await prisma.businessService.findMany({
+        where: {
+          businessId: Number(businessId),
+          active: true,
+          visibleToCustomers: true,
+          approvalStatus: 'APPROVED'
+        },
+        select: { id: true }
+      });
+      allowedServiceIdsToUse = activeServices.map(s => s.id);
+    } else {
+      // Validate all allowedServiceIds belong to this business and are active + visible
+      const serviceIds = allowedServiceIdsToUse.map(id => Number(id));
+      const validServices = await prisma.businessService.findMany({
+        where: {
+          id: { in: serviceIds },
+          businessId: Number(businessId),
+          active: true,
+          visibleToCustomers: true
+        },
+        select: { id: true }
+      });
+
+      if (validServices.length !== serviceIds.length) {
+        return res.status(400).json({
+          message: 'Invalid allowedServiceIds: all services must belong to this business and be active + visible to customers'
+        });
+      }
+    }
+
+    // Determine serviceId for legacy compatibility
+    // Use first allowed service or provided serviceId
+    const legacyServiceId = serviceId || (allowedServiceIdsToUse.length > 0 ? allowedServiceIdsToUse[0] : null);
+
+    if (!legacyServiceId) {
+      return res.status(400).json({ message: 'No services available for this slot. Please add services to your business first.' });
+    }
+
     // Create slot with status: OPEN by default (immediately visible to customers)
     const slot = await prisma.slot.create({
-      data: { businessId: Number(businessId), serviceId: Number(serviceId), date, startTime, endTime, regularPrice: Number(regularPrice), dealPrice: dealPrice ? Number(dealPrice) : null, note }
+      data: {
+        businessId: Number(businessId),
+        serviceId: Number(legacyServiceId), // Legacy field for backward compatibility
+        date,
+        startTime,
+        endTime,
+        regularPrice: Number(regularPrice),
+        dealPrice: dealPrice ? Number(dealPrice) : null,
+        note
+      }
     });
-    res.status(201).json(slot);
+
+    // Epic 2 - Sprint B: Create SlotAllowedService records
+    if (allowedServiceIdsToUse && allowedServiceIdsToUse.length > 0) {
+      await prisma.slotAllowedService.createMany({
+        data: allowedServiceIdsToUse.map(sid => ({
+          slotId: slot.id,
+          businessServiceId: Number(sid)
+        }))
+      });
+    }
+
+    // Fetch and return slot with allowed services
+    const slotWithServices = await prisma.slot.findUnique({
+      where: { id: slot.id },
+      include: {
+        allowedServices: {
+          include: {
+            businessService: {
+              include: { serviceTemplate: true }
+            }
+          }
+        }
+      }
+    });
+
+    res.status(201).json(slotWithServices);
   } catch (e) { next(e); }
 });
 
@@ -175,6 +292,66 @@ router.delete('/:id', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res,
     await prisma.slot.delete({ where: { id: slotId } });
     res.json({ message: 'Slot deleted' });
   } catch (e) { next(e); }
+});
+
+/**
+ * GET /slots/:slotId/available-times - Get available booking times for a service in a slot
+ *
+ * Epic 2 - Sprint B: Multi-booking support
+ *
+ * Returns legal start times for a specific service in a slot, accounting for:
+ * - Existing bookings
+ * - No-dead-edge rule
+ * - Service duration
+ *
+ * Query params:
+ * - businessServiceId (required): The service to check availability for
+ * - excludeBookingId (optional): Booking ID to exclude (for reschedule)
+ */
+router.get('/:slotId/available-times', async (req, res, next) => {
+  try {
+    const slotId = Number(req.params.slotId);
+    const { businessServiceId, excludeBookingId } = req.query;
+
+    if (!businessServiceId) {
+      return res.status(400).json({ message: 'businessServiceId is required' });
+    }
+
+    // Verify slot exists
+    const slot = await prisma.slot.findUnique({
+      where: { id: slotId },
+      include: {
+        allowedServices: {
+          where: { businessServiceId: Number(businessServiceId) }
+        }
+      }
+    });
+
+    if (!slot) {
+      return res.status(404).json({ message: 'Slot not found' });
+    }
+
+    // Verify service is allowed in this slot
+    if (slot.allowedServices.length === 0) {
+      return res.status(400).json({ message: 'Service not allowed in this slot' });
+    }
+
+    // Get legal start times using slotAvailability service
+    const legalTimes = await getLegalStartTimes(
+      prisma,
+      slotId,
+      Number(businessServiceId),
+      excludeBookingId ? Number(excludeBookingId) : null
+    );
+
+    res.json({
+      slotId,
+      businessServiceId: Number(businessServiceId),
+      availableTimes: legalTimes
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;

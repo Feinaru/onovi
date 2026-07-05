@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getToken } from '../../../api';
 import './BusinessProfilePage.css';
 
 /**
@@ -39,7 +40,7 @@ export default function BusinessProfilePage() {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
+      const token = getToken();
       const response = await fetch('/api/service-provider/business/profile', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -179,7 +180,7 @@ export default function BusinessProfilePage() {
       setError(null);
       setSuccess(null);
 
-      const token = localStorage.getItem('token');
+      const token = getToken();
       const response = await fetch('/api/service-provider/business/profile', {
         method: 'PUT',
         headers: {

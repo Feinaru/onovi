@@ -17,6 +17,8 @@
     "db:generate": "npx prisma generate",
     "db:push": "npx prisma db push",
     "db:reset": "npx prisma migrate reset",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "test:flow": "bash test-flow.sh",
     "test:addresses": "node test-addresses.js",
     "test:crm": "node test-crm-api.js",
@@ -42,6 +44,8 @@
     "prisma": "^6.19.3"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
     "nodemon": "^3.1.14"
   }
 }
