@@ -3,6 +3,8 @@ import { api } from '../../api';
 import DashboardPage from './pages/DashboardPage';
 import BusinessProfilePage from './pages/BusinessProfilePage';
 import ServicesPage from './pages/ServicesPage';
+import ServiceGroupsPage from './pages/ServiceGroupsPage';
+import SettingsPage from './pages/SettingsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
 
 /**
@@ -12,6 +14,7 @@ import ComingSoonPage from './pages/ComingSoonPage';
  * - Dashboard (active)
  * - Business (active)
  * - Services (active)
+ * - Service Groups (active)
  * - Calendar (coming soon)
  * - Bookings (coming soon)
  * - Customers (coming soon)
@@ -43,6 +46,7 @@ export default function ServiceProviderWorkspace({ user, setView }) {
     { id: 'dashboard', label: 'לוח בקרה', icon: '📊', active: true },
     { id: 'business', label: 'פרטי העסק', icon: '🏢', active: true },
     { id: 'services', label: 'שירותים', icon: '✂️', active: true },
+    { id: 'service-groups', label: 'קבוצות שירותים', icon: '📦', active: true },
     { id: 'calendar', label: 'יומן', icon: '📅', active: false },
     { id: 'bookings', label: 'הזמנות', icon: '📋', active: false },
     { id: 'customers', label: 'לקוחות', icon: '👥', active: false },
@@ -85,8 +89,10 @@ export default function ServiceProviderWorkspace({ user, setView }) {
         return <BusinessProfilePage user={user} />;
       case 'services':
         return <ServicesPage user={user} />;
+      case 'service-groups':
+        return <ServiceGroupsPage user={user} />;
       case 'settings':
-        return <ComingSoonPage pageName="הגדרות" icon="⚙️" />;
+        return <SettingsPage user={user} />;
       default:
         return <DashboardPage user={user} approvalStatus={approvalStatus} />;
     }

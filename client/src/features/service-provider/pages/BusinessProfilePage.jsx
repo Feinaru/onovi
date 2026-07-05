@@ -23,7 +23,10 @@ export default function BusinessProfilePage() {
     description: '',
     city: '',
     street: '',
-    houseNumber: ''
+    houseNumber: '',
+    logoUrl: '',
+    coverImageUrl: '',
+    galleryImages: []
   });
 
   // Fetch profile on mount
@@ -51,6 +54,14 @@ export default function BusinessProfilePage() {
 
       if (data.success) {
         setProfile(data.data);
+        let parsedGallery = [];
+        if (data.data.galleryImages) {
+          try {
+            parsedGallery = JSON.parse(data.data.galleryImages);
+          } catch (e) {
+            console.error('Failed to parse gallery images:', e);
+          }
+        }
         setFormData({
           name: data.data.name || '',
           phone: data.data.phone || '',
@@ -58,7 +69,10 @@ export default function BusinessProfilePage() {
           description: data.data.description || '',
           city: data.data.city || '',
           street: data.data.street || '',
-          houseNumber: data.data.houseNumber || ''
+          houseNumber: data.data.houseNumber || '',
+          logoUrl: data.data.logoUrl || '',
+          coverImageUrl: data.data.coverImageUrl || '',
+          galleryImages: parsedGallery
         });
       }
     } catch (err) {
@@ -74,6 +88,75 @@ export default function BusinessProfilePage() {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  }
+
+  function handleImageUpload(fieldName, event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      setError('יש לבחור קובץ תמונה בלבד');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError('גודל הקובץ חייב להיות עד 5MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setFormData(prev => ({
+        ...prev,
+        [fieldName]: e.target.result
+      }));
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleGalleryAdd(event) {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) return;
+
+    // Limit to 10 images
+    const remainingSlots = 10 - formData.galleryImages.length;
+    if (files.length > remainingSlots) {
+      setError(`ניתן להעלות עד ${remainingSlots} תמונות נוספות`);
+      return;
+    }
+
+    const readers = files.map(file => {
+      return new Promise((resolve) => {
+        if (!file.type.startsWith('image/')) {
+          resolve(null);
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          resolve(null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(readers).then(results => {
+      const validImages = results.filter(r => r !== null);
+      setFormData(prev => ({
+        ...prev,
+        galleryImages: [...prev.galleryImages, ...validImages]
+      }));
+    });
+  }
+
+  function handleGalleryRemove(index) {
+    setFormData(prev => ({
+      ...prev,
+      galleryImages: prev.galleryImages.filter((_, i) => i !== index)
     }));
   }
 
@@ -356,6 +439,102 @@ export default function BusinessProfilePage() {
               rows="4"
               placeholder="תאר את העסק שלך..."
             />
+          </div>
+        </div>
+
+        {/* Media Section */}
+        <h2 className="section-title" style={{ marginTop: 'var(--space-8)' }}>מדיה</h2>
+        <div className="form-grid">
+          {/* Logo */}
+          <div className="form-group">
+            <label className="form-label">לוגו</label>
+            <div className="image-upload-area">
+              {formData.logoUrl ? (
+                <div className="image-preview">
+                  <img src={formData.logoUrl} alt="Logo" />
+                  <button
+                    type="button"
+                    className="btn-remove-image"
+                    onClick={() => setFormData(prev => ({ ...prev, logoUrl: '' }))}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <label className="upload-placeholder">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload('logoUrl', e)}
+                    style={{ display: 'none' }}
+                  />
+                  <span>📷</span>
+                  <span>העלה לוגו</span>
+                </label>
+              )}
+            </div>
+          </div>
+
+          {/* Cover Image */}
+          <div className="form-group">
+            <label className="form-label">תמונת רקע</label>
+            <div className="image-upload-area">
+              {formData.coverImageUrl ? (
+                <div className="image-preview">
+                  <img src={formData.coverImageUrl} alt="Cover" />
+                  <button
+                    type="button"
+                    className="btn-remove-image"
+                    onClick={() => setFormData(prev => ({ ...prev, coverImageUrl: '' }))}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <label className="upload-placeholder">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload('coverImageUrl', e)}
+                    style={{ display: 'none' }}
+                  />
+                  <span>📷</span>
+                  <span>העלה תמונת רקע</span>
+                </label>
+              )}
+            </div>
+          </div>
+
+          {/* Gallery */}
+          <div className="form-group full-width">
+            <label className="form-label">גלריה (עד 10 תמונות)</label>
+            <div className="gallery-grid">
+              {formData.galleryImages.map((img, index) => (
+                <div key={index} className="gallery-item">
+                  <img src={img} alt={`Gallery ${index + 1}`} />
+                  <button
+                    type="button"
+                    className="btn-remove-image"
+                    onClick={() => handleGalleryRemove(index)}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {formData.galleryImages.length < 10 && (
+                <label className="gallery-upload-placeholder">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleGalleryAdd}
+                    style={{ display: 'none' }}
+                  />
+                  <span>+</span>
+                  <span>הוסף תמונות</span>
+                </label>
+              )}
+            </div>
           </div>
         </div>
 

@@ -2,47 +2,47 @@ import { useState, useEffect } from 'react';
 import './ServicesPage.css';
 
 /**
- * ServicesPage - Service Groups Management
- * Phase 13.2
+ * ServicesPage - Individual Services Management
+ * Epic 1 - Sprint A
  *
- * Service Group = BusinessProfession + BusinessService records
- * Displays groups by Field > Profession > Services
+ * Manage individual BusinessService records
+ * Features: Edit name, price, duration, active/inactive, visible to customers
+ * Calendar color placeholder for future
+ * No deletion from this screen (deletion happens through Service Groups)
  */
 export default function ServicesPage({ user }) {
-  const [serviceGroups, setServiceGroups] = useState([]);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
   // Modal state
-  const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState('add'); // 'add' or 'edit'
-  const [editingGroup, setEditingGroup] = useState(null);
-
-  // Form state
-  const [fields, setFields] = useState([]);
-  const [professions, setProfessions] = useState([]);
-  const [services, setServices] = useState([]);
-  const [selectedFieldId, setSelectedFieldId] = useState('');
-  const [selectedProfessionId, setSelectedProfessionId] = useState('');
-  const [selectedServiceIds, setSelectedServiceIds] = useState([]);
-
-  // Modals
-  const [deleteConfirmGroup, setDeleteConfirmGroup] = useState(null);
+  const [editingService, setEditingService] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  // Form state
+  const [formData, setFormData] = useState({
+    customName: '',
+    description: '',
+    durationMinutes: 0,
+    regularPrice: 0,
+    active: true,
+    visibleToCustomers: true,
+    calendarColor: ''
+  });
+
   useEffect(() => {
-    fetchServiceGroups();
-    fetchFields();
+    fetchServices();
   }, []);
 
-  async function fetchServiceGroups() {
+  async function fetchServices() {
     try {
       setLoading(true);
       setError(null);
 
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/service-provider/service-groups', {
+      const response = await fetch('/api/service-provider/services', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -51,131 +51,72 @@ export default function ServicesPage({ user }) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to load service groups');
+        throw new Error(data.error || 'Failed to load services');
       }
 
       if (data.success) {
-        setServiceGroups(data.data);
+        setServices(data.data);
       }
     } catch (err) {
-      console.error('Fetch service groups error:', err);
+      console.error('Fetch services error:', err);
       setError(err.message);
     } finally {
       setLoading(false);
     }
   }
 
-  async function fetchFields() {
-    try {
-      const response = await fetch('/api/registration/fields');
-      const data = await response.json();
-      setFields(data);
-    } catch (err) {
-      console.error('Fetch fields error:', err);
-    }
-  }
-
-  async function fetchProfessions(fieldId) {
-    try {
-      const response = await fetch(`/api/registration/fields/${fieldId}/professions`);
-      const data = await response.json();
-      setProfessions(data);
-    } catch (err) {
-      console.error('Fetch professions error:', err);
-    }
-  }
-
-  async function fetchServices(professionId) {
-    try {
-      const response = await fetch(`/api/registration/professions/${professionId}/services`);
-      const data = await response.json();
-      setServices(data);
-    } catch (err) {
-      console.error('Fetch services error:', err);
-    }
-  }
-
-  function handleAddClick() {
-    setModalMode('add');
-    setEditingGroup(null);
-    setSelectedFieldId('');
-    setSelectedProfessionId('');
-    setSelectedServiceIds([]);
-    setProfessions([]);
-    setServices([]);
-    setShowModal(true);
-  }
-
-  function handleEditClick(group) {
-    setModalMode('edit');
-    setEditingGroup(group);
-    setSelectedFieldId(group.fieldId);
-    setSelectedProfessionId(group.professionId);
-    setSelectedServiceIds(group.services.map(s => s.serviceTemplateId));
-
-    // Fetch professions and services
-    fetchProfessions(group.fieldId);
-    fetchServices(group.professionId);
-
-    setShowModal(true);
-  }
-
-  function handleDeleteClick(group) {
-    setDeleteConfirmGroup(group);
+  function handleEditClick(service) {
+    setEditingService(service);
+    setFormData({
+      customName: service.name,
+      description: service.description || '',
+      durationMinutes: service.durationMinutes,
+      regularPrice: service.regularPrice,
+      active: service.active,
+      visibleToCustomers: service.visibleToCustomers,
+      calendarColor: service.calendarColor || ''
+    });
+    setShowEditModal(true);
   }
 
   function handleCloseModal() {
-    setShowModal(false);
-    setModalMode('add');
-    setEditingGroup(null);
-    setSelectedFieldId('');
-    setSelectedProfessionId('');
-    setSelectedServiceIds([]);
-    setProfessions([]);
-    setServices([]);
+    setShowEditModal(false);
+    setEditingService(null);
+    setFormData({
+      customName: '',
+      description: '',
+      durationMinutes: 0,
+      regularPrice: 0,
+      active: true,
+      visibleToCustomers: true,
+      calendarColor: ''
+    });
   }
 
-  function handleFieldChange(e) {
-    const fieldId = e.target.value;
-    setSelectedFieldId(fieldId);
-    setSelectedProfessionId('');
-    setSelectedServiceIds([]);
-    setProfessions([]);
-    setServices([]);
-
-    if (fieldId) {
-      fetchProfessions(fieldId);
-    }
+  function handleInputChange(e) {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   }
 
-  function handleProfessionChange(e) {
-    const professionId = e.target.value;
-    setSelectedProfessionId(professionId);
-    setSelectedServiceIds([]);
-    setServices([]);
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    if (professionId) {
-      fetchServices(professionId);
-    }
-  }
-
-  function handleServiceToggle(serviceId) {
-    setSelectedServiceIds(prev =>
-      prev.includes(serviceId)
-        ? prev.filter(id => id !== serviceId)
-        : [...prev, serviceId]
-    );
-  }
-
-  async function handleSubmit() {
     // Validate
-    if (!selectedFieldId || !selectedProfessionId) {
-      setError('יש לבחור תחום ומקצוע');
+    if (!formData.customName.trim()) {
+      setError('שם השירות הוא שדה חובה');
       return;
     }
 
-    if (selectedServiceIds.length === 0) {
-      setError('יש לבחור לפחות שירות אחד');
+    if (formData.durationMinutes <= 0) {
+      setError('משך השירות חייב להיות גדול מ-0');
+      return;
+    }
+
+    if (formData.regularPrice < 0) {
+      setError('מחיר לא יכול להיות שלילי');
       return;
     }
 
@@ -184,103 +125,90 @@ export default function ServicesPage({ user }) {
       setError(null);
 
       const token = localStorage.getItem('token');
-
-      let response;
-      if (modalMode === 'add') {
-        response = await fetch('/api/service-provider/service-groups', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            fieldId: parseInt(selectedFieldId),
-            professionId: parseInt(selectedProfessionId),
-            serviceTemplateIds: selectedServiceIds
-          })
-        });
-      } else {
-        response = await fetch(`/api/service-provider/service-groups/${editingGroup.businessProfessionId}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            serviceTemplateIds: selectedServiceIds
-          })
-        });
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to save service group');
-      }
-
-      if (data.success) {
-        setSuccess(modalMode === 'add' ? 'קבוצת שירותים נוספה בהצלחה' : 'קבוצת שירותים עודכנה בהצלחה');
-        handleCloseModal();
-        await fetchServiceGroups();
-      }
-    } catch (err) {
-      console.error('Save service group error:', err);
-      setError(err.message);
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  async function handleDeleteConfirm() {
-    if (!deleteConfirmGroup) return;
-
-    try {
-      setSubmitting(true);
-      setError(null);
-
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/service-provider/service-groups/${deleteConfirmGroup.businessProfessionId}`, {
-        method: 'DELETE',
+      const response = await fetch(`/api/service-provider/services/${editingService.id}`, {
+        method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          customName: formData.customName,
+          description: formData.description || null,
+          durationMinutes: parseInt(formData.durationMinutes),
+          regularPrice: parseInt(formData.regularPrice),
+          active: formData.active,
+          visibleToCustomers: formData.visibleToCustomers,
+          calendarColor: formData.calendarColor || null
+        })
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to delete service group');
+        throw new Error(data.error || 'Failed to update service');
       }
 
       if (data.success) {
-        setSuccess('קבוצת שירותים נמחקה בהצלחה');
-        setDeleteConfirmGroup(null);
-        await fetchServiceGroups();
+        setSuccess('השירות עודכן בהצלחה');
+        handleCloseModal();
+        await fetchServices();
       }
     } catch (err) {
-      console.error('Delete service group error:', err);
+      console.error('Update service error:', err);
       setError(err.message);
     } finally {
       setSubmitting(false);
     }
   }
 
+  async function handleToggleActive(service) {
+    try {
+      setError(null);
+
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/service-provider/services/${service.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          active: !service.active
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to update service');
+      }
+
+      if (data.success) {
+        setSuccess(`השירות ${!service.active ? 'הופעל' : 'הושבת'} בהצלחה`);
+        await fetchServices();
+      }
+    } catch (err) {
+      console.error('Toggle service error:', err);
+      setError(err.message);
+    }
+  }
+
   if (loading) {
     return (
-      <div className="services-page">
+      <div className="services-management-page">
         <div className="loading-state">
           <div className="spinner"></div>
-          <p>טוען קבוצות שירותים...</p>
+          <p>טוען שירותים...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="services-page">
+    <div className="services-management-page">
       <div className="page-header">
         <h1>ניהול שירותים</h1>
-        <p className="page-description">נהל את קבוצות השירותים שלך - תחומים, מקצועות ושירותים</p>
+        <p className="page-description">ערוך ונהל את השירותים שלך</p>
       </div>
 
       {/* Messages */}
@@ -300,198 +228,211 @@ export default function ServicesPage({ user }) {
         </div>
       )}
 
-      <div className="page-actions">
-        <button className="btn-primary" onClick={handleAddClick}>
-          + הוסף קבוצת שירותים
-        </button>
-      </div>
-
-      {/* Service Groups List */}
-      {serviceGroups.length === 0 ? (
+      {/* Services List */}
+      {services.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-icon">✂️</div>
-          <div className="empty-state-title">אין עדיין קבוצות שירותים</div>
+          <div className="empty-state-title">אין עדיין שירותים</div>
           <div className="empty-state-description">
-            התחל בהוספת קבוצת שירותים ראשונה כדי להציע שירותים ללקוחות שלך
+            הוסף שירותים דרך קבוצות שירותים כדי להתחיל
           </div>
-          <button className="btn-primary" onClick={handleAddClick}>
-            + הוסף קבוצת שירותים
-          </button>
         </div>
       ) : (
-        <div className="service-groups-list">
-          {serviceGroups.map(group => (
-            <div key={group.businessProfessionId} className="service-group-card">
-              <div className="service-group-header">
-                <div className="service-group-info">
-                  <div className="service-group-field">{group.fieldName}</div>
-                  <div className="service-group-profession">{group.professionName}</div>
-                </div>
-                <div className="service-group-actions">
-                  <button
-                    className="btn-icon btn-edit"
-                    onClick={() => handleEditClick(group)}
-                    title="ערוך"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    className="btn-icon btn-delete"
-                    onClick={() => handleDeleteClick(group)}
-                    title="מחק"
-                  >
-                    🗑️
-                  </button>
-                </div>
-              </div>
-
-              <div className="services-list">
-                {group.services.map(service => (
-                  <div key={service.id} className="service-item">
-                    <div className="service-name">{service.name}</div>
-                    <div className="service-details">
-                      <span>{service.durationMinutes} דקות</span>
-                      <span>₪{service.regularPrice}</span>
+        <div className="services-table">
+          <table>
+            <thead>
+              <tr>
+                <th>שם השירות</th>
+                <th>תחום / מקצוע</th>
+                <th>משך (דקות)</th>
+                <th>מחיר (₪)</th>
+                <th>סטטוס</th>
+                <th>גלוי ללקוחות</th>
+                <th>פעולות</th>
+              </tr>
+            </thead>
+            <tbody>
+              {services.map(service => (
+                <tr key={service.id} className={!service.active ? 'inactive-row' : ''}>
+                  <td>
+                    <div className="service-name-cell">
+                      <span className="service-name">{service.name}</span>
+                      {service.description && (
+                        <span className="service-description">{service.description}</span>
+                      )}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                  </td>
+                  <td>
+                    <div className="service-category">
+                      <span className="field-name">{service.fieldName}</span>
+                      <span className="profession-name">{service.professionName}</span>
+                    </div>
+                  </td>
+                  <td>{service.durationMinutes}</td>
+                  <td>₪{service.regularPrice}</td>
+                  <td>
+                    <span className={`status-badge ${service.active ? 'active' : 'inactive'}`}>
+                      {service.active ? 'פעיל' : 'מושבת'}
+                    </span>
+                  </td>
+                  <td>
+                    <span className={`visibility-badge ${service.visibleToCustomers ? 'visible' : 'hidden'}`}>
+                      {service.visibleToCustomers ? 'גלוי' : 'מוסתר'}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="action-buttons">
+                      <button
+                        className="btn-icon btn-edit"
+                        onClick={() => handleEditClick(service)}
+                        title="ערוך"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        className={`btn-icon ${service.active ? 'btn-disable' : 'btn-enable'}`}
+                        onClick={() => handleToggleActive(service)}
+                        title={service.active ? 'השבת' : 'הפעל'}
+                      >
+                        {service.active ? '⏸️' : '▶️'}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 
-      {/* Add/Edit Modal */}
-      {showModal && (
+      {/* Edit Modal */}
+      {showEditModal && editingService && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2 className="modal-title">
-                {modalMode === 'add' ? 'הוסף קבוצת שירותים' : 'ערוך קבוצת שירותים'}
-              </h2>
+              <h2 className="modal-title">ערוך שירות</h2>
               <button className="modal-close" onClick={handleCloseModal}>✕</button>
             </div>
 
-            <div className="modal-body">
-              {/* Field */}
-              <div className="form-group">
-                <label className="form-label required">תחום</label>
-                <select
-                  className="form-select"
-                  value={selectedFieldId}
-                  onChange={handleFieldChange}
-                  disabled={modalMode === 'edit'}
-                >
-                  <option value="">בחר תחום</option>
-                  {fields.map(field => (
-                    <option key={field.id} value={field.id}>
-                      {field.nameHebrew}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Profession */}
-              <div className="form-group">
-                <label className="form-label required">מקצוע</label>
-                <select
-                  className="form-select"
-                  value={selectedProfessionId}
-                  onChange={handleProfessionChange}
-                  disabled={!selectedFieldId || modalMode === 'edit'}
-                >
-                  <option value="">בחר מקצוע</option>
-                  {professions.map(profession => (
-                    <option key={profession.id} value={profession.id}>
-                      {profession.nameHebrew}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Services */}
-              {selectedProfessionId && services.length > 0 && (
-                <div className="form-group">
-                  <label className="form-label required">שירותים</label>
-                  <div className="services-selection">
-                    {services.map(service => (
-                      <label key={service.id} className="service-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedServiceIds.includes(service.id)}
-                          onChange={() => handleServiceToggle(service.id)}
-                        />
-                        <div className="service-checkbox-label">
-                          <div className="service-checkbox-name">{service.nameHebrew}</div>
-                          <div className="service-checkbox-info">
-                            {service.defaultDurationMinutes} דקות • ₪{service.defaultPrice || 0}
-                          </div>
-                        </div>
-                      </label>
-                    ))}
+            <form onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <div className="form-grid">
+                  {/* Service Name */}
+                  <div className="form-group full-width">
+                    <label className="form-label required">שם השירות</label>
+                    <input
+                      type="text"
+                      name="customName"
+                      className="form-input"
+                      value={formData.customName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <small className="form-hint">שם ברירת מחדל: {editingService.templateName}</small>
                   </div>
-                  <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
-                    נבחרו {selectedServiceIds.length} שירותים
-                  </small>
+
+                  {/* Description */}
+                  <div className="form-group full-width">
+                    <label className="form-label">תיאור</label>
+                    <textarea
+                      name="description"
+                      className="form-textarea"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      rows="3"
+                    />
+                  </div>
+
+                  {/* Duration */}
+                  <div className="form-group">
+                    <label className="form-label required">משך (דקות)</label>
+                    <input
+                      type="number"
+                      name="durationMinutes"
+                      className="form-input"
+                      value={formData.durationMinutes}
+                      onChange={handleInputChange}
+                      min="1"
+                      max="1440"
+                      required
+                    />
+                  </div>
+
+                  {/* Price */}
+                  <div className="form-group">
+                    <label className="form-label required">מחיר (₪)</label>
+                    <input
+                      type="number"
+                      name="regularPrice"
+                      className="form-input"
+                      value={formData.regularPrice}
+                      onChange={handleInputChange}
+                      min="0"
+                      required
+                    />
+                  </div>
+
+                  {/* Active Status */}
+                  <div className="form-group">
+                    <label className="form-checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="active"
+                        checked={formData.active}
+                        onChange={handleInputChange}
+                      />
+                      <span>שירות פעיל</span>
+                    </label>
+                  </div>
+
+                  {/* Visible to Customers */}
+                  <div className="form-group">
+                    <label className="form-checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="visibleToCustomers"
+                        checked={formData.visibleToCustomers}
+                        onChange={handleInputChange}
+                      />
+                      <span>גלוי ללקוחות</span>
+                    </label>
+                  </div>
+
+                  {/* Calendar Color (placeholder for future) */}
+                  <div className="form-group full-width">
+                    <label className="form-label">צבע ביומן (בעתיד)</label>
+                    <input
+                      type="text"
+                      name="calendarColor"
+                      className="form-input"
+                      value={formData.calendarColor}
+                      onChange={handleInputChange}
+                      placeholder="#3B82F6"
+                      disabled
+                    />
+                    <small className="form-hint">תכונה זו תהיה זמינה בגרסה עתידית</small>
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
 
-            <div className="modal-footer">
-              <button
-                className="btn-primary"
-                onClick={handleSubmit}
-                disabled={submitting || !selectedFieldId || !selectedProfessionId || selectedServiceIds.length === 0}
-              >
-                {submitting ? 'שומר...' : 'שמור'}
-              </button>
-              <button
-                className="btn-secondary"
-                onClick={handleCloseModal}
-                disabled={submitting}
-              >
-                ביטול
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Delete Confirmation Modal */}
-      {deleteConfirmGroup && (
-        <div className="modal-overlay" onClick={() => setDeleteConfirmGroup(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '400px' }}>
-            <div className="modal-header">
-              <h2 className="modal-title">אישור מחיקה</h2>
-              <button className="modal-close" onClick={() => setDeleteConfirmGroup(null)}>✕</button>
-            </div>
-
-            <div className="modal-body">
-              <p>האם אתה בטוח שברצונך למחוק את קבוצת השירותים?</p>
-              <p style={{ marginTop: '8px', fontWeight: 600 }}>
-                {deleteConfirmGroup.fieldName} - {deleteConfirmGroup.professionName}
-              </p>
-              <p style={{ marginTop: '8px', color: '#666', fontSize: '0.9rem' }}>
-                פעולה זו תמחק את כל השירותים בקבוצה ({deleteConfirmGroup.services.length} שירותים)
-              </p>
-            </div>
-
-            <div className="modal-footer">
-              <button
-                className="btn-danger"
-                onClick={handleDeleteConfirm}
-                disabled={submitting}
-              >
-                {submitting ? 'מוחק...' : 'מחק'}
-              </button>
-              <button
-                className="btn-secondary"
-                onClick={() => setDeleteConfirmGroup(null)}
-                disabled={submitting}
-              >
-                ביטול
-              </button>
-            </div>
+              <div className="modal-footer">
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  disabled={submitting}
+                >
+                  {submitting ? 'שומר...' : 'שמור'}
+                </button>
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={handleCloseModal}
+                  disabled={submitting}
+                >
+                  ביטול
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

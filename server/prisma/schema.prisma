@@ -215,6 +215,17 @@ model Business {
   // Lead integration
   sourceLeadId Int? @unique
 
+  // Epic 1 - Sprint B: Business Media
+  logoUrl       String? // Path or URL to logo image
+  coverImageUrl String? // Path or URL to cover image
+  galleryImages String? // JSON array of image paths/URLs
+
+  // Epic 1 - Sprint C: Business Settings
+  language                     String? @default("he") // Language preference
+  timezone                     String? @default("Asia/Jerusalem") // Timezone
+  defaultAppointmentBufferMins Int?    @default(0) // Buffer time between appointments
+  defaultBookingBehavior       String? @default("manual") // "manual" or "auto"
+
   status    BusinessStatus @default(PENDING_APPROVAL)
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
@@ -252,6 +263,10 @@ model BusinessService {
   approvalStatus    ApprovalStatus @default(PENDING)
   approvedAt        DateTime?
   approvedById      Int?
+
+  // Epic 1 - Sprint A
+  visibleToCustomers Boolean @default(true)
+  calendarColor      String? // Future: color for calendar display
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

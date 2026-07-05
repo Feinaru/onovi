@@ -109,7 +109,16 @@ router.get('/profile', async (req, res) => {
         ownerEmail: user.email,
         // Approval info
         approvalStatus: approval ? approval.status : 'DRAFT',
-        adminNote: approval ? approval.adminNote : null
+        adminNote: approval ? approval.adminNote : null,
+        // Media fields
+        logoUrl: business.logoUrl,
+        coverImageUrl: business.coverImageUrl,
+        galleryImages: business.galleryImages,
+        // Settings fields
+        language: business.language,
+        timezone: business.timezone,
+        defaultAppointmentBufferMins: business.defaultAppointmentBufferMins,
+        defaultBookingBehavior: business.defaultBookingBehavior
       }
     });
   } catch (error) {
@@ -124,11 +133,14 @@ router.get('/profile', async (req, res) => {
 
 /**
  * PUT /api/service-provider/business/profile
- * Update business profile
+ * Update business profile (including media)
  */
 router.put('/profile', async (req, res) => {
   try {
-    const { name, phone, email, description, city, street, houseNumber } = req.body;
+    const {
+      name, phone, email, description, city, street, houseNumber,
+      logoUrl, coverImageUrl, galleryImages
+    } = req.body;
 
     // Validate required fields
     if (!name || !phone) {
@@ -158,17 +170,42 @@ router.put('/profile', async (req, res) => {
 
     const businessId = user.businesses[0].id;
 
+    // Build update data
+    const updateData = {
+      name,
+      phone,
+      description: description || null,
+      city: city || null,
+      street: street || null,
+      houseNumber: houseNumber || null
+    };
+
+    // Add media fields if provided
+    if (logoUrl !== undefined) updateData.logoUrl = logoUrl || null;
+    if (coverImageUrl !== undefined) updateData.coverImageUrl = coverImageUrl || null;
+    if (galleryImages !== undefined) {
+      // Validate JSON if provided
+      if (galleryImages && typeof galleryImages === 'string') {
+        try {
+          JSON.parse(galleryImages);
+          updateData.galleryImages = galleryImages;
+        } catch (e) {
+          return res.status(400).json({
+            success: false,
+            error: 'Gallery images must be valid JSON'
+          });
+        }
+      } else if (Array.isArray(galleryImages)) {
+        updateData.galleryImages = JSON.stringify(galleryImages);
+      } else {
+        updateData.galleryImages = null;
+      }
+    }
+
     // Update business
     const updatedBusiness = await prisma.business.update({
       where: { id: businessId },
-      data: {
-        name,
-        phone,
-        description: description || null,
-        city: city || null,
-        street: street || null,
-        houseNumber: houseNumber || null
-      }
+      data: updateData
     });
 
     // Update user email if provided
@@ -198,6 +235,77 @@ router.put('/profile', async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Failed to update business profile',
+      details: error.message
+    });
+  }
+});
+
+/**
+ * PUT /api/service-provider/business/settings
+ * Update business settings
+ */
+router.put('/settings', async (req, res) => {
+  try {
+    const {
+      language,
+      timezone,
+      defaultAppointmentBufferMins,
+      defaultBookingBehavior
+    } = req.body;
+
+    // Get user's business
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      include: {
+        businesses: {
+          where: { status: { in: ['PENDING_APPROVAL', 'ACTIVE', 'SUSPENDED'] } },
+          take: 1
+        }
+      }
+    });
+
+    if (!user || !user.businesses || user.businesses.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'No business found for this user'
+      });
+    }
+
+    const businessId = user.businesses[0].id;
+
+    // Build update data
+    const updateData = {};
+    if (language !== undefined) updateData.language = language;
+    if (timezone !== undefined) updateData.timezone = timezone;
+    if (defaultAppointmentBufferMins !== undefined) {
+      updateData.defaultAppointmentBufferMins = defaultAppointmentBufferMins;
+    }
+    if (defaultBookingBehavior !== undefined) {
+      updateData.defaultBookingBehavior = defaultBookingBehavior;
+    }
+
+    // Update business
+    const updatedBusiness = await prisma.business.update({
+      where: { id: businessId },
+      data: updateData
+    });
+
+    res.json({
+      success: true,
+      message: 'Settings updated successfully',
+      data: {
+        language: updatedBusiness.language,
+        timezone: updatedBusiness.timezone,
+        defaultAppointmentBufferMins: updatedBusiness.defaultAppointmentBufferMins,
+        defaultBookingBehavior: updatedBusiness.defaultBookingBehavior,
+        updatedAt: updatedBusiness.updatedAt
+      }
+    });
+  } catch (error) {
+    console.error('Update settings error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to update settings',
       details: error.message
     });
   }
