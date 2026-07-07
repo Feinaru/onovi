@@ -26,6 +26,8 @@ const serviceProviderBusinessRoutes = require('./routes/service-provider-busines
 const serviceProviderRegistrationRoutes = require('./routes/service-provider-registration.routes');
 const serviceProviderServiceGroupsRoutes = require('./routes/service-provider-service-groups.routes');
 const serviceProviderServicesRoutes = require('./routes/service-provider-services.routes');
+const serviceProviderSlotsRoutes = require('./routes/service-provider-slots.routes');
+const serviceProviderBookingsRoutes = require('./routes/service-provider-bookings.routes');
 
 const app = express();
 app.use(cors());
@@ -60,6 +62,8 @@ app.use('/api/service-provider/business', serviceProviderBusinessRoutes);
 app.use('/api/service-provider/registration', serviceProviderRegistrationRoutes);
 app.use('/api/service-provider/service-groups', serviceProviderServiceGroupsRoutes);
 app.use('/api/service-provider/services', serviceProviderServicesRoutes);
+app.use('/api/service-provider/slots', serviceProviderSlotsRoutes);
+app.use('/api/service-provider/bookings', serviceProviderBookingsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
