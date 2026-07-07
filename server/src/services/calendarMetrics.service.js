@@ -73,8 +73,23 @@ async function getTodayMetrics(businessId, date) {
 
     // Calculate slot capacity based on duration
     const slotDuration = calculateDuration(slot.startTime, slot.endTime);
-    const serviceDuration = slot.service.durationMinutes;
-    const capacity = Math.floor(slotDuration / serviceDuration);
+
+    // Epic 2: Handle multi-service slots (service = null)
+    let serviceDuration;
+    let capacity;
+    if (slot.service) {
+      // Legacy: single service
+      serviceDuration = slot.service.durationMinutes;
+      capacity = Math.floor(slotDuration / serviceDuration);
+    } else if (slot.allowedServices && slot.allowedServices.length > 0) {
+      // Epic 2: multi-service slot - use shortest service for capacity
+      const durations = slot.allowedServices.map(as => as.businessService.durationMinutes);
+      serviceDuration = Math.min(...durations);
+      capacity = Math.floor(slotDuration / serviceDuration);
+    } else {
+      // No service data - skip capacity calculation
+      capacity = 1;
+    }
 
     metrics.totalCapacity += capacity;
 
@@ -84,11 +99,12 @@ async function getTodayMetrics(businessId, date) {
 
     // Calculate remaining capacity and potential revenue
     const remainingCapacity = capacity - activeBookings;
-    const pricePerSpot = slot.dealPrice || slot.regularPrice;
+    const pricePerSpot = slot.dealPrice || slot.regularPrice || 0;
     metrics.potentialRevenue += remainingCapacity * pricePerSpot;
 
     // Track by service
-    const serviceName = slot.service.name;
+    const serviceName = slot.service ? slot.service.name :
+      (slot.allowedServices && slot.allowedServices.length > 0 ? 'Multi-Service' : 'Unknown');
     if (!metrics.serviceBreakdown[serviceName]) {
       metrics.serviceBreakdown[serviceName] = {
         slots: 0,

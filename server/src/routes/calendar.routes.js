@@ -44,7 +44,15 @@ router.get('/:businessId', auth(), async (req, res, next) => {
           businessId,
           ...(from && to ? { date: { gte: from, lte: to } } : {}),
         },
-        include: { service: true, bookings: true },
+        include: {
+          service: true,
+          bookings: true,
+          allowedServices: {
+            include: {
+              businessService: true
+            }
+          }
+        },
         orderBy: [{ date: 'asc' }, { startTime: 'asc' }]
       }),
 
@@ -119,9 +127,35 @@ router.get('/:businessId', auth(), async (req, res, next) => {
 
         // Calculate capacity dynamically
         const slotDuration = metricsService.calculateDuration(slot.startTime, slot.endTime);
-        const serviceDuration = slot.service.durationMinutes;
-        const capacity = metricsService.calculateSlotCapacity(slotDuration, serviceDuration);
+
+        // Epic 2: For multi-service slots, use shortest service duration or slot duration
+        // Legacy: Use single service duration
+        let serviceDuration;
+        let capacity;
+        if (slot.service) {
+          // Legacy: single service
+          serviceDuration = slot.service.durationMinutes;
+          capacity = metricsService.calculateSlotCapacity(slotDuration, serviceDuration);
+        } else if (slot.allowedServices.length > 0) {
+          // Epic 2: multi-service slot - use shortest service for capacity
+          const durations = slot.allowedServices.map(as => as.businessService.durationMinutes);
+          serviceDuration = Math.min(...durations);
+          capacity = metricsService.calculateSlotCapacity(slotDuration, serviceDuration);
+        } else {
+          // No service data - use slot duration as service duration
+          serviceDuration = slotDuration;
+          capacity = 1;
+        }
+
         const bookedCount = activeBookings.length;
+
+        // Get title and service name
+        const title = slot.title ||
+          (slot.service ? slot.service.name : null) ||
+          (slot.allowedServices.length > 0 ? slot.allowedServices[0].businessService.name : 'Slot');
+
+        const serviceName = slot.service ? slot.service.name :
+          (slot.allowedServices.length > 0 ? slot.allowedServices.map(as => as.businessService.name).join(', ') : null);
 
         return {
           id: `slot-${slot.id}`,
@@ -132,9 +166,9 @@ router.get('/:businessId', auth(), async (req, res, next) => {
           startTime: slot.startTime,
           endTime: slot.endTime,
           duration: slotDuration,
-          title: slot.title || slot.service.name,
-          serviceName: slot.service.name,
-          serviceId: slot.serviceId,
+          title,
+          serviceName,
+          serviceId: slot.serviceId, // Legacy field (may be null)
           serviceDuration: serviceDuration,
           regularPrice: slot.regularPrice,
           dealPrice: slot.dealPrice,
@@ -150,11 +184,19 @@ router.get('/:businessId', auth(), async (req, res, next) => {
             id: b.id,
             customerName: b.customerName,
             customerPhone: b.customerPhone,
-            serviceName: slot.service.name,
+            serviceName: slot.service ? slot.service.name : (b.service ? b.service.name : 'Service'),
             startTime: slot.startTime,
             endTime: slot.endTime,
             price: b.price,
             status: b.status
+          })),
+          allowedServices: slot.allowedServices.map(as => ({
+            id: as.businessService.id,
+            name: as.businessService.name,
+            durationMinutes: as.businessService.durationMinutes,
+            regularPrice: as.businessService.regularPrice,
+            active: as.businessService.active,
+            visibleToCustomers: as.businessService.visibleToCustomers
           })),
           externalSource: slot.externalSource,
           externalId: slot.externalId
