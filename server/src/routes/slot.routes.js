@@ -156,7 +156,7 @@ router.get('/', async (req, res, next) => {
  * IMPORTANT: serviceId is kept ONLY for backward compatibility with legacy slots.
  * New flow should use allowedServiceIds (array of BusinessService IDs).
  */
-router.post('/', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
+router.post('/', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 'ADMIN'), async (req, res, next) => {
   try {
     const { businessId, serviceId, date, startTime, endTime, regularPrice, dealPrice, note, allowedServiceIds } = req.body;
     if (!businessId || !date || !startTime || !endTime || !regularPrice) {
@@ -251,7 +251,7 @@ router.post('/', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next
   } catch (e) { next(e); }
 });
 
-router.patch('/:id', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
+router.patch('/:id', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 'ADMIN'), async (req, res, next) => {
   try {
     const slotId = Number(req.params.id);
     const { date, startTime, endTime, regularPrice, dealPrice, note, status } = req.body;
@@ -282,7 +282,7 @@ router.patch('/:id', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, 
   } catch (e) { next(e); }
 });
 
-router.delete('/:id', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res, next) => {
+router.delete('/:id', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 'ADMIN'), async (req, res, next) => {
   try {
     const slotId = Number(req.params.id);
     const existing = await prisma.slot.findUnique({ where: { id: slotId }, include: { business: true } });
