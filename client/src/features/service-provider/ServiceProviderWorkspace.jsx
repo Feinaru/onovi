@@ -36,10 +36,23 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
   async function fetchApprovalStatus() {
     try {
       const result = await api('/api/service-provider/business/status');
-      setApprovalStatus(result.data.approval);
+
+      // Handle response structure: { success: true, data: { approvalStatus: 'APPROVED', ... } }
+      if (result && result.data && result.data.approvalStatus) {
+        setApprovalStatus({ status: result.data.approvalStatus });
+      } else if (result && result.approvalStatus) {
+        // Fallback if data is not nested
+        setApprovalStatus({ status: result.approvalStatus });
+      } else {
+        // No approval status found - business may not exist
+        setApprovalStatus({ status: 'NOT_FOUND' });
+      }
+
       setLoading(false);
     } catch (error) {
       console.error('Failed to fetch approval status:', error);
+      // Set error state instead of leaving stuck on loading
+      setApprovalStatus({ status: 'ERROR' });
       setLoading(false);
     }
   }
@@ -65,7 +78,9 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
       DRAFT: { label: 'טיוטה', className: 'badge-secondary' },
       PENDING_APPROVAL: { label: 'ממתין לאישור', className: 'badge-warning' },
       APPROVED: { label: 'מאושר', className: 'badge-success' },
-      REJECTED: { label: 'נדחה', className: 'badge-danger' }
+      REJECTED: { label: 'נדחה', className: 'badge-danger' },
+      NOT_FOUND: { label: 'לא נמצא עסק', className: 'badge-secondary' },
+      ERROR: { label: 'שגיאה בטעינת סטטוס', className: 'badge-danger' }
     };
 
     const config = statusConfig[approvalStatus.status] || statusConfig.DRAFT;
@@ -173,7 +188,7 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
       </main>
 
       {/* Mobile bottom navigation */}
-      <nav className="app-mobile-nav">
+      <nav className="mobile-nav">
         {navigationItems.slice(0, 5).map(item => (
           <button
             key={item.id}

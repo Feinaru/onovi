@@ -21,12 +21,12 @@ export default function BookingsPage({ user }) {
       setLoading(true);
 
       // Fetch all bookings
-      const bookingsRes = await api('/api/bookings');
+      const bookingsRes = await api('/bookings');
       let bookingsData = Array.isArray(bookingsRes) ? bookingsRes : [];
 
       // Filter to user's businesses
       // First get user's businesses
-      const businessesRes = await api('/api/businesses');
+      const businessesRes = await api('/businesses');
       const businessesData = Array.isArray(businessesRes) ? businessesRes : [];
       const userBusinessIds = businessesData
         .filter(b => b.ownerId === user.id)
@@ -51,7 +51,7 @@ export default function BookingsPage({ user }) {
 
   async function updateBookingStatus(id, status) {
     try {
-      await api(`/api/bookings/${id}/status`, {
+      await api(`/bookings/${id}/status`, {
         method: 'PATCH',
         body: JSON.stringify({ status })
       });
@@ -66,7 +66,7 @@ export default function BookingsPage({ user }) {
     if (!confirm('האם לבטל הזמנה זו?')) return;
 
     try {
-      await api(`/api/bookings/${id}/cancel`, {
+      await api(`/bookings/${id}/cancel`, {
         method: 'PATCH'
       });
       showMessage('ההזמנה בוטלה');
