@@ -2,17 +2,43 @@ import { useState, useEffect } from 'react';
 import { api } from '../../../api';
 import SlotForm from '../../business/components/SlotForm';
 import SlotCard from '../../business/components/SlotCard';
+import CalendarHeader from '../components/calendar/CalendarHeader';
+import CalendarDayView from '../components/calendar/CalendarDayView';
 
 /**
  * CalendarPage - Standalone slot management for Service Provider Workspace
  * Migrated to use provider-scoped API routes (Phase B)
+ * Phase 1: Visual day view calendar with navigation
  */
+
+// Format Date to YYYY-MM-DD in local timezone
+function formatDateLocal(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Add days to a date
+function addDays(date, days) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
 export default function CalendarPage({ user }) {
   const [business, setBusiness] = useState(null);
   const [services, setServices] = useState([]);
   const [slots, setSlots] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // Current date for calendar navigation - initialize intelligently
+  const [currentDate, setCurrentDate] = useState(() => {
+    const today = new Date();
+    // Will be updated to smart date after slots load
+    return today;
+  });
 
   // Slot form state - businessId kept for SlotForm compatibility but not sent to backend
   const [slotForm, setSlotForm] = useState({
@@ -57,7 +83,24 @@ export default function CalendarPage({ user }) {
       // Fetch provider slots
       const slotsRes = await api('/api/service-provider/slots');
       if (slotsRes.success && Array.isArray(slotsRes.data)) {
-        setSlots(slotsRes.data);
+        const slotsData = slotsRes.data;
+        setSlots(slotsData);
+
+        // Smart currentDate initialization: use earliest upcoming slot date or today
+        if (slotsData.length > 0) {
+          const today = formatDateLocal(new Date());
+          const upcomingSlots = slotsData.filter(s => s.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+
+          if (upcomingSlots.length > 0) {
+            // Use earliest upcoming slot date
+            const [year, month, day] = upcomingSlots[0].date.split('-').map(Number);
+            setCurrentDate(new Date(year, month - 1, day));
+          } else {
+            // No upcoming slots, use first slot date
+            const [year, month, day] = slotsData[0].date.split('-').map(Number);
+            setCurrentDate(new Date(year, month - 1, day));
+          }
+        }
       }
     } catch (err) {
       console.error('Failed to load data:', err);
@@ -170,6 +213,24 @@ export default function CalendarPage({ user }) {
     }
   }
 
+  // Navigation handlers
+  function handlePreviousDay() {
+    setCurrentDate(prev => addDays(prev, -1));
+  }
+
+  function handleNextDay() {
+    setCurrentDate(prev => addDays(prev, 1));
+  }
+
+  function handleToday() {
+    setCurrentDate(new Date());
+  }
+
+  // Handle slot click from visual calendar
+  function handleSlotClick(slot) {
+    setEditingSlot(slot);
+  }
+
   if (loading) {
     return <div style={{ padding: '20px', textAlign: 'center' }}>טוען...</div>;
   }
@@ -213,35 +274,19 @@ export default function CalendarPage({ user }) {
         </div>
       </div>
 
-      {/* Existing Slots */}
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">תורים קיימים ({slots.length})</h3>
-          <p className="card-description">כל התורים שפרסמת</p>
-        </div>
+      {/* Calendar Day View */}
+      <CalendarHeader
+        currentDate={currentDate}
+        onPreviousDay={handlePreviousDay}
+        onNextDay={handleNextDay}
+        onToday={handleToday}
+      />
 
-        {slots.length === 0 && (
-          <div className="empty-state">
-            <div className="empty-state-icon">📅</div>
-            <h3 className="empty-state-title">אין תורים</h3>
-            <p className="empty-state-description">פרסם תור ראשון כדי להתחיל לקבל הזמנות</p>
-          </div>
-        )}
-
-        {slots.length > 0 && (
-          <div style={{ padding: '16px', display: 'grid', gap: '16px' }}>
-            {slots.map(slot => (
-              <SlotCard
-                key={slot.id}
-                slot={slot}
-                onEdit={setEditingSlot}
-                onDelete={deleteSlot}
-                showMessage={showMessage}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      <CalendarDayView
+        slots={slots}
+        currentDate={currentDate}
+        onSlotClick={handleSlotClick}
+      />
 
       {/* Edit Modal (if needed) */}
       {editingSlot && (
