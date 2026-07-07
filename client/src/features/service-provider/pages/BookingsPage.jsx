@@ -20,20 +20,13 @@ export default function BookingsPage({ user }) {
     try {
       setLoading(true);
 
-      // Fetch all bookings
-      const bookingsRes = await api('/bookings');
-      let bookingsData = Array.isArray(bookingsRes) ? bookingsRes : [];
+      // Fetch provider's bookings (backend filters by authenticated user's business)
+      const bookingsRes = await api('/api/service-provider/bookings');
 
-      // Filter to user's businesses
-      // First get user's businesses
-      const businessesRes = await api('/businesses');
-      const businessesData = Array.isArray(businessesRes) ? businessesRes : [];
-      const userBusinessIds = businessesData
-        .filter(b => b.ownerId === user.id)
-        .map(b => b.id);
-
-      // Filter bookings
-      bookingsData = bookingsData.filter(b => userBusinessIds.includes(b.businessId));
+      // Handle new response shape: { success, data }
+      const bookingsData = bookingsRes.success && Array.isArray(bookingsRes.data)
+        ? bookingsRes.data
+        : [];
 
       setBookings(bookingsData);
     } catch (err) {
@@ -51,12 +44,17 @@ export default function BookingsPage({ user }) {
 
   async function updateBookingStatus(id, status) {
     try {
-      await api(`/bookings/${id}/status`, {
+      const result = await api(`/api/service-provider/bookings/${id}/status`, {
         method: 'PATCH',
         body: JSON.stringify({ status })
       });
-      showMessage('הסטטוס עודכן');
-      await loadBookings();
+
+      if (result.success) {
+        showMessage('הסטטוס עודכן');
+        await loadBookings();
+      } else {
+        showMessage(result.error || 'שגיאה בעדכון סטטוס');
+      }
     } catch (err) {
       showMessage(err.message || 'שגיאה בעדכון סטטוס');
     }
@@ -66,11 +64,16 @@ export default function BookingsPage({ user }) {
     if (!confirm('האם לבטל הזמנה זו?')) return;
 
     try {
-      await api(`/bookings/${id}/cancel`, {
+      const result = await api(`/api/service-provider/bookings/${id}/cancel`, {
         method: 'PATCH'
       });
-      showMessage('ההזמנה בוטלה');
-      await loadBookings();
+
+      if (result.success) {
+        showMessage('ההזמנה בוטלה');
+        await loadBookings();
+      } else {
+        showMessage(result.error || 'שגיאה בביטול הזמנה');
+      }
     } catch (err) {
       showMessage(err.message || 'שגיאה בביטול הזמנה');
     }
