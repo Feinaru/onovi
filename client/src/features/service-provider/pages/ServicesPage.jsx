@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getToken } from '../../../api';
+import { api } from '../../../api';
 import './ServicesPage.css';
 
 /**
@@ -42,18 +42,7 @@ export default function ServicesPage({ user }) {
       setLoading(true);
       setError(null);
 
-      const token = getToken();
-      const response = await fetch('/api/service-provider/services', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to load services');
-      }
+      const data = await api('/api/service-provider/services');
 
       if (data.success) {
         setServices(data.data);
@@ -125,13 +114,8 @@ export default function ServicesPage({ user }) {
       setSubmitting(true);
       setError(null);
 
-      const token = getToken();
-      const response = await fetch(`/api/service-provider/services/${editingService.id}`, {
+      const data = await api(`/api/service-provider/services/${editingService.id}`, {
         method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
           customName: formData.customName,
           description: formData.description || null,
@@ -142,12 +126,6 @@ export default function ServicesPage({ user }) {
           calendarColor: formData.calendarColor || null
         })
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update service');
-      }
 
       if (data.success) {
         setSuccess('השירות עודכן בהצלחה');
@@ -166,23 +144,12 @@ export default function ServicesPage({ user }) {
     try {
       setError(null);
 
-      const token = getToken();
-      const response = await fetch(`/api/service-provider/services/${service.id}`, {
+      const data = await api(`/api/service-provider/services/${service.id}`, {
         method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
           active: !service.active
         })
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update service');
-      }
 
       if (data.success) {
         setSuccess(`השירות ${!service.active ? 'הופעל' : 'הושבת'} בהצלחה`);

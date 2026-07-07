@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { api } from '../../../api';
 import './ServiceGroupsPage.css';
 
 /**
@@ -41,18 +42,7 @@ export default function ServiceGroupsPage({ user }) {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/service-provider/service-groups', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to load service groups');
-      }
+      const data = await api('/api/service-provider/service-groups');
 
       if (data.success) {
         setServiceGroups(data.data);
@@ -67,8 +57,7 @@ export default function ServiceGroupsPage({ user }) {
 
   async function fetchFields() {
     try {
-      const response = await fetch('/api/registration/fields');
-      const data = await response.json();
+      const data = await api('/api/registration/fields');
       setFields(data);
     } catch (err) {
       console.error('Fetch fields error:', err);
@@ -77,8 +66,7 @@ export default function ServiceGroupsPage({ user }) {
 
   async function fetchProfessions(fieldId) {
     try {
-      const response = await fetch(`/api/registration/fields/${fieldId}/professions`);
-      const data = await response.json();
+      const data = await api(`/api/registration/fields/${fieldId}/professions`);
       setProfessions(data);
     } catch (err) {
       console.error('Fetch professions error:', err);
@@ -87,8 +75,7 @@ export default function ServiceGroupsPage({ user }) {
 
   async function fetchServices(professionId) {
     try {
-      const response = await fetch(`/api/registration/professions/${professionId}/services`);
-      const data = await response.json();
+      const data = await api(`/api/registration/professions/${professionId}/services`);
       setServices(data);
     } catch (err) {
       console.error('Fetch services error:', err);
@@ -183,16 +170,10 @@ export default function ServiceGroupsPage({ user }) {
       setSubmitting(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
-
-      let response;
+      let data;
       if (modalMode === 'add') {
-        response = await fetch('/api/service-provider/service-groups', {
+        data = await api('/api/service-provider/service-groups', {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify({
             fieldId: parseInt(selectedFieldId),
             professionId: parseInt(selectedProfessionId),
@@ -200,22 +181,12 @@ export default function ServiceGroupsPage({ user }) {
           })
         });
       } else {
-        response = await fetch(`/api/service-provider/service-groups/${editingGroup.businessProfessionId}`, {
+        data = await api(`/api/service-provider/service-groups/${editingGroup.businessProfessionId}`, {
           method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify({
             serviceTemplateIds: selectedServiceIds
           })
         });
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to save service group');
       }
 
       if (data.success) {
@@ -238,19 +209,9 @@ export default function ServiceGroupsPage({ user }) {
       setSubmitting(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/service-provider/service-groups/${deleteConfirmGroup.businessProfessionId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      const data = await api(`/api/service-provider/service-groups/${deleteConfirmGroup.businessProfessionId}`, {
+        method: 'DELETE'
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to delete service group');
-      }
 
       if (data.success) {
         setSuccess('קבוצת שירותים נמחקה בהצלחה');

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { api } from '../../../api';
 import './SettingsPage.css';
 
 /**
@@ -33,18 +34,7 @@ export default function SettingsPage() {
       setLoading(true);
       setError(null);
 
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/service-provider/business/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to load settings');
-      }
+      const data = await api('/api/service-provider/business/profile');
 
       if (data.success) {
         setSettings(data.data);
@@ -79,13 +69,8 @@ export default function SettingsPage() {
       setError(null);
       setSuccess(null);
 
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/service-provider/business/settings', {
+      const data = await api('/api/service-provider/business/settings', {
         method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
           language: formData.language,
           timezone: formData.timezone,
@@ -93,12 +78,6 @@ export default function SettingsPage() {
           defaultBookingBehavior: formData.defaultBookingBehavior
         })
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update settings');
-      }
 
       if (data.success) {
         setSuccess('ההגדרות עודכנו בהצלחה');

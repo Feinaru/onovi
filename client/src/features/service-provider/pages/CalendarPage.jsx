@@ -37,13 +37,13 @@ export default function CalendarPage({ user }) {
       setLoading(true);
 
       // Fetch businesses owned by user
-      const businessesRes = await api('/api/businesses');
+      const businessesRes = await api('/businesses');
       const businessesData = Array.isArray(businessesRes) ? businessesRes : [];
       const userBusinesses = businessesData.filter(b => b.ownerId === user.id);
       setBusinesses(userBusinesses);
 
       // Fetch services for user's businesses
-      const servicesRes = await api('/api/services');
+      const servicesRes = await api('/services');
       const servicesData = Array.isArray(servicesRes) ? servicesRes : [];
       const userServices = servicesData.filter(s =>
         userBusinesses.some(b => b.id === s.businessId)
@@ -51,7 +51,7 @@ export default function CalendarPage({ user }) {
       setServices(userServices);
 
       // Fetch slots for user's businesses
-      const slotsRes = await api('/api/slots');
+      const slotsRes = await api('/slots');
       const slotsData = Array.isArray(slotsRes) ? slotsRes : [];
       const userSlots = slotsData.filter(s =>
         userBusinesses.some(b => b.id === s.businessId)
@@ -85,7 +85,7 @@ export default function CalendarPage({ user }) {
     }
 
     try {
-      await api('/api/slots', {
+      await api('/slots', {
         method: 'POST',
         body: JSON.stringify(slotForm)
       });
@@ -112,7 +112,7 @@ export default function CalendarPage({ user }) {
     e.preventDefault();
 
     try {
-      await api(`/api/slots/${editingSlot.id}`, {
+      await api(`/slots/${editingSlot.id}`, {
         method: 'PATCH',
         body: JSON.stringify(editingSlot)
       });
@@ -128,7 +128,7 @@ export default function CalendarPage({ user }) {
     if (!confirm('למחוק תור זה?')) return;
 
     try {
-      await api(`/api/slots/${id}`, { method: 'DELETE' });
+      await api(`/slots/${id}`, { method: 'DELETE' });
       showMessage('התור נמחק');
       await loadData();
     } catch (err) {

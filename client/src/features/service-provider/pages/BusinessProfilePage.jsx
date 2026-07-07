@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getToken } from '../../../api';
+import { getToken, api } from '../../../api';
 import './BusinessProfilePage.css';
 
 /**
@@ -40,18 +40,7 @@ export default function BusinessProfilePage() {
       setLoading(true);
       setError(null);
 
-      const token = getToken();
-      const response = await fetch('/api/service-provider/business/profile', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to load profile');
-      }
+      const data = await api('/api/service-provider/business/profile');
 
       if (data.success) {
         setProfile(data.data);
@@ -180,21 +169,10 @@ export default function BusinessProfilePage() {
       setError(null);
       setSuccess(null);
 
-      const token = getToken();
-      const response = await fetch('/api/service-provider/business/profile', {
+      const data = await api('/api/service-provider/business/profile', {
         method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(formData)
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update profile');
-      }
 
       if (data.success) {
         setSuccess('הפרטים עודכנו בהצלחה');
