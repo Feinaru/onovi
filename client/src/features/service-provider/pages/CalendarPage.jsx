@@ -5,16 +5,16 @@ import SlotCard from '../../business/components/SlotCard';
 
 /**
  * CalendarPage - Standalone slot management for Service Provider Workspace
- * Manages its own state and provides all necessary props to SlotsTab components
+ * Migrated to use provider-scoped API routes (Phase B)
  */
 export default function CalendarPage({ user }) {
-  const [businesses, setBusinesses] = useState([]);
+  const [business, setBusiness] = useState(null);
   const [services, setServices] = useState([]);
   const [slots, setSlots] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Slot form state
+  // Slot form state - businessId kept for SlotForm compatibility but not sent to backend
   const [slotForm, setSlotForm] = useState({
     businessId: '',
     date: '',
@@ -36,31 +36,28 @@ export default function CalendarPage({ user }) {
     try {
       setLoading(true);
 
-      // Fetch businesses owned by user
-      const businessesRes = await api('/businesses');
-      const businessesData = Array.isArray(businessesRes) ? businessesRes : [];
-      const userBusinesses = businessesData.filter(b => b.ownerId === user.id);
-      setBusinesses(userBusinesses);
+      // Fetch provider business profile
+      const businessRes = await api('/api/service-provider/business/profile');
+      if (businessRes.success && businessRes.data) {
+        const businessData = businessRes.data;
+        setBusiness(businessData);
 
-      // Fetch services for user's businesses
-      const servicesRes = await api('/services');
-      const servicesData = Array.isArray(servicesRes) ? servicesRes : [];
-      const userServices = servicesData.filter(s =>
-        userBusinesses.some(b => b.id === s.businessId)
-      );
-      setServices(userServices);
+        // Set businessId in form for SlotForm compatibility (not sent to backend)
+        if (!slotForm.businessId) {
+          setSlotForm(prev => ({ ...prev, businessId: businessData.id }));
+        }
+      }
 
-      // Fetch slots for user's businesses
-      const slotsRes = await api('/slots');
-      const slotsData = Array.isArray(slotsRes) ? slotsRes : [];
-      const userSlots = slotsData.filter(s =>
-        userBusinesses.some(b => b.id === s.businessId)
-      );
-      setSlots(userSlots);
+      // Fetch provider services
+      const servicesRes = await api('/api/service-provider/services');
+      if (servicesRes.success && Array.isArray(servicesRes.data)) {
+        setServices(servicesRes.data);
+      }
 
-      // Set default businessId if only one business
-      if (userBusinesses.length === 1 && !slotForm.businessId) {
-        setSlotForm(prev => ({ ...prev, businessId: userBusinesses[0].id }));
+      // Fetch provider slots
+      const slotsRes = await api('/api/service-provider/slots');
+      if (slotsRes.success && Array.isArray(slotsRes.data)) {
+        setSlots(slotsRes.data);
       }
     } catch (err) {
       console.error('Failed to load data:', err);
@@ -85,24 +82,39 @@ export default function CalendarPage({ user }) {
     }
 
     try {
-      await api('/slots', {
-        method: 'POST',
-        body: JSON.stringify(slotForm)
-      });
-      showMessage('התור פורסם');
-      await loadData();
+      // Extract only fields needed by backend (no businessId)
+      const slotData = {
+        date: slotForm.date,
+        startTime: slotForm.startTime,
+        endTime: slotForm.endTime,
+        regularPrice: slotForm.regularPrice,
+        dealPrice: slotForm.dealPrice || undefined,
+        allowedServiceIds: slotForm.allowedServiceIds
+      };
 
-      // Reset form
-      setSlotForm({
-        businessId: slotForm.businessId, // Keep businessId
-        date: '',
-        startTime: '',
-        endTime: '',
-        regularPrice: '',
-        dealPrice: '',
-        status: 'OPEN',
-        allowedServiceIds: []
+      const result = await api('/api/service-provider/slots', {
+        method: 'POST',
+        body: JSON.stringify(slotData)
       });
+
+      if (result.success) {
+        showMessage('התור פורסם');
+        await loadData();
+
+        // Reset form
+        setSlotForm({
+          businessId: slotForm.businessId, // Keep for SlotForm compatibility
+          date: '',
+          startTime: '',
+          endTime: '',
+          regularPrice: '',
+          dealPrice: '',
+          status: 'OPEN',
+          allowedServiceIds: []
+        });
+      } else {
+        showMessage(result.error || 'שגיאה ביצירת תור');
+      }
     } catch (err) {
       showMessage(err.message || 'שגיאה ביצירת תור');
     }
@@ -112,13 +124,28 @@ export default function CalendarPage({ user }) {
     e.preventDefault();
 
     try {
-      await api(`/slots/${editingSlot.id}`, {
+      // Extract only fields that can be updated
+      const updateData = {
+        date: editingSlot.date,
+        startTime: editingSlot.startTime,
+        endTime: editingSlot.endTime,
+        regularPrice: editingSlot.regularPrice,
+        dealPrice: editingSlot.dealPrice || null,
+        note: editingSlot.note
+      };
+
+      const result = await api(`/api/service-provider/slots/${editingSlot.id}`, {
         method: 'PATCH',
-        body: JSON.stringify(editingSlot)
+        body: JSON.stringify(updateData)
       });
-      showMessage('התור עודכן');
-      setEditingSlot(null);
-      await loadData();
+
+      if (result.success) {
+        showMessage('התור עודכן');
+        setEditingSlot(null);
+        await loadData();
+      } else {
+        showMessage(result.error || 'שגיאה בעדכון תור');
+      }
     } catch (err) {
       showMessage(err.message || 'שגיאה בעדכון תור');
     }
@@ -128,9 +155,16 @@ export default function CalendarPage({ user }) {
     if (!confirm('למחוק תור זה?')) return;
 
     try {
-      await api(`/slots/${id}`, { method: 'DELETE' });
-      showMessage('התור נמחק');
-      await loadData();
+      const result = await api(`/api/service-provider/slots/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (result.success) {
+        showMessage('התור נמחק');
+        await loadData();
+      } else {
+        showMessage(result.error || 'שגיאה במחיקת תור');
+      }
     } catch (err) {
       showMessage(err.message || 'שגיאה במחיקת תור');
     }
@@ -171,7 +205,7 @@ export default function CalendarPage({ user }) {
           <SlotForm
             slotForm={slotForm}
             setSlotForm={setSlotForm}
-            businesses={businesses}
+            businesses={business ? [business] : []}
             services={businessServices}
             onSubmit={createSlot}
             showMessage={showMessage}
@@ -232,7 +266,7 @@ export default function CalendarPage({ user }) {
               <SlotForm
                 slotForm={editingSlot}
                 setSlotForm={setEditingSlot}
-                businesses={businesses}
+                businesses={business ? [business] : []}
                 services={services.filter(s => s.businessId === editingSlot.businessId)}
                 onSubmit={updateSlot}
                 showMessage={showMessage}
