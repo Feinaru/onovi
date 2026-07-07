@@ -24,7 +24,7 @@ export default function LandingPage({ setView }) {
       </section>
 
       {/* How It Works */}
-      <section className="landing-section">
+      <section className="landing-section landing-section-dark">
         <div className="landing-container">
           <h2 className="landing-section-title">איך זה עובד?</h2>
           <div className="landing-steps">

@@ -1,73 +1,78 @@
-/* Onovi Design System - Modern, Clean, Trustworthy */
+/* Lomea Design System - Modern, Clean, Trustworthy */
 
 /* ============================================
    CSS Variables - Design Tokens
    ============================================ */
 :root {
-  /* Colors - Neutral Palette */
-  --gray-50: #fafbfc;
-  --gray-100: #f4f6f8;
-  --gray-200: #e8ecf0;
-  --gray-300: #d5dbe0;
-  --gray-400: #a8b4c0;
-  --gray-500: #6b7a8f;
-  --gray-600: #4a5568;
-  --gray-700: #2d3748;
-  --gray-800: #1a202c;
-  --gray-900: #0f1419;
+  /* Colors - Neutral Palette / Interface */
+  --gray-50: #F7FAFC;
+  --gray-100: #EEF4F7;
+  --gray-200: #D9E6EE;
+  --gray-300: #C7D7E1;
+  --gray-400: #B8C7D1;
+  --gray-500: #647887;
+  --gray-600: #4D6372;
+  --gray-700: #304858;
+  --gray-800: #1D3545;
+  --gray-900: #102A3A;
 
-  /* Colors - Brand (Mint/Teal Gradient) */
-  --primary-50: #f0fdfa;
-  --primary-100: #ccfbf1;
-  --primary-200: #99f6e4;
-  --primary-300: #5eead4;
-  --primary-400: #2dd4bf;
-  --primary-500: #14b8a6;
-  --primary-600: #0d9488;
-  --primary-700: #0f766e;
-  --primary-800: #115e59;
-  --primary-900: #134e4a;
+  /* Colors - Brand (Lomea Deep Blue) */
+  --primary-50: #EAF3F8;
+  --primary-100: #D4E7F0;
+  --primary-200: #A9CEE0;
+  --primary-300: #7FB6D1;
+  --primary-400: #549DC1;
+  --primary-500: #0B4A78;
+  --primary-600: #00355C;
+  --primary-700: #002A49;
+  --primary-800: #001F36;
+  --primary-900: #001624;
 
-  /* Colors - Accent (Deep Navy) */
-  --accent-50: #f0f4f8;
-  --accent-100: #d9e2ec;
-  --accent-200: #bcccdc;
-  --accent-300: #9fb3c8;
-  --accent-400: #829ab1;
-  --accent-500: #627d98;
-  --accent-600: #486581;
-  --accent-700: #334e68;
-  --accent-800: #243b53;
-  --accent-900: #1a2332;
-  --accent-9: #243b53; /* Alias for accent-800 (deep navy) */
+  /* Colors - Accent (Lomea Coral Red) */
+  --accent-50: #FDEDEC;
+  --accent-100: #FAD4D1;
+  --accent-200: #F4A9A3;
+  --accent-300: #EE7E75;
+  --accent-400: #E85347;
+  --accent-500: #DB4439;
+  --accent-600: #C9362D;
+  --accent-700: #A92D26;
+  --accent-800: #84231D;
+  --accent-900: #5F1915;
+  --accent-9: #84231D; /* Alias for accent-800 */
 
   /* Colors - Semantic */
-  --success-50: #ecfdf5;
-  --success-100: #d1fae5;
-  --success-500: #10b981;
-  --success-600: #059669;
-  --success-700: #047857;
+  --success-50: #EAFBF5;
+  --success-100: #D1F7E9;
+  --success-500: #18A77A;
+  --success-600: #128B65;
+  --success-700: #0F7455;
 
-  --danger-50: #fef2f2;
-  --danger-100: #fee2e2;
-  --danger-500: #ef4444;
-  --danger-600: #dc2626;
-  --danger-700: #b91c1c;
+  --danger-50: #FEF3F2;
+  --danger-100: #FEE4E2;
+  --danger-500: #DB4439;
+  --danger-600: #B42318;
+  --danger-700: #911C13;
 
-  --warning-50: #fffbeb;
-  --warning-100: #fef3c7;
-  --warning-500: #f59e0b;
-  --warning-600: #d97706;
+  --warning-50: #FFF8E6;
+  --warning-100: #FFEFC2;
+  --warning-500: #F4B740;
+  --warning-600: #D99A16;
+
+  --info-50: #EEF6FF;
+  --info-100: #D9EAFF;
+  --info-500: #2F80ED;
+  --info-600: #1C64D1;
 
   /* Semantic Tokens */
-  --bg-primary: var(--gray-50);
-  --bg-secondary: var(--gray-100);
-  --bg-elevated: #ffffff;
-  --text-primary: var(--gray-900);
-  --text-secondary: var(--gray-600);
-  --text-tertiary: var(--gray-500);
-  --border-subtle: var(--gray-200);
-  --border-strong: var(--gray-300);
+  --bg-primary: #F7FAFC;
+  --bg-secondary: #EAF3F8;
+  --bg-elevated: #FFFFFF;
+  --text-primary: #102A3A;
+  --text-secondary: #647887;
+  --text-tertiary: #7D909C;
+  --border-subtle: #D9E6EE;
+  --border-strong: #B8C7D1;
 
   /* Spacing Scale */
   --space-1: 0.25rem;  /* 4px */
@@ -949,8 +954,8 @@ tr:hover {
 }
 
 .landing-hero {
-  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
-  color: white;
+  background: linear-gradient(135deg, #FFFFFF 0%, #EAF3F8 100%);
+  color: var(--text-primary);
   padding: var(--space-20) var(--space-6);
   text-align: center;
   position: relative;
@@ -964,7 +969,7 @@ tr:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 50%, rgba(0,53,92,0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -1003,13 +1008,13 @@ tr:hover {
   font-size: var(--text-3xl);
   font-weight: var(--font-semibold);
   margin-bottom: var(--space-4);
-  color: rgba(255, 255, 255, 0.95);
+  color: #00355C;
 }
 
 .landing-description {
   font-size: var(--text-xl);
   margin-bottom: var(--space-10);
-  color: rgba(255, 255, 255, 0.9);
+  color: #102A3A;
   line-height: 1.6;
 }
 
@@ -1021,32 +1026,60 @@ tr:hover {
 }
 
 .landing-cta-primary {
-  background: white;
-  color: var(--primary-700);
-  border-color: white;
+  background: #00355C;
+  color: white;
+  border-color: #00355C;
   min-width: 200px;
 }
 
 .landing-cta-primary:hover {
-  background: var(--gray-50);
+  background: #002A49;
   transform: translateY(-2px);
   box-shadow: var(--shadow-xl);
 }
 
 .landing-cta-secondary {
-  background: transparent;
-  color: white;
-  border-color: rgba(255, 255, 255, 0.5);
+  background: white;
+  color: #00355C;
+  border-color: #00355C;
   min-width: 200px;
 }
 
 .landing-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: white;
+  background: #F7FAFC;
+  border-color: #002A49;
+  color: #002A49;
 }
 
 .landing-section {
   padding: var(--space-20) var(--space-6);
+}
+
+.landing-section-dark {
+  background: linear-gradient(135deg, #00355C 0%, #002A49 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-section-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.landing-section-dark .landing-container {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-section-dark .landing-section-title {
+  color: white;
 }
 
 .landing-section-alt {
@@ -1083,10 +1116,22 @@ tr:hover {
   transition: all var(--transition-base);
 }
 
+.landing-section-dark .landing-step {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
 .landing-step:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary-300);
+}
+
+.landing-section-dark .landing-step:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .landing-step-number {
@@ -1105,6 +1150,11 @@ tr:hover {
   font-size: var(--text-sm);
 }
 
+.landing-section-dark .landing-step-number {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
 .landing-step-icon {
   font-size: 48px;
   margin-bottom: var(--space-4);
@@ -1117,10 +1167,18 @@ tr:hover {
   color: var(--text-primary);
 }
 
+.landing-section-dark .landing-step-title {
+  color: white;
+}
+
 .landing-step-description {
   font-size: var(--text-sm);
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+.landing-section-dark .landing-step-description {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .landing-features {
