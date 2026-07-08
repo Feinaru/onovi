@@ -115,9 +115,10 @@ router.get('/', auth(), async (req, res, next) => {
 });
 
 /**
- * GET /bookings/:id - Get single booking details with role-based access control
+ * GET /bookings/:id - Get single booking details (CUSTOMER-only)
+ * Service providers should use /api/service-provider/bookings/:id instead
  */
-router.get('/:id', auth(), async (req, res, next) => {
+router.get('/:id', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
   try {
     const bookingId = Number(req.params.id);
 
@@ -140,13 +141,6 @@ router.get('/:id', auth(), async (req, res, next) => {
           }
         },
         businessService: {
-          select: {
-            id: true,
-            name: true,
-            description: true,
-            durationMinutes: true,
-            regularPrice: true
-          },
           include: {
             serviceTemplate: {
               select: {
@@ -182,24 +176,8 @@ router.get('/:id', auth(), async (req, res, next) => {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    // Role-based access control
-    if (req.user.role === 'CUSTOMER') {
-      // CUSTOMER: Can only see their own bookings
-      if (booking.customerId !== req.user.id) {
-        return res.status(403).json({ message: 'Forbidden' });
-      }
-    } else if (req.user.role === 'SERVICE_PROVIDER' || req.user.role === 'BUSINESS') {
-      // SERVICE_PROVIDER: Can only see bookings for businesses they own
-      const business = await prisma.business.findUnique({
-        where: { id: booking.businessId },
-        select: { ownerId: true }
-      });
-
-      if (!business || business.ownerId !== req.user.id) {
-        return res.status(403).json({ message: 'Forbidden' });
-      }
-    } else if (req.user.role !== 'ADMIN') {
-      // Unknown role (ADMIN is allowed to see all)
+    // CUSTOMER can only see their own bookings
+    if (booking.customerId !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
