@@ -379,6 +379,14 @@ router.patch('/:id/status', auth(), requireRole('BUSINESS', 'SERVICE_PROVIDER', 
       return res.status(404).json({ message: 'Booking not found' });
     }
 
+    // Prevent modification of terminal states (Bundle 6: Hardening)
+    const terminalStatuses = ['COMPLETED', 'CANCELLED_BY_CUSTOMER', 'CANCELLED_BY_BUSINESS', 'CANCELLED', 'NO_SHOW', 'REJECTED'];
+    if (terminalStatuses.includes(booking.status)) {
+      return res.status(400).json({
+        message: `Cannot modify booking in ${booking.status} state. Terminal states cannot be changed.`
+      });
+    }
+
     // Authorization check
     if (req.user.role !== 'ADMIN') {
       const business = await prisma.business.findUnique({
@@ -445,6 +453,14 @@ router.patch('/:id/cancel', auth(), async (req, res, next) => {
 
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    // Prevent cancellation of terminal states (Bundle 6: Hardening)
+    const nonCancellableStatuses = ['COMPLETED', 'CANCELLED_BY_CUSTOMER', 'CANCELLED_BY_BUSINESS', 'CANCELLED', 'NO_SHOW', 'REJECTED'];
+    if (nonCancellableStatuses.includes(booking.status)) {
+      return res.status(400).json({
+        message: `Cannot cancel booking in ${booking.status} state. Booking is already finalized.`
+      });
     }
 
     // Determine cancellation type based on user role
