@@ -8,6 +8,7 @@ import MyBookingsPage from './features/customer/pages/MyBookingsPage';
 import BusinessPage from './features/business/BusinessPage';
 import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
 import AdminPage from './pages/AdminPage';
+import AdminApprovalsPage from './features/admin/pages/AdminApprovalsPage';
 import LandingPage from './pages/LandingPage';
 import CRMPage from './pages/CRMPage';
 import RegistrationEntryPage from './features/registration/RegistrationEntryPage';
@@ -436,6 +437,12 @@ function App() {
         {/* Admin View */}
         {view === 'admin' && user.role === 'ADMIN' && <AdminPage user={user} setView={setView} />}
         {view === 'admin' && user.role !== 'ADMIN' && (
+          <UnauthorizedAccess onNavigateHome={handleNavigateHome} />
+        )}
+
+        {/* Admin Approvals View */}
+        {view === 'admin-approvals' && user.role === 'ADMIN' && <AdminApprovalsPage setView={setView} />}
+        {view === 'admin-approvals' && user.role !== 'ADMIN' && (
           <UnauthorizedAccess onNavigateHome={handleNavigateHome} />
         )}
 

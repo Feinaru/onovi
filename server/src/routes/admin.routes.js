@@ -139,15 +139,44 @@ router.get('/businesses', async (req, res, next) => {
 router.patch('/businesses/:id/approve', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
+    const adminId = req.user.id;
 
-    const business = await prisma.business.update({
-      where: { id },
-      data: {
-        status: 'ACTIVE'
+    // Use transaction to keep Business and ServiceProviderApproval consistent
+    const result = await prisma.$transaction(async (tx) => {
+      // Update Business status
+      const business = await tx.business.update({
+        where: { id },
+        data: {
+          status: 'ACTIVE'
+        }
+      });
+
+      // Check if ServiceProviderApproval exists for this business
+      const approval = await tx.serviceProviderApproval.findFirst({
+        where: { serviceProviderId: id }
+      });
+
+      let updatedApproval = null;
+      if (approval) {
+        // Update ServiceProviderApproval to keep data consistent
+        updatedApproval = await tx.serviceProviderApproval.update({
+          where: { id: approval.id },
+          data: {
+            status: 'APPROVED',
+            reviewedById: adminId,
+            reviewedAt: new Date()
+          }
+        });
       }
+
+      return { business, approval: updatedApproval };
     });
 
-    res.json(business);
+    // Return business with metadata about approval update
+    res.json({
+      ...result.business,
+      _approvalUpdated: result.approval !== null
+    });
   } catch (err) {
     next(err);
   }
