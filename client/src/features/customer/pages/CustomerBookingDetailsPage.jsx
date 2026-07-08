@@ -8,6 +8,14 @@ export default function CustomerBookingDetailsPage({ bookingId, setView }) {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showRescheduleOptions, setShowRescheduleOptions] = useState(false);
+  const [rescheduleOptions, setRescheduleOptions] = useState([]);
+  const [loadingOptions, setLoadingOptions] = useState(false);
+  const [rescheduleError, setRescheduleError] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [rescheduling, setRescheduling] = useState(false);
+  const [rescheduleSuccess, setRescheduleSuccess] = useState(false);
 
   useEffect(() => {
     loadBooking();
@@ -24,6 +32,53 @@ export default function CustomerBookingDetailsPage({ bookingId, setView }) {
       setError(err.message || 'שגיאה בטעינת פרטי הזמנה');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadRescheduleOptions() {
+    try {
+      setLoadingOptions(true);
+      setRescheduleError(null);
+      const data = await api(`/bookings/${bookingId}/reschedule-options`);
+      setRescheduleOptions(data.options || []);
+      setShowRescheduleOptions(true);
+    } catch (err) {
+      console.error('Failed to load reschedule options:', err);
+      setRescheduleError(err.message || 'שגיאה בטעינת מועדים זמינים');
+    } finally {
+      setLoadingOptions(false);
+    }
+  }
+
+  async function handleRescheduleConfirm() {
+    if (!selectedOption) return;
+
+    try {
+      setRescheduling(true);
+      setRescheduleError(null);
+      const result = await api(`/bookings/${bookingId}/reschedule`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          slotId: selectedOption.slotId,
+          startTime: selectedOption.startTime
+        })
+      });
+
+      if (result.success) {
+        setRescheduleSuccess(true);
+        setShowConfirmation(false);
+        setShowRescheduleOptions(false);
+        setSelectedOption(null);
+        // Reload booking to show updated time
+        await loadBooking();
+        // Show success message briefly
+        setTimeout(() => setRescheduleSuccess(false), 3000);
+      }
+    } catch (err) {
+      console.error('Failed to reschedule:', err);
+      setRescheduleError(err.message || 'שגיאה בשינוי התור');
+    } finally {
+      setRescheduling(false);
     }
   }
 
@@ -166,6 +221,233 @@ export default function CustomerBookingDetailsPage({ bookingId, setView }) {
       <div style={{ marginBottom: '24px' }}>
         {getStatusBadge(booking.status)}
       </div>
+
+      {/* Success message */}
+      {rescheduleSuccess && (
+        <div style={{
+          padding: '16px',
+          marginBottom: '24px',
+          backgroundColor: '#d1fae5',
+          color: '#065f46',
+          borderRadius: '8px',
+          border: '1px solid #a7f3d0',
+          textAlign: 'center',
+          fontWeight: '500'
+        }}>
+          ✓ התור עודכן בהצלחה
+        </div>
+      )}
+
+      {/* Reschedule section */}
+      {booking.reschedule && (
+        <div style={{ marginBottom: '24px' }}>
+          {booking.reschedule.canReschedule ? (
+            <button
+              onClick={loadRescheduleOptions}
+              disabled={loadingOptions}
+              className="btn-primary"
+              style={{ fontSize: '16px', padding: '12px 24px' }}
+            >
+              {loadingOptions ? 'טוען מועדים...' : '🔄 שנה תור'}
+            </button>
+          ) : (
+            <div style={{
+              padding: '16px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              border: '1px solid #e5e7eb'
+            }}>
+              <div style={{ fontWeight: '500', marginBottom: '4px' }}>לא ניתן לשנות את התור</div>
+              <div style={{ fontSize: '14px', color: '#6b7280' }}>
+                {booking.reschedule.blockedReasonMessage || 'לא ניתן לשנות את התור במצב הנוכחי'}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Reschedule error */}
+      {rescheduleError && (
+        <div style={{
+          padding: '16px',
+          marginBottom: '24px',
+          backgroundColor: '#fee2e2',
+          color: '#991b1b',
+          borderRadius: '8px',
+          border: '1px solid #fecaca'
+        }}>
+          ⚠️ {rescheduleError}
+        </div>
+      )}
+
+      {/* Reschedule options modal */}
+      {showRescheduleOptions && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '24px'
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            padding: '24px',
+            maxWidth: '600px',
+            width: '100%',
+            maxHeight: '80vh',
+            overflow: 'auto'
+          }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '16px' }}>
+              בחר מועד חדש
+            </h3>
+
+            {rescheduleOptions.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '48px', color: '#6b7280' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>📅</div>
+                <div>אין מועדים חלופיים זמינים כרגע</div>
+              </div>
+            ) : (
+              <div style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
+                {rescheduleOptions.map((option, index) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      setSelectedOption(option);
+                      setShowConfirmation(true);
+                    }}
+                    style={{
+                      padding: '16px',
+                      border: '2px solid #e5e7eb',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      ':hover': {
+                        borderColor: '#3b82f6',
+                        backgroundColor: '#eff6ff'
+                      }
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#3b82f6';
+                      e.currentTarget.style.backgroundColor = '#eff6ff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = '#e5e7eb';
+                      e.currentTarget.style.backgroundColor = 'white';
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <div style={{ fontWeight: '600', marginBottom: '4px' }}>
+                          📅 {option.date}
+                        </div>
+                        <div style={{ fontSize: '14px', color: '#6b7280' }}>
+                          🕐 {option.startTime} - {option.endTime}
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '18px', fontWeight: '600', color: '#10b981' }}>
+                        ₪{option.price}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <button
+              onClick={() => {
+                setShowRescheduleOptions(false);
+                setRescheduleError(null);
+              }}
+              className="btn-secondary"
+              style={{ width: '100%' }}
+            >
+              ביטול
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation modal */}
+      {showConfirmation && selectedOption && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1001,
+          padding: '24px'
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            padding: '24px',
+            maxWidth: '400px',
+            width: '100%'
+          }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '16px' }}>
+              האם לשנות את התור?
+            </h3>
+
+            <div style={{ marginBottom: '24px', padding: '16px', backgroundColor: '#f9fafb', borderRadius: '8px' }}>
+              <div style={{ fontSize: '14px', color: '#6b7280', marginBottom: '8px' }}>מועד חדש:</div>
+              <div style={{ fontWeight: '600', marginBottom: '4px' }}>
+                📅 {selectedOption.date}
+              </div>
+              <div style={{ color: '#6b7280' }}>
+                🕐 {selectedOption.startTime} - {selectedOption.endTime}
+              </div>
+            </div>
+
+            {rescheduleError && (
+              <div style={{
+                padding: '12px',
+                marginBottom: '16px',
+                backgroundColor: '#fee2e2',
+                color: '#991b1b',
+                borderRadius: '6px',
+                fontSize: '14px'
+              }}>
+                {rescheduleError}
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={handleRescheduleConfirm}
+                disabled={rescheduling}
+                className="btn-primary"
+                style={{ flex: 1 }}
+              >
+                {rescheduling ? 'משנה...' : 'כן, שנה תור'}
+              </button>
+              <button
+                onClick={() => {
+                  setShowConfirmation(false);
+                  setSelectedOption(null);
+                  setRescheduleError(null);
+                }}
+                disabled={rescheduling}
+                className="btn-secondary"
+                style={{ flex: 1 }}
+              >
+                ביטול
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Details card */}
       <div style={{
