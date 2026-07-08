@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('../lib/prisma');
 const { auth, requireRole } = require('../middleware/auth');
-const prisma = new PrismaClient();
 
 // Apply authentication and service provider role to all routes
 router.use(auth());
