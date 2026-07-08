@@ -185,7 +185,10 @@ export default function BusinessProfilePage({ businessId, setView }) {
 
         {/* CTA Section */}
         <div className="business-cta-section">
-          <button onClick={handleBackToSearch} className="btn-primary btn-large">
+          <button onClick={handleBackToSearch} className="btn-primary btn-large" style={{ marginBottom: 'var(--space-3)' }}>
+            📅 צפה בתורים זמינים
+          </button>
+          <button onClick={handleBackToSearch} className="btn-secondary btn-large">
             חזרה לחיפוש תורים
           </button>
         </div>
