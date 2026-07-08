@@ -11,6 +11,11 @@ const { auth, requireRole } = require('../middleware/auth');
 const { getLegalStartTimes } = require('../services/slotAvailability.service');
 const { recalculateSlotStatus } = require('../services/slotStatus.service');
 const { ACTIVE_BOOKING_STATUSES, CANCELLED_BOOKING_STATUSES } = require('../constants/bookingStatuses');
+const {
+  canCustomerRescheduleBooking,
+  getRescheduleBlockedReasonMessage,
+  RESCHEDULABLE_BOOKING_STATUSES
+} = require('../lib/bookingLifecycle');
 
 /**
  * Helper: Calculate end time from start time and duration
@@ -181,7 +186,21 @@ router.get('/:id', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
-    res.json(booking);
+    // Add reschedule readiness metadata
+    const reschedulePolicy = canCustomerRescheduleBooking(booking, req.user.id);
+    const bookingWithReschedule = {
+      ...booking,
+      reschedule: {
+        canReschedule: reschedulePolicy.canReschedule,
+        blockedReason: reschedulePolicy.blockedReason,
+        blockedReasonMessage: reschedulePolicy.blockedReason
+          ? getRescheduleBlockedReasonMessage(reschedulePolicy.blockedReason)
+          : null,
+        allowedStatuses: RESCHEDULABLE_BOOKING_STATUSES
+      }
+    };
+
+    res.json(bookingWithReschedule);
   } catch (e) {
     next(e);
   }
