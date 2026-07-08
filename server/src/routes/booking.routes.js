@@ -207,6 +207,157 @@ router.get('/:id', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
 });
 
 /**
+ * GET /bookings/:id/reschedule-options - Get reschedule options for a booking
+ * CUSTOMER-only endpoint that returns available alternative times
+ * Does NOT mutate the booking or reserve slots
+ */
+router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
+  try {
+    const bookingId = Number(req.params.id);
+    const { startDate, endDate, limit = 50 } = req.query;
+
+    // Get booking with all necessary relationships
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: {
+        business: true,
+        businessService: {
+          include: {
+            serviceTemplate: true
+          }
+        },
+        slot: true
+      }
+    });
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    // Verify ownership
+    if (booking.customerId !== req.user.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    // Check reschedule eligibility
+    const reschedulePolicy = canCustomerRescheduleBooking(booking, req.user.id);
+    if (!reschedulePolicy.canReschedule) {
+      return res.status(400).json({
+        message: getRescheduleBlockedReasonMessage(reschedulePolicy.blockedReason),
+        blockedReason: reschedulePolicy.blockedReason
+      });
+    }
+
+    // Determine service duration
+    const durationMinutes = booking.businessService?.serviceTemplate?.defaultDurationMinutes
+      || booking.businessService?.durationMinutes
+      || 30;
+
+    // Calculate date range (default to next 14 days)
+    const today = new Date().toISOString().split('T')[0];
+    const defaultEndDate = new Date();
+    defaultEndDate.setDate(defaultEndDate.getDate() + 14);
+    const dateStart = startDate || today;
+    const dateEnd = endDate || defaultEndDate.toISOString().split('T')[0];
+
+    // Find available slots for the same business and service
+    const availableSlots = await prisma.slot.findMany({
+      where: {
+        businessId: booking.businessId,
+        date: {
+          gte: dateStart,
+          lte: dateEnd
+        },
+        status: {
+          in: ['OPEN', 'PARTIALLY_BOOKED']
+        },
+        allowedServices: {
+          some: {
+            businessServiceId: booking.businessServiceId
+          }
+        }
+      },
+      include: {
+        allowedServices: {
+          where: {
+            businessServiceId: booking.businessServiceId
+          }
+        }
+      },
+      orderBy: [
+        { date: 'asc' },
+        { startTime: 'asc' }
+      ],
+      take: Number(limit)
+    });
+
+    // Build options array with legal start times for each slot
+    const options = [];
+    for (const slot of availableSlots) {
+      // Skip the current slot (customer already has this time)
+      if (slot.id === booking.slotId) {
+        continue;
+      }
+
+      try {
+        // Use transaction for legal time calculation
+        const legalTimes = await prisma.$transaction(async (tx) => {
+          return getLegalStartTimes(tx, slot.id, booking.businessServiceId, bookingId);
+        });
+
+        // Add each legal time as an option
+        for (const legalTime of legalTimes) {
+          const startTime = typeof legalTime === 'string' ? legalTime : legalTime.startTime;
+
+          // Calculate end time
+          const [hours, minutes] = startTime.split(':').map(Number);
+          const totalMinutes = hours * 60 + minutes + durationMinutes;
+          const endHours = Math.floor(totalMinutes / 60);
+          const endMinutes = totalMinutes % 60;
+          const endTime = `${String(endHours).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`;
+
+          options.push({
+            slotId: slot.id,
+            date: slot.date,
+            slotStartTime: slot.startTime,
+            slotEndTime: slot.endTime,
+            startTime,
+            endTime,
+            price: booking.businessService?.regularPrice || booking.price
+          });
+        }
+      } catch (err) {
+        // Skip slots with errors (e.g., calculation issues)
+        console.error(`Error calculating legal times for slot ${slot.id}:`, err.message);
+        continue;
+      }
+    }
+
+    // Return response
+    res.json({
+      bookingId: booking.id,
+      businessId: booking.businessId,
+      businessServiceId: booking.businessServiceId,
+      serviceName: booking.businessService?.name || 'שירות',
+      durationMinutes,
+      current: {
+        slotId: booking.slotId,
+        date: booking.slot?.date,
+        startTime: booking.startTime,
+        endTime: booking.endTime
+      },
+      options,
+      policy: {
+        canReschedule: true,
+        blockedReason: null
+      }
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
  * POST /bookings - Create booking with atomic locking and legal time validation
  * Requires authenticated CUSTOMER role
  */
