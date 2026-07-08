@@ -261,6 +261,7 @@ router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (re
     const dateEnd = endDate || defaultEndDate.toISOString().split('T')[0];
 
     // Find available slots for the same business and service
+    // Only include slots with active, customer-visible services (same rule as fresh bookings)
     const availableSlots = await prisma.slot.findMany({
       where: {
         businessId: booking.businessId,
@@ -271,7 +272,11 @@ router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (re
         status: 'OPEN',
         allowedServices: {
           some: {
-            businessServiceId: booking.businessServiceId
+            businessServiceId: booking.businessServiceId,
+            businessService: {
+              active: true,
+              visibleToCustomers: true
+            }
           }
         }
       },
@@ -279,6 +284,9 @@ router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (re
         allowedServices: {
           where: {
             businessServiceId: booking.businessServiceId
+          },
+          include: {
+            businessService: true
           }
         }
       },
@@ -783,7 +791,14 @@ router.patch('/:id/reschedule', auth(), requireRole('CUSTOMER'), async (req, res
         throw err;
       }
 
-      // Verify service is allowed
+      // Verify slot is OPEN (same rule as fresh bookings)
+      if (newSlot.status !== 'OPEN') {
+        const err = new Error('התור החדש לא זמין');
+        err.status = 400;
+        throw err;
+      }
+
+      // Verify service is allowed and active/visible (same rule as fresh bookings)
       if (!newSlot.allowedServices || newSlot.allowedServices.length === 0) {
         const err = new Error('השירות הזה לא זמין בתור החדש');
         err.status = 400;
@@ -791,6 +806,13 @@ router.patch('/:id/reschedule', auth(), requireRole('CUSTOMER'), async (req, res
       }
 
       const businessService = newSlot.allowedServices[0].businessService;
+
+      // Verify service is active and visible to customers
+      if (!businessService.active || !businessService.visibleToCustomers) {
+        const err = new Error('השירות הזה כבר לא זמין ללקוחות');
+        err.status = 400;
+        throw err;
+      }
       const durationMinutes = businessService.serviceTemplate
         ? businessService.serviceTemplate.defaultDurationMinutes
         : businessService.durationMinutes;
