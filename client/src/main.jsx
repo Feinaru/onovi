@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './features/customer/CustomerPage';
+import MyBookingsPage from './features/customer/pages/MyBookingsPage';
 import BusinessPage from './features/business/BusinessPage';
 import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
 import AdminPage from './pages/AdminPage';
@@ -425,6 +426,9 @@ function App() {
       >
         {/* Customer View */}
         {view === 'customer' && <CustomerPage user={user} setView={setView} />}
+
+        {/* My Bookings View */}
+        {view === 'my-bookings' && user.role === 'CUSTOMER' && <MyBookingsPage setView={setView} />}
 
         {/* Business View */}
         {view === 'business' && <BusinessPage user={user} setView={setView} />}
