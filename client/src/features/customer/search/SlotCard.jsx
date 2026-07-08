@@ -213,10 +213,12 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
                   onChange={() => handleServiceSelect(service)}
                   style={{ marginLeft: '8px' }}
                 />
-                <span style={{ flex: 1, fontSize: '14px' }}>{service.name}</span>
-                <span style={{ fontSize: '12px', color: '#718096' }}>
-                  {service.durationMinutes} דקות
-                </span>
+                <div style={{ flex: 1 }}>
+                  <span style={{ fontSize: '14px' }}>{service.name}</span>
+                  <div style={{ fontSize: '12px', color: '#718096', marginTop: '2px' }}>
+                    {service.durationMinutes} דקות • {service.regularPrice ? `₪${service.regularPrice}` : 'מחיר לא זמין'}
+                  </div>
+                </div>
               </label>
             ))}
           </div>

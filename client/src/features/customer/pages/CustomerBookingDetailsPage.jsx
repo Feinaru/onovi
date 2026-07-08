@@ -342,17 +342,24 @@ export default function CustomerBookingDetailsPage({ bookingId, setView }) {
                       e.currentTarget.style.backgroundColor = 'white';
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <div style={{ fontWeight: '600', marginBottom: '4px' }}>
-                          📅 {option.date}
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+                        <div>
+                          <div style={{ fontWeight: '600', marginBottom: '4px' }}>
+                            📅 {option.date}
+                          </div>
+                          <div style={{ fontSize: '14px', color: '#6b7280', marginBottom: '2px' }}>
+                            🕐 תור: {option.startTime} - {option.endTime}
+                          </div>
+                          {option.slotStartTime && option.slotEndTime && (
+                            <div style={{ fontSize: '12px', color: '#9ca3af', fontStyle: 'italic' }}>
+                              בתוך זמינות: {option.slotStartTime} - {option.slotEndTime}
+                            </div>
+                          )}
                         </div>
-                        <div style={{ fontSize: '14px', color: '#6b7280' }}>
-                          🕐 {option.startTime} - {option.endTime}
+                        <div style={{ fontSize: '18px', fontWeight: '600', color: '#10b981' }}>
+                          ₪{option.price}
                         </div>
-                      </div>
-                      <div style={{ fontSize: '18px', fontWeight: '600', color: '#10b981' }}>
-                        ₪{option.price}
                       </div>
                     </div>
                   </div>

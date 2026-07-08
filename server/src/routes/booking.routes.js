@@ -248,9 +248,9 @@ router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (re
       });
     }
 
-    // Determine service duration
-    const durationMinutes = booking.businessService?.serviceTemplate?.defaultDurationMinutes
-      || booking.businessService?.durationMinutes
+    // Determine service duration (prefer actual businessService duration over template default)
+    const durationMinutes = booking.businessService?.durationMinutes
+      || booking.businessService?.serviceTemplate?.defaultDurationMinutes
       || 30;
 
     // Calculate date range (default to next 14 days)
