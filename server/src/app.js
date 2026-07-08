@@ -30,6 +30,7 @@ const serviceProviderServiceGroupsRoutes = require('./routes/service-provider-se
 const serviceProviderServicesRoutes = require('./routes/service-provider-services.routes');
 const serviceProviderSlotsRoutes = require('./routes/service-provider-slots.routes');
 const serviceProviderBookingsRoutes = require('./routes/service-provider-bookings.routes');
+const serviceProviderCustomersRoutes = require('./routes/service-provider-customers.routes');
 
 const app = express();
 app.use(cors());
@@ -68,6 +69,7 @@ app.use('/api/service-provider/service-groups', serviceProviderServiceGroupsRout
 app.use('/api/service-provider/services', serviceProviderServicesRoutes);
 app.use('/api/service-provider/slots', serviceProviderSlotsRoutes);
 app.use('/api/service-provider/bookings', serviceProviderBookingsRoutes);
+app.use('/api/service-provider/customers', serviceProviderCustomersRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);

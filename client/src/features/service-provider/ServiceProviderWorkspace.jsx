@@ -8,6 +8,7 @@ import SettingsPage from './pages/SettingsPage';
 import ComingSoonPage from './pages/ComingSoonPage';
 import CalendarPage from './pages/CalendarPage';
 import BookingsPage from './pages/BookingsPage';
+import ProviderCustomersPage from './pages/ProviderCustomersPage';
 
 /**
  * ServiceProviderWorkspace - Main workspace for service providers
@@ -64,7 +65,7 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
     { id: 'service-groups', label: 'קבוצות שירותים', icon: '📦', active: true },
     { id: 'calendar', label: 'תורים', icon: '📅', active: true },
     { id: 'bookings', label: 'הזמנות', icon: '📋', active: true },
-    { id: 'customers', label: 'לקוחות', icon: '👥', active: false },
+    { id: 'customers', label: 'לקוחות', icon: '👥', active: true },
     { id: 'reports', label: 'דוחות', icon: '📈', active: false },
     { id: 'settings', label: 'הגדרות', icon: '⚙️', active: true }
   ];
@@ -112,6 +113,8 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
         return <CalendarPage user={user} />;
       case 'bookings':
         return <BookingsPage user={user} />;
+      case 'customers':
+        return <ProviderCustomersPage user={user} />;
       case 'settings':
         return <SettingsPage user={user} />;
       default:
