@@ -32,23 +32,61 @@ function timeToMinutes(timeStr) {
 }
 
 /**
- * GET /bookings - List bookings
+ * GET /bookings - List bookings with role-based access control
  */
-router.get('/', auth(false), async (req, res, next) => {
+router.get('/', auth(), async (req, res, next) => {
   try {
     const where = {};
 
-    // Filter by customer (authenticated)
-    if (req.query.mine === 'true' && req.user?.id) {
+    // Role-based access control
+    if (req.user.role === 'CUSTOMER') {
+      // CUSTOMER: Can only see their own bookings
       where.customerId = req.user.id;
+
+    } else if (req.user.role === 'SERVICE_PROVIDER' || req.user.role === 'BUSINESS') {
+      // SERVICE_PROVIDER/BUSINESS: Can only see bookings for businesses they own
+
+      // Get all businesses owned by this user
+      const ownedBusinesses = await prisma.business.findMany({
+        where: { ownerId: req.user.id },
+        select: { id: true }
+      });
+
+      const ownedBusinessIds = ownedBusinesses.map(b => b.id);
+
+      if (ownedBusinessIds.length === 0) {
+        // User owns no businesses, return empty array
+        return res.json([]);
+      }
+
+      // If businessId filter is provided, verify ownership
+      if (req.query.businessId) {
+        const requestedBusinessId = Number(req.query.businessId);
+        if (!ownedBusinessIds.includes(requestedBusinessId)) {
+          // User doesn't own this business
+          return res.status(403).json({ message: 'Forbidden: You do not own this business' });
+        }
+        where.businessId = requestedBusinessId;
+      } else {
+        // No specific business requested, filter to all owned businesses
+        where.businessId = { in: ownedBusinessIds };
+      }
+
+    } else if (req.user.role === 'ADMIN') {
+      // ADMIN: Can see all bookings, apply optional filters
+      if (req.query.businessId) {
+        where.businessId = Number(req.query.businessId);
+      }
+      if (req.query.customerId) {
+        where.customerId = Number(req.query.customerId);
+      }
+
+    } else {
+      // Unknown role, deny access
+      return res.status(403).json({ message: 'Forbidden' });
     }
 
-    // Filter by business
-    if (req.query.businessId) {
-      where.businessId = Number(req.query.businessId);
-    }
-
-    // Filter by slot
+    // Optional slot filter (available to all roles)
     if (req.query.slotId) {
       where.slotId = Number(req.query.slotId);
     }
