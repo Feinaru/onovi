@@ -22,7 +22,7 @@ router.get('/dashboard', async (req, res, next) => {
       prisma.user.count(),
       prisma.category.count(),
       prisma.business.count(),
-      prisma.service.count(),
+      prisma.businessService.count(),
       prisma.slot.count(),
       prisma.booking.count(),
       prisma.business.count({ where: { status: 'PENDING_APPROVAL' } }),
