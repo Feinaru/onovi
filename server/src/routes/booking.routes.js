@@ -268,9 +268,7 @@ router.get('/:id/reschedule-options', auth(), requireRole('CUSTOMER'), async (re
           gte: dateStart,
           lte: dateEnd
         },
-        status: {
-          in: ['OPEN', 'PARTIALLY_BOOKED']
-        },
+        status: 'OPEN',
         allowedServices: {
           some: {
             businessServiceId: booking.businessServiceId
