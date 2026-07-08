@@ -5,6 +5,7 @@ import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './features/customer/CustomerPage';
 import MyBookingsPage from './features/customer/pages/MyBookingsPage';
+import BusinessProfilePage from './features/customer/pages/BusinessProfilePage';
 import BusinessPage from './features/business/BusinessPage';
 import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
 import AdminPage from './pages/AdminPage';
@@ -83,6 +84,7 @@ function App() {
   }
 
   function handleNavigate(newView) {
+    // Support both string views and object views { view, businessId }
     setView(newView);
   }
 
@@ -166,6 +168,24 @@ function App() {
           showBackButton={true}
         >
           <CustomerPage user={user} setView={setView} />
+        </PublicLayout>
+        <Toast message={message} />
+      </>
+    );
+  }
+
+  // Show business profile page (public)
+  const viewName = typeof view === 'object' ? view.view : view;
+  if (!user && viewName === 'business-profile' && typeof view === 'object') {
+    return (
+      <>
+        <PublicLayout
+          user={user}
+          onNavigate={handleNavigate}
+          onLogout={logout}
+          showBackButton={true}
+        >
+          <BusinessProfilePage businessId={view.businessId} setView={setView} />
         </PublicLayout>
         <Toast message={message} />
       </>
@@ -426,10 +446,15 @@ function App() {
         onLogout={logout}
       >
         {/* Customer View */}
-        {view === 'customer' && <CustomerPage user={user} setView={setView} />}
+        {viewName === 'customer' && <CustomerPage user={user} setView={setView} />}
+
+        {/* Business Profile View (for logged-in customers) */}
+        {viewName === 'business-profile' && typeof view === 'object' && (
+          <BusinessProfilePage businessId={view.businessId} setView={setView} />
+        )}
 
         {/* My Bookings View */}
-        {view === 'my-bookings' && user.role === 'CUSTOMER' && <MyBookingsPage setView={setView} />}
+        {viewName === 'my-bookings' && user.role === 'CUSTOMER' && <MyBookingsPage setView={setView} />}
 
         {/* Business View */}
         {view === 'business' && <BusinessPage user={user} setView={setView} />}

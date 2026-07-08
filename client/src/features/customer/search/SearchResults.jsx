@@ -21,7 +21,7 @@ function SearchResults({ filteredSlots, allSlots, filters, onSlotSelect, onReset
 
         <div className="slots-grid">
           {filteredSlots.map(slot => (
-            <SlotCard key={slot.id} slot={slot} onSelect={onSlotSelect} />
+            <SlotCard key={slot.id} slot={slot} onSelect={onSlotSelect} setView={setView} />
           ))}
         </div>
       </div>

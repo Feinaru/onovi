@@ -438,20 +438,64 @@ router.delete('/:id', auth(), requireRole('BUSINESS', 'ADMIN'), async (req, res,
   }
 });
 
-// GET /api/businesses/:id - Get business by ID
+// GET /api/businesses/:id - Get business by ID (PUBLIC - customer-facing)
 router.get('/:id', async (req, res, next) => {
   try {
     const businessId = Number(req.params.id);
+
+    // Only expose ACTIVE businesses to public
     const business = await prisma.business.findUnique({
       where: { id: businessId },
-      include: { category: true, services: true }
+      include: {
+        category: true,
+        services: {
+          where: {
+            active: true,
+            visibleToCustomers: true
+          }
+        },
+        approvals: {
+          where: {
+            status: 'APPROVED'
+          },
+          take: 1
+        }
+      }
     });
 
-    if (!business) {
+    // Return 404 if business doesn't exist, isn't ACTIVE, or isn't approved
+    if (!business || business.status !== 'ACTIVE' || business.approvals.length === 0) {
       return res.status(404).json({ message: 'Business not found' });
     }
 
-    res.json(business);
+    // Remove private/internal fields before sending to client
+    const publicBusiness = {
+      id: business.id,
+      name: business.name,
+      description: business.description,
+      phone: business.phone,
+      city: business.city,
+      cityNameHebrew: business.cityNameHebrew,
+      street: business.street,
+      streetNameHebrew: business.streetNameHebrew,
+      houseNumber: business.houseNumber,
+      formattedAddress: business.formattedAddress,
+      latitude: business.latitude,
+      longitude: business.longitude,
+      logoUrl: business.logoUrl,
+      coverImageUrl: business.coverImageUrl,
+      galleryImages: business.galleryImages,
+      category: business.category,
+      services: business.services.map(s => ({
+        id: s.id,
+        name: s.name,
+        description: s.description,
+        durationMinutes: s.durationMinutes,
+        regularPrice: s.regularPrice
+      }))
+    };
+
+    res.json(publicBusiness);
   } catch (e) {
     next(e);
   }

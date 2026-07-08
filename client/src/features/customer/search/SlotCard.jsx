@@ -4,7 +4,7 @@ import { api } from '../../../api';
 /**
  * SlotCard - Individual slot display card (Sprint C: booking submission)
  */
-function SlotCard({ slot, onSelect, showMessage }) {
+function SlotCard({ slot, onSelect, showMessage, setView }) {
   const [selectedService, setSelectedService] = useState(null);
   const [availableTimes, setAvailableTimes] = useState(null);
   const [loadingTimes, setLoadingTimes] = useState(false);
@@ -158,6 +158,24 @@ function SlotCard({ slot, onSelect, showMessage }) {
         <div className="slot-location">
           📍 {slot.business.city}
         </div>
+        {setView && (
+          <button
+            onClick={() => setView({ view: 'business-profile', businessId: slot.business.id })}
+            style={{
+              marginTop: '6px',
+              padding: '4px 12px',
+              fontSize: '12px',
+              color: '#0B4A78',
+              backgroundColor: 'transparent',
+              border: '1px solid #0B4A78',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            צפה בפרופיל העסק →
+          </button>
+        )}
       </div>
 
       {/* Allowed Services */}
