@@ -76,6 +76,104 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * GET /api/service-provider/bookings/:id
+ * Get a single booking detail for the service provider's business
+ */
+router.get('/:id', async (req, res) => {
+  try {
+    const bookingId = Number(req.params.id);
+
+    // Get provider's business
+    const business = await getProviderBusiness(req.user.id);
+
+    if (!business) {
+      return res.status(404).json({
+        success: false,
+        error: 'No business found for this user'
+      });
+    }
+
+    // Get booking and verify ownership
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: {
+        business: {
+          select: {
+            id: true,
+            publicId: true,
+            name: true,
+            phone: true,
+            city: true,
+            cityNameHebrew: true,
+            street: true,
+            streetNameHebrew: true,
+            houseNumber: true,
+            formattedAddress: true,
+            status: true
+          }
+        },
+        businessService: {
+          include: {
+            serviceTemplate: {
+              select: {
+                id: true,
+                name: true,
+                defaultDurationMinutes: true
+              }
+            }
+          }
+        },
+        slot: {
+          select: {
+            id: true,
+            publicId: true,
+            date: true,
+            startTime: true,
+            endTime: true,
+            status: true
+          }
+        },
+        customer: {
+          select: {
+            id: true,
+            fullName: true,
+            phone: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    if (!booking) {
+      return res.status(404).json({
+        success: false,
+        error: 'Booking not found'
+      });
+    }
+
+    // Verify booking belongs to provider's business
+    if (booking.businessId !== business.id) {
+      return res.status(403).json({
+        success: false,
+        error: 'Booking does not belong to your business'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: booking
+    });
+  } catch (error) {
+    console.error('Get provider booking detail error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get booking details',
+      details: error.message
+    });
+  }
+});
+
+/**
  * PATCH /api/service-provider/bookings/:id/status
  * Update booking status for a booking belonging to the service provider's business
  */

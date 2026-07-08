@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../../api';
 import BookingCard from '../../business/components/BookingCard';
+import ServiceProviderBookingDetailsPage from './ServiceProviderBookingDetailsPage';
 
 /**
  * BookingsPage - Standalone bookings management for Service Provider Workspace
@@ -11,6 +12,7 @@ export default function BookingsPage({ user }) {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all'); // all, pending, confirmed, completed
+  const [selectedBookingId, setSelectedBookingId] = useState(null); // for details view
 
   useEffect(() => {
     loadBookings();
@@ -77,6 +79,19 @@ export default function BookingsPage({ user }) {
     } catch (err) {
       showMessage(err.message || 'שגיאה בביטול הזמנה');
     }
+  }
+
+  // Show booking details if selected
+  if (selectedBookingId) {
+    return (
+      <ServiceProviderBookingDetailsPage
+        bookingId={selectedBookingId}
+        onBack={() => {
+          setSelectedBookingId(null);
+          loadBookings(); // Reload to get latest data
+        }}
+      />
+    );
   }
 
   if (loading) {
@@ -168,6 +183,7 @@ export default function BookingsPage({ user }) {
                 onUpdateStatus={updateBookingStatus}
                 onCancel={cancelBooking}
                 showMessage={showMessage}
+                onViewDetails={setSelectedBookingId}
               />
             ))}
           </div>

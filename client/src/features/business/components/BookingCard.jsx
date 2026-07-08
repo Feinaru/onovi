@@ -5,7 +5,7 @@ import React from 'react';
  * Can render as table row (asTableRow=true) or as card (default)
  * Supports both onStatusChange (legacy) and onUpdateStatus (new)
  */
-function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMessage, asTableRow = false }) {
+function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMessage, onViewDetails, asTableRow = false }) {
   const handleStatusChange = onUpdateStatus || onStatusChange;
 
   const statusLabels = {
@@ -108,8 +108,9 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
-        <label style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>עדכן סטטוס:</label>
+      {/* Action buttons */}
+      <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'stretch', marginBottom: onViewDetails ? 'var(--space-2)' : 0 }}>
+        <label style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', alignSelf: 'center' }}>עדכן סטטוס:</label>
         <select
           value={booking.status}
           onChange={e => handleStatusChange && handleStatusChange(booking.id, e.target.value)}
@@ -124,6 +125,17 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
           <option value="CANCELLED_BY_BUSINESS">✗ בוטל ע"י עסק</option>
         </select>
       </div>
+
+      {/* View details button */}
+      {onViewDetails && (
+        <button
+          onClick={() => onViewDetails(booking.id)}
+          className="btn-secondary"
+          style={{ width: '100%' }}
+        >
+          פרטים
+        </button>
+      )}
     </div>
   );
 }
