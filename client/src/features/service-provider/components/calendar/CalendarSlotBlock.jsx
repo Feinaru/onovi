@@ -41,6 +41,13 @@ export default function CalendarSlotBlock({ slot, onClick, columnIndex = 0, tota
   // Count bookings
   const bookingCount = slot.bookings ? slot.bookings.length : 0;
 
+  // Format booking count in Hebrew
+  const bookingLabel = bookingCount === 1 ? '1 הזמנה' : `${bookingCount} הזמנות`;
+
+  // Visual adjustments for status
+  const isFull = slot.status === 'FULL';
+  const isCancelled = slot.status === 'CANCELLED';
+
   return (
     <div
       onClick={() => onClick(slot)}
@@ -59,7 +66,9 @@ export default function CalendarSlotBlock({ slot, onClick, columnIndex = 0, tota
         color: statusStyle.text,
         fontSize: 'var(--text-sm)',
         overflow: 'hidden',
-        zIndex: 10
+        zIndex: 10,
+        opacity: isCancelled ? 0.6 : 1,
+        border: isFull ? '2px solid rgba(0, 0, 0, 0.2)' : 'none'
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'scale(1.02)';
@@ -109,22 +118,42 @@ export default function CalendarSlotBlock({ slot, onClick, columnIndex = 0, tota
         )}
       </div>
 
-      {/* Booking count indicator */}
-      {bookingCount > 0 && (
+      {/* Booking count badge */}
+      {bookingCount > 0 && height > 40 && (
         <div style={{
           position: 'absolute',
           top: '4px',
-          left: '4px',
+          right: '4px',
+          background: 'rgba(255, 255, 255, 0.95)',
+          color: statusStyle.bg,
+          borderRadius: '10px',
+          padding: '2px 6px',
+          fontSize: '10px',
+          fontWeight: 'var(--font-bold)',
+          whiteSpace: 'nowrap',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+        }}>
+          {bookingLabel}
+        </div>
+      )}
+
+      {/* Simple count for smaller slots */}
+      {bookingCount > 0 && height <= 40 && (
+        <div style={{
+          position: 'absolute',
+          top: '4px',
+          right: '4px',
           background: 'rgba(255, 255, 255, 0.9)',
           color: statusStyle.bg,
           borderRadius: '50%',
-          width: '20px',
-          height: '20px',
+          width: '18px',
+          height: '18px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '11px',
-          fontWeight: 'var(--font-bold)'
+          fontWeight: 'var(--font-bold)',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
         }}>
           {bookingCount}
         </div>

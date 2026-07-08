@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import CalendarTimeGrid from './CalendarTimeGrid';
 import CalendarSlotBlock from './CalendarSlotBlock';
+import CalendarTimeIndicator from './CalendarTimeIndicator';
 
 /**
  * CalendarDayView - Main day view calendar container
@@ -141,6 +142,9 @@ export default function CalendarDayView({ slots, currentDate, onSlotClick }) {
             height: '100%',
             pointerEvents: 'auto'
           }}>
+            {/* Current time indicator */}
+            <CalendarTimeIndicator currentDate={currentDate} />
+
             {todaySlots.length === 0 && (
               <div style={{
                 position: 'absolute',
