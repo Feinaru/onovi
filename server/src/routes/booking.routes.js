@@ -689,46 +689,59 @@ router.patch('/:id/cancel', auth(), async (req, res, next) => {
 
 /**
  * PATCH /bookings/:id/reschedule - Reschedule booking atomically
- * Requires authentication. Guest reschedule not allowed without token/code mechanism.
+ * CUSTOMER-only endpoint for Customer Reschedule v1
+ * Provider/Admin reschedule not implemented yet
  */
-router.patch('/:id/reschedule', auth(), async (req, res, next) => {
+router.patch('/:id/reschedule', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
   try {
     const bookingId = Number(req.params.id);
-    const { newSlotId, newBusinessServiceId, newStartTime } = req.body;
+    const { slotId, startTime } = req.body;
 
-    if (!newSlotId || !newBusinessServiceId || !newStartTime) {
+    // Validate request body
+    if (!slotId || !startTime) {
       return res.status(400).json({
-        message: 'newSlotId, newBusinessServiceId, newStartTime are required'
+        message: 'slotId and startTime are required'
       });
     }
 
-    // Get original booking
+    // Get original booking with all necessary relationships
     const originalBooking = await prisma.booking.findUnique({
       where: { id: bookingId },
-      include: { business: true }
+      include: {
+        business: true,
+        businessService: {
+          include: {
+            serviceTemplate: true
+          }
+        }
+      }
     });
 
     if (!originalBooking) {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    // Authorization: Customer can only manage own bookings, Provider can manage business bookings
-    if (req.user.role === 'CUSTOMER' && originalBooking.customerId !== req.user.id) {
+    // Verify ownership
+    if (originalBooking.customerId !== req.user.id) {
       return res.status(403).json({ message: 'Forbidden' });
-    } else if (req.user.role === 'BUSINESS' || req.user.role === 'SERVICE_PROVIDER') {
-      const business = await prisma.business.findUnique({
-        where: { id: originalBooking.businessId }
-      });
+    }
 
-      if (!business || business.ownerId !== req.user.id) {
-        return res.status(403).json({ message: 'Forbidden' });
-      }
+    // Check reschedule eligibility using lifecycle policy
+    const reschedulePolicy = canCustomerRescheduleBooking(originalBooking, req.user.id);
+    if (!reschedulePolicy.canReschedule) {
+      return res.status(400).json({
+        message: getRescheduleBlockedReasonMessage(reschedulePolicy.blockedReason),
+        blockedReason: reschedulePolicy.blockedReason
+      });
     }
 
     // Execute reschedule in transaction
     const result = await prisma.$transaction(async (tx) => {
       const oldSlotId = originalBooking.slotId;
-      const newSlotIdNum = Number(newSlotId);
+      const newSlotIdNum = Number(slotId);
+
+      // Derive businessServiceId from original booking (not from request body)
+      const businessServiceId = originalBooking.businessServiceId;
 
       // Lock both slots one-by-one in deterministic order to prevent deadlocks
       // Collect unique slot IDs and sort ascending
@@ -736,10 +749,10 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
       const slotIds = Array.from(slotIdsSet).sort((a, b) => a - b);
 
       // Lock each slot individually in order
-      for (const slotId of slotIds) {
+      for (const slotIdToLock of slotIds) {
         await tx.$queryRaw`
           SELECT * FROM "Slot"
-          WHERE "id" = ${slotId}
+          WHERE "id" = ${slotIdToLock}
           FOR UPDATE
         `;
       }
@@ -749,7 +762,7 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
         where: { id: newSlotIdNum },
         include: {
           allowedServices: {
-            where: { businessServiceId: Number(newBusinessServiceId) },
+            where: { businessServiceId: businessServiceId },
             include: {
               businessService: {
                 include: { serviceTemplate: true }
@@ -760,8 +773,15 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
       });
 
       if (!newSlot) {
-        const err = new Error('New slot not found');
+        const err = new Error('התור החדש לא נמצא');
         err.status = 404;
+        throw err;
+      }
+
+      // Verify new slot belongs to same business
+      if (newSlot.businessId !== originalBooking.businessId) {
+        const err = new Error('לא ניתן להעביר תור לעסק אחר');
+        err.status = 400;
         throw err;
       }
 
@@ -781,14 +801,14 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
       const legalTimes = await getLegalStartTimes(
         tx,
         newSlotIdNum,
-        Number(newBusinessServiceId),
+        businessServiceId,
         bookingId // Exclude this booking so it doesn't block itself
       );
 
       // Verify new time is legal
       const isLegal = legalTimes.some(t => {
         const tStr = typeof t === 'string' ? t : t.startTime;
-        return tStr === newStartTime;
+        return tStr === startTime;
       });
 
       if (!isLegal) {
@@ -799,17 +819,16 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
       }
 
       // Calculate new end time
-      const newEndTime = calculateEndTime(newStartTime, durationMinutes);
+      const newEndTime = calculateEndTime(startTime, durationMinutes);
 
-      // Update booking
+      // Update booking - preserve all customer data, only change time/slot
       await tx.booking.update({
         where: { id: bookingId },
         data: {
           slotId: newSlotIdNum,
-          businessServiceId: Number(newBusinessServiceId),
-          startTime: newStartTime,
+          startTime: startTime,
           endTime: newEndTime,
-          price: businessService.regularPrice
+          // Keep businessServiceId, customerId, businessId, customerName, customerPhone, customerNote, status, price unchanged
         }
       });
 
@@ -825,7 +844,15 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
             include: { serviceTemplate: true }
           },
           slot: true,
-          business: true
+          business: true,
+          customer: {
+            select: {
+              id: true,
+              fullName: true,
+              phone: true,
+              email: true
+            }
+          }
         }
       });
 
@@ -834,7 +861,11 @@ router.patch('/:id/reschedule', auth(), async (req, res, next) => {
       isolationLevel: 'Serializable'
     });
 
-    res.json(result);
+    res.json({
+      success: true,
+      message: 'התור עודכן בהצלחה',
+      booking: result
+    });
   } catch (e) {
     if (e.status === 409) {
       return res.status(409).json({
