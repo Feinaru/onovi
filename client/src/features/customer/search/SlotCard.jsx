@@ -4,16 +4,16 @@ import { api } from '../../../api';
 /**
  * SlotCard - Individual slot display card (Sprint C: booking submission)
  */
-function SlotCard({ slot, onSelect, showMessage, setView }) {
+function SlotCard({ slot, onSelect, showMessage, setView, user }) {
   const [selectedService, setSelectedService] = useState(null);
   const [availableTimes, setAvailableTimes] = useState(null);
   const [loadingTimes, setLoadingTimes] = useState(false);
   const [selectedTime, setSelectedTime] = useState(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookingForm, setBookingForm] = useState({
-    customerName: '',
-    customerPhone: '',
-    customerEmail: '',
+    customerName: user?.fullName || '',
+    customerPhone: user?.phone || '',
+    customerEmail: user?.email || '',
     customerNote: ''
   });
   const [submitting, setSubmitting] = useState(false);
@@ -112,7 +112,14 @@ function SlotCard({ slot, onSelect, showMessage, setView }) {
         onSelect(slot);
       }
     } catch (err) {
-      if (err.status === 409) {
+      if (err.status === 401) {
+        // Unauthorized - redirect to login
+        showMessage?.('נדרש התחברות. מעבר לדף התחברות...');
+        setTimeout(() => setView('auth'), 1500);
+      } else if (err.status === 403) {
+        // Forbidden
+        showMessage?.('אין הרשאה לבצע פעולה זו');
+      } else if (err.status === 409) {
         // Conflict - time no longer available
         showMessage?.(err.message || 'השעה כבר לא זמינה. אנא בחר שעה אחרת');
         // Refetch available times
@@ -276,8 +283,27 @@ function SlotCard({ slot, onSelect, showMessage, setView }) {
         </div>
       )}
 
-      {/* Booking Form */}
-      {selectedTime && !showBookingForm && (
+      {/* Booking Form / Login Required */}
+      {selectedTime && !showBookingForm && !user && (
+        <button
+          onClick={() => setView('auth')}
+          style={{
+            width: '100%',
+            padding: '12px',
+            marginTop: '12px',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '6px',
+            fontSize: '15px',
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}
+        >
+          🔐 התחבר כדי לקבוע תור
+        </button>
+      )}
+      {selectedTime && !showBookingForm && user && (
         <button
           onClick={() => setShowBookingForm(true)}
           style={{

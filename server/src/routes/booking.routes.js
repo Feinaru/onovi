@@ -116,8 +116,9 @@ router.get('/', auth(), async (req, res, next) => {
 
 /**
  * POST /bookings - Create booking with atomic locking and legal time validation
+ * Requires authenticated CUSTOMER role
  */
-router.post('/', auth(false), async (req, res, next) => {
+router.post('/', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
   try {
     const {
       slotId,
@@ -128,6 +129,13 @@ router.post('/', auth(false), async (req, res, next) => {
       customerEmail,
       customerNote
     } = req.body;
+
+    // Validation: User must be authenticated
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        message: 'Authentication required'
+      });
+    }
 
     // Validation
     if (!slotId || !businessServiceId || !startTime || !customerName || !customerPhone) {
@@ -211,7 +219,7 @@ router.post('/', auth(false), async (req, res, next) => {
       // 7. Create booking
       const booking = await tx.booking.create({
         data: {
-          customerId: req.user?.id || null,
+          customerId: req.user.id,
           businessId: lockedSlot.businessId,
           businessServiceId: Number(businessServiceId),
           slotId: Number(slotId),
