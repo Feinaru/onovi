@@ -226,6 +226,7 @@ export default function MyBookingsPage({ setView }) {
                   booking={booking}
                   canCancel={canCancelBooking(booking)}
                   onCancel={handleCancelClick}
+                  setView={setView}
                 />
               ))}
             </div>

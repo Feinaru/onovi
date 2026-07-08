@@ -5,6 +5,7 @@ import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './features/customer/CustomerPage';
 import MyBookingsPage from './features/customer/pages/MyBookingsPage';
+import CustomerBookingDetailsPage from './features/customer/pages/CustomerBookingDetailsPage';
 import BusinessProfilePage from './features/customer/pages/BusinessProfilePage';
 import BusinessPage from './features/business/BusinessPage';
 import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
@@ -456,6 +457,11 @@ function App() {
 
         {/* My Bookings View */}
         {viewName === 'my-bookings' && user.role === 'CUSTOMER' && <MyBookingsPage setView={setView} />}
+
+        {/* Booking Details View */}
+        {viewName === 'booking-details' && typeof view === 'object' && user.role === 'CUSTOMER' && (
+          <CustomerBookingDetailsPage bookingId={view.bookingId} setView={setView} />
+        )}
 
         {/* Business View */}
         {view === 'business' && <BusinessPage user={user} setView={setView} />}

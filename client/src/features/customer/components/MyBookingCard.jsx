@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * MyBookingCard - Displays a single booking for customer view
  */
-export default function MyBookingCard({ booking, canCancel, onCancel }) {
+export default function MyBookingCard({ booking, canCancel, onCancel, setView }) {
   /**
    * Get status label and style
    */
@@ -171,23 +171,39 @@ export default function MyBookingCard({ booking, canCancel, onCancel }) {
         </div>
       )}
 
-      {/* Cancel button for active bookings */}
-      {canCancel && onCancel && (
+      {/* Action buttons */}
+      {(canCancel || setView) && (
         <div style={{
           paddingTop: booking.business?.phone ? '0' : 'var(--space-3)',
-          borderTop: booking.business?.phone ? 'none' : '1px solid var(--border-color)'
+          borderTop: booking.business?.phone ? 'none' : '1px solid var(--border-color)',
+          display: 'flex',
+          gap: 'var(--space-2)'
         }}>
-          <button
-            onClick={() => onCancel(booking)}
-            className="btn-secondary"
-            style={{
-              width: '100%',
-              color: 'var(--danger-color)',
-              borderColor: 'var(--danger-color)'
-            }}
-          >
-            ביטול התור
-          </button>
+          {/* Details button */}
+          {setView && (
+            <button
+              onClick={() => setView({ view: 'booking-details', bookingId: booking.id })}
+              className="btn-secondary"
+              style={{ flex: 1 }}
+            >
+              פרטים
+            </button>
+          )}
+
+          {/* Cancel button for active bookings */}
+          {canCancel && onCancel && (
+            <button
+              onClick={() => onCancel(booking)}
+              className="btn-secondary"
+              style={{
+                flex: 1,
+                color: 'var(--danger-color)',
+                borderColor: 'var(--danger-color)'
+              }}
+            >
+              ביטול התור
+            </button>
+          )}
         </div>
       )}
     </div>

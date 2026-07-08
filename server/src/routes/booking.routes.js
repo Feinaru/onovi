@@ -115,6 +115,101 @@ router.get('/', auth(), async (req, res, next) => {
 });
 
 /**
+ * GET /bookings/:id - Get single booking details with role-based access control
+ */
+router.get('/:id', auth(), async (req, res, next) => {
+  try {
+    const bookingId = Number(req.params.id);
+
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: {
+        business: {
+          select: {
+            id: true,
+            publicId: true,
+            name: true,
+            phone: true,
+            city: true,
+            cityNameHebrew: true,
+            street: true,
+            streetNameHebrew: true,
+            houseNumber: true,
+            formattedAddress: true,
+            status: true
+          }
+        },
+        businessService: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+            durationMinutes: true,
+            regularPrice: true
+          },
+          include: {
+            serviceTemplate: {
+              select: {
+                id: true,
+                name: true,
+                defaultDurationMinutes: true
+              }
+            }
+          }
+        },
+        slot: {
+          select: {
+            id: true,
+            publicId: true,
+            date: true,
+            startTime: true,
+            endTime: true,
+            status: true
+          }
+        },
+        customer: {
+          select: {
+            id: true,
+            fullName: true,
+            phone: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    // Role-based access control
+    if (req.user.role === 'CUSTOMER') {
+      // CUSTOMER: Can only see their own bookings
+      if (booking.customerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    } else if (req.user.role === 'SERVICE_PROVIDER' || req.user.role === 'BUSINESS') {
+      // SERVICE_PROVIDER: Can only see bookings for businesses they own
+      const business = await prisma.business.findUnique({
+        where: { id: booking.businessId },
+        select: { ownerId: true }
+      });
+
+      if (!business || business.ownerId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    } else if (req.user.role !== 'ADMIN') {
+      // Unknown role (ADMIN is allowed to see all)
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    res.json(booking);
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
  * POST /bookings - Create booking with atomic locking and legal time validation
  * Requires authenticated CUSTOMER role
  */
