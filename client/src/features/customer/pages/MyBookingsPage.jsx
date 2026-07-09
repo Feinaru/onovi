@@ -115,17 +115,6 @@ export default function MyBookingsPage({ setView }) {
         </p>
       </div>
 
-      {/* Back to search button */}
-      {setView && (
-        <button
-          onClick={() => setView('customer')}
-          className="btn-secondary"
-          style={{ marginBottom: 'var(--space-4)' }}
-        >
-          ← חזרה לחיפוש תורים
-        </button>
-      )}
-
       {/* Filter tabs */}
       <div style={{
         display: 'flex',

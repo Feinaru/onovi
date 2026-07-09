@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '../api';
-import UsersPage from '../features/admin/users/UsersPage';
 
 export default function AdminPage({ user, setView }) {
-  const [activeSection, setActiveSection] = useState('dashboard');
   const [dashboard, setDashboard] = useState(null);
   const [businesses, setBusinesses] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -124,30 +122,11 @@ export default function AdminPage({ user, setView }) {
 
   const pendingBusinesses = businesses.filter(b => b.status === 'PENDING_APPROVAL');
 
-  if (activeSection === 'users') {
-    return <UsersPage />;
-  }
-
   return (
     <div>
       <div className="page-header">
         <h1 className="page-title">ניהול מערכת</h1>
         <p className="page-description">ברוך הבא, {user.fullName} - לוח הבקרה של האדמין</p>
-      </div>
-
-      <div style={{ marginBottom: 'var(--space-6)', display: 'flex', gap: 'var(--space-3)' }}>
-        <button
-          className={activeSection === 'dashboard' ? 'btn-primary' : 'btn-secondary'}
-          onClick={() => setActiveSection('dashboard')}
-        >
-          📊 לוח בקרה
-        </button>
-        <button
-          className={activeSection === 'users' ? 'btn-primary' : 'btn-secondary'}
-          onClick={() => setActiveSection('users')}
-        >
-          👥 משתמשים
-        </button>
       </div>
 
       {error && (
