@@ -49,7 +49,7 @@ function SearchResults({ businesses, loading, hasActiveFilters, onResetFilters, 
           <div className="empty-state-icon-v2">🔍</div>
           <h3 className="empty-state-title-v2">לא נמצאו תורים זמינים</h3>
           <p className="empty-state-description-v2">
-            נסה לשנות את הפילטרים או לחפש בתאריך אחר
+            נסה להרחיב את טווח התאריכים, לבחור שירות אחר או להגדיל את הרדיוס.
           </p>
           <button className="btn-primary" onClick={onResetFilters}>
             נקה פילטרים
@@ -57,10 +57,10 @@ function SearchResults({ businesses, loading, hasActiveFilters, onResetFilters, 
         </div>
       ) : (
         <div className="empty-state-v2">
-          <div className="empty-state-icon-v2">🔍</div>
-          <h3 className="empty-state-title-v2">חפש תורים זמינים</h3>
+          <div className="empty-state-icon-v2">📅</div>
+          <h3 className="empty-state-title-v2">מציגים תורים זמינים בשבועיים הקרובים</h3>
           <p className="empty-state-description-v2">
-            השתמש בפילטרים למעלה כדי למצוא תורים פנויים
+            השתמש בפילטרים למעלה כדי לחפש תורים פנויים לפי תחום, שירות, תאריך או מיקום
           </p>
           {!user && (
             <button className="btn-primary" onClick={() => setView('auth')}>

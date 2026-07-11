@@ -23,7 +23,8 @@ export default function CustomerPage({ user, setView }) {
     locationStatus,
     locationError,
     requestLocation,
-    clearLocation
+    clearLocation,
+    useDemoLocation
   } = useSearchData();
 
   return (
@@ -43,6 +44,7 @@ export default function CustomerPage({ user, setView }) {
         locationError={locationError}
         onRequestLocation={requestLocation}
         onClearLocation={clearLocation}
+        onUseDemoLocation={useDemoLocation}
       />
 
       <SearchResults

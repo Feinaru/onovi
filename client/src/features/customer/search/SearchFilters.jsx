@@ -19,7 +19,8 @@ function SearchFilters({
   locationStatus,
   locationError,
   onRequestLocation,
-  onClearLocation
+  onClearLocation,
+  onUseDemoLocation
 }) {
   const handleTimeBucketToggle = (bucket) => {
     const newBuckets = filters.timeBuckets.includes(bucket)
@@ -232,9 +233,12 @@ function SearchFilters({
 
         {/* Location / GPS */}
         <div style={{ marginBottom: '16px', paddingTop: '16px', borderTop: '1px solid #e5e7eb' }}>
-          <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '8px' }}>
+          <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '4px' }}>
             מיקום
           </label>
+          <p style={{ fontSize: '12px', color: '#6b7280', marginBottom: '12px' }}>
+            נשתמש במיקום שלך כדי להציג עסקים קרובים ולחשב מרחק.
+          </p>
 
           {locationStatus === 'idle' && (
             <button
@@ -279,47 +283,67 @@ function SearchFilters({
               }}>
                 {locationError}
               </div>
-              <button
-                onClick={onRequestLocation}
-                style={{
-                  width: '100%',
-                  padding: '10px',
-                  border: '1px solid #d1d5db',
-                  borderRadius: '8px',
-                  background: 'white',
-                  color: '#6b7280',
-                  cursor: 'pointer',
-                  fontSize: '13px'
-                }}
-              >
-                נסה שוב
-              </button>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  onClick={onRequestLocation}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    background: 'white',
+                    color: '#6b7280',
+                    cursor: 'pointer',
+                    fontSize: '13px'
+                  }}
+                >
+                  נסה שוב
+                </button>
+                {onUseDemoLocation && (
+                  <button
+                    onClick={onUseDemoLocation}
+                    style={{
+                      flex: 1,
+                      padding: '10px',
+                      border: '1px solid #3b82f6',
+                      borderRadius: '8px',
+                      background: '#eff6ff',
+                      color: '#3b82f6',
+                      cursor: 'pointer',
+                      fontSize: '13px',
+                      fontWeight: '500'
+                    }}
+                  >
+                    השתמש במיקום דמו
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
-          {locationStatus === 'success' && filters.lat && filters.lng && (
+          {(locationStatus === 'success' || locationStatus === 'demo') && filters.lat && filters.lng && (
             <div>
               <div style={{
                 padding: '8px 12px',
-                background: '#f0fdf4',
-                border: '1px solid #86efac',
+                background: locationStatus === 'demo' ? '#eff6ff' : '#f0fdf4',
+                border: locationStatus === 'demo' ? '1px solid #93c5fd' : '1px solid #86efac',
                 borderRadius: '8px',
-                color: '#166534',
+                color: locationStatus === 'demo' ? '#1e40af' : '#166534',
                 fontSize: '13px',
                 marginBottom: '8px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <span>✓ מיקום זוהה</span>
+                <span>{locationStatus === 'demo' ? '📍 מיקום דמו פעיל: תל אביב' : '✓ מיקום זוהה'}</span>
                 <button
                   onClick={onClearLocation}
                   style={{
                     padding: '4px 8px',
-                    border: '1px solid #16a34a',
+                    border: locationStatus === 'demo' ? '1px solid #3b82f6' : '1px solid #16a34a',
                     borderRadius: '4px',
                     background: 'white',
-                    color: '#16a34a',
+                    color: locationStatus === 'demo' ? '#3b82f6' : '#16a34a',
                     cursor: 'pointer',
                     fontSize: '12px'
                   }}

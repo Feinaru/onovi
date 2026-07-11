@@ -13,6 +13,7 @@ export default function CalendarEventCard({ event, compact = false }) {
     return (
       <div
         onClick={event.onClick}
+        title="לחץ לפרטי התור"
         style={{
           padding: 'var(--space-2)',
           background: statusMeta.bgColor,
@@ -74,6 +75,7 @@ export default function CalendarEventCard({ event, compact = false }) {
   return (
     <div
       onClick={event.onClick}
+      title="לחץ לפרטי התור"
       style={{
         padding: 'var(--space-3)',
         background: 'var(--bg-primary)',

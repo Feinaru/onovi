@@ -4,20 +4,42 @@ import { api } from '../../../../api';
 /**
  * useSearchData - Manages appointment search data and filtering (Search v2)
  */
+// Helper function to get default date range (today + 14 days)
+function getDefaultDateRange() {
+  const today = new Date();
+  const twoWeeksLater = new Date(today);
+  twoWeeksLater.setDate(today.getDate() + 14);
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  return {
+    dateFrom: formatDate(today),
+    dateTo: formatDate(twoWeeksLater)
+  };
+}
+
 export function useSearchData() {
   const [businesses, setBusinesses] = useState([]);
   const [fields, setFields] = useState([]);
   const [professions, setProfessions] = useState([]);
   const [serviceTemplates, setServiceTemplates] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [locationStatus, setLocationStatus] = useState('idle'); // idle, loading, success, error
+  const [locationStatus, setLocationStatus] = useState('idle'); // idle, loading, success, error, demo
   const [locationError, setLocationError] = useState('');
+
+  const defaultDates = getDefaultDateRange();
+
   const [filters, setFilters] = useState({
     fieldIds: [],
     professionIds: [],
     serviceTemplateIds: [],
-    dateFrom: '',
-    dateTo: '',
+    dateFrom: defaultDates.dateFrom,
+    dateTo: defaultDates.dateTo,
     timeBuckets: [],
     timeFrom: '',
     timeTo: '',
@@ -135,12 +157,13 @@ export function useSearchData() {
   }
 
   const resetFilters = () => {
+    const defaultDates = getDefaultDateRange();
     setFilters({
       fieldIds: [],
       professionIds: [],
       serviceTemplateIds: [],
-      dateFrom: '',
-      dateTo: '',
+      dateFrom: defaultDates.dateFrom,
+      dateTo: defaultDates.dateTo,
       timeBuckets: [],
       timeFrom: '',
       timeTo: '',
@@ -229,6 +252,17 @@ export function useSearchData() {
     setLocationError('');
   };
 
+  // Use demo location (Tel Aviv fallback)
+  const useDemoLocation = () => {
+    setFilters({
+      ...filters,
+      lat: 32.0853,
+      lng: 34.7818
+    });
+    setLocationStatus('demo');
+    setLocationError('');
+  };
+
   return {
     businesses,
     fields,
@@ -245,6 +279,7 @@ export function useSearchData() {
     locationStatus,
     locationError,
     requestLocation,
-    clearLocation
+    clearLocation,
+    useDemoLocation
   };
 }
