@@ -1,8 +1,9 @@
 import React from 'react';
 import MultiSelectFilter from './MultiSelectFilter';
+import { LocationMap } from './LocationMap';
 
 /**
- * SearchFilters - Search v2 filters with taxonomy, date range, time buckets
+ * SearchFilters - Search v2 filters with taxonomy, date range, time buckets, GPS
  */
 function SearchFilters({
   fields,
@@ -14,7 +15,11 @@ function SearchFilters({
   onResetFilters,
   handleFieldsChange,
   handleProfessionsChange,
-  handleServicesChange
+  handleServicesChange,
+  locationStatus,
+  locationError,
+  onRequestLocation,
+  onClearLocation
 }) {
   const handleTimeBucketToggle = (bucket) => {
     const newBuckets = filters.timeBuckets.includes(bucket)
@@ -225,6 +230,113 @@ function SearchFilters({
           )}
         </div>
 
+        {/* Location / GPS */}
+        <div style={{ marginBottom: '16px', paddingTop: '16px', borderTop: '1px solid #e5e7eb' }}>
+          <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '8px' }}>
+            מיקום
+          </label>
+
+          {locationStatus === 'idle' && (
+            <button
+              onClick={onRequestLocation}
+              style={{
+                width: '100%',
+                padding: '12px',
+                border: '1px solid #3b82f6',
+                borderRadius: '8px',
+                background: 'white',
+                color: '#3b82f6',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              📍 השתמש במיקום שלי
+            </button>
+          )}
+
+          {locationStatus === 'loading' && (
+            <div style={{
+              padding: '12px',
+              textAlign: 'center',
+              color: '#6b7280',
+              fontSize: '14px'
+            }}>
+              מאתר מיקום...
+            </div>
+          )}
+
+          {locationStatus === 'error' && (
+            <div>
+              <div style={{
+                padding: '12px',
+                background: '#fef2f2',
+                border: '1px solid #fecaca',
+                borderRadius: '8px',
+                color: '#991b1b',
+                fontSize: '13px',
+                marginBottom: '8px'
+              }}>
+                {locationError}
+              </div>
+              <button
+                onClick={onRequestLocation}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '8px',
+                  background: 'white',
+                  color: '#6b7280',
+                  cursor: 'pointer',
+                  fontSize: '13px'
+                }}
+              >
+                נסה שוב
+              </button>
+            </div>
+          )}
+
+          {locationStatus === 'success' && filters.lat && filters.lng && (
+            <div>
+              <div style={{
+                padding: '8px 12px',
+                background: '#f0fdf4',
+                border: '1px solid #86efac',
+                borderRadius: '8px',
+                color: '#166534',
+                fontSize: '13px',
+                marginBottom: '8px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <span>✓ מיקום זוהה</span>
+                <button
+                  onClick={onClearLocation}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid #16a34a',
+                    borderRadius: '4px',
+                    background: 'white',
+                    color: '#16a34a',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  נקה
+                </button>
+              </div>
+              <LocationMap
+                lat={filters.lat}
+                lng={filters.lng}
+                radiusKm={filters.radiusKm}
+                onRadiusChange={(newRadius) => setFilters({ ...filters, radiusKm: newRadius })}
+              />
+            </div>
+          )}
+        </div>
+
         {/* Sort */}
         <div style={{ marginBottom: '16px' }}>
           <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '4px' }}>
@@ -247,7 +359,13 @@ function SearchFilters({
             <option value="soonest">זמן פנוי הקרוב ביותר</option>
             <option value="price-asc">מחיר: נמוך לגבוה</option>
             <option value="price-desc">מחיר: גבוה לנמוך</option>
+            {filters.lat && filters.lng && <option value="nearest">הכי קרוב אליי</option>}
           </select>
+          {filters.sort === 'nearest' && !filters.lat && !filters.lng && (
+            <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '4px' }}>
+              דורש מיקום
+            </div>
+          )}
         </div>
 
         {/* Reset Button */}

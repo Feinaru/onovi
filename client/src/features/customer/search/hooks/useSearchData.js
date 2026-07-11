@@ -10,6 +10,8 @@ export function useSearchData() {
   const [professions, setProfessions] = useState([]);
   const [serviceTemplates, setServiceTemplates] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [locationStatus, setLocationStatus] = useState('idle'); // idle, loading, success, error
+  const [locationError, setLocationError] = useState('');
   const [filters, setFilters] = useState({
     fieldIds: [],
     professionIds: [],
@@ -20,7 +22,10 @@ export function useSearchData() {
     timeFrom: '',
     timeTo: '',
     useSpecificTime: false,
-    sort: 'recommended'
+    sort: 'recommended',
+    lat: null,
+    lng: null,
+    radiusKm: 10
   });
 
   // Load taxonomy on mount
@@ -113,6 +118,11 @@ export function useSearchData() {
       if (filters.sort) {
         query.set('sort', filters.sort);
       }
+      if (filters.lat && filters.lng) {
+        query.set('lat', filters.lat);
+        query.set('lng', filters.lng);
+        query.set('radiusKm', filters.radiusKm);
+      }
 
       const response = await api(`/api/customer/appointment-search?${query.toString()}`);
       setBusinesses(response.results || []);
@@ -135,8 +145,13 @@ export function useSearchData() {
       timeFrom: '',
       timeTo: '',
       useSpecificTime: false,
-      sort: 'recommended'
+      sort: 'recommended',
+      lat: null,
+      lng: null,
+      radiusKm: 10
     });
+    setLocationStatus('idle');
+    setLocationError('');
   };
 
   const hasActiveFilters =
@@ -167,6 +182,53 @@ export function useSearchData() {
     setFilters({ ...filters, serviceTemplateIds: selectedIds });
   };
 
+  // Request GPS location
+  const requestLocation = () => {
+    setLocationStatus('loading');
+    setLocationError('');
+
+    if (!navigator.geolocation) {
+      setLocationStatus('error');
+      setLocationError('הדפדפן שלך אינו תומך באיתור מיקום. חפש ללא מיקום או נסה דפדפן אחר.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setFilters({
+          ...filters,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        setLocationStatus('success');
+      },
+      (error) => {
+        setLocationStatus('error');
+        if (error.code === error.PERMISSION_DENIED) {
+          setLocationError('הרשאת מיקום נדחתה. אפשר לבחור עיר ידנית או לאפשר מיקום בהגדרות הדפדפן.');
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          setLocationError('לא ניתן לזהות את המיקום כרגע. נסה שוב או חפש ללא מיקום.');
+        } else if (error.code === error.TIMEOUT) {
+          setLocationError('איתור המיקום לקח יותר מדי זמן. נסה שוב או חפש ללא מיקום.');
+        } else {
+          setLocationError('שגיאה באיתור המיקום. נסה שוב או חפש ללא מיקום.');
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000
+      }
+    );
+  };
+
+  // Clear GPS location
+  const clearLocation = () => {
+    setFilters({ ...filters, lat: null, lng: null });
+    setLocationStatus('idle');
+    setLocationError('');
+  };
+
   return {
     businesses,
     fields,
@@ -179,6 +241,10 @@ export function useSearchData() {
     hasActiveFilters,
     handleFieldsChange,
     handleProfessionsChange,
-    handleServicesChange
+    handleServicesChange,
+    locationStatus,
+    locationError,
+    requestLocation,
+    clearLocation
   };
 }

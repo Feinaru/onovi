@@ -19,7 +19,11 @@ export default function CustomerPage({ user, setView }) {
     hasActiveFilters,
     handleFieldsChange,
     handleProfessionsChange,
-    handleServicesChange
+    handleServicesChange,
+    locationStatus,
+    locationError,
+    requestLocation,
+    clearLocation
   } = useSearchData();
 
   return (
@@ -35,6 +39,10 @@ export default function CustomerPage({ user, setView }) {
         handleFieldsChange={handleFieldsChange}
         handleProfessionsChange={handleProfessionsChange}
         handleServicesChange={handleServicesChange}
+        locationStatus={locationStatus}
+        locationError={locationError}
+        onRequestLocation={requestLocation}
+        onClearLocation={clearLocation}
       />
 
       <SearchResults
