@@ -1,85 +1,91 @@
-import { Component } from 'react';
+import React from 'react';
 
 /**
- * Error Boundary - Catches React errors and prevents white screen
+ * ErrorBoundary - Catches React render errors and shows friendly fallback
+ * Prevents white screen during demo
  */
-export default class ErrorBoundary extends Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('[ErrorBoundary] Caught error:', error);
-    console.error('[ErrorBoundary] Error info:', errorInfo);
-    console.error('[ErrorBoundary] Component stack:', errorInfo.componentStack);
-
-    this.setState({
-      error: error,
-      errorInfo: errorInfo
-    });
+    console.error('React Error Boundary caught an error:', error, errorInfo);
   }
 
-  handleReset = () => {
-    this.setState({ hasError: false, error: null, errorInfo: null });
-    if (this.props.onReset) {
-      this.props.onReset();
-    }
+  handleReload = () => {
+    window.location.reload();
   };
 
   render() {
     if (this.state.hasError) {
       return (
         <div style={{
-          padding: '40px 20px',
-          textAlign: 'center',
-          backgroundColor: '#FEF2F2',
-          border: '1px solid #FCA5A5',
-          borderRadius: '8px',
-          margin: '20px'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          padding: '24px',
+          background: '#f9fafb'
         }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>⚠️</div>
-          <h2 style={{ color: '#991B1B', marginBottom: '12px' }}>משהו השתבש</h2>
-          <p style={{ color: '#7F1D1D', marginBottom: '20px' }}>
-            {this.state.error?.message || 'אירעה שגיאה בלתי צפויה'}
-          </p>
-          <button
-            onClick={this.handleReset}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#DC2626',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}
-          >
-            נסה שוב
-          </button>
-          {process.env.NODE_ENV === 'development' && this.state.errorInfo && (
-            <details style={{ marginTop: '20px', textAlign: 'left' }}>
-              <summary style={{ cursor: 'pointer', color: '#991B1B' }}>
-                פרטים טכניים (development only)
-              </summary>
-              <pre style={{
-                backgroundColor: '#FEE2E2',
-                padding: '12px',
-                borderRadius: '4px',
-                overflow: 'auto',
-                fontSize: '12px',
-                color: '#7F1D1D'
-              }}>
-                {this.state.error?.toString()}
-                {'\n\n'}
-                {this.state.errorInfo.componentStack}
-              </pre>
-            </details>
-          )}
+          <div style={{
+            maxWidth: '500px',
+            padding: '32px',
+            background: 'white',
+            borderRadius: '12px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center'
+          }}>
+            <div style={{
+              fontSize: '64px',
+              marginBottom: '16px'
+            }}>
+              ⚠️
+            </div>
+            <h1 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              marginBottom: '12px',
+              color: '#1f2937'
+            }}>
+              משהו השתבש
+            </h1>
+            <p style={{
+              fontSize: '16px',
+              color: '#6b7280',
+              marginBottom: '24px',
+              lineHeight: '1.6'
+            }}>
+              רענן את העמוד או חזור למסך הראשי ונסה שוב.
+            </p>
+            <button
+              onClick={this.handleReload}
+              style={{
+                padding: '12px 24px',
+                background: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#2563eb';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = '#3b82f6';
+              }}
+            >
+              רענן עמוד
+            </button>
+          </div>
         </div>
       );
     }
@@ -87,3 +93,5 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
+
+export default ErrorBoundary;

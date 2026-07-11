@@ -32,6 +32,7 @@ import AppLayout from './layouts/AppLayout';
 import PublicLayout from './layouts/PublicLayout';
 import Toast from './shared/ui/Toast';
 import UnauthorizedAccess from './shared/ui/UnauthorizedAccess';
+import ErrorBoundary from './components/ErrorBoundary';
 import { getNavItems, getHomeView, isAuthorized } from './shared/hooks/useNavigation';
 
 import './styles.css';
@@ -510,4 +511,8 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
