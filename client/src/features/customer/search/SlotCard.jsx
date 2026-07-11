@@ -149,6 +149,11 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
   // Use allowedServices if available, otherwise fall back to legacy service
   const allowedServices = slot.allowedServices || (slot.service ? [slot.service] : []);
 
+  // Debug: Log service prices to help verify data
+  if (allowedServices.length > 0 && allowedServices[0].regularPrice === undefined) {
+    console.warn('[SlotCard] Missing regularPrice in allowedServices:', slot.id, allowedServices);
+  }
+
   return (
     <div className="slot-card-v2">
       {/* Badges */}

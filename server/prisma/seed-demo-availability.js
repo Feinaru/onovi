@@ -110,6 +110,31 @@ async function main() {
   console.log(`✅ Demo business: ${demoBusiness.name} (ID: ${demoBusiness.id})`);
 
   // ============================================================================
+  // STEP 3.5: Create approval for demo business (required for public profile)
+  // ============================================================================
+
+  const existingApproval = await prisma.serviceProviderApproval.findFirst({
+    where: { serviceProviderId: demoBusiness.id }
+  });
+
+  if (existingApproval) {
+    await prisma.serviceProviderApproval.update({
+      where: { id: existingApproval.id },
+      data: { status: 'APPROVED' }
+    });
+  } else {
+    await prisma.serviceProviderApproval.create({
+      data: {
+        serviceProviderId: demoBusiness.id,
+        status: 'APPROVED',
+        adminNote: 'Auto-approved demo business'
+      }
+    });
+  }
+
+  console.log('✅ Demo business approval created/verified');
+
+  // ============================================================================
   // STEP 4: Create services with different durations
   // ============================================================================
 

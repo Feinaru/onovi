@@ -100,9 +100,30 @@ router.get('/', async (req, res, next) => {
 
     console.log('[SlotRoutes] Slots after all filters:', slots.length);
 
+    // Filter out slots whose endTime has already passed (for customer queries only)
+    let filteredSlots = slots;
+    if (includeAll !== 'true') {
+      const now = new Date();
+      const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      const todayDate = now.toISOString().split('T')[0];
+
+      filteredSlots = slots.filter(slot => {
+        // Keep all future dates
+        if (slot.date > todayDate) return true;
+        // For today, only keep slots whose endTime hasn't passed
+        if (slot.date === todayDate) {
+          return slot.endTime > currentTime;
+        }
+        // Past dates should already be filtered by Prisma where clause
+        return false;
+      });
+
+      console.log('[SlotRoutes] Slots after past time filtering:', filteredSlots.length);
+    }
+
     // Debug: Show business cities and cityCodes
     if (cityCode || city) {
-      const businessInfo = slots.map(s => ({
+      const businessInfo = filteredSlots.map(s => ({
         businessId: s.business.id,
         businessName: s.business.name,
         city: s.business.city,
@@ -112,10 +133,10 @@ router.get('/', async (req, res, next) => {
       console.log('[SlotRoutes] Business info in results:', JSON.stringify(businessInfo, null, 2));
 
       // Show what was filtered out
-      const filteredOutCount = allSlots.length - slots.length;
+      const filteredOutCount = allSlots.length - filteredSlots.length;
       if (filteredOutCount > 0) {
         console.log('[SlotRoutes] Filtered out', filteredOutCount, 'slots');
-        const filteredOut = allSlots.filter(s => !slots.find(slot => slot.id === s.id));
+        const filteredOut = allSlots.filter(s => !filteredSlots.find(slot => slot.id === s.id));
         const filteredBusinesses = filteredOut.map(s => ({
           businessName: s.business.name,
           city: s.business.city,
@@ -126,7 +147,7 @@ router.get('/', async (req, res, next) => {
     }
 
     // Format response to include allowed services
-    const slotsWithServices = slots.map(slot => ({
+    const slotsWithServices = filteredSlots.map(slot => ({
       ...slot,
       allowedServices: slot.allowedServices.map(as => ({
         id: as.businessService.id,
