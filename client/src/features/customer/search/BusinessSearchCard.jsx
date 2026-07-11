@@ -139,6 +139,20 @@ function BusinessSearchCard({ businessCard, setView, user }) {
           </div>
         )}
 
+        {business.distanceKm !== undefined && business.distanceKm !== null && (
+          <div style={{
+            fontSize: '13px',
+            color: '#3b82f6',
+            marginBottom: '4px',
+            fontWeight: '500'
+          }}>
+            {business.distanceKm < 1
+              ? `${Math.round(business.distanceKm * 1000)} מ׳ ממך`
+              : `${business.distanceKm.toFixed(1)} ק״מ ממך`
+            }
+          </div>
+        )}
+
         {business.category && (
           <div style={{
             display: 'inline-block',
