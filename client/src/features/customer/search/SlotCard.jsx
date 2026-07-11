@@ -85,7 +85,7 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
     setSubmitting(true);
 
     try {
-      await api('/bookings', {
+      const booking = await api('/bookings', {
         method: 'POST',
         body: JSON.stringify({
           slotId: slot.id,
@@ -95,21 +95,27 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
         })
       });
 
-      showMessage?.('ההזמנה נוצרה בהצלחה! העסק יאשר בקרוב');
-      setShowBookingForm(false);
-      setSelectedService(null);
-      setSelectedTime(null);
-      setAvailableTimes(null);
-      setBookingForm({
-        customerName: '',
-        customerPhone: '',
-        customerEmail: '',
-        customerNote: ''
-      });
-
-      // Optionally reload or update UI
-      if (onSelect) {
-        onSelect(slot);
+      // Navigate to booking details page to show confirmation
+      if (booking?.id && setView) {
+        setView({ view: 'booking-details', bookingId: booking.id });
+      } else {
+        // Fallback to my-bookings if booking id is missing or setView unavailable
+        showMessage?.('ההזמנה נוצרה בהצלחה! העסק יאשר בקרוב');
+        if (setView) {
+          setView('my-bookings');
+        } else {
+          // Final fallback: just show message and reset form
+          setShowBookingForm(false);
+          setSelectedService(null);
+          setSelectedTime(null);
+          setAvailableTimes(null);
+          setBookingForm({
+            customerName: '',
+            customerPhone: '',
+            customerEmail: '',
+            customerNote: ''
+          });
+        }
       }
     } catch (err) {
       if (err.status === 401) {
@@ -216,7 +222,7 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
                 <div style={{ flex: 1 }}>
                   <span style={{ fontSize: '14px' }}>{service.name}</span>
                   <div style={{ fontSize: '12px', color: '#718096', marginTop: '2px' }}>
-                    {service.durationMinutes} דקות • {service.regularPrice ? `₪${service.regularPrice}` : 'מחיר לא זמין'}
+                    {service.durationMinutes} דקות • {service.regularPrice != null ? `₪${service.regularPrice}` : 'מחיר לא זמין'}
                   </div>
                 </div>
               </label>
