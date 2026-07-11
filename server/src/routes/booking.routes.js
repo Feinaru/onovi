@@ -8,7 +8,7 @@
 const router = require('express').Router();
 const prisma = require('../lib/prisma');
 const { auth, requireRole } = require('../middleware/auth');
-const { getLegalStartTimes } = require('../services/slotAvailability.service');
+const { getLegalStartTimes, isPastTime } = require('../services/slotAvailability.service');
 const { recalculateSlotStatus } = require('../services/slotStatus.service');
 const { ACTIVE_BOOKING_STATUSES, CANCELLED_BOOKING_STATUSES } = require('../constants/bookingStatuses');
 const {
@@ -435,10 +435,24 @@ router.post('/', auth(), requireRole('CUSTOMER'), async (req, res, next) => {
       const allowedService = slotDetails.allowedServices[0];
       const businessService = allowedService.businessService;
 
-      // Get service duration
-      const durationMinutes = businessService.serviceTemplate
-        ? businessService.serviceTemplate.defaultDurationMinutes
-        : businessService.durationMinutes;
+      // Verify service is active and visible to customers
+      if (!businessService.active || !businessService.visibleToCustomers) {
+        const err = new Error('השירות הזה כבר לא זמין ללקוחות');
+        err.status = 400;
+        throw err;
+      }
+
+      // Verify booking time is not in the past
+      if (isPastTime(slotDetails.date, startTime)) {
+        const err = new Error('לא ניתן להזמין תור בזמן שכבר עבר');
+        err.status = 400;
+        throw err;
+      }
+
+      // Get service duration (canonical: businessService first, then template fallback)
+      const durationMinutes = businessService.durationMinutes
+        || businessService.serviceTemplate?.defaultDurationMinutes
+        || 30;
 
       // 4. Recalculate legal start times inside transaction
       const legalTimes = await getLegalStartTimes(
@@ -813,9 +827,10 @@ router.patch('/:id/reschedule', auth(), requireRole('CUSTOMER'), async (req, res
         err.status = 400;
         throw err;
       }
-      const durationMinutes = businessService.serviceTemplate
-        ? businessService.serviceTemplate.defaultDurationMinutes
-        : businessService.durationMinutes;
+      // Get service duration (canonical: businessService first, then template fallback)
+      const durationMinutes = businessService.durationMinutes
+        || businessService.serviceTemplate?.defaultDurationMinutes
+        || 30;
 
       // Get legal times for new slot, excluding THIS booking
       const legalTimes = await getLegalStartTimes(

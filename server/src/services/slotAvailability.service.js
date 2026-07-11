@@ -40,6 +40,20 @@ function minutesToTime(minutes) {
 }
 
 /**
+ * Check if a slot date + time is in the past
+ * @param {string} slotDate - YYYY-MM-DD format
+ * @param {string} startTime - HH:MM format
+ * @returns {boolean} true if the time is in the past
+ */
+function isPastTime(slotDate, startTime) {
+  const now = new Date();
+  const [hours, minutes] = startTime.split(':').map(Number);
+  const slotDateTime = new Date(slotDate);
+  slotDateTime.setHours(hours, minutes, 0, 0);
+  return slotDateTime < now;
+}
+
+/**
  * Get legal start times for a service in a slot
  *
  * CRITICAL: Must be called with transaction client for concurrency safety
@@ -80,18 +94,18 @@ async function getLegalStartTimes(tx, slotId, businessServiceId, excludeBookingI
     throw new Error('Service not allowed in this slot');
   }
 
-  // 3. Get selected service duration
+  // 3. Get selected service duration (canonical: businessService first, then template fallback)
   const selectedService = slot.allowedServices
     .find(as => as.businessServiceId === businessServiceId)
     .businessService;
-  const selectedDuration = selectedService.serviceTemplate
-    ? selectedService.serviceTemplate.defaultDurationMinutes
-    : selectedService.durationMinutes;
+  const selectedDuration = selectedService.durationMinutes
+    || selectedService.serviceTemplate?.defaultDurationMinutes
+    || 30;
 
   // 4. Calculate shortest allowed service duration (for no-dead-edge rule)
   const allowedDurations = slot.allowedServices.map(as => {
     const bs = as.businessService;
-    return bs.serviceTemplate ? bs.serviceTemplate.defaultDurationMinutes : bs.durationMinutes;
+    return bs.durationMinutes || bs.serviceTemplate?.defaultDurationMinutes || 30;
   });
   const shortestDuration = Math.min(...allowedDurations);
 
@@ -162,7 +176,10 @@ async function getLegalStartTimes(tx, slotId, businessServiceId, excludeBookingI
     }
   }
 
-  return legalTimes;
+  // 10. Filter out past times (customer-facing requirement)
+  const futureTimes = legalTimes.filter(t => !isPastTime(slot.date, t.startTime));
+
+  return futureTimes;
 }
 
 /**
@@ -237,6 +254,7 @@ module.exports = {
   getLegalStartTimes,
   hasRemainingCapacity,
   recalculateSlotStatus,
+  isPastTime,
   timeToMinutes,
   minutesToTime,
   gcd,

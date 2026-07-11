@@ -34,7 +34,13 @@ router.get('/', async (req, res, next) => {
 
     // CRITICAL: Only show OPEN slots to customers (unless includeAll for admin/business)
     const where = includeAll === 'true' ? {} : { status: 'OPEN' };
-    if (date) where.date = date;
+    if (date) {
+      where.date = date;
+    } else if (includeAll !== 'true') {
+      // Filter out past dates for customer-facing queries (unless includeAll for admin/business)
+      const today = new Date().toISOString().split('T')[0];
+      where.date = { gte: today };
+    }
 
     // Build business filter
     if (cityCode || city || categoryId) {
