@@ -208,13 +208,25 @@ async function main() {
 
   console.log('\n📅 Creating availability windows...');
 
+  // Generate dynamic dates (always future)
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const dayAfterTomorrow = new Date(today);
+  dayAfterTomorrow.setDate(today.getDate() + 2);
+
+  const tomorrowStr = tomorrow.toISOString().split('T')[0];
+  const dayAfterTomorrowStr = dayAfterTomorrow.toISOString().split('T')[0];
+
+  console.log(`  Using dynamic dates: tomorrow=${tomorrowStr}, dayAfter=${dayAfterTomorrowStr}`);
+
   const slots = [];
 
   // Window 1: Tomorrow, 10:00-12:00, allows 30min + 60min services
   const slot1 = await prisma.slot.create({
     data: {
       businessId: demoBusiness.id,
-      date: '2026-07-10',
+      date: tomorrowStr,
       startTime: '10:00',
       endTime: '12:00',
       status: 'OPEN',
@@ -232,13 +244,13 @@ async function main() {
     skipDuplicates: true
   });
 
-  console.log(`  ✅ חלון 1: 2026-07-10, 10:00-12:00 (תספורת גבר, תספורת אישה)`);
+  console.log(`  ✅ חלון 1: ${tomorrowStr}, 10:00-12:00 (תספורת גבר, תספורת אישה)`);
 
   // Window 2: Tomorrow, 13:00-15:00, allows 60min + 90min services
   const slot2 = await prisma.slot.create({
     data: {
       businessId: demoBusiness.id,
-      date: '2026-07-10',
+      date: tomorrowStr,
       startTime: '13:00',
       endTime: '15:00',
       status: 'OPEN',
@@ -256,13 +268,13 @@ async function main() {
     skipDuplicates: true
   });
 
-  console.log(`  ✅ חלון 2: 2026-07-10, 13:00-15:00 (תספורת אישה, צבע שורש)`);
+  console.log(`  ✅ חלון 2: ${tomorrowStr}, 13:00-15:00 (תספורת אישה, צבע שורש)`);
 
   // Window 3: Day after tomorrow, 09:00-11:00, allows 30min + 120min services
   const slot3 = await prisma.slot.create({
     data: {
       businessId: demoBusiness.id,
-      date: '2026-07-11',
+      date: dayAfterTomorrowStr,
       startTime: '09:00',
       endTime: '11:00',
       status: 'OPEN',
@@ -280,13 +292,13 @@ async function main() {
     skipDuplicates: true
   });
 
-  console.log(`  ✅ חלון 3: 2026-07-11, 09:00-11:00 (תספורת גבר, החלקה)`);
+  console.log(`  ✅ חלון 3: ${dayAfterTomorrowStr}, 09:00-11:00 (תספורת גבר, החלקה)`);
 
   // Window 4: Day after tomorrow, 16:00-18:00, allows all services
   const slot4 = await prisma.slot.create({
     data: {
       businessId: demoBusiness.id,
-      date: '2026-07-11',
+      date: dayAfterTomorrowStr,
       startTime: '16:00',
       endTime: '18:00',
       status: 'OPEN',
