@@ -174,15 +174,11 @@ export default function AdminApprovalsPage({ setView }) {
       </div>
 
       {approvals.length === 0 ? (
-        <div style={{
-          padding: 'var(--space-6)',
-          textAlign: 'center',
-          background: 'var(--bg-secondary)',
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--border-color)'
-        }}>
-          <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)' }}>
-            אין בקשות ממתינות לאישור
+        <div className="empty-state">
+          <div className="empty-state-icon">✓</div>
+          <h3 className="empty-state-title">אין בקשות ממתינות כרגע</h3>
+          <p className="empty-state-description">
+            כל בקשות נותני השירות טופלו. בקשות חדשות יופיעו כאן
           </p>
         </div>
       ) : (

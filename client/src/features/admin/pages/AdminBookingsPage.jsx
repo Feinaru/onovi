@@ -260,7 +260,17 @@ export default function AdminBookingsPage({ setView }) {
         <div className="empty-state">
           <div className="empty-state-icon">📋</div>
           <div className="empty-state-title">אין הזמנות להצגה</div>
-          <div className="empty-state-description">נסה לשנות את הפילטרים או חפש לקוח אחר</div>
+          <div className="empty-state-description">
+            {statusFilter || startDate || endDate || search
+              ? 'לא נמצאו הזמנות לפי הסינון שבחרת. נסה לשנות את הפילטרים'
+              : 'עדיין אין הזמנות במערכת. הזמנות חדשות יופיעו כאן'
+            }
+          </div>
+          {(statusFilter || startDate || endDate || search) && (
+            <button className="btn-secondary" onClick={resetFilters} style={{ marginTop: 'var(--space-3)' }}>
+              🔄 נקה סינונים
+            </button>
+          )}
         </div>
       )}
 

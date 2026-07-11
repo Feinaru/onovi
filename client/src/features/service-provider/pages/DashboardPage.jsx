@@ -1,8 +1,60 @@
+import { useState, useEffect } from 'react';
+import { api } from '../../../api';
+
 /**
  * DashboardPage - Service Provider Dashboard
  * Shows welcome message, approval status, and quick overview
  */
 export default function DashboardPage({ user, approvalStatus }) {
+  const [stats, setStats] = useState({
+    pendingCount: 0,
+    todayCount: 0,
+    weeklyCount: 0,
+    weeklyRevenue: 0
+  });
+  const [loadingStats, setLoadingStats] = useState(true);
+
+  useEffect(() => {
+    loadStats();
+  }, []);
+
+  async function loadStats() {
+    try {
+      setLoadingStats(true);
+      const bookingsRes = await api('/api/service-provider/bookings');
+      const bookingsData = bookingsRes.success && Array.isArray(bookingsRes.data)
+        ? bookingsRes.data
+        : [];
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayStr = today.toISOString().split('T')[0];
+
+      const weekAgo = new Date(today);
+      weekAgo.setDate(weekAgo.getDate() - 7);
+
+      const pending = bookingsData.filter(b => b.status === 'PENDING').length;
+      const todayBookings = bookingsData.filter(b => b.slot?.date === todayStr).length;
+      const weeklyBookings = bookingsData.filter(b => {
+        if (!b.slot?.date) return false;
+        const bookingDate = new Date(b.slot.date);
+        return bookingDate >= weekAgo && bookingDate <= today;
+      });
+      const weeklyRev = weeklyBookings.reduce((sum, b) => sum + (b.price || 0), 0);
+
+      setStats({
+        pendingCount: pending,
+        todayCount: todayBookings,
+        weeklyCount: weeklyBookings.length,
+        weeklyRevenue: weeklyRev
+      });
+    } catch (err) {
+      console.error('Failed to load stats:', err);
+    } finally {
+      setLoadingStats(false);
+    }
+  }
+
   function renderApprovalStatusCard() {
     if (!approvalStatus) {
       return (
@@ -95,39 +147,51 @@ export default function DashboardPage({ user, approvalStatus }) {
       {renderApprovalStatusCard()}
 
       {/* Quick Stats Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>✂️</div>
+            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>⏳</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
-              -
+              {loadingStats ? '...' : stats.pendingCount}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              שירותים
+              תורים ממתינים
             </div>
           </div>
         </div>
 
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>📄</div>
+            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>📅</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
-              -
+              {loadingStats ? '...' : stats.todayCount}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              מסמכים
+              תורים היום
             </div>
           </div>
         </div>
 
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>✓</div>
+            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>📊</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
-              -
+              {loadingStats ? '...' : stats.weeklyCount}
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              הסכמות
+              תורים השבוע
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>💰</div>
+            <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
+              {loadingStats ? '...' : `₪${stats.weeklyRevenue}`}
+            </div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+              הכנסות השבוע
             </div>
           </div>
         </div>
@@ -136,23 +200,58 @@ export default function DashboardPage({ user, approvalStatus }) {
       {/* Quick Actions */}
       <div className="card">
         <div className="card-header">
-          <h3 className="card-title">פעולות מהירות</h3>
+          <h3 className="card-title">מה כדאי לעשות עכשיו?</h3>
         </div>
-        <div style={{ padding: 'var(--space-6)', display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
-          <button className="btn-secondary" disabled>
-            ➕ הוסף שירות חדש
-          </button>
-          <button className="btn-secondary" disabled>
-            📄 העלה מסמך
-          </button>
-          <button className="btn-secondary" disabled>
-            📅 נהל זמינות
-          </button>
-        </div>
-        <div style={{ padding: 'var(--space-4)', borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-secondary)' }}>
-          <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', textAlign: 'center' }}>
-            תכונות אלה יהיו זמינות בקרוב
-          </p>
+        <div style={{ padding: 'var(--space-4)' }}>
+          {stats.pendingCount > 0 && (
+            <div style={{
+              padding: 'var(--space-4)',
+              marginBottom: 'var(--space-3)',
+              background: 'var(--warning-50)',
+              border: '1px solid var(--warning-200)',
+              borderRadius: 'var(--radius-md)'
+            }}>
+              <div style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-1)', color: 'var(--warning-700)' }}>
+                ⏳ יש {stats.pendingCount} תורים ממתינים לאישור
+              </div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                עבור לדף ההזמנות כדי לאשר או לדחות תורים
+              </div>
+            </div>
+          )}
+          {stats.todayCount > 0 && (
+            <div style={{
+              padding: 'var(--space-4)',
+              marginBottom: 'var(--space-3)',
+              background: 'var(--primary-50)',
+              border: '1px solid var(--primary-200)',
+              borderRadius: 'var(--radius-md)'
+            }}>
+              <div style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-1)', color: 'var(--primary-700)' }}>
+                📅 יש לך {stats.todayCount} תורים היום
+              </div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                בדוק את הפרטים ותתכונן ללקוחות שלך
+              </div>
+            </div>
+          )}
+          {stats.pendingCount === 0 && stats.todayCount === 0 && !loadingStats && (
+            <div style={{
+              padding: 'var(--space-4)',
+              background: 'var(--success-50)',
+              border: '1px solid var(--success-200)',
+              borderRadius: 'var(--radius-md)',
+              textAlign: 'center'
+            }}>
+              <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>✓</div>
+              <div style={{ fontWeight: 'var(--font-semibold)', color: 'var(--success-700)' }}>
+                הכל מעודכן!
+              </div>
+              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: 'var(--space-1)' }}>
+                אין תורים ממתינים לטיפול כרגע
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

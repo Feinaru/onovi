@@ -11,7 +11,7 @@ export default function BookingsPage({ user }) {
   const [bookings, setBookings] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all'); // all, pending, confirmed, completed
+  const [filter, setFilter] = useState('pending'); // Default to pending for immediate action
   const [selectedBookingId, setSelectedBookingId] = useState(null); // for details view
 
   useEffect(() => {
@@ -163,12 +163,23 @@ export default function BookingsPage({ user }) {
 
         {filteredBookings.length === 0 && (
           <div className="empty-state">
-            <div className="empty-state-icon">📋</div>
-            <h3 className="empty-state-title">אין הזמנות</h3>
+            <div className="empty-state-icon">
+              {filter === 'pending' ? '⏳' : filter === 'confirmed' ? '✅' : filter === 'completed' ? '✓' : '📋'}
+            </div>
+            <h3 className="empty-state-title">
+              {filter === 'pending' ? 'אין תורים ממתינים' :
+               filter === 'confirmed' ? 'אין תורים מאושרים' :
+               filter === 'completed' ? 'אין תורים שהושלמו' :
+               'אין הזמנות'}
+            </h3>
             <p className="empty-state-description">
               {filter === 'all'
-                ? 'עדיין אין הזמנות. לקוחות יוכלו להזמין לאחר שתפרסם תורים'
-                : `אין הזמנות בסטטוס ${filter === 'pending' ? 'ממתינות' : filter === 'confirmed' ? 'מאושרות' : 'הושלמו'}`
+                ? 'עדיין אין הזמנות. לקוחות יוכלו להזמין לאחר שתפרסם תורים זמינים'
+                : filter === 'pending'
+                ? 'כל התורים כבר טופלו. תורים חדשים יופיעו כאן'
+                : filter === 'confirmed'
+                ? 'אין תורים מאושרים כרגע. תורים שתאשר יופיעו כאן'
+                : 'אין תורים שהושלמו עדיין'
               }
             </p>
           </div>
