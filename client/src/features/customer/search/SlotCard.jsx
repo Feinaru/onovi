@@ -226,8 +226,8 @@ function SlotCard({ slot, onSelect, showMessage, setView, user }) {
                 />
                 <div style={{ flex: 1 }}>
                   <span style={{ fontSize: '14px' }}>{service.name}</span>
-                  <div style={{ fontSize: '12px', color: '#718096', marginTop: '2px' }}>
-                    {service.durationMinutes} דקות • {service.regularPrice != null ? `₪${service.regularPrice}` : 'מחיר לא זמין'}
+                  <div style={{ fontSize: '12px', color: '#718096', marginTop: '2px', whiteSpace: 'nowrap' }}>
+                    {service.durationMinutes} דקות · {service.regularPrice != null ? `₪${service.regularPrice}` : 'מחיר לא זמין'}
                   </div>
                 </div>
               </label>
