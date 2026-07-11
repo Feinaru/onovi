@@ -34,12 +34,27 @@ router.get('/', async (req, res, next) => {
 
     // CRITICAL: Only show OPEN slots to customers (unless includeAll for admin/business)
     const where = includeAll === 'true' ? {} : { status: 'OPEN' };
-    if (date) {
-      where.date = date;
-    } else if (includeAll !== 'true') {
-      // Filter out past dates for customer-facing queries (unless includeAll for admin/business)
-      const today = new Date().toISOString().split('T')[0];
-      where.date = { gte: today };
+
+    const today = new Date().toISOString().split('T')[0];
+
+    // Handle date filtering with past-date rejection for customers
+    if (includeAll !== 'true') {
+      if (date) {
+        // Reject explicit past date requests for customers
+        if (date < today) {
+          console.log('[SlotRoutes] Customer requested past date, returning empty:', date);
+          return res.json([]);
+        }
+        where.date = date;
+      } else {
+        // No date param: only show future slots
+        where.date = { gte: today };
+      }
+    } else {
+      // includeAll=true (admin/business): accept any date
+      if (date) {
+        where.date = date;
+      }
     }
 
     // Build business filter
