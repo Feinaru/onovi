@@ -115,12 +115,14 @@ export default function MyBookingsPage({ setView }) {
         </p>
       </div>
 
-      {/* Filter tabs */}
+      {/* Filter tabs - enhanced segmented buttons */}
       <div style={{
-        display: 'flex',
-        gap: 'var(--space-2)',
+        display: 'inline-flex',
+        gap: '0',
         marginBottom: 'var(--space-4)',
-        borderBottom: '2px solid var(--border-color)',
+        background: '#f3f4f6',
+        padding: '4px',
+        borderRadius: '12px',
         flexWrap: 'wrap'
       }}>
         {tabs.map(tab => (
@@ -128,29 +130,31 @@ export default function MyBookingsPage({ setView }) {
             key={tab.id}
             onClick={() => setActiveFilter(tab.id)}
             style={{
-              padding: 'var(--space-3) var(--space-4)',
-              background: activeFilter === tab.id ? 'var(--primary-color)' : 'transparent',
-              color: activeFilter === tab.id ? 'white' : 'var(--text-primary)',
+              padding: '10px 20px',
+              background: activeFilter === tab.id ? '#3b82f6' : 'transparent',
+              color: activeFilter === tab.id ? 'white' : '#6b7280',
               border: 'none',
-              borderBottom: activeFilter === tab.id ? '2px solid var(--primary-color)' : '2px solid transparent',
-              borderRadius: 'var(--radius-md) var(--radius-md) 0 0',
+              borderRadius: '8px',
               cursor: 'pointer',
-              fontSize: 'var(--text-base)',
-              fontWeight: activeFilter === tab.id ? 'var(--font-semibold)' : 'var(--font-medium)',
+              fontSize: '14px',
+              fontWeight: activeFilter === tab.id ? '600' : '500',
               transition: 'all 0.2s',
-              marginBottom: '-2px',
-              minWidth: '100px'
+              minWidth: '100px',
+              boxShadow: activeFilter === tab.id ? '0 2px 4px rgba(59,130,246,0.3)' : 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
           >
             {tab.label}
             {tab.count > 0 && (
               <span style={{
-                marginRight: 'var(--space-2)',
                 padding: '2px 8px',
-                background: activeFilter === tab.id ? 'rgba(255,255,255,0.2)' : 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-full)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: 'var(--font-bold)'
+                background: activeFilter === tab.id ? 'rgba(255,255,255,0.25)' : '#e5e7eb',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                color: activeFilter === tab.id ? 'white' : '#6b7280'
               }}>
                 {tab.count}
               </span>
