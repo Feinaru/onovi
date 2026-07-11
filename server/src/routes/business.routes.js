@@ -469,6 +469,24 @@ router.get('/:id', async (req, res, next) => {
     }
 
     // Remove private/internal fields before sending to client
+    // Dedupe services by name+duration+price to handle seed script re-runs
+    const seenServices = new Map();
+    const dedupedServices = [];
+
+    for (const s of business.services) {
+      const key = `${s.name}|${s.durationMinutes}|${s.regularPrice}`;
+      if (!seenServices.has(key)) {
+        seenServices.set(key, true);
+        dedupedServices.push({
+          id: s.id,
+          name: s.name,
+          description: s.description,
+          durationMinutes: s.durationMinutes,
+          regularPrice: s.regularPrice
+        });
+      }
+    }
+
     const publicBusiness = {
       id: business.id,
       name: business.name,
@@ -486,13 +504,7 @@ router.get('/:id', async (req, res, next) => {
       coverImageUrl: business.coverImageUrl,
       galleryImages: business.galleryImages,
       category: business.category,
-      services: business.services.map(s => ({
-        id: s.id,
-        name: s.name,
-        description: s.description,
-        durationMinutes: s.durationMinutes,
-        regularPrice: s.regularPrice
-      }))
+      services: dedupedServices
     };
 
     res.json(publicBusiness);
