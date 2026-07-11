@@ -1,94 +1,184 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { api } from '../../../../api';
 
 /**
- * useSearchData - Manages slot search data and filtering logic
+ * useSearchData - Manages appointment search data and filtering (Search v2)
  */
 export function useSearchData() {
-  const [slots, setSlots] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [businesses, setBusinesses] = useState([]);
+  const [fields, setFields] = useState([]);
+  const [professions, setProfessions] = useState([]);
+  const [serviceTemplates, setServiceTemplates] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
-    categoryId: '',
-    city: '',
-    street: '',
-    houseNumber: '',
-    searchLocation: null,
-    date: '',
-    timeOfDay: '',
-    minPrice: '',
-    maxPrice: '',
-    onlyDiscounted: false
+    fieldIds: [],
+    professionIds: [],
+    serviceTemplateIds: [],
+    dateFrom: '',
+    dateTo: '',
+    timeBuckets: [],
+    timeFrom: '',
+    timeTo: '',
+    useSpecificTime: false,
+    sort: 'recommended'
   });
 
-  async function load() {
-    const query = new URLSearchParams(
-      Object.fromEntries(
-        Object.entries(filters)
-          .filter(([k, v]) => v && k !== 'timeOfDay' && k !== 'minPrice' && k !== 'maxPrice' && k !== 'onlyDiscounted')
-      )
-    ).toString();
-    const fetchedSlots = await api(`/slots${query ? `?${query}` : ''}`);
-    setSlots(fetchedSlots);
+  // Load taxonomy on mount
+  useEffect(() => {
+    loadTaxonomy();
+  }, []);
+
+  // Load businesses when filters change
+  useEffect(() => {
+    loadBusinesses();
+  }, [filters]);
+
+  async function loadTaxonomy() {
+    try {
+      const fieldsData = await api('/api/registration/fields');
+      setFields(fieldsData);
+    } catch (err) {
+      console.error('Failed to load fields:', err);
+    }
   }
 
-  useEffect(() => {
-    api('/categories').then(setCategories);
-  }, []);
+  async function loadProfessions(fieldIds) {
+    if (fieldIds.length === 0) {
+      setProfessions([]);
+      return;
+    }
 
-  useEffect(() => {
-    load();
-  }, []);
+    try {
+      // Load professions for all selected fields
+      const allProfessions = [];
+      for (const fieldId of fieldIds) {
+        const profs = await api(`/api/registration/fields/${fieldId}/professions`);
+        allProfessions.push(...profs);
+      }
+      // Dedupe by id
+      const unique = Array.from(new Map(allProfessions.map(p => [p.id, p])).values());
+      setProfessions(unique);
+    } catch (err) {
+      console.error('Failed to load professions:', err);
+    }
+  }
 
-  const getTimeOfDay = (time) => {
-    const hour = parseInt(time.split(':')[0]);
-    if (hour >= 6 && hour < 12) return 'בוקר';
-    if (hour >= 12 && hour < 17) return 'צהריים';
-    return 'ערב';
-  };
+  async function loadServices(professionIds) {
+    if (professionIds.length === 0) {
+      setServiceTemplates([]);
+      return;
+    }
 
-  const filteredSlots = useMemo(() => {
-    return slots.filter(slot => {
-      if (filters.timeOfDay) {
-        const slotTimeOfDay = getTimeOfDay(slot.startTime);
-        if (slotTimeOfDay !== filters.timeOfDay) return false;
+    try {
+      // Load services for all selected professions
+      const allServices = [];
+      for (const professionId of professionIds) {
+        const services = await api(`/api/registration/professions/${professionId}/services`);
+        allServices.push(...services);
+      }
+      // Dedupe by id
+      const unique = Array.from(new Map(allServices.map(s => [s.id, s])).values());
+      setServiceTemplates(unique);
+    } catch (err) {
+      console.error('Failed to load service templates:', err);
+    }
+  }
+
+  async function loadBusinesses() {
+    setLoading(true);
+    try {
+      const query = new URLSearchParams();
+
+      if (filters.fieldIds.length > 0) {
+        query.set('fieldIds', filters.fieldIds.join(','));
+      }
+      if (filters.professionIds.length > 0) {
+        query.set('professionIds', filters.professionIds.join(','));
+      }
+      if (filters.serviceTemplateIds.length > 0) {
+        query.set('serviceTemplateIds', filters.serviceTemplateIds.join(','));
+      }
+      if (filters.dateFrom) {
+        query.set('dateFrom', filters.dateFrom);
+      }
+      if (filters.dateTo) {
+        query.set('dateTo', filters.dateTo);
+      }
+      if (filters.useSpecificTime && filters.timeFrom && filters.timeTo) {
+        query.set('timeFrom', filters.timeFrom);
+        query.set('timeTo', filters.timeTo);
+      } else if (filters.timeBuckets.length > 0) {
+        query.set('timeBuckets', filters.timeBuckets.join(','));
+      }
+      if (filters.sort) {
+        query.set('sort', filters.sort);
       }
 
-      const price = slot.dealPrice || slot.regularPrice;
-      if (filters.minPrice && price < parseFloat(filters.minPrice)) return false;
-      if (filters.maxPrice && price > parseFloat(filters.maxPrice)) return false;
-
-      if (filters.onlyDiscounted) {
-        const hasDeal = slot.dealPrice && slot.dealPrice < slot.regularPrice;
-        if (!hasDeal) return false;
-      }
-
-      return true;
-    });
-  }, [slots, filters]);
+      const response = await api(`/api/customer/appointment-search?${query.toString()}`);
+      setBusinesses(response.results || []);
+    } catch (err) {
+      console.error('Failed to load businesses:', err);
+      setBusinesses([]);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const resetFilters = () => {
     setFilters({
-      categoryId: '',
-      city: '',
-      date: '',
-      timeOfDay: '',
-      minPrice: '',
-      maxPrice: '',
-      onlyDiscounted: false
+      fieldIds: [],
+      professionIds: [],
+      serviceTemplateIds: [],
+      dateFrom: '',
+      dateTo: '',
+      timeBuckets: [],
+      timeFrom: '',
+      timeTo: '',
+      useSpecificTime: false,
+      sort: 'recommended'
     });
   };
 
-  const hasActiveFilters = filters.categoryId || filters.city || filters.date ||
-    filters.timeOfDay || filters.minPrice || filters.maxPrice || filters.onlyDiscounted;
+  const hasActiveFilters =
+    filters.fieldIds.length > 0 ||
+    filters.professionIds.length > 0 ||
+    filters.serviceTemplateIds.length > 0 ||
+    filters.dateFrom ||
+    filters.dateTo ||
+    filters.timeBuckets.length > 0 ||
+    filters.timeFrom ||
+    filters.timeTo;
+
+  // Handle field selection change
+  const handleFieldsChange = (selectedIds) => {
+    setFilters({ ...filters, fieldIds: selectedIds, professionIds: [], serviceTemplateIds: [] });
+    loadProfessions(selectedIds);
+    setServiceTemplates([]);
+  };
+
+  // Handle profession selection change
+  const handleProfessionsChange = (selectedIds) => {
+    setFilters({ ...filters, professionIds: selectedIds, serviceTemplateIds: [] });
+    loadServices(selectedIds);
+  };
+
+  // Handle service template selection change
+  const handleServicesChange = (selectedIds) => {
+    setFilters({ ...filters, serviceTemplateIds: selectedIds });
+  };
 
   return {
-    slots,
-    categories,
+    businesses,
+    fields,
+    professions,
+    serviceTemplates,
     filters,
     setFilters,
-    filteredSlots,
-    load,
+    loading,
     resetFilters,
-    hasActiveFilters
+    hasActiveFilters,
+    handleFieldsChange,
+    handleProfessionsChange,
+    handleServicesChange
   };
 }

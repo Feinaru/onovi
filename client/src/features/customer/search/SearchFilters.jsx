@@ -1,122 +1,274 @@
 import React from 'react';
-import AddressSearchFilter from '../../../components/AddressSearchFilter';
+import MultiSelectFilter from './MultiSelectFilter';
 
 /**
- * SearchFilters - Main and advanced search filters
+ * SearchFilters - Search v2 filters with taxonomy, date range, time buckets
  */
-function SearchFilters({ categories, filters, setFilters, onSearch, hasActiveFilters, onResetFilters }) {
+function SearchFilters({
+  fields,
+  professions,
+  serviceTemplates,
+  filters,
+  setFilters,
+  hasActiveFilters,
+  onResetFilters,
+  handleFieldsChange,
+  handleProfessionsChange,
+  handleServicesChange
+}) {
+  const handleTimeBucketToggle = (bucket) => {
+    const newBuckets = filters.timeBuckets.includes(bucket)
+      ? filters.timeBuckets.filter(b => b !== bucket)
+      : [...filters.timeBuckets, bucket];
+    setFilters({ ...filters, timeBuckets: newBuckets });
+  };
+
   return (
     <div className="customer-search-section">
       <div className="search-card">
-        {/* Main Filters */}
-        <div className="search-main-filters">
-          <div className="form-group-inline">
-            <label className="form-label-inline">קטגוריה</label>
-            <select
-              value={filters.categoryId}
-              onChange={e => setFilters({ ...filters, categoryId: e.target.value })}
-              className="search-input"
-            >
-              <option value="">כל הקטגוריות</option>
-              {categories.map(c => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <AddressSearchFilter
-            value={filters.searchLocation}
-            onChange={(addressData) => {
-              setFilters({
-                ...filters,
-                city: addressData.city || '',
-                street: addressData.street || '',
-                houseNumber: addressData.houseNumber || '',
-                searchLocation: addressData
-              });
-            }}
+        {/* Taxonomy Filters */}
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          flexWrap: 'wrap',
+          marginBottom: '16px'
+        }}>
+          <MultiSelectFilter
+            label="תחום"
+            options={fields}
+            selectedIds={filters.fieldIds}
+            onChange={handleFieldsChange}
           />
 
-          <div className="form-group-inline">
-            <label className="form-label-inline">תאריך</label>
+          <MultiSelectFilter
+            label="מקצוע"
+            options={professions}
+            selectedIds={filters.professionIds}
+            onChange={handleProfessionsChange}
+            disabled={filters.fieldIds.length === 0}
+          />
+
+          <MultiSelectFilter
+            label="שירות"
+            options={serviceTemplates}
+            selectedIds={filters.serviceTemplateIds}
+            onChange={handleServicesChange}
+            disabled={filters.professionIds.length === 0}
+          />
+        </div>
+
+        {/* Date Range */}
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          flexWrap: 'wrap',
+          marginBottom: '16px'
+        }}>
+          <div style={{ flex: 1, minWidth: '150px' }}>
+            <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '4px' }}>
+              מתאריך
+            </label>
             <input
               type="date"
-              value={filters.date}
-              onChange={e => setFilters({ ...filters, date: e.target.value })}
-              className="search-input"
+              value={filters.dateFrom}
+              onChange={e => setFilters({ ...filters, dateFrom: e.target.value })}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                border: '1px solid #d1d5db',
+                borderRadius: '8px',
+                fontSize: '14px'
+              }}
             />
           </div>
 
-          <button className="btn-primary btn-search" onClick={onSearch}>
-            <span>🔍</span>
-            <span>חפש</span>
-          </button>
+          <div style={{ flex: 1, minWidth: '150px' }}>
+            <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '4px' }}>
+              עד תאריך
+            </label>
+            <input
+              type="date"
+              value={filters.dateTo}
+              onChange={e => setFilters({ ...filters, dateTo: e.target.value })}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                border: '1px solid #d1d5db',
+                borderRadius: '8px',
+                fontSize: '14px'
+              }}
+            />
+          </div>
         </div>
 
-        {/* Advanced Filters */}
-        <div className="search-advanced-filters">
-          <div className="filter-group">
-            <label className="filter-label">זמן ביום</label>
-            <div className="filter-chips">
-              <button
-                className={`filter-chip ${filters.timeOfDay === 'בוקר' ? 'active' : ''}`}
-                onClick={() => setFilters({ ...filters, timeOfDay: filters.timeOfDay === 'בוקר' ? '' : 'בוקר' })}
-              >
-                ☀️ בוקר
-              </button>
-              <button
-                className={`filter-chip ${filters.timeOfDay === 'צהריים' ? 'active' : ''}`}
-                onClick={() => setFilters({ ...filters, timeOfDay: filters.timeOfDay === 'צהריים' ? '' : 'צהריים' })}
-              >
-                🌤️ צהריים
-              </button>
-              <button
-                className={`filter-chip ${filters.timeOfDay === 'ערב' ? 'active' : ''}`}
-                onClick={() => setFilters({ ...filters, timeOfDay: filters.timeOfDay === 'ערב' ? '' : 'ערב' })}
-              >
-                🌙 ערב
-              </button>
-            </div>
-          </div>
-
-          <div className="filter-group">
-            <label className="filter-label">טווח מחירים</label>
-            <div className="filter-price-range">
-              <input
-                type="number"
-                placeholder="מינימום"
-                value={filters.minPrice}
-                onChange={e => setFilters({ ...filters, minPrice: e.target.value })}
-                className="price-input"
-              />
-              <span className="price-separator">-</span>
-              <input
-                type="number"
-                placeholder="מקסימום"
-                value={filters.maxPrice}
-                onChange={e => setFilters({ ...filters, maxPrice: e.target.value })}
-                className="price-input"
-              />
-            </div>
-          </div>
-
-          <div className="filter-group">
-            <label className="filter-toggle">
-              <input
-                type="checkbox"
-                checked={filters.onlyDiscounted}
-                onChange={e => setFilters({ ...filters, onlyDiscounted: e.target.checked })}
-              />
-              <span className="toggle-text">רק תורים מוזלים 🔥</span>
-            </label>
-          </div>
-
-          {hasActiveFilters && (
-            <button className="btn-text" onClick={onResetFilters}>
-              נקה פילטרים
+        {/* Time Buckets */}
+        <div style={{ marginBottom: '16px' }}>
+          <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '8px' }}>
+            זמן ביום
+          </label>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => handleTimeBucketToggle('morning')}
+              style={{
+                padding: '8px 16px',
+                border: filters.timeBuckets.includes('morning') ? '2px solid #3b82f6' : '1px solid #d1d5db',
+                borderRadius: '20px',
+                background: filters.timeBuckets.includes('morning') ? '#eff6ff' : 'white',
+                color: filters.timeBuckets.includes('morning') ? '#3b82f6' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontWeight: filters.timeBuckets.includes('morning') ? '600' : '400'
+              }}
+            >
+              ☀️ בוקר
             </button>
+            <button
+              onClick={() => handleTimeBucketToggle('afternoon')}
+              style={{
+                padding: '8px 16px',
+                border: filters.timeBuckets.includes('afternoon') ? '2px solid #3b82f6' : '1px solid #d1d5db',
+                borderRadius: '20px',
+                background: filters.timeBuckets.includes('afternoon') ? '#eff6ff' : 'white',
+                color: filters.timeBuckets.includes('afternoon') ? '#3b82f6' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontWeight: filters.timeBuckets.includes('afternoon') ? '600' : '400'
+              }}
+            >
+              🌤️ צהריים
+            </button>
+            <button
+              onClick={() => handleTimeBucketToggle('evening')}
+              style={{
+                padding: '8px 16px',
+                border: filters.timeBuckets.includes('evening') ? '2px solid #3b82f6' : '1px solid #d1d5db',
+                borderRadius: '20px',
+                background: filters.timeBuckets.includes('evening') ? '#eff6ff' : 'white',
+                color: filters.timeBuckets.includes('evening') ? '#3b82f6' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontWeight: filters.timeBuckets.includes('evening') ? '600' : '400'
+              }}
+            >
+              🌙 ערב
+            </button>
+            <button
+              onClick={() => handleTimeBucketToggle('night')}
+              style={{
+                padding: '8px 16px',
+                border: filters.timeBuckets.includes('night') ? '2px solid #3b82f6' : '1px solid #d1d5db',
+                borderRadius: '20px',
+                background: filters.timeBuckets.includes('night') ? '#eff6ff' : 'white',
+                color: filters.timeBuckets.includes('night') ? '#3b82f6' : '#6b7280',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontWeight: filters.timeBuckets.includes('night') ? '600' : '400'
+              }}
+            >
+              🌃 לילה
+            </button>
+          </div>
+        </div>
+
+        {/* Specific Time */}
+        <div style={{ marginBottom: '16px' }}>
+          <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', marginBottom: '8px' }}>
+            <input
+              type="checkbox"
+              checked={filters.useSpecificTime}
+              onChange={e => setFilters({ ...filters, useSpecificTime: e.target.checked })}
+              style={{ marginLeft: '8px' }}
+            />
+            <span style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563' }}>
+              זמן ספציפי
+            </span>
+          </label>
+
+          {filters.useSpecificTime && (
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ fontSize: '12px', color: '#6b7280', display: 'block', marginBottom: '4px' }}>
+                  משעה
+                </label>
+                <input
+                  type="time"
+                  value={filters.timeFrom}
+                  onChange={e => setFilters({ ...filters, timeFrom: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '13px'
+                  }}
+                />
+              </div>
+              <span style={{ color: '#9ca3af', marginTop: '20px' }}>—</span>
+              <div style={{ flex: 1 }}>
+                <label style={{ fontSize: '12px', color: '#6b7280', display: 'block', marginBottom: '4px' }}>
+                  עד שעה
+                </label>
+                <input
+                  type="time"
+                  value={filters.timeTo}
+                  onChange={e => setFilters({ ...filters, timeTo: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '13px'
+                  }}
+                />
+              </div>
+            </div>
           )}
         </div>
+
+        {/* Sort */}
+        <div style={{ marginBottom: '16px' }}>
+          <label style={{ fontSize: '13px', fontWeight: '600', color: '#4b5563', display: 'block', marginBottom: '4px' }}>
+            מיון לפי
+          </label>
+          <select
+            value={filters.sort}
+            onChange={e => setFilters({ ...filters, sort: e.target.value })}
+            style={{
+              width: '100%',
+              padding: '10px 12px',
+              border: '1px solid #d1d5db',
+              borderRadius: '8px',
+              fontSize: '14px',
+              background: 'white',
+              cursor: 'pointer'
+            }}
+          >
+            <option value="recommended">מומלץ</option>
+            <option value="soonest">זמן פנוי הקרוב ביותר</option>
+            <option value="price-asc">מחיר: נמוך לגבוה</option>
+            <option value="price-desc">מחיר: גבוה לנמוך</option>
+          </select>
+        </div>
+
+        {/* Reset Button */}
+        {hasActiveFilters && (
+          <button
+            onClick={onResetFilters}
+            style={{
+              width: '100%',
+              padding: '12px',
+              border: '1px solid #d1d5db',
+              borderRadius: '8px',
+              background: 'white',
+              color: '#6b7280',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500'
+            }}
+          >
+            נקה פילטרים
+          </button>
+        )}
       </div>
     </div>
   );
