@@ -31,6 +31,7 @@ const serviceProviderServicesRoutes = require('./routes/service-provider-service
 const serviceProviderSlotsRoutes = require('./routes/service-provider-slots.routes');
 const serviceProviderBookingsRoutes = require('./routes/service-provider-bookings.routes');
 const serviceProviderCustomersRoutes = require('./routes/service-provider-customers.routes');
+const customerSearchRoutes = require('./routes/customer-search.routes');
 
 const app = express();
 app.use(cors());
@@ -70,6 +71,7 @@ app.use('/api/service-provider/services', serviceProviderServicesRoutes);
 app.use('/api/service-provider/slots', serviceProviderSlotsRoutes);
 app.use('/api/service-provider/bookings', serviceProviderBookingsRoutes);
 app.use('/api/service-provider/customers', serviceProviderCustomersRoutes);
+app.use('/api/customer', customerSearchRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err);
