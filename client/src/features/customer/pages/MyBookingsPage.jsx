@@ -1,14 +1,12 @@
 import React from 'react';
 import { useMyBookings } from '../hooks/useMyBookings';
 import MyBookingCard from '../components/MyBookingCard';
-import CustomerCalendarView from './CustomerCalendarView';
 
 /**
  * MyBookingsPage - Customer's booking management page
  */
 export default function MyBookingsPage({ setView }) {
   const {
-    bookings,
     filteredBookings,
     activeFilter,
     setActiveFilter,
@@ -20,7 +18,6 @@ export default function MyBookingsPage({ setView }) {
     canCancelBooking
   } = useMyBookings();
 
-  const [viewMode, setViewMode] = React.useState('list');
   const [showCancelConfirm, setShowCancelConfirm] = React.useState(false);
   const [bookingToCancel, setBookingToCancel] = React.useState(null);
   const [cancelMessage, setCancelMessage] = React.useState('');
@@ -118,110 +115,53 @@ export default function MyBookingsPage({ setView }) {
         </p>
       </div>
 
-      {/* View Mode Toggle (List / Calendar) */}
+      {/* Filter tabs - enhanced segmented buttons */}
       <div style={{
         display: 'inline-flex',
         gap: '0',
         marginBottom: 'var(--space-4)',
         background: '#f3f4f6',
         padding: '4px',
-        borderRadius: '12px'
+        borderRadius: '12px',
+        flexWrap: 'wrap'
       }}>
-        <button
-          onClick={() => setViewMode('list')}
-          style={{
-            padding: '10px 20px',
-            background: viewMode === 'list' ? '#3b82f6' : 'transparent',
-            color: viewMode === 'list' ? 'white' : '#6b7280',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: viewMode === 'list' ? '600' : '500',
-            transition: 'all 0.2s',
-            minWidth: '100px',
-            boxShadow: viewMode === 'list' ? '0 2px 4px rgba(59,130,246,0.3)' : 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            justifyContent: 'center'
-          }}
-        >
-          📋 רשימה
-        </button>
-        <button
-          onClick={() => setViewMode('calendar')}
-          style={{
-            padding: '10px 20px',
-            background: viewMode === 'calendar' ? '#3b82f6' : 'transparent',
-            color: viewMode === 'calendar' ? 'white' : '#6b7280',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: viewMode === 'calendar' ? '600' : '500',
-            transition: 'all 0.2s',
-            minWidth: '100px',
-            boxShadow: viewMode === 'calendar' ? '0 2px 4px rgba(59,130,246,0.3)' : 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            justifyContent: 'center'
-          }}
-        >
-          📅 יומן
-        </button>
+        {tabs.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveFilter(tab.id)}
+            style={{
+              padding: '10px 20px',
+              background: activeFilter === tab.id ? '#3b82f6' : 'transparent',
+              color: activeFilter === tab.id ? 'white' : '#6b7280',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: activeFilter === tab.id ? '600' : '500',
+              transition: 'all 0.2s',
+              minWidth: '100px',
+              boxShadow: activeFilter === tab.id ? '0 2px 4px rgba(59,130,246,0.3)' : 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            {tab.label}
+            {tab.count > 0 && (
+              <span style={{
+                padding: '2px 8px',
+                background: activeFilter === tab.id ? 'rgba(255,255,255,0.25)' : '#e5e7eb',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                color: activeFilter === tab.id ? 'white' : '#6b7280'
+              }}>
+                {tab.count}
+              </span>
+            )}
+          </button>
+        ))}
       </div>
-
-      {/* Filter tabs - only shown in list view */}
-      {viewMode === 'list' && (
-        <div style={{
-          display: 'inline-flex',
-          gap: '0',
-          marginBottom: 'var(--space-4)',
-          background: '#f3f4f6',
-          padding: '4px',
-          borderRadius: '12px',
-          flexWrap: 'wrap'
-        }}>
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveFilter(tab.id)}
-              style={{
-                padding: '10px 20px',
-                background: activeFilter === tab.id ? '#3b82f6' : 'transparent',
-                color: activeFilter === tab.id ? 'white' : '#6b7280',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: activeFilter === tab.id ? '600' : '500',
-                transition: 'all 0.2s',
-                minWidth: '100px',
-                boxShadow: activeFilter === tab.id ? '0 2px 4px rgba(59,130,246,0.3)' : 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              {tab.label}
-              {tab.count > 0 && (
-                <span style={{
-                  padding: '2px 8px',
-                  background: activeFilter === tab.id ? 'rgba(255,255,255,0.25)' : '#e5e7eb',
-                  borderRadius: '12px',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  color: activeFilter === tab.id ? 'white' : '#6b7280'
-                }}>
-                  {tab.count}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
 
       {/* Loading state */}
       {loading && (
@@ -268,69 +208,58 @@ export default function MyBookingsPage({ setView }) {
         </div>
       )}
 
-      {/* Content: List or Calendar */}
+      {/* Bookings list */}
       {!loading && !error && (
         <>
-          {viewMode === 'list' ? (
-            /* List View */
-            <>
-              {filteredBookings.length > 0 ? (
-                <div>
-                  {filteredBookings.map(booking => (
-                    <MyBookingCard
-                      key={booking.id}
-                      booking={booking}
-                      canCancel={canCancelBooking(booking)}
-                      onCancel={handleCancelClick}
-                      setView={setView}
-                    />
-                  ))}
-                </div>
-              ) : (
-                /* Empty state */
-                <div style={{
-                  textAlign: 'center',
-                  padding: 'var(--space-8)',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-lg)',
-                  marginTop: 'var(--space-4)'
-                }}>
-                  <div style={{
-                    fontSize: '4rem',
-                    marginBottom: 'var(--space-3)'
-                  }}>
-                    {emptyStates[activeFilter].icon}
-                  </div>
-                  <h3 style={{
-                    fontSize: 'var(--text-xl)',
-                    fontWeight: 'var(--font-semibold)',
-                    marginBottom: 'var(--space-2)'
-                  }}>
-                    {emptyStates[activeFilter].title}
-                  </h3>
-                  <p style={{
-                    color: 'var(--text-secondary)',
-                    marginBottom: 'var(--space-4)'
-                  }}>
-                    {emptyStates[activeFilter].description}
-                  </p>
-                  {activeFilter === 'upcoming' && setView && (
-                    <button
-                      onClick={() => setView('customer')}
-                      className="btn-primary"
-                    >
-                      🔍 חפש תורים זמינים
-                    </button>
-                  )}
-                </div>
-              )}
-            </>
+          {filteredBookings.length > 0 ? (
+            <div>
+              {filteredBookings.map(booking => (
+                <MyBookingCard
+                  key={booking.id}
+                  booking={booking}
+                  canCancel={canCancelBooking(booking)}
+                  onCancel={handleCancelClick}
+                  setView={setView}
+                />
+              ))}
+            </div>
           ) : (
-            /* Calendar View */
-            <CustomerCalendarView
-              bookings={bookings}
-              setView={setView}
-            />
+            /* Empty state */
+            <div style={{
+              textAlign: 'center',
+              padding: 'var(--space-8)',
+              background: 'var(--bg-secondary)',
+              borderRadius: 'var(--radius-lg)',
+              marginTop: 'var(--space-4)'
+            }}>
+              <div style={{
+                fontSize: '4rem',
+                marginBottom: 'var(--space-3)'
+              }}>
+                {emptyStates[activeFilter].icon}
+              </div>
+              <h3 style={{
+                fontSize: 'var(--text-xl)',
+                fontWeight: 'var(--font-semibold)',
+                marginBottom: 'var(--space-2)'
+              }}>
+                {emptyStates[activeFilter].title}
+              </h3>
+              <p style={{
+                color: 'var(--text-secondary)',
+                marginBottom: 'var(--space-4)'
+              }}>
+                {emptyStates[activeFilter].description}
+              </p>
+              {activeFilter === 'upcoming' && setView && (
+                <button
+                  onClick={() => setView('customer')}
+                  className="btn-primary"
+                >
+                  🔍 חפש תורים זמינים
+                </button>
+              )}
+            </div>
           )}
         </>
       )}

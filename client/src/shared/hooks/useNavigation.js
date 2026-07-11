@@ -9,7 +9,8 @@ export function getNavItems(user) {
   // Customer navigation
   if (user.role === 'CUSTOMER') {
     items.push({ id: 'customer', label: 'מצא תורים', icon: '🔍' });
-    items.push({ id: 'my-bookings', label: 'התורים שלי', icon: '📅' });
+    items.push({ id: 'my-bookings', label: 'התורים שלי', icon: '📋' });
+    items.push({ id: 'customer-calendar', label: 'יומן', icon: '📅' });
   }
 
   // Business navigation (legacy)

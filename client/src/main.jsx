@@ -5,6 +5,7 @@ import { clearSession, getUser, setSession } from './api';
 import AuthPanel from './components/AuthPanel';
 import CustomerPage from './features/customer/CustomerPage';
 import MyBookingsPage from './features/customer/pages/MyBookingsPage';
+import CustomerCalendarPage from './features/customer/pages/CustomerCalendarPage';
 import CustomerBookingDetailsPage from './features/customer/pages/CustomerBookingDetailsPage';
 import BusinessProfilePage from './features/customer/pages/BusinessProfilePage';
 import BusinessPage from './features/business/BusinessPage';
@@ -458,6 +459,9 @@ function App() {
 
         {/* My Bookings View */}
         {viewName === 'my-bookings' && user.role === 'CUSTOMER' && <MyBookingsPage setView={setView} />}
+
+        {/* Customer Calendar View */}
+        {viewName === 'customer-calendar' && user.role === 'CUSTOMER' && <CustomerCalendarPage setView={setView} />}
 
         {/* Booking Details View */}
         {viewName === 'booking-details' && typeof view === 'object' && user.role === 'CUSTOMER' && (
