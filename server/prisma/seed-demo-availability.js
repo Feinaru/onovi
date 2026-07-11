@@ -90,6 +90,8 @@ async function main() {
       city: 'תל אביב',
       cityCode: 5000,
       cityNameHebrew: 'תל אביב-יפו',
+      latitude: 32.0853,
+      longitude: 34.7818,
       status: 'ACTIVE'
     },
     create: {
@@ -103,6 +105,8 @@ async function main() {
       city: 'תל אביב',
       cityCode: 5000,
       cityNameHebrew: 'תל אביב-יפו',
+      latitude: 32.0853,
+      longitude: 34.7818,
       status: 'ACTIVE'
     }
   });

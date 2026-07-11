@@ -33,6 +33,26 @@ function parseArray(str) {
 }
 
 /**
+ * Calculate distance between two coordinates using Haversine formula
+ * Returns distance in kilometers
+ */
+function calculateDistanceKm(lat1, lng1, lat2, lng2) {
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+
+  return Math.round(distance * 10) / 10; // Round to 1 decimal place
+}
+
+/**
  * Check if time falls within a bucket
  */
 function isTimeInBucket(time, bucket) {
@@ -65,8 +85,7 @@ function getSoonestDate(services) {
 /**
  * Calculate recommended score
  */
-function calculateRecommendedScore(businessCard) {
-  // For now: prioritize soonest availability, then lower price
+function calculateRecommendedScore(businessCard, userLat, userLng) {
   const soonestDate = getSoonestDate(businessCard.services);
   const minPrice = Math.min(...businessCard.services.map(s => s.regularPrice));
 
@@ -77,13 +96,19 @@ function calculateRecommendedScore(businessCard) {
   // Lower price gets higher score
   const priceScore = Math.max(0, 1 - (minPrice / 1000)); // Normalize to 0-1
 
+  // If GPS exists and business has location, factor in distance
+  if (userLat && userLng && businessCard.business.distanceKm !== undefined) {
+    const distanceScore = Math.max(0, 1 - (businessCard.business.distanceKm / 50)); // 0-1 scale, 50km max
+    return (0.4 * availabilityScore) + (0.3 * priceScore) + (0.3 * distanceScore);
+  }
+
   return (0.6 * availabilityScore) + (0.4 * priceScore);
 }
 
 /**
  * Sort business results
  */
-function sortBusinessResults(results, sortType) {
+function sortBusinessResults(results, sortType, userLat, userLng) {
   switch (sortType) {
     case 'soonest':
       return results.sort((a, b) => {
@@ -107,13 +132,20 @@ function sortBusinessResults(results, sortType) {
       });
 
     case 'nearest':
-      // Not implemented yet (requires GPS)
-      console.log('[CustomerSearch] nearest sort requested but GPS not implemented, falling back to recommended');
-      return results.sort((a, b) => calculateRecommendedScore(b) - calculateRecommendedScore(a));
+      if (!userLat || !userLng) {
+        console.log('[CustomerSearch] nearest sort requested without GPS, falling back to recommended');
+        return results.sort((a, b) => calculateRecommendedScore(b, userLat, userLng) - calculateRecommendedScore(a, userLat, userLng));
+      }
+      // Sort by distance ascending
+      return results.sort((a, b) => {
+        const aDist = a.business.distanceKm ?? Infinity;
+        const bDist = b.business.distanceKm ?? Infinity;
+        return aDist - bDist;
+      });
 
     case 'recommended':
     default:
-      return results.sort((a, b) => calculateRecommendedScore(b) - calculateRecommendedScore(a));
+      return results.sort((a, b) => calculateRecommendedScore(b, userLat, userLng) - calculateRecommendedScore(a, userLat, userLng));
   }
 }
 
@@ -133,7 +165,10 @@ router.get('/appointment-search', async (req, res, next) => {
       timeBuckets: timeBucketsStr,
       timeFrom,
       timeTo,
-      sort = 'recommended'
+      sort = 'recommended',
+      lat: latStr,
+      lng: lngStr,
+      radiusKm: radiusKmStr
     } = req.query;
 
     // Parse filters
@@ -141,6 +176,15 @@ router.get('/appointment-search', async (req, res, next) => {
     const professionIds = parseIntArray(professionIdsStr);
     const serviceTemplateIds = parseIntArray(serviceTemplateIdsStr);
     const timeBuckets = parseArray(timeBucketsStr);
+
+    // Parse GPS parameters
+    const userLat = latStr ? parseFloat(latStr) : null;
+    const userLng = lngStr ? parseFloat(lngStr) : null;
+    let radiusKm = radiusKmStr ? parseFloat(radiusKmStr) : 10;
+
+    // Validate and clamp radius
+    if (radiusKm < 1) radiusKm = 1;
+    if (radiusKm > 50) radiusKm = 50;
 
     // Date range defaults and validation
     const today = new Date().toISOString().split('T')[0];
@@ -164,7 +208,10 @@ router.get('/appointment-search', async (req, res, next) => {
       timeBuckets,
       timeFrom,
       timeTo,
-      sort
+      sort,
+      userLat,
+      userLng,
+      radiusKm
     });
 
     // Build BusinessService filter
@@ -341,26 +388,52 @@ router.get('/appointment-search', async (req, res, next) => {
       }
     }
 
-    // Convert maps to arrays
-    const results = Array.from(businessMap.values()).map(businessData => ({
-      business: businessData.business,
-      services: Array.from(businessData.servicesMap.values()).map(serviceData => ({
-        businessServiceId: serviceData.businessServiceId,
-        serviceTemplateId: serviceData.serviceTemplateId,
-        name: serviceData.name,
-        durationMinutes: serviceData.durationMinutes,
-        regularPrice: serviceData.regularPrice,
-        availableDates: Array.from(serviceData.datesMap.entries())
-          .map(([date, times]) => ({
-            date,
-            times: times.sort((a, b) => a.startTime.localeCompare(b.startTime))
-          }))
-          .sort((a, b) => a.date.localeCompare(b.date))
-      }))
-    }));
+    // Convert maps to arrays and calculate distances
+    let results = Array.from(businessMap.values()).map(businessData => {
+      const businessCard = {
+        business: businessData.business,
+        services: Array.from(businessData.servicesMap.values()).map(serviceData => ({
+          businessServiceId: serviceData.businessServiceId,
+          serviceTemplateId: serviceData.serviceTemplateId,
+          name: serviceData.name,
+          durationMinutes: serviceData.durationMinutes,
+          regularPrice: serviceData.regularPrice,
+          availableDates: Array.from(serviceData.datesMap.entries())
+            .map(([date, times]) => ({
+              date,
+              times: times.sort((a, b) => a.startTime.localeCompare(b.startTime))
+            }))
+            .sort((a, b) => a.date.localeCompare(b.date))
+        }))
+      };
+
+      // Calculate distance if GPS provided and business has coordinates
+      if (userLat && userLng && businessData.business.latitude && businessData.business.longitude) {
+        businessCard.business.distanceKm = calculateDistanceKm(
+          userLat,
+          userLng,
+          businessData.business.latitude,
+          businessData.business.longitude
+        );
+      }
+
+      return businessCard;
+    });
+
+    // Filter by radius if GPS provided
+    if (userLat && userLng) {
+      results = results.filter(businessCard => {
+        // Exclude businesses without coordinates
+        if (!businessCard.business.latitude || !businessCard.business.longitude) {
+          return false;
+        }
+        // Include businesses within radius
+        return businessCard.business.distanceKm <= radiusKm;
+      });
+    }
 
     // Sort results
-    const sortedResults = sortBusinessResults(results, sort);
+    const sortedResults = sortBusinessResults(results, sort, userLat, userLng);
 
     console.log(`[CustomerSearch] Returning ${sortedResults.length} businesses with ${sortedResults.reduce((sum, b) => sum + b.services.length, 0)} services`);
 
@@ -377,7 +450,10 @@ router.get('/appointment-search', async (req, res, next) => {
           dateTo: finalDateTo,
           timeBuckets,
           timeFrom,
-          timeTo
+          timeTo,
+          lat: userLat,
+          lng: userLng,
+          radiusKm: userLat && userLng ? radiusKm : null
         },
         sort
       }
