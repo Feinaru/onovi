@@ -558,6 +558,18 @@ Customer Available Times =
 - ✅ Provider calendar may have different UI/behavior than customer calendar (justified)
 - ✅ Reuse visual primitives where appropriate (date cells, event cards, colors)
 
+**For detailed calendar system architecture, behavior, view rules, and edit/lock policy, see:**
+
+📄 **`docs/LOMEA_CALENDAR_SYSTEM.md`** (MANDATORY for all calendar-related work)
+
+This document defines:
+- Day/week/month view behavior for customer and provider calendars
+- Availability vs booking separation rules
+- Provider edit and lock policy
+- Price/revenue calculation rules
+- Shared component architecture
+- Implementation phases
+
 ---
 
 ## 14. Customer Calendar Principles
@@ -576,6 +588,10 @@ Customer Available Times =
 - ✅ Consistent visual styling with provider calendar (colors, spacing, cards)
 - ❌ Do NOT add booking creation or availability management to customer calendar
 - ❌ Do NOT force identical behavior to provider calendar when roles differ
+
+**For detailed calendar system architecture and view specifications, see:**
+
+📄 **`docs/LOMEA_CALENDAR_SYSTEM.md`** (MANDATORY for all calendar-related work)
 
 ---
 
