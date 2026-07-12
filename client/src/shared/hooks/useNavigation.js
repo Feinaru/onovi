@@ -30,7 +30,6 @@ export function getNavItems(user) {
     items.push({ id: 'admin-approvals', label: 'אישורי נותני שירות', icon: '✓' });
     items.push({ id: 'admin-bookings', label: 'ניהול הזמנות', icon: '📋' });
     items.push({ id: 'crm', label: 'CRM', icon: '📋' });
-    items.push({ id: 'business', label: 'ניהול עסק', icon: '💼' });
     items.push({ id: 'customer', label: 'מצא תורים', icon: '🔍' });
   }
 
