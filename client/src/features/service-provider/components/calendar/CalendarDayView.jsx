@@ -156,9 +156,9 @@ export default function CalendarDayView({ slots, currentDate, onSlotClick }) {
                 fontSize: 'var(--text-lg)'
               }}>
                 <div style={{ fontSize: '3rem', marginBottom: 'var(--space-4)' }}>📅</div>
-                <div>אין תורים ביום זה</div>
+                <div>אין זמינות ביום זה</div>
                 <div style={{ fontSize: 'var(--text-sm)', marginTop: 'var(--space-2)' }}>
-                  לחץ על "פרסום תור חדש" למעלה כדי ליצור תור
+                  לחץ על "פתח זמינות חדשה" למעלה כדי ליצור זמינות
                 </div>
               </div>
             )}

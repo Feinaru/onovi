@@ -138,7 +138,7 @@ export default function BookingsPage({ user }) {
           className={`btn ${filter === 'pending' ? 'btn-primary' : 'btn-secondary'}`}
           onClick={() => setFilter('pending')}
         >
-          ממתינות ({bookings.filter(b => b.status === 'PENDING').length})
+          ממתינות לאישור ({bookings.filter(b => b.status === 'PENDING').length})
         </button>
         <button
           className={`btn ${filter === 'confirmed' ? 'btn-primary' : 'btn-secondary'}`}

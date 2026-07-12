@@ -259,8 +259,8 @@ export default function CalendarPage({ user }) {
       {/* Slot Creation Form */}
       <div className="card" style={{ marginBottom: '24px' }}>
         <div className="card-header">
-          <h3 className="card-title">פרסום תור חדש</h3>
-          <p className="card-description">צור תור חדש עם בחירת שירותים מרובים</p>
+          <h3 className="card-title">פתח זמינות חדשה</h3>
+          <p className="card-description">צור זמינות חדשה עם בחירת שירותים מרובים</p>
         </div>
         <div className="card-body">
           <SlotForm

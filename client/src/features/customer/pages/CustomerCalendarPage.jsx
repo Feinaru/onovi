@@ -29,7 +29,7 @@ export default function CustomerCalendarPage({ setView }) {
           color: 'var(--text-secondary)',
           fontSize: 'var(--text-base)'
         }}>
-          הצג את כל התורים שלך בתצוגת לוח שנה חודשית
+          כל התורים שלך בתצוגת יומן חודשית
         </p>
       </div>
 
