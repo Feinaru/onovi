@@ -1,5 +1,7 @@
 import React from 'react';
 import { api } from '../../../api';
+import LoadingState from '../../../shared/ui/LoadingState';
+import EmptyState from '../../../shared/ui/EmptyState';
 
 export default function AdminApprovalsPage({ setView }) {
   const [approvals, setApprovals] = React.useState([]);
@@ -141,11 +143,7 @@ export default function AdminApprovalsPage({ setView }) {
   }
 
   if (loading) {
-    return (
-      <div style={{ padding: 'var(--space-4)', textAlign: 'center' }}>
-        <p>טוען רשימת בקשות...</p>
-      </div>
-    );
+    return <LoadingState title="טוען רשימת בקשות..." />;
   }
 
   if (error) {
@@ -174,13 +172,11 @@ export default function AdminApprovalsPage({ setView }) {
       </div>
 
       {approvals.length === 0 ? (
-        <div className="empty-state">
-          <div className="empty-state-icon">✓</div>
-          <h3 className="empty-state-title">אין בקשות ממתינות כרגע</h3>
-          <p className="empty-state-description">
-            כל בקשות נותני השירות טופלו. בקשות חדשות יופיעו כאן
-          </p>
-        </div>
+        <EmptyState
+          icon="✓"
+          title="אין בקשות ממתינות כרגע"
+          description="כל בקשות נותני השירות טופלו. בקשות חדשות יופיעו כאן"
+        />
       ) : (
         <div style={{
           background: 'white',

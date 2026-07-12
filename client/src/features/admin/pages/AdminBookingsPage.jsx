@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../../api';
 import BookingStatusBadge from '../../../shared/ui/BookingStatusBadge';
+import LoadingState from '../../../shared/ui/LoadingState';
+import EmptyState from '../../../shared/ui/EmptyState';
 
 /**
  * AdminBookingsPage - Admin-only booking management
@@ -220,30 +222,24 @@ export default function AdminBookingsPage({ setView }) {
       </div>
 
       {/* Loading State */}
-      {loading && (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)' }}>
-          <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>⏳</div>
-          <div style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)' }}>טוען הזמנות...</div>
-        </div>
-      )}
+      {loading && <LoadingState title="טוען הזמנות..." />}
 
       {/* Empty State */}
       {!loading && bookings.length === 0 && (
-        <div className="empty-state">
-          <div className="empty-state-icon">📋</div>
-          <div className="empty-state-title">אין הזמנות להצגה</div>
-          <div className="empty-state-description">
-            {statusFilter || startDate || endDate || search
+        <EmptyState
+          icon="📋"
+          title="אין הזמנות להצגה"
+          description={
+            statusFilter || startDate || endDate || search
               ? 'לא נמצאו הזמנות לפי הסינון שבחרת. נסה לשנות את הפילטרים'
               : 'עדיין אין הזמנות במערכת. הזמנות חדשות יופיעו כאן'
-            }
-          </div>
-          {(statusFilter || startDate || endDate || search) && (
-            <button className="btn-secondary" onClick={resetFilters} style={{ marginTop: 'var(--space-3)' }}>
+          }
+          action={(statusFilter || startDate || endDate || search) && (
+            <button className="btn-secondary" onClick={resetFilters}>
               🔄 נקה סינונים
             </button>
           )}
-        </div>
+        />
       )}
 
       {/* Bookings Table */}

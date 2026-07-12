@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMyBookings } from '../hooks/useMyBookings';
 import CustomerCalendarView from './CustomerCalendarView';
+import LoadingState from '../../../shared/ui/LoadingState';
 
 /**
  * CustomerCalendarPage - Wrapper page for customer calendar view
@@ -34,21 +35,7 @@ export default function CustomerCalendarPage({ setView }) {
       </div>
 
       {/* Loading state */}
-      {loading && (
-        <div style={{
-          textAlign: 'center',
-          padding: 'var(--space-8)',
-          color: 'var(--text-secondary)'
-        }}>
-          <div style={{
-            fontSize: 'var(--text-4xl)',
-            marginBottom: 'var(--space-2)'
-          }}>
-            ⏳
-          </div>
-          <div>טוען יומן...</div>
-        </div>
-      )}
+      {loading && <LoadingState title="טוען יומן..." />}
 
       {/* Error state */}
       {error && !loading && (

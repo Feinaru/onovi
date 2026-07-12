@@ -1,6 +1,8 @@
 import React from 'react';
 import { useMyBookings } from '../hooks/useMyBookings';
 import MyBookingCard from '../components/MyBookingCard';
+import LoadingState from '../../../shared/ui/LoadingState';
+import EmptyState from '../../../shared/ui/EmptyState';
 
 /**
  * MyBookingsPage - Customer's booking management page
@@ -164,21 +166,7 @@ export default function MyBookingsPage({ setView }) {
       </div>
 
       {/* Loading state */}
-      {loading && (
-        <div style={{
-          textAlign: 'center',
-          padding: 'var(--space-8)',
-          color: 'var(--text-secondary)'
-        }}>
-          <div style={{
-            fontSize: 'var(--text-4xl)',
-            marginBottom: 'var(--space-2)'
-          }}>
-            ⏳
-          </div>
-          <div>טוען תורים...</div>
-        </div>
-      )}
+      {loading && <LoadingState title="טוען תורים..." />}
 
       {/* Error state */}
       {error && !loading && (
@@ -225,33 +213,11 @@ export default function MyBookingsPage({ setView }) {
             </div>
           ) : (
             /* Empty state */
-            <div style={{
-              textAlign: 'center',
-              padding: 'var(--space-8)',
-              background: 'var(--bg-secondary)',
-              borderRadius: 'var(--radius-lg)',
-              marginTop: 'var(--space-4)'
-            }}>
-              <div style={{
-                fontSize: '4rem',
-                marginBottom: 'var(--space-3)'
-              }}>
-                {emptyStates[activeFilter].icon}
-              </div>
-              <h3 style={{
-                fontSize: 'var(--text-xl)',
-                fontWeight: 'var(--font-semibold)',
-                marginBottom: 'var(--space-2)'
-              }}>
-                {emptyStates[activeFilter].title}
-              </h3>
-              <p style={{
-                color: 'var(--text-secondary)',
-                marginBottom: 'var(--space-4)'
-              }}>
-                {emptyStates[activeFilter].description}
-              </p>
-              {activeFilter === 'upcoming' && setView && (
+            <EmptyState
+              icon={emptyStates[activeFilter].icon}
+              title={emptyStates[activeFilter].title}
+              description={emptyStates[activeFilter].description}
+              action={activeFilter === 'upcoming' && setView && (
                 <button
                   onClick={() => setView('customer')}
                   className="btn-primary"
@@ -259,7 +225,8 @@ export default function MyBookingsPage({ setView }) {
                   🔍 חפש תורים זמינים
                 </button>
               )}
-            </div>
+              className="mt-4"
+            />
           )}
         </>
       )}

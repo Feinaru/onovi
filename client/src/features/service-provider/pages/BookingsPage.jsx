@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { api } from '../../../api';
 import BookingCard from '../../business/components/BookingCard';
 import ServiceProviderBookingDetailsPage from './ServiceProviderBookingDetailsPage';
+import LoadingState from '../../../shared/ui/LoadingState';
+import EmptyState from '../../../shared/ui/EmptyState';
 
 /**
  * BookingsPage - Standalone bookings management for Service Provider Workspace
@@ -95,7 +97,7 @@ export default function BookingsPage({ user }) {
   }
 
   if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>טוען...</div>;
+    return <LoadingState title="טוען הזמנות..." />;
   }
 
   // Filter bookings based on status filter
@@ -162,27 +164,24 @@ export default function BookingsPage({ user }) {
         </div>
 
         {filteredBookings.length === 0 && (
-          <div className="empty-state">
-            <div className="empty-state-icon">
-              {filter === 'pending' ? '⏳' : filter === 'confirmed' ? '✅' : filter === 'completed' ? '✓' : '📋'}
-            </div>
-            <h3 className="empty-state-title">
-              {filter === 'pending' ? 'אין תורים ממתינים' :
-               filter === 'confirmed' ? 'אין תורים מאושרים' :
-               filter === 'completed' ? 'אין תורים שהושלמו' :
-               'אין הזמנות'}
-            </h3>
-            <p className="empty-state-description">
-              {filter === 'all'
-                ? 'עדיין אין הזמנות. לקוחות יוכלו להזמין לאחר שתפרסם תורים זמינים'
+          <EmptyState
+            icon={filter === 'pending' ? '⏳' : filter === 'confirmed' ? '✅' : filter === 'completed' ? '✓' : '📋'}
+            title={
+              filter === 'pending' ? 'אין הזמנות ממתינות לאישור' :
+              filter === 'confirmed' ? 'אין תורים מאושרים' :
+              filter === 'completed' ? 'אין תורים שהושלמו' :
+              'אין הזמנות להצגה'
+            }
+            description={
+              filter === 'all'
+                ? 'עדיין אין הזמנות. לקוחות יוכלו להזמין לאחר שתפתח זמינות'
                 : filter === 'pending'
-                ? 'כל התורים כבר טופלו. תורים חדשים יופיעו כאן'
+                ? 'כל ההזמנות טופלו כרגע. הזמנות חדשות יופיעו כאן'
                 : filter === 'confirmed'
-                ? 'אין תורים מאושרים כרגע. תורים שתאשר יופיעו כאן'
+                ? 'אין הזמנות מאושרות כרגע. הזמנות שתאשר יופיעו כאן'
                 : 'אין תורים שהושלמו עדיין'
-              }
-            </p>
-          </div>
+            }
+          />
         )}
 
         {filteredBookings.length > 0 && (
