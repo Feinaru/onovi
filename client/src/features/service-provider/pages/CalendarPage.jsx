@@ -11,6 +11,21 @@ import CalendarDayView from '../components/calendar/CalendarDayView';
  * Phase 1: Visual day view calendar with navigation
  */
 
+/**
+ * Active booking statuses (block editing/deleting availability)
+ */
+const ACTIVE_BOOKING_STATUSES = ['PENDING', 'APPROVED', 'CONFIRMED', 'COMPLETED', 'NO_SHOW'];
+
+/**
+ * Helper: Get active bookings from slot bookings array
+ */
+function getActiveBookings(slot) {
+  if (!slot || !slot.bookings || !Array.isArray(slot.bookings)) {
+    return [];
+  }
+  return slot.bookings.filter(b => ACTIVE_BOOKING_STATUSES.includes(b.status));
+}
+
 // Format Date to YYYY-MM-DD in local timezone
 function formatDateLocal(date) {
   const year = date.getFullYear();
@@ -195,7 +210,7 @@ export default function CalendarPage({ user }) {
   }
 
   async function deleteSlot(id) {
-    if (!confirm('למחוק תור זה?')) return;
+    if (!confirm('למחוק זמינות זו?')) return;
 
     try {
       const result = await api(`/api/service-provider/slots/${id}`, {
@@ -203,13 +218,13 @@ export default function CalendarPage({ user }) {
       });
 
       if (result.success) {
-        showMessage('התור נמחק');
+        showMessage('הזמינות נמחקה');
         await loadData();
       } else {
-        showMessage(result.error || 'שגיאה במחיקת תור');
+        showMessage(result.error || 'שגיאה במחיקת זמינות');
       }
     } catch (err) {
-      showMessage(err.message || 'שגיאה במחיקת תור');
+      showMessage(err.message || 'שגיאה במחיקת זמינות');
     }
   }
 
@@ -289,38 +304,62 @@ export default function CalendarPage({ user }) {
       />
 
       {/* Edit Modal (if needed) */}
-      {editingSlot && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.5)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000
-        }}>
-          <div className="card" style={{ maxWidth: '600px', width: '90%', maxHeight: '90vh', overflow: 'auto' }}>
-            <div className="card-header">
-              <h3 className="card-title">עריכת תור</h3>
-              <button onClick={() => setEditingSlot(null)} className="btn-ghost">✕</button>
-            </div>
-            <div className="card-body">
-              <SlotForm
-                slotForm={editingSlot}
-                setSlotForm={setEditingSlot}
-                businesses={business ? [business] : []}
-                services={services.filter(s => s.businessId === editingSlot.businessId)}
-                onSubmit={updateSlot}
-                showMessage={showMessage}
-                isEditing={true}
-              />
+      {editingSlot && (() => {
+        const activeBookings = getActiveBookings(editingSlot);
+        const hasActiveBookings = activeBookings.length > 0;
+
+        return (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}>
+            <div className="card" style={{ maxWidth: '600px', width: '90%', maxHeight: '90vh', overflow: 'auto' }}>
+              <div className="card-header">
+                <h3 className="card-title">עריכת זמינות</h3>
+                <button onClick={() => setEditingSlot(null)} className="btn-ghost">✕</button>
+              </div>
+
+              {/* Warning Banner */}
+              {hasActiveBookings && (
+                <div style={{
+                  background: '#FEF3C7',
+                  border: '1px solid #FCD34D',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-3)',
+                  margin: 'var(--space-4)',
+                  color: '#92400E'
+                }}>
+                  <strong>⚠️ זמינות עם הזמנות פעילות</strong>
+                  <p style={{ margin: '4px 0 0 0', fontSize: '14px' }}>
+                    קיימות {activeBookings.length} הזמנות פעילות. ניתן לערוך רק את ההערה.
+                  </p>
+                </div>
+              )}
+
+              <div className="card-body">
+                <SlotForm
+                  slotForm={editingSlot}
+                  setSlotForm={setEditingSlot}
+                  businesses={business ? [business] : []}
+                  services={services.filter(s => s.businessId === editingSlot.businessId)}
+                  onSubmit={updateSlot}
+                  showMessage={showMessage}
+                  isEditing={true}
+                  hasActiveBookings={hasActiveBookings}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

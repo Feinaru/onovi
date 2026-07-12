@@ -9,6 +9,18 @@ router.use(auth());
 router.use(requireRole('SERVICE_PROVIDER'));
 
 /**
+ * Active booking statuses (block editing/deleting availability)
+ */
+const ACTIVE_BOOKING_STATUSES = ['PENDING', 'APPROVED', 'CONFIRMED', 'COMPLETED', 'NO_SHOW'];
+
+/**
+ * Helper: Get active bookings from bookings array
+ */
+function getActiveBookings(bookings = []) {
+  return bookings.filter(b => ACTIVE_BOOKING_STATUSES.includes(b.status));
+}
+
+/**
  * Helper: Get provider's business from authenticated user
  */
 async function getProviderBusiness(userId) {
@@ -263,11 +275,14 @@ router.patch('/:id', async (req, res) => {
       });
     }
 
-    // Verify slot ownership
+    // Verify slot ownership and fetch with bookings
     const existing = await prisma.slot.findFirst({
       where: {
         id: slotId,
         businessId: business.id
+      },
+      include: {
+        bookings: true
       }
     });
 
@@ -276,6 +291,39 @@ router.patch('/:id', async (req, res) => {
         success: false,
         error: 'Slot not found or does not belong to your business'
       });
+    }
+
+    // Check for active bookings
+    const activeBookings = getActiveBookings(existing.bookings);
+    const hasActiveBookings = activeBookings.length > 0;
+
+    // If active bookings exist, block dangerous field changes
+    if (hasActiveBookings) {
+      const tryingToChangeDate = date !== undefined && date !== existing.date;
+      const tryingToChangeStartTime = startTime !== undefined && startTime !== existing.startTime;
+      const tryingToChangeEndTime = endTime !== undefined && endTime !== existing.endTime;
+
+      // Normalize price comparison
+      const tryingToChangeRegularPrice = regularPrice !== undefined && Number(regularPrice) !== Number(existing.regularPrice);
+
+      // Normalize dealPrice (null, undefined, empty string all treated as null)
+      const normalizeDealPrice = (val) => {
+        if (val === null || val === undefined || val === '') return null;
+        return Number(val);
+      };
+      const tryingToChangeDealPrice = dealPrice !== undefined && normalizeDealPrice(dealPrice) !== normalizeDealPrice(existing.dealPrice);
+
+      const tryingToChangeStatus = status !== undefined && status !== existing.status;
+
+      if (tryingToChangeDate || tryingToChangeStartTime || tryingToChangeEndTime ||
+          tryingToChangeRegularPrice || tryingToChangeDealPrice || tryingToChangeStatus) {
+        return res.status(400).json({
+          success: false,
+          error: `לא ניתן לשנות זמינות עם הזמנות פעילות. יש ${activeBookings.length} הזמנות פעילות.`
+        });
+      }
+
+      // Only note is allowed to be updated when active bookings exist
     }
 
     const updateData = {};
@@ -362,11 +410,14 @@ router.delete('/:id', async (req, res) => {
       });
     }
 
-    // Verify slot ownership
+    // Verify slot ownership and fetch with bookings
     const existing = await prisma.slot.findFirst({
       where: {
         id: slotId,
         businessId: business.id
+      },
+      include: {
+        bookings: true
       }
     });
 
@@ -374,6 +425,15 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({
         success: false,
         error: 'Slot not found or does not belong to your business'
+      });
+    }
+
+    // Check for active bookings
+    const activeBookings = getActiveBookings(existing.bookings);
+    if (activeBookings.length > 0) {
+      return res.status(400).json({
+        success: false,
+        error: `לא ניתן למחוק זמינות עם הזמנות פעילות. יש ${activeBookings.length} הזמנות פעילות. יש לטפל בהזמנות תחילה.`
       });
     }
 

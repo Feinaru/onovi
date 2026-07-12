@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 /**
  * SlotForm - Create new slot form (Sprint B: multi-booking support)
  */
-function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
+function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit, hasActiveBookings = false }) {
   // Filter services to show only active + visible services for selected business
   const activeServices = services.filter(s =>
     s.businessId === slotForm.businessId && s.active && s.visibleToCustomers
@@ -127,6 +127,7 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
             value={slotForm.date}
             onChange={e => setSlotForm({ ...slotForm, date: e.target.value })}
             required
+            disabled={hasActiveBookings}
           />
         </div>
         <div className="form-group">
@@ -137,6 +138,7 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
             value={slotForm.startTime}
             onChange={e => setSlotForm({ ...slotForm, startTime: e.target.value })}
             required
+            disabled={hasActiveBookings}
           />
         </div>
         <div className="form-group">
@@ -147,6 +149,7 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
             value={slotForm.endTime}
             onChange={e => setSlotForm({ ...slotForm, endTime: e.target.value })}
             required
+            disabled={hasActiveBookings}
           />
         </div>
       </div>
@@ -159,6 +162,7 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
             value={slotForm.regularPrice}
             onChange={e => setSlotForm({ ...slotForm, regularPrice: Number(e.target.value) })}
             required
+            disabled={hasActiveBookings}
           />
         </div>
         <div className="form-group">
@@ -168,9 +172,28 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit }) {
             placeholder="190"
             value={slotForm.dealPrice}
             onChange={e => setSlotForm({ ...slotForm, dealPrice: Number(e.target.value) })}
+            disabled={hasActiveBookings}
           />
         </div>
       </div>
+
+      {/* Note field (always editable) */}
+      <div className="form-group">
+        <label className="form-label">הערה (אופציונלי)</label>
+        <textarea
+          placeholder="הערות נוספות..."
+          value={slotForm.note || ''}
+          onChange={e => setSlotForm({ ...slotForm, note: e.target.value })}
+          rows={3}
+          style={{
+            width: '100%',
+            padding: '8px',
+            borderRadius: '4px',
+            border: '1px solid #ddd'
+          }}
+        />
+      </div>
+
       <button className="btn-primary">📅 פרסם תור</button>
     </form>
   );
