@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../../api';
+import BookingStatusBadge from '../../../shared/ui/BookingStatusBadge';
 
 /**
  * AdminBookingsPage - Admin-only booking management
@@ -94,35 +95,6 @@ export default function AdminBookingsPage({ setView }) {
     setTimeout(() => setMessage(''), 3000);
   }
 
-  function getStatusBadge(status) {
-    const statusConfig = {
-      PENDING: { bg: 'var(--warning-50)', color: 'var(--warning-700)', label: 'ממתין' },
-      CONFIRMED: { bg: 'var(--success-50)', color: 'var(--success-700)', label: 'מאושר' },
-      COMPLETED: { bg: 'var(--primary-50)', color: 'var(--primary-700)', label: 'הושלם' },
-      CANCELLED_BY_CUSTOMER: { bg: 'var(--gray-100)', color: 'var(--gray-700)', label: 'בוטל ע"י לקוח' },
-      CANCELLED_BY_BUSINESS: { bg: 'var(--gray-100)', color: 'var(--gray-700)', label: 'בוטל ע"י עסק' },
-      NO_SHOW: { bg: 'var(--danger-50)', color: 'var(--danger-700)', label: 'לא הגיע' },
-      REJECTED: { bg: 'var(--danger-50)', color: 'var(--danger-700)', label: 'נדחה' },
-      APPROVED: { bg: 'var(--success-50)', color: 'var(--success-700)', label: 'מאושר' },
-      CANCELLED: { bg: 'var(--gray-100)', color: 'var(--gray-700)', label: 'בוטל' }
-    };
-
-    const config = statusConfig[status] || { bg: 'var(--gray-100)', color: 'var(--gray-700)', label: status };
-
-    return (
-      <span style={{
-        padding: 'var(--space-1) var(--space-3)',
-        borderRadius: 'var(--radius-md)',
-        fontSize: 'var(--text-sm)',
-        fontWeight: 'var(--font-medium)',
-        backgroundColor: config.bg,
-        color: config.color
-      }}>
-        {config.label}
-      </span>
-    );
-  }
-
   function formatDateTime(date, time) {
     if (!date) return 'תאריך לא זמין';
     return time ? `${date} ${time}` : date;
@@ -189,11 +161,11 @@ export default function AdminBookingsPage({ setView }) {
               style={{ width: '100%' }}
             >
               <option value="">הכל</option>
-              <option value="PENDING">ממתין</option>
+              <option value="PENDING">ממתין לאישור</option>
               <option value="CONFIRMED">מאושר</option>
               <option value="COMPLETED">הושלם</option>
-              <option value="CANCELLED_BY_CUSTOMER">בוטל ע"י לקוח</option>
-              <option value="CANCELLED_BY_BUSINESS">בוטל ע"י עסק</option>
+              <option value="CANCELLED_BY_CUSTOMER">בוטל על ידי לקוח</option>
+              <option value="CANCELLED_BY_BUSINESS">בוטל על ידי עסק</option>
               <option value="NO_SHOW">לא הגיע</option>
               <option value="REJECTED">נדחה</option>
             </select>
@@ -348,7 +320,7 @@ export default function AdminBookingsPage({ setView }) {
                         ₪{booking.price || 0}
                       </td>
                       <td>
-                        {getStatusBadge(booking.status)}
+                        <BookingStatusBadge status={booking.status} context="admin" showIcon={false} />
                       </td>
                       <td>
                         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>

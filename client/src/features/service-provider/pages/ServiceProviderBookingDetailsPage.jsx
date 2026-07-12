@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../../api';
+import BookingStatusBadge from '../../../shared/ui/BookingStatusBadge';
+import { getCalendarStatusMeta } from '../../../shared/calendar/utils/statusColors';
 
 /**
  * ServiceProviderBookingDetailsPage - Detailed view of a single booking for service providers
@@ -36,7 +38,8 @@ export default function ServiceProviderBookingDetailsPage({ bookingId, onBack })
   }
 
   async function updateStatus(newStatus) {
-    if (!confirm(`האם לעדכן את הסטטוס ל-${getStatusLabel(newStatus)}?`)) {
+    const meta = getCalendarStatusMeta(newStatus, 'provider');
+    if (!confirm(`האם לעדכן את הסטטוס ל-${meta.label}?`)) {
       return;
     }
 
@@ -61,47 +64,6 @@ export default function ServiceProviderBookingDetailsPage({ bookingId, onBack })
     } finally {
       setUpdating(false);
     }
-  }
-
-  function getStatusLabel(status) {
-    const labels = {
-      PENDING: 'ממתין לאישור',
-      CONFIRMED: 'מאושר',
-      REJECTED: 'נדחה',
-      COMPLETED: 'הושלם',
-      NO_SHOW: 'לא הגיע',
-      CANCELLED_BY_CUSTOMER: 'בוטל על ידי הלקוח',
-      CANCELLED_BY_BUSINESS: 'בוטל על ידי העסק'
-    };
-    return labels[status] || status;
-  }
-
-  function getStatusBadge(status) {
-    const statusConfig = {
-      PENDING: { bg: '#fef3c7', color: '#92400e', label: '⏳ ממתין לאישור' },
-      CONFIRMED: { bg: '#d1fae5', color: '#065f46', label: '✓ מאושר' },
-      COMPLETED: { bg: '#dbeafe', color: '#1e40af', label: '✅ הושלם' },
-      CANCELLED_BY_CUSTOMER: { bg: '#fee2e2', color: '#991b1b', label: '✗ בוטל ע"י לקוח' },
-      CANCELLED_BY_BUSINESS: { bg: '#fee2e2', color: '#991b1b', label: '✗ בוטל ע"י העסק' },
-      REJECTED: { bg: '#fee2e2', color: '#991b1b', label: '✗ נדחה' },
-      NO_SHOW: { bg: '#fee2e2', color: '#991b1b', label: '❌ לא הגיע' }
-    };
-
-    const config = statusConfig[status] || { bg: '#f3f4f6', color: '#374151', label: status };
-
-    return (
-      <span style={{
-        display: 'inline-block',
-        padding: 'var(--space-2) var(--space-3)',
-        background: config.bg,
-        color: config.color,
-        borderRadius: 'var(--radius-md)',
-        fontSize: 'var(--text-sm)',
-        fontWeight: 'var(--font-semibold)'
-      }}>
-        {config.label}
-      </span>
-    );
   }
 
   function formatDate(dateStr) {
@@ -220,7 +182,7 @@ export default function ServiceProviderBookingDetailsPage({ bookingId, onBack })
               <h2 className="card-title">פרטי הזמנה</h2>
               <p className="card-description">מספר הזמנה: {booking.publicId?.substring(0, 8) || booking.id}</p>
             </div>
-            {getStatusBadge(booking.status)}
+            <BookingStatusBadge status={booking.status} context="provider" />
           </div>
         </div>
       </div>

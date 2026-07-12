@@ -1,4 +1,5 @@
 import React from 'react';
+import BookingStatusBadge from '../../../shared/ui/BookingStatusBadge';
 
 /**
  * BookingCard - Displays booking information
@@ -7,17 +8,6 @@ import React from 'react';
  */
 function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMessage, onViewDetails, asTableRow = false }) {
   const handleStatusChange = onUpdateStatus || onStatusChange;
-
-  const statusLabels = {
-    'PENDING': '⏳ ממתין',
-    'CONFIRMED': '✓ מאושר',
-    'APPROVED': '✓ מאושר',
-    'REJECTED': '✗ נדחה',
-    'COMPLETED': '✅ הושלם',
-    'CANCELLED_BY_CUSTOMER': '✗ בוטל ע"י לקוח',
-    'CANCELLED_BY_BUSINESS': '✗ בוטל ע"י עסק',
-    'NO_SHOW': '❌ לא הגיע'
-  };
 
   if (asTableRow) {
     return (
@@ -37,14 +27,7 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
         </td>
         <td style={{ fontWeight: 'var(--font-semibold)' }}>₪{booking.businessService?.regularPrice || booking.price}</td>
         <td>
-          <span className={`badge ${
-            booking.status === 'CONFIRMED' || booking.status === 'APPROVED' ? 'badge-success' :
-            booking.status === 'PENDING' ? 'badge-warning' :
-            booking.status === 'COMPLETED' ? 'badge-primary' :
-            'badge-danger'
-          }`}>
-            {statusLabels[booking.status] || booking.status}
-          </span>
+          <BookingStatusBadge status={booking.status} context="provider" />
         </td>
         <td>
           <select
@@ -56,11 +39,12 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
               borderRadius: 'var(--radius-md)'
             }}
           >
-            <option value="PENDING">⏳ ממתין</option>
+            <option value="PENDING">⏳ ממתין לאישור</option>
             <option value="CONFIRMED">✓ מאושר</option>
             <option value="REJECTED">✗ נדחה</option>
             <option value="COMPLETED">✅ הושלם</option>
-            <option value="CANCELLED_BY_BUSINESS">✗ בוטל</option>
+            <option value="NO_SHOW">❌ לא הגיע</option>
+            <option value="CANCELLED_BY_BUSINESS">✗ בוטל על ידי העסק</option>
           </select>
         </td>
       </tr>
@@ -79,14 +63,7 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
             📞 {booking.customerPhone}
           </div>
         </div>
-        <span className={`badge ${
-          booking.status === 'CONFIRMED' || booking.status === 'APPROVED' ? 'badge-success' :
-          booking.status === 'PENDING' ? 'badge-warning' :
-          booking.status === 'COMPLETED' ? 'badge-primary' :
-          'badge-danger'
-        }`}>
-          {statusLabels[booking.status] || booking.status}
-        </span>
+        <BookingStatusBadge status={booking.status} context="provider" />
       </div>
 
       <div style={{ display: 'grid', gap: 'var(--space-2)', marginBottom: 'var(--space-3)' }}>
@@ -117,12 +94,12 @@ function BookingCard({ booking, onStatusChange, onUpdateStatus, onCancel, showMe
           className="form-input"
           style={{ flex: 1 }}
         >
-          <option value="PENDING">⏳ ממתין</option>
+          <option value="PENDING">⏳ ממתין לאישור</option>
           <option value="CONFIRMED">✓ מאושר</option>
           <option value="REJECTED">✗ נדחה</option>
           <option value="COMPLETED">✅ הושלם</option>
           <option value="NO_SHOW">❌ לא הגיע</option>
-          <option value="CANCELLED_BY_BUSINESS">✗ בוטל ע"י עסק</option>
+          <option value="CANCELLED_BY_BUSINESS">✗ בוטל על ידי העסק</option>
         </select>
       </div>
 

@@ -1,27 +1,10 @@
 import React from 'react';
+import BookingStatusBadge from '../../../shared/ui/BookingStatusBadge';
 
 /**
  * MyBookingCard - Displays a single booking for customer view
  */
 export default function MyBookingCard({ booking, canCancel, onCancel, setView }) {
-  /**
-   * Get status label and style
-   */
-  const getStatusInfo = (status) => {
-    const statusMap = {
-      'PENDING': { label: '⏳ ממתין לאישור', className: 'badge-warning' },
-      'CONFIRMED': { label: '✓ מאושר', className: 'badge-success' },
-      'APPROVED': { label: '✓ מאושר', className: 'badge-success' },
-      'COMPLETED': { label: '✅ הושלם', className: 'badge-primary' },
-      'CANCELLED': { label: '✗ בוטל', className: 'badge-danger' },
-      'CANCELLED_BY_CUSTOMER': { label: '✗ בוטל על ידך', className: 'badge-danger' },
-      'CANCELLED_BY_BUSINESS': { label: '✗ בוטל על ידי העסק', className: 'badge-danger' },
-      'REJECTED': { label: '✗ נדחה', className: 'badge-danger' },
-      'NO_SHOW': { label: '❌ לא הגעת', className: 'badge-danger' }
-    };
-
-    return statusMap[status] || { label: status, className: 'badge-secondary' };
-  };
 
   /**
    * Get service name with null-safety
@@ -68,8 +51,6 @@ export default function MyBookingCard({ booking, canCancel, onCancel, setView })
     }
   };
 
-  const statusInfo = getStatusInfo(booking.status);
-
   return (
     <div className="card" style={{ padding: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
       {/* Header with service name and status */}
@@ -96,9 +77,7 @@ export default function MyBookingCard({ booking, canCancel, onCancel, setView })
             {getBusinessCity() && `, ${getBusinessCity()}`}
           </div>
         </div>
-        <span className={`badge ${statusInfo.className}`}>
-          {statusInfo.label}
-        </span>
+        <BookingStatusBadge status={booking.status} context="customer" />
       </div>
 
       {/* Booking details */}
