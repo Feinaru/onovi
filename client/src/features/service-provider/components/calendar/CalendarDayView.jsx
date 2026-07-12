@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import CalendarTimeGrid from './CalendarTimeGrid';
+import CalendarTimeGrid from '../../../../shared/calendar/CalendarTimeGrid';
 import CalendarSlotBlock from './CalendarSlotBlock';
-import CalendarTimeIndicator from './CalendarTimeIndicator';
+import CalendarTimeIndicator from '../../../../shared/calendar/CalendarTimeIndicator';
 
 /**
  * CalendarDayView - Main day view calendar container

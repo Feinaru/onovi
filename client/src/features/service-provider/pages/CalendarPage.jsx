@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { api } from '../../../api';
 import SlotForm from '../../business/components/SlotForm';
 import SlotCard from '../../business/components/SlotCard';
-import CalendarHeader from '../components/calendar/CalendarHeader';
+import CalendarShell from '../../../shared/calendar/CalendarShell';
 import CalendarDayView from '../components/calendar/CalendarDayView';
+import { formatDateLocal, addDays, addMonths } from '../../../shared/calendar/utils/calendarUtils';
 
 /**
  * CalendarPage - Standalone slot management for Service Provider Workspace
  * Migrated to use provider-scoped API routes (Phase B)
- * Phase 1: Visual day view calendar with navigation
+ * Unified Calendar System - Day/Week/Month views with shared CalendarShell
  */
 
 /**
@@ -26,21 +27,6 @@ function getActiveBookings(slot) {
   return slot.bookings.filter(b => ACTIVE_BOOKING_STATUSES.includes(b.status));
 }
 
-// Format Date to YYYY-MM-DD in local timezone
-function formatDateLocal(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-// Add days to a date
-function addDays(date, days) {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
 export default function CalendarPage({ user }) {
   const [business, setBusiness] = useState(null);
   const [services, setServices] = useState([]);
@@ -54,6 +40,9 @@ export default function CalendarPage({ user }) {
     // Will be updated to smart date after slots load
     return today;
   });
+
+  // Current view - day/week/month
+  const [currentView, setCurrentView] = useState('day');
 
   // Slot form state - businessId kept for SlotForm compatibility but not sent to backend
   const [slotForm, setSlotForm] = useState({
@@ -229,12 +218,24 @@ export default function CalendarPage({ user }) {
   }
 
   // Navigation handlers
-  function handlePreviousDay() {
-    setCurrentDate(prev => addDays(prev, -1));
+  function handlePrevious() {
+    if (currentView === 'month') {
+      setCurrentDate(prev => addMonths(prev, -1));
+    } else if (currentView === 'week') {
+      setCurrentDate(prev => addDays(prev, -7));
+    } else {
+      setCurrentDate(prev => addDays(prev, -1));
+    }
   }
 
-  function handleNextDay() {
-    setCurrentDate(prev => addDays(prev, 1));
+  function handleNext() {
+    if (currentView === 'month') {
+      setCurrentDate(prev => addMonths(prev, 1));
+    } else if (currentView === 'week') {
+      setCurrentDate(prev => addDays(prev, 7));
+    } else {
+      setCurrentDate(prev => addDays(prev, 1));
+    }
   }
 
   function handleToday() {
@@ -290,19 +291,46 @@ export default function CalendarPage({ user }) {
         </div>
       </div>
 
-      {/* Calendar Day View */}
-      <CalendarHeader
+      {/* Calendar with Shell */}
+      <CalendarShell
         currentDate={currentDate}
-        onPreviousDay={handlePreviousDay}
-        onNextDay={handleNextDay}
+        currentView={currentView}
+        availableViews={['day', 'week', 'month']}
+        onViewChange={setCurrentView}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
         onToday={handleToday}
-      />
-
-      <CalendarDayView
-        slots={slots}
-        currentDate={currentDate}
-        onSlotClick={handleSlotClick}
-      />
+      >
+        {currentView === 'day' && (
+          <CalendarDayView
+            slots={slots}
+            currentDate={currentDate}
+            onSlotClick={handleSlotClick}
+          />
+        )}
+        {currentView === 'week' && (
+          <div style={{
+            padding: 'var(--space-4)',
+            textAlign: 'center',
+            background: 'var(--bg-secondary)',
+            borderRadius: 'var(--radius-lg)',
+            color: 'var(--text-secondary)'
+          }}>
+            תצוגת שבוע - בפיתוח
+          </div>
+        )}
+        {currentView === 'month' && (
+          <div style={{
+            padding: 'var(--space-4)',
+            textAlign: 'center',
+            background: 'var(--bg-secondary)',
+            borderRadius: 'var(--radius-lg)',
+            color: 'var(--text-secondary)'
+          }}>
+            תצוגת חודש - בפיתוח
+          </div>
+        )}
+      </CalendarShell>
 
       {/* Edit Modal (if needed) */}
       {editingSlot && (() => {

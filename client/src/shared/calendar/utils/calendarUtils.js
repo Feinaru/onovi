@@ -120,3 +120,12 @@ export function addMonths(date, months) {
   newDate.setMonth(newDate.getMonth() + months);
   return newDate;
 }
+
+/**
+ * Add days to date
+ */
+export function addDays(date, days) {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + days);
+  return newDate;
+}
