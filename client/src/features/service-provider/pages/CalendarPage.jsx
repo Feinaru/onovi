@@ -4,7 +4,9 @@ import SlotForm from '../../business/components/SlotForm';
 import SlotCard from '../../business/components/SlotCard';
 import CalendarShell from '../../../shared/calendar/CalendarShell';
 import CalendarDayView from '../components/calendar/CalendarDayView';
-import { formatDateLocal, addDays, addMonths } from '../../../shared/calendar/utils/calendarUtils';
+import CalendarMonthGrid from '../../../shared/calendar/CalendarMonthGrid';
+import CalendarEventCard from '../../../shared/calendar/CalendarEventCard';
+import { formatDateLocal, addDays, addMonths, formatDateDisplayHebrew, getHebrewDayName } from '../../../shared/calendar/utils/calendarUtils';
 
 /**
  * CalendarPage - Standalone slot management for Service Provider Workspace
@@ -25,6 +27,37 @@ function getActiveBookings(slot) {
     return [];
   }
   return slot.bookings.filter(b => ACTIVE_BOOKING_STATUSES.includes(b.status));
+}
+
+/**
+ * Convert Slot objects to provider calendar events for month/week views
+ * Does not mutate slots, does not change Booking.price
+ */
+function slotsToProviderEvents(slots, onSlotClick) {
+  return slots.map(slot => {
+    const activeBookings = getActiveBookings(slot);
+    const totalBookings = slot.bookings ? slot.bookings.length : 0;
+
+    // Build service names for display
+    const serviceNames = slot.allowedServices && slot.allowedServices.length > 0
+      ? slot.allowedServices.map(s => s.name).join(', ')
+      : 'שירותים';
+
+    return {
+      id: slot.id,
+      date: slot.date,
+      startTime: slot.startTime,
+      endTime: slot.endTime,
+      title: `${slot.startTime} - ${slot.endTime}`,
+      subtitle: serviceNames,
+      status: slot.status,
+      bookingCount: totalBookings,
+      activeBookingCount: activeBookings.length,
+      hasActiveBookings: activeBookings.length > 0,
+      sourceSlot: slot,
+      onClick: () => onSlotClick(slot)
+    };
+  });
 }
 
 export default function CalendarPage({ user }) {
@@ -57,6 +90,7 @@ export default function CalendarPage({ user }) {
   });
 
   const [editingSlot, setEditingSlot] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     loadData();
@@ -247,6 +281,16 @@ export default function CalendarPage({ user }) {
     setEditingSlot(slot);
   }
 
+  // Handle date click from month view
+  function handleDateClick(date) {
+    setSelectedDate(date);
+    setCurrentView('day');
+    setCurrentDate(date);
+  }
+
+  // Convert slots to provider calendar events
+  const providerEvents = slotsToProviderEvents(slots, handleSlotClick);
+
   if (loading) {
     return <div style={{ padding: '20px', textAlign: 'center' }}>טוען...</div>;
   }
@@ -308,26 +352,141 @@ export default function CalendarPage({ user }) {
             onSlotClick={handleSlotClick}
           />
         )}
-        {currentView === 'week' && (
-          <div style={{
-            padding: 'var(--space-4)',
-            textAlign: 'center',
-            background: 'var(--bg-secondary)',
-            borderRadius: 'var(--radius-lg)',
-            color: 'var(--text-secondary)'
-          }}>
-            תצוגת שבוע - בפיתוח
-          </div>
-        )}
+        {currentView === 'week' && (() => {
+          // Calculate week start (Sunday)
+          const weekStart = new Date(currentDate);
+          weekStart.setDate(currentDate.getDate() - currentDate.getDay());
+
+          const weekDays = Array.from({ length: 7 }, (_, i) => {
+            const day = new Date(weekStart);
+            day.setDate(weekStart.getDate() + i);
+            return day;
+          });
+
+          return (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(7, 1fr)',
+              gap: 'var(--space-2)',
+              marginTop: 'var(--space-4)'
+            }}>
+              {weekDays.map(day => {
+                const dayStr = formatDateLocal(day);
+                const daySlots = slots.filter(s => s.date === dayStr);
+                const isToday = formatDateLocal(new Date()) === dayStr;
+
+                return (
+                  <div
+                    key={dayStr}
+                    style={{
+                      background: 'var(--bg-primary)',
+                      borderRadius: 'var(--radius-lg)',
+                      border: isToday ? '2px solid var(--primary-color)' : '1px solid var(--border-subtle)',
+                      padding: 'var(--space-3)',
+                      minHeight: '200px'
+                    }}
+                  >
+                    <div style={{
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: 'var(--font-semibold)',
+                      marginBottom: 'var(--space-2)',
+                      color: isToday ? 'var(--primary-color)' : 'var(--text-primary)'
+                    }}>
+                      {getHebrewDayName(day)}
+                    </div>
+                    <div style={{
+                      fontSize: 'var(--text-2xl)',
+                      fontWeight: 'var(--font-bold)',
+                      marginBottom: 'var(--space-3)',
+                      color: isToday ? 'var(--primary-color)' : 'var(--text-primary)'
+                    }}>
+                      {day.getDate()}
+                    </div>
+
+                    {daySlots.length > 0 ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                        {daySlots.map(slot => {
+                          const activeBookings = getActiveBookings(slot);
+                          const totalBookings = slot.bookings ? slot.bookings.length : 0;
+
+                          return (
+                            <div
+                              key={slot.id}
+                              onClick={() => handleSlotClick(slot)}
+                              style={{
+                                padding: 'var(--space-2)',
+                                background: 'var(--bg-secondary)',
+                                borderRadius: 'var(--radius-md)',
+                                border: '1px solid var(--border-subtle)',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                                fontSize: 'var(--text-xs)'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = 'var(--bg-tertiary)';
+                                e.currentTarget.style.transform = 'scale(1.02)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = 'var(--bg-secondary)';
+                                e.currentTarget.style.transform = 'scale(1)';
+                              }}
+                            >
+                              <div style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-1)' }}>
+                                {slot.startTime} - {slot.endTime}
+                              </div>
+                              {totalBookings > 0 && (
+                                <div style={{
+                                  fontSize: '10px',
+                                  color: activeBookings.length > 0 ? 'var(--primary-color)' : 'var(--text-secondary)'
+                                }}>
+                                  {totalBookings === 1 ? 'הזמנה אחת' : `${totalBookings} הזמנות`}
+                                  {activeBookings.length > 0 && ` (${activeBookings.length} פעילות)`}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div style={{
+                        fontSize: 'var(--text-xs)',
+                        color: 'var(--text-secondary)',
+                        textAlign: 'center',
+                        padding: 'var(--space-2)'
+                      }}>
+                        אין זמינויות
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
         {currentView === 'month' && (
-          <div style={{
-            padding: 'var(--space-4)',
-            textAlign: 'center',
-            background: 'var(--bg-secondary)',
-            borderRadius: 'var(--radius-lg)',
-            color: 'var(--text-secondary)'
-          }}>
-            תצוגת חודש - בפיתוח
+          <div>
+            <CalendarMonthGrid
+              currentMonth={currentDate}
+              events={providerEvents}
+              selectedDate={selectedDate}
+              onDateClick={handleDateClick}
+            />
+
+            {slots.length === 0 && (
+              <div style={{
+                marginTop: 'var(--space-4)',
+                padding: 'var(--space-6)',
+                textAlign: 'center',
+                background: 'var(--bg-secondary)',
+                borderRadius: 'var(--radius-lg)',
+                color: 'var(--text-secondary)'
+              }}>
+                <div style={{ fontSize: '3rem', marginBottom: 'var(--space-2)' }}>📅</div>
+                <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-medium)' }}>
+                  אין זמינויות בחודש זה
+                </div>
+              </div>
+            )}
           </div>
         )}
       </CalendarShell>
