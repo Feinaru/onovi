@@ -285,6 +285,7 @@ export default function CalendarPage({ user }) {
             services={businessServices}
             onSubmit={createSlot}
             showMessage={showMessage}
+            showBusinessSelect={false}
           />
         </div>
       </div>
@@ -354,6 +355,7 @@ export default function CalendarPage({ user }) {
                   showMessage={showMessage}
                   isEditing={true}
                   hasActiveBookings={hasActiveBookings}
+                  showBusinessSelect={false}
                 />
               </div>
             </div>

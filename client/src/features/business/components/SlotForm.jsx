@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 /**
  * SlotForm - Create new slot form (Sprint B: multi-booking support)
  */
-function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit, hasActiveBookings = false }) {
+function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit, hasActiveBookings = false, showBusinessSelect = true }) {
   // Filter services to show only active + visible services for selected business
   const activeServices = services.filter(s =>
     s.businessId === slotForm.businessId && s.active && s.visibleToCustomers
@@ -49,21 +49,23 @@ function SlotForm({ businesses, services, slotForm, setSlotForm, onSubmit, hasAc
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="grid grid-2">
-        <div className="form-group">
-          <label className="form-label">עסק *</label>
-          <select
-            value={slotForm.businessId}
-            onChange={e => setSlotForm({ ...slotForm, businessId: Number(e.target.value), allowedServiceIds: [] })}
-            required
-          >
-            <option value="">בחר עסק</option>
-            {businesses.map(b => (
-              <option key={b.id} value={b.id}>{b.name}</option>
-            ))}
-          </select>
+      {showBusinessSelect && (
+        <div className="grid grid-2">
+          <div className="form-group">
+            <label className="form-label">עסק *</label>
+            <select
+              value={slotForm.businessId}
+              onChange={e => setSlotForm({ ...slotForm, businessId: Number(e.target.value), allowedServiceIds: [] })}
+              required
+            >
+              <option value="">בחר עסק</option>
+              {businesses.map(b => (
+                <option key={b.id} value={b.id}>{b.name}</option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
+      )}
 
       {slotForm.businessId && activeServices.length > 0 && (
         <div className="form-group">
