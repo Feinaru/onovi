@@ -179,7 +179,7 @@ export default function CalendarPage({ user }) {
       });
 
       if (result.success) {
-        showMessage('התור פורסם');
+        showMessage('הזמינות נוצרה');
         await loadData();
 
         // Reset form
@@ -194,10 +194,10 @@ export default function CalendarPage({ user }) {
           allowedServiceIds: []
         });
       } else {
-        showMessage(result.error || 'שגיאה ביצירת תור');
+        showMessage(result.error || 'שגיאה ביצירת זמינות');
       }
     } catch (err) {
-      showMessage(err.message || 'שגיאה ביצירת תור');
+      showMessage(err.message || 'שגיאה ביצירת זמינות');
     }
   }
 
@@ -221,14 +221,14 @@ export default function CalendarPage({ user }) {
       });
 
       if (result.success) {
-        showMessage('התור עודכן');
+        showMessage('הזמינות עודכנה');
         setEditingSlot(null);
         await loadData();
       } else {
-        showMessage(result.error || 'שגיאה בעדכון תור');
+        showMessage(result.error || 'שגיאה בעדכון זמינות');
       }
     } catch (err) {
-      showMessage(err.message || 'שגיאה בעדכון תור');
+      showMessage(err.message || 'שגיאה בעדכון זמינות');
     }
   }
 
