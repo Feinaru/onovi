@@ -90,6 +90,7 @@ export default function CalendarPage({ user }) {
   });
 
   const [editingSlot, setEditingSlot] = useState(null);
+  const [viewingSlot, setViewingSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
@@ -278,7 +279,7 @@ export default function CalendarPage({ user }) {
 
   // Handle slot click from visual calendar
   function handleSlotClick(slot) {
-    setEditingSlot(slot);
+    setViewingSlot(slot);
   }
 
   // Handle date click from month view
@@ -490,6 +491,173 @@ export default function CalendarPage({ user }) {
           </div>
         )}
       </CalendarShell>
+
+      {/* Availability Details Modal */}
+      {viewingSlot && (() => {
+        const activeBookings = getActiveBookings(viewingSlot);
+        const hasActiveBookings = activeBookings.length > 0;
+        const totalBookings = viewingSlot.bookings ? viewingSlot.bookings.length : 0;
+
+        return (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}>
+            <div className="card" style={{ maxWidth: '600px', width: '90%', maxHeight: '90vh', overflow: 'auto' }}>
+              <div className="card-header">
+                <h3 className="card-title">פרטי זמינות</h3>
+                <button onClick={() => setViewingSlot(null)} className="btn-ghost">✕</button>
+              </div>
+
+              <div className="card-body">
+                {/* Date and Time */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    תאריך ושעה
+                  </div>
+                  <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)' }}>
+                    {viewingSlot.date}
+                  </div>
+                  <div style={{ fontSize: 'var(--text-base)', marginTop: 'var(--space-1)' }}>
+                    {viewingSlot.startTime} - {viewingSlot.endTime}
+                  </div>
+                </div>
+
+                {/* Status */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    סטטוס
+                  </div>
+                  <div>
+                    {viewingSlot.status === 'OPEN' && <span style={{ color: '#10b981', fontWeight: 'var(--font-semibold)' }}>פנוי</span>}
+                    {viewingSlot.status === 'FULL' && <span style={{ color: '#f59e0b', fontWeight: 'var(--font-semibold)' }}>מלא</span>}
+                    {viewingSlot.status === 'CANCELLED' && <span style={{ color: '#6b7280', fontWeight: 'var(--font-semibold)' }}>בוטל</span>}
+                  </div>
+                </div>
+
+                {/* Services */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    שירותים
+                  </div>
+                  {viewingSlot.allowedServices && viewingSlot.allowedServices.length > 0 ? (
+                    <ul style={{ margin: 0, paddingRight: 'var(--space-4)' }}>
+                      {viewingSlot.allowedServices.map((service, idx) => (
+                        <li key={idx}>{service.name}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div style={{ color: 'var(--text-secondary)' }}>לא הוגדרו שירותים לזמינות זו</div>
+                  )}
+                </div>
+
+                {/* Pricing */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    מחיר
+                  </div>
+                  <div>
+                    <span>מחיר רגיל: ₪{viewingSlot.regularPrice}</span>
+                    {viewingSlot.dealPrice && (
+                      <span style={{ marginRight: 'var(--space-3)', color: '#10b981' }}>
+                        מחיר מבצע: ₪{viewingSlot.dealPrice}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bookings */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    הזמנות
+                  </div>
+                  <div>
+                    <div>סה"כ הזמנות: {totalBookings}</div>
+                    {hasActiveBookings && (
+                      <div style={{ color: 'var(--primary-color)', fontWeight: 'var(--font-semibold)' }}>
+                        הזמנות פעילות: {activeBookings.length}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Note */}
+                <div style={{ marginBottom: 'var(--space-4)' }}>
+                  <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
+                    הערות
+                  </div>
+                  <div style={{ color: viewingSlot.note ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
+                    {viewingSlot.note || 'אין הערות'}
+                  </div>
+                </div>
+
+                {/* Warning Banner */}
+                {hasActiveBookings && (
+                  <div style={{
+                    background: '#FEF3C7',
+                    border: '1px solid #FCD34D',
+                    borderRadius: 'var(--radius-md)',
+                    padding: 'var(--space-3)',
+                    marginBottom: 'var(--space-4)',
+                    color: '#92400E'
+                  }}>
+                    <strong>⚠️ קיימות {activeBookings.length} הזמנות פעילות בזמינות זו.</strong>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '14px' }}>
+                      עריכת תאריך, שעה ומחיר חסומה. ניתן לערוך הערות בלבד.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Actions */}
+              <div style={{
+                padding: 'var(--space-4)',
+                borderTop: '1px solid var(--border-subtle)',
+                display: 'flex',
+                gap: 'var(--space-2)',
+                justifyContent: 'space-between'
+              }}>
+                <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                  <button
+                    className="btn-primary"
+                    onClick={() => {
+                      setEditingSlot(viewingSlot);
+                      setViewingSlot(null);
+                    }}
+                  >
+                    {hasActiveBookings ? 'ערוך זמינות מוגבלת' : 'ערוך זמינות'}
+                  </button>
+                  <button
+                    className="btn-secondary"
+                    onClick={() => setViewingSlot(null)}
+                  >
+                    סגור
+                  </button>
+                </div>
+                {!hasActiveBookings && (
+                  <button
+                    className="btn-danger"
+                    onClick={() => {
+                      deleteSlot(viewingSlot.id);
+                      setViewingSlot(null);
+                    }}
+                  >
+                    מחק זמינות
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Edit Modal (if needed) */}
       {editingSlot && (() => {
