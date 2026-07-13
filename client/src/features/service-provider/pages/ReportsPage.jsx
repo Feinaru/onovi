@@ -9,7 +9,7 @@ export default function ReportsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reports, setReports] = useState(null);
-  const [period, setPeriod] = useState('week'); // 'week' | 'month' | 'custom'
+  const [period, setPeriod] = useState('month'); // 'week' | 'month' | 'prev-month' | 'custom'
   const [customFrom, setCustomFrom] = useState('');
   const [customTo, setCustomTo] = useState('');
 
@@ -17,15 +17,47 @@ export default function ReportsPage() {
     fetchReports();
   }, [period]);
 
+  // Calculate previous month date range
+  function getPreviousMonthRange() {
+    const today = new Date();
+    const firstDayPrevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    const lastDayPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    return {
+      from: formatDate(firstDayPrevMonth),
+      to: formatDate(lastDayPrevMonth)
+    };
+  }
+
   async function fetchReports() {
     try {
       setLoading(true);
       setError(null);
 
-      const params = new URLSearchParams({ period });
-      if (period === 'custom' && customFrom && customTo) {
-        params.set('from', customFrom);
-        params.set('to', customTo);
+      let params;
+      if (period === 'prev-month') {
+        // Previous month: use custom with calculated dates
+        const prevMonth = getPreviousMonthRange();
+        params = new URLSearchParams({
+          period: 'custom',
+          from: prevMonth.from,
+          to: prevMonth.to
+        });
+      } else if (period === 'custom' && customFrom && customTo) {
+        params = new URLSearchParams({
+          period: 'custom',
+          from: customFrom,
+          to: customTo
+        });
+      } else {
+        params = new URLSearchParams({ period });
       }
 
       const result = await api(`/api/service-provider/reports/summary?${params}`);
@@ -104,13 +136,19 @@ export default function ReportsPage() {
                 className={period === 'week' ? 'btn-primary' : 'btn-secondary'}
                 onClick={() => setPeriod('week')}
               >
-                שבוע נוכחי
+                השבוע
               </button>
               <button
                 className={period === 'month' ? 'btn-primary' : 'btn-secondary'}
                 onClick={() => setPeriod('month')}
               >
-                חודש נוכחי
+                החודש
+              </button>
+              <button
+                className={period === 'prev-month' ? 'btn-primary' : 'btn-secondary'}
+                onClick={() => setPeriod('prev-month')}
+              >
+                חודש קודם
               </button>
               <button
                 className={period === 'custom' ? 'btn-primary' : 'btn-secondary'}
