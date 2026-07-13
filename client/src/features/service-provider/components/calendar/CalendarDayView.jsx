@@ -132,8 +132,8 @@ export default function CalendarDayView({ slots, currentDate, onSlotClick }) {
         <div style={{
           position: 'absolute',
           top: 0,
-          left: '60px', // Offset for time labels
-          right: 0,
+          right: '60px', // Offset for time labels (RTL layout)
+          left: 0,
           height: '1440px', // 24 hours * 60px
           pointerEvents: 'none'
         }}>
