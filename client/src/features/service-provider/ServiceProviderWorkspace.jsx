@@ -9,6 +9,7 @@ import ComingSoonPage from './pages/ComingSoonPage';
 import CalendarPage from './pages/CalendarPage';
 import BookingsPage from './pages/BookingsPage';
 import ProviderCustomersPage from './pages/ProviderCustomersPage';
+import ReportsPage from './pages/ReportsPage';
 
 /**
  * ServiceProviderWorkspace - Main workspace for service providers
@@ -18,10 +19,10 @@ import ProviderCustomersPage from './pages/ProviderCustomersPage';
  * - Business (active)
  * - Services (active)
  * - Service Groups (active)
- * - Calendar (active - Epic 2)
- * - Bookings (active - Epic 2)
- * - Customers (coming soon)
- * - Reports (coming soon)
+ * - Calendar (active)
+ * - Bookings (active)
+ * - Customers (active)
+ * - Reports (active)
  * - Settings (active)
  */
 export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
@@ -66,7 +67,7 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
     { id: 'calendar', label: 'תורים', icon: '📅', active: true },
     { id: 'bookings', label: 'הזמנות', icon: '📋', active: true },
     { id: 'customers', label: 'לקוחות', icon: '👥', active: true },
-    { id: 'reports', label: 'דוחות', icon: '📈', active: false },
+    { id: 'reports', label: 'דוחות', icon: '📈', active: true },
     { id: 'settings', label: 'הגדרות', icon: '⚙️', active: true }
   ];
 
@@ -115,6 +116,8 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
         return <BookingsPage user={user} />;
       case 'customers':
         return <ProviderCustomersPage user={user} />;
+      case 'reports':
+        return <ReportsPage user={user} />;
       case 'settings':
         return <SettingsPage user={user} />;
       default:
