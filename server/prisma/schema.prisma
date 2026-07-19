@@ -132,6 +132,26 @@ enum DocumentStatus {
   REJECTED
 }
 
+// ===== AUTH / ONBOARDING FOUNDATION ENUMS (Phase 1) =====
+
+enum AuthProvider {
+  PASSWORD
+  GOOGLE
+  APPLE
+}
+
+enum OnboardingStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum OnboardingType {
+  SERVICE_RECIPIENT
+  SERVICE_PROVIDER
+  NONE
+}
+
 // ===== EXISTING MODELS (MODIFIED) =====
 
 model User {
@@ -145,6 +165,12 @@ model User {
   lastLoginAt  DateTime?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
+
+  // Auth/onboarding foundation (Phase 1) - additive, non-breaking
+  emailVerified    Boolean          @default(false)
+  phoneVerified    Boolean          @default(false)
+  onboardingStatus OnboardingStatus @default(COMPLETED)
+  onboardingType   OnboardingType   @default(NONE)
 
   // Existing relations
   businesses   Business[]        @relation("BusinessOwner")
@@ -164,6 +190,43 @@ model User {
   reviewedDocuments          UploadedDocument[]        @relation("DocumentReviewer")
   approvedServices           BusinessService[]         @relation("ServiceApprover")
   applicationSettingsUpdates ApplicationSetting[]
+
+  // Auth/onboarding foundation relations (Phase 1)
+  authIdentities  AuthIdentity[]
+  onboardingState OnboardingState?
+}
+
+// ===== AUTH / ONBOARDING FOUNDATION MODELS (Phase 1) =====
+
+model AuthIdentity {
+  id                    Int          @id @default(autoincrement())
+  userId                Int
+  provider              AuthProvider
+  providerUserId        String?
+  providerEmail         String?
+  providerEmailVerified Boolean      @default(false)
+  passwordHash          String?
+  createdAt             DateTime     @default(now())
+  lastLoginAt           DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@unique([userId, provider])
+  @@index([userId])
+}
+
+model OnboardingState {
+  id             Int            @id @default(autoincrement())
+  userId         Int            @unique
+  onboardingType OnboardingType @default(NONE)
+  currentStep    String?
+  completedSteps Json?
+  dataDraft      Json?
+  lastSavedAt    DateTime       @default(now()) @updatedAt
+  completedAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Category {
