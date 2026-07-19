@@ -15,15 +15,25 @@ async function main() {
   const customerPassword = await bcrypt.hash('123456', 10);
 
   const admin = await prisma.user.create({
-    data: { fullName: 'Admin', phone: '0500000001', email: 'admin@timefill.local', passwordHash: adminPassword, role: 'ADMIN' }
+    data: { fullName: 'Admin', phone: '0500000001', email: 'admin@timefill.local', passwordHash: adminPassword, role: 'ADMIN', onboardingStatus: 'COMPLETED', onboardingType: 'NONE' }
   });
 
+  // NOTE: 0500000002 is seeded as legacy role BUSINESS (unchanged in Phase 1). onboardingType maps to SERVICE_PROVIDER.
   const businessUser = await prisma.user.create({
-    data: { fullName: 'עסק דמו', phone: '0500000002', email: 'business@timefill.local', passwordHash: businessPassword, role: 'BUSINESS' }
+    data: { fullName: 'עסק דמו', phone: '0500000002', email: 'business@timefill.local', passwordHash: businessPassword, role: 'BUSINESS', onboardingStatus: 'COMPLETED', onboardingType: 'SERVICE_PROVIDER' }
   });
 
-  await prisma.user.create({
-    data: { fullName: 'לקוח דמו', phone: '0500000003', email: 'customer@timefill.local', passwordHash: customerPassword, role: 'CUSTOMER' }
+  const customerUser = await prisma.user.create({
+    data: { fullName: 'לקוח דמו', phone: '0500000003', email: 'customer@timefill.local', passwordHash: customerPassword, role: 'CUSTOMER', onboardingStatus: 'COMPLETED', onboardingType: 'SERVICE_RECIPIENT' }
+  });
+
+  // Auth identities (Phase 1) - a PASSWORD identity mirrors each user's passwordHash
+  await prisma.authIdentity.createMany({
+    data: [
+      { userId: admin.id, provider: 'PASSWORD', passwordHash: adminPassword, providerEmail: admin.email },
+      { userId: businessUser.id, provider: 'PASSWORD', passwordHash: businessPassword, providerEmail: businessUser.email },
+      { userId: customerUser.id, provider: 'PASSWORD', passwordHash: customerPassword, providerEmail: customerUser.email }
+    ]
   });
 
   const massage = await prisma.category.create({ data: { name: 'עיסוי', icon: 'massage', displayOrder: 1 } });
