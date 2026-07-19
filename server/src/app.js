@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+
+const { corsOptions } = require('./config/security');
 
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -35,7 +38,10 @@ const serviceProviderReportsRoutes = require('./routes/service-provider-reports.
 const customerSearchRoutes = require('./routes/customer-search.routes');
 
 const app = express();
-app.use(cors());
+// Security headers. CSP is disabled: this is a JSON API consumed by a separate
+// frontend origin, so a strict CSP here provides no benefit and risks breakage.
+app.use(helmet({ contentSecurityPolicy: false }));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (req, res) => {

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const { jwtSecret } = require('../config/security');
 const prisma = new PrismaClient();
 
 function auth(required = true) {
@@ -13,7 +14,7 @@ function auth(required = true) {
     }
 
     try {
-      const payload = jwt.verify(token, process.env.JWT_SECRET);
+      const payload = jwt.verify(token, jwtSecret);
 
       // Fetch full user from database
       const user = await prisma.user.findUnique({
