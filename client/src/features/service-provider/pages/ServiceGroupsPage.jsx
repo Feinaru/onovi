@@ -371,29 +371,37 @@ export default function ServiceGroupsPage({ user }) {
               </div>
 
               {/* Services */}
-              {selectedProfessionId && services.length > 0 && (
+              {selectedProfessionId && (
                 <div className="form-group">
                   <label className="form-label required">שירותים</label>
-                  <div className="services-selection">
-                    {services.map(service => (
-                      <label key={service.id} className="service-checkbox">
-                        <input
-                          type="checkbox"
-                          checked={selectedServiceIds.includes(service.id)}
-                          onChange={() => handleServiceToggle(service.id)}
-                        />
-                        <div className="service-checkbox-label">
-                          <div className="service-checkbox-name">{service.nameHebrew}</div>
-                          <div className="service-checkbox-info">
-                            {service.defaultDurationMinutes} דקות • ₪{service.defaultPrice || 0}
-                          </div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                  <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
-                    נבחרו {selectedServiceIds.length} שירותים
-                  </small>
+                  {services.length > 0 ? (
+                    <>
+                      <div className="services-selection">
+                        {services.map(service => (
+                          <label key={service.id} className="service-checkbox">
+                            <input
+                              type="checkbox"
+                              checked={selectedServiceIds.includes(service.id)}
+                              onChange={() => handleServiceToggle(service.id)}
+                            />
+                            <div className="service-checkbox-label">
+                              <div className="service-checkbox-name">{service.nameHebrew}</div>
+                              <div className="service-checkbox-info">
+                                {service.defaultDurationMinutes} דקות • ₪{service.defaultPrice || 0}
+                              </div>
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                      <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
+                        נבחרו {selectedServiceIds.length} שירותים
+                      </small>
+                    </>
+                  ) : (
+                    <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
+                      אין שירותים זמינים למקצוע זה כרגע. יש לבחור מקצוע אחר או להוסיף שירותים לפני יצירת הקבוצה.
+                    </small>
+                  )}
                 </div>
               )}
             </div>

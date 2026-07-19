@@ -65,7 +65,7 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
     { id: 'services', label: 'שירותים', icon: '✂️', active: true },
     { id: 'service-groups', label: 'קבוצות שירותים', icon: '📦', active: true },
     { id: 'calendar', label: 'יומן', icon: '📅', active: true },
-    { id: 'bookings', label: 'הזמנות', icon: '📋', active: true },
+    { id: 'bookings', label: 'תורים', icon: '📋', active: true },
     { id: 'customers', label: 'לקוחות', icon: '👥', active: true },
     { id: 'reports', label: 'דוחות', icon: '📈', active: true },
     { id: 'settings', label: 'הגדרות', icon: '⚙️', active: true }
