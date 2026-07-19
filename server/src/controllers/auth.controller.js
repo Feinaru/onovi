@@ -63,7 +63,14 @@ async function me(req, res, next) {
   try {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json(publicUser(user));
+    // Phase 1: expose auth/onboarding metadata (fields are already part of the User row).
+    res.json({
+      ...publicUser(user),
+      onboardingStatus: user.onboardingStatus,
+      onboardingType: user.onboardingType,
+      emailVerified: user.emailVerified,
+      phoneVerified: user.phoneVerified
+    });
   } catch (error) {
     next(error);
   }

@@ -50,3 +50,36 @@ export function isAuthorized(view, userRole) {
   }
   return true;
 }
+
+/**
+ * INERT Phase 1 helper — intentionally NOT wired into routing yet.
+ *
+ * Computes where a user *would* be routed once the onboarding stepper exists (Phase 2).
+ * In Phase 1 there is no onboarding UI and no onboarding redirect: current dashboards must
+ * continue exactly as today, so this function is not called from any active route/redirect.
+ *
+ * Rules:
+ *  - Missing/undefined onboardingStatus is treated as COMPLETED (non-breaking).
+ *  - Blocked accounts use only existing UserStatus values (BLOCKED, SUSPENDED).
+ *  - ADMIN never onboards.
+ *  - Returns null when the user should proceed to their normal dashboard (no onboarding redirect).
+ *
+ * @returns {null | { type: 'blocked' } | { type: 'onboarding', step: 'role-selection' | 'resume' }}
+ */
+export function resolveOnboardingRedirect(user) {
+  if (!user) return null;
+
+  // Blocked/suspended accounts (existing statuses only; no DISABLED in Phase 1).
+  if (user.status === 'BLOCKED' || user.status === 'SUSPENDED') {
+    return { type: 'blocked' };
+  }
+
+  // Admins never enter onboarding.
+  if (user.role === 'ADMIN') return null;
+
+  // Non-breaking default: an absent status behaves as COMPLETED.
+  const onboardingStatus = user.onboardingStatus || 'COMPLETED';
+  if (onboardingStatus === 'COMPLETED') return null;
+  if (onboardingStatus === 'IN_PROGRESS') return { type: 'onboarding', step: 'resume' };
+  return { type: 'onboarding', step: 'role-selection' }; // NOT_STARTED
+}
