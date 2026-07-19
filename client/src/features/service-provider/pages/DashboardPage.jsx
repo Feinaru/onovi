@@ -114,7 +114,7 @@ export default function DashboardPage({ user, approvalStatus }) {
           margin: 'var(--space-4)'
         }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-4)' }}>
-            <div style={{ fontSize: '3rem' }}>{config.icon}</div>
+            <div style={{ fontSize: '2rem' }}>{config.icon}</div>
             <div style={{ flex: 1 }}>
               <h4 style={{ margin: 0, marginBottom: 'var(--space-2)', color: config.color, fontWeight: 'var(--font-semibold)' }}>
                 {config.title}
@@ -150,7 +150,7 @@ export default function DashboardPage({ user, approvalStatus }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>⏳</div>
+            <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>⏳</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.pendingCount}
             </div>
@@ -162,7 +162,7 @@ export default function DashboardPage({ user, approvalStatus }) {
 
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>📅</div>
+            <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>📅</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.todayCount}
             </div>
@@ -174,7 +174,7 @@ export default function DashboardPage({ user, approvalStatus }) {
 
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>📊</div>
+            <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>📊</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.weeklyCount}
             </div>
@@ -186,7 +186,7 @@ export default function DashboardPage({ user, approvalStatus }) {
 
         <div className="card">
           <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 'var(--space-2)' }}>💰</div>
+            <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>💰</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : `₪${stats.weeklyRevenue}`}
             </div>
