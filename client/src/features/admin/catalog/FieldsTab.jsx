@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import CatalogModal from './CatalogModal';
-import { StatusPill } from './catalogUi';
+import IconPicker from './IconPicker';
+import { StatusPill, SortHeader, useTableSort } from './catalogUi';
 import {
   createField,
   updateField,
@@ -9,9 +10,9 @@ import {
   deleteField
 } from './catalogApi';
 
-const EMPTY_FORM = { nameHebrew: '', name: '', icon: '', displayOrder: 0 };
+const EMPTY_FORM = { nameHebrew: '', name: '', icon: '' };
 
-export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
+export default function FieldsTab({ fields, serviceTemplates, onReload, onSuccess, onError }) {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,9 +20,29 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
 
+  // Count service templates per field (via profession.field.id) — client-side,
+  // no backend call (CatalogPage already loads all service templates).
+  const servicesByField = useMemo(() => {
+    const map = {};
+    for (const s of serviceTemplates || []) {
+      const fid = s.profession?.field?.id;
+      if (fid != null) map[fid] = (map[fid] || 0) + 1;
+    }
+    return map;
+  }, [serviceTemplates]);
+
+  const servicesCount = (field) => servicesByField[field.id] || 0;
+
+  const { sort, toggle, sortRows } = useTableSort('name', {
+    name: (f) => f.nameHebrew,
+    status: (f) => f.status,
+    professions: (f) => f._count?.professions ?? 0,
+    services: (f) => servicesCount(f)
+  });
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return fields.filter((f) => {
+    const rows = fields.filter((f) => {
       if (statusFilter !== 'ALL' && f.status !== statusFilter) return false;
       if (!q) return true;
       return (
@@ -29,7 +50,8 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
         (f.name || '').toLowerCase().includes(q)
       );
     });
-  }, [fields, search, statusFilter]);
+    return sortRows(rows);
+  }, [fields, search, statusFilter, sortRows]);
 
   function openCreate() {
     setEditingId(null);
@@ -42,8 +64,7 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
     setForm({
       nameHebrew: field.nameHebrew || '',
       name: field.name || '',
-      icon: field.icon || '',
-      displayOrder: field.displayOrder ?? 0
+      icon: field.icon || ''
     });
     setModalOpen(true);
   }
@@ -61,11 +82,12 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
     }
     setSaving(true);
     try {
+      // displayOrder intentionally omitted: create → backend default; edit →
+      // PATCH leaves the stored value unchanged.
       const payload = {
         nameHebrew: form.nameHebrew.trim(),
         name: form.name.trim(),
-        icon: form.icon.trim() || null,
-        displayOrder: Number(form.displayOrder) || 0
+        icon: form.icon.trim() || null
       };
       if (editingId) {
         await updateField(editingId, payload);
@@ -87,7 +109,7 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
     try {
       if (field.status === 'ARCHIVED') {
         await restoreField(field.id);
-        onSuccess('התחום שוחזר');
+        onSuccess('התחום הוחזר לפעילות');
       } else {
         await archiveField(field.id);
         onSuccess('התחום הועבר לארכיון');
@@ -101,7 +123,7 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
   async function handleDelete(field) {
     const count = field._count?.professions ?? 0;
     if (count > 0) {
-      onError(new Error('לא ניתן למחוק תחום שמכיל מקצועות. יש להעביר או לארכב אותם קודם'));
+      onError(new Error('לא ניתן למחוק תחום שמכיל מקצועות. יש להעביר לארכיון או למחוק אותם קודם'));
       return;
     }
     if (!confirm(`למחוק לצמיתות את התחום "${field.nameHebrew}"?`)) return;
@@ -151,11 +173,11 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
           <table>
             <thead>
               <tr>
-                <th>שם התחום</th>
+                <SortHeader label="שם התחום" sortKey="name" sort={sort} onToggle={toggle} />
                 <th>אייקון</th>
-                <th>מקצועות</th>
-                <th>סדר תצוגה</th>
-                <th>סטטוס</th>
+                <SortHeader label="מקצועות" sortKey="professions" sort={sort} onToggle={toggle} />
+                <SortHeader label="שירותים" sortKey="services" sort={sort} onToggle={toggle} />
+                <SortHeader label="סטטוס" sortKey="status" sort={sort} onToggle={toggle} />
                 <th>פעולות</th>
               </tr>
             </thead>
@@ -170,13 +192,13 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
                   </td>
                   <td style={{ fontSize: 'var(--text-xl)' }}>{field.icon || '—'}</td>
                   <td>{field._count?.professions ?? 0}</td>
-                  <td>{field.displayOrder ?? 0}</td>
+                  <td>{servicesCount(field)}</td>
                   <td><StatusPill status={field.status} /></td>
                   <td>
                     <div className="flex gap-2">
                       <button className="btn-sm btn-secondary" onClick={() => openEdit(field)}>✏️ ערוך</button>
                       <button className="btn-sm btn-secondary" onClick={() => handleArchiveToggle(field)}>
-                        {field.status === 'ARCHIVED' ? '♻️ שחזר' : '📥 ארכב'}
+                        {field.status === 'ARCHIVED' ? '♻️ החזר לפעילות' : '📥 העבר לארכיון'}
                       </button>
                       <button className="btn-sm btn-danger" onClick={() => handleDelete(field)}>🗑️ מחק</button>
                     </div>
@@ -209,23 +231,9 @@ export default function FieldsTab({ fields, onReload, onSuccess, onError }) {
                 required
               />
             </div>
-            <div className="grid grid-2">
-              <div className="form-group">
-                <label className="form-label">אייקון</label>
-                <input
-                  placeholder="🩺"
-                  value={form.icon}
-                  onChange={(e) => setForm({ ...form, icon: e.target.value })}
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">סדר תצוגה</label>
-                <input
-                  type="number"
-                  value={form.displayOrder}
-                  onChange={(e) => setForm({ ...form, displayOrder: e.target.value })}
-                />
-              </div>
+            <div className="form-group">
+              <label className="form-label">אייקון</label>
+              <IconPicker value={form.icon} onChange={(icon) => setForm({ ...form, icon })} />
             </div>
             <div className="flex gap-3">
               <button className="btn-primary" disabled={saving}>

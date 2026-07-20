@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import FieldsTab from './FieldsTab';
 import ProfessionsTab from './ProfessionsTab';
 import ServicesTab from './ServicesTab';
+import CatalogToast from './CatalogToast';
 import { listFields, listProfessions, listServiceTemplates } from './catalogApi';
 import { toHebrewError } from './catalogErrors';
 
@@ -18,8 +19,8 @@ export default function CatalogPage() {
   const [serviceTemplates, setServiceTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [error, setError] = useState('');
-  const [msg, setMsg] = useState('');
+  const [toast, setToast] = useState(null); // { type: 'success' | 'error', text }
+  const toastTimer = useRef(null);
 
   const reload = useCallback(async () => {
     const [fieldsData, professionsData, serviceTemplatesData] = await Promise.all([
@@ -48,18 +49,23 @@ export default function CatalogPage() {
     return () => { cancelled = true; };
   }, [reload]);
 
-  // Notifications passed to tabs. Auto-clear so banners don't pile up.
-  const onSuccess = useCallback((text) => {
-    setError('');
-    setMsg(text);
-    setTimeout(() => setMsg(''), 3000);
+  // Bottom-right toast feedback. A single active toast, auto-dismissed; a new
+  // toast replaces the previous one (and its pending timer).
+  const showToast = useCallback((type, text) => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ type, text });
+    toastTimer.current = setTimeout(() => setToast(null), type === 'error' ? 5000 : 3000);
   }, []);
 
-  const onError = useCallback((err, context) => {
-    setMsg('');
-    setError(toHebrewError(err, context));
-    setTimeout(() => setError(''), 5000);
+  useEffect(() => () => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
   }, []);
+
+  const onSuccess = useCallback((text) => showToast('success', text), [showToast]);
+  const onError = useCallback(
+    (err, context) => showToast('error', toHebrewError(err, context)),
+    [showToast]
+  );
 
   const tabProps = {
     fields,
@@ -76,31 +82,6 @@ export default function CatalogPage() {
         <h1 className="page-title">קטלוג</h1>
         <p className="page-description">ניהול תחומים, מקצועות ושירותים שמופיעים במערכת</p>
       </div>
-
-      {error && (
-        <div style={{
-          padding: 'var(--space-4)',
-          background: 'var(--danger-50)',
-          color: 'var(--danger-700)',
-          borderRadius: 'var(--radius-lg)',
-          marginBottom: 'var(--space-6)',
-          border: '1px solid var(--danger-200)'
-        }}>
-          ⚠️ {error}
-        </div>
-      )}
-      {msg && (
-        <div style={{
-          padding: 'var(--space-4)',
-          background: 'var(--success-50)',
-          color: 'var(--success-700)',
-          borderRadius: 'var(--radius-lg)',
-          marginBottom: 'var(--space-6)',
-          border: '1px solid var(--success-200)'
-        }}>
-          ✓ {msg}
-        </div>
-      )}
 
       <div className="card">
         <div
@@ -147,6 +128,8 @@ export default function CatalogPage() {
           </>
         )}
       </div>
+
+      <CatalogToast toast={toast} />
     </div>
   );
 }

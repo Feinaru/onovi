@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import CatalogModal from './CatalogModal';
-import { StatusPill, formatPrice, formatDuration } from './catalogUi';
+import { StatusPill, SortHeader, useTableSort, formatDuration } from './catalogUi';
 import {
   createServiceTemplate,
   updateServiceTemplate,
@@ -9,18 +9,16 @@ import {
   deleteServiceTemplate
 } from './catalogApi';
 
+// Catalog defines the service's identity + (later) its document requirements.
+// Price belongs to the provider's BusinessService, so it is not managed here;
+// duration is kept only as an optional suggestion ("משך מומלץ").
 const EMPTY_FORM = {
   fieldId: '',
   professionId: '',
   nameHebrew: '',
   name: '',
-  defaultDurationMinutes: '',
-  defaultPrice: '',
-  colorLevel: 'GREEN',
-  displayOrder: 0
+  defaultDurationMinutes: ''
 };
-
-const COLOR_LABELS = { GREEN: '🟢 נמוך', YELLOW: '🟡 בינוני', RED: '🔴 גבוה' };
 
 export default function ServicesTab({ serviceTemplates, professions, fields, onReload, onSuccess, onError }) {
   const [search, setSearch] = useState('');
@@ -44,9 +42,16 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
     return professions.filter((p) => String(p.fieldId) === String(form.fieldId));
   }, [professions, form.fieldId]);
 
+  const { sort, toggle, sortRows } = useTableSort('name', {
+    name: (s) => s.nameHebrew,
+    profession: (s) => s.profession?.nameHebrew,
+    duration: (s) => s.defaultDurationMinutes ?? 0,
+    status: (s) => s.status
+  });
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return serviceTemplates.filter((s) => {
+    const rows = serviceTemplates.filter((s) => {
       const fieldId = s.profession?.field?.id;
       if (fieldFilter !== 'ALL' && String(fieldId) !== String(fieldFilter)) return false;
       if (professionFilter !== 'ALL' && String(s.professionId) !== String(professionFilter)) return false;
@@ -57,7 +62,8 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
         (s.name || '').toLowerCase().includes(q)
       );
     });
-  }, [serviceTemplates, search, fieldFilter, professionFilter, statusFilter]);
+    return sortRows(rows);
+  }, [serviceTemplates, search, fieldFilter, professionFilter, statusFilter, sortRows]);
 
   function openCreate() {
     setEditingId(null);
@@ -74,10 +80,7 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
       professionId: String(service.professionId ?? ''),
       nameHebrew: service.nameHebrew || '',
       name: service.name || '',
-      defaultDurationMinutes: service.defaultDurationMinutes ?? '',
-      defaultPrice: service.defaultPrice ?? '',
-      colorLevel: service.colorLevel || 'GREEN',
-      displayOrder: service.displayOrder ?? 0
+      defaultDurationMinutes: service.defaultDurationMinutes ?? ''
     });
     setModalOpen(true);
   }
@@ -104,23 +107,20 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
     }
     const duration = Number(form.defaultDurationMinutes);
     if (!duration || duration <= 0) {
-      onError(new Error('יש להזין משך ברירת מחדל גדול מאפס'));
+      onError(new Error('יש להזין משך מומלץ גדול מאפס'));
       return;
     }
     setSaving(true);
     try {
+      // colorLevel, defaultPrice and displayOrder are intentionally not sent from
+      // the admin catalog: risk level is being replaced by document requirements,
+      // price belongs to the provider, and ordering is handled by sorting.
       const payload = {
         professionId: Number(form.professionId),
         nameHebrew: form.nameHebrew.trim(),
         name: form.name.trim(),
-        defaultDurationMinutes: duration,
-        colorLevel: form.colorLevel,
-        displayOrder: Number(form.displayOrder) || 0
+        defaultDurationMinutes: duration
       };
-      // Price is optional; only send when provided.
-      if (form.defaultPrice !== '' && form.defaultPrice !== null) {
-        payload.defaultPrice = Number(form.defaultPrice);
-      }
       if (editingId) {
         await updateServiceTemplate(editingId, payload);
         onSuccess('השירות עודכן');
@@ -141,7 +141,7 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
     try {
       if (service.status === 'ARCHIVED') {
         await restoreServiceTemplate(service.id);
-        onSuccess('השירות שוחזר');
+        onSuccess('השירות הוחזר לפעילות');
       } else {
         await archiveServiceTemplate(service.id);
         onSuccess('השירות הועבר לארכיון');
@@ -242,12 +242,11 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
               <thead>
                 <tr>
                   <th>תחום</th>
-                  <th>מקצוע</th>
-                  <th>שם השירות</th>
-                  <th>משך</th>
-                  <th>מחיר</th>
+                  <SortHeader label="מקצוע" sortKey="profession" sort={sort} onToggle={toggle} />
+                  <SortHeader label="שם השירות" sortKey="name" sort={sort} onToggle={toggle} />
+                  <SortHeader label="משך מומלץ" sortKey="duration" sort={sort} onToggle={toggle} />
                   <th>בשימוש</th>
-                  <th>סטטוס</th>
+                  <SortHeader label="סטטוס" sortKey="status" sort={sort} onToggle={toggle} />
                   <th>פעולות</th>
                 </tr>
               </thead>
@@ -265,14 +264,13 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
                       </div>
                     </td>
                     <td>{formatDuration(service.defaultDurationMinutes)}</td>
-                    <td>{formatPrice(service.defaultPrice)}</td>
                     <td>{service._count?.businessServices ?? 0}</td>
                     <td><StatusPill status={service.status} /></td>
                     <td>
                       <div className="flex gap-2">
                         <button className="btn-sm btn-secondary" onClick={() => openEdit(service)}>✏️ ערוך</button>
                         <button className="btn-sm btn-secondary" onClick={() => handleArchiveToggle(service)}>
-                          {service.status === 'ARCHIVED' ? '♻️ שחזר' : '📥 ארכב'}
+                          {service.status === 'ARCHIVED' ? '♻️ החזר לפעילות' : '📥 העבר לארכיון'}
                         </button>
                         <button className="btn-sm btn-danger" onClick={() => handleDelete(service)}>🗑️ מחק</button>
                       </div>
@@ -333,48 +331,18 @@ export default function ServicesTab({ serviceTemplates, professions, fields, onR
                 required
               />
             </div>
-            <div className="grid grid-2">
-              <div className="form-group">
-                <label className="form-label">משך ברירת מחדל (דקות) *</label>
-                <input
-                  type="number"
-                  min="1"
-                  placeholder="30"
-                  value={form.defaultDurationMinutes}
-                  onChange={(e) => setForm({ ...form, defaultDurationMinutes: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">מחיר ברירת מחדל (₪)</label>
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="אופציונלי"
-                  value={form.defaultPrice}
-                  onChange={(e) => setForm({ ...form, defaultPrice: e.target.value })}
-                />
-              </div>
-            </div>
-            <div className="grid grid-2">
-              <div className="form-group">
-                <label className="form-label">רמת סיכון</label>
-                <select
-                  value={form.colorLevel}
-                  onChange={(e) => setForm({ ...form, colorLevel: e.target.value })}
-                >
-                  {Object.entries(COLOR_LABELS).map(([value, label]) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label className="form-label">סדר תצוגה</label>
-                <input
-                  type="number"
-                  value={form.displayOrder}
-                  onChange={(e) => setForm({ ...form, displayOrder: e.target.value })}
-                />
+            <div className="form-group">
+              <label className="form-label">משך מומלץ (דקות) *</label>
+              <input
+                type="number"
+                min="1"
+                placeholder="30"
+                value={form.defaultDurationMinutes}
+                onChange={(e) => setForm({ ...form, defaultDurationMinutes: e.target.value })}
+                required
+              />
+              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 'var(--space-1)' }}>
+                המשך והמחיר בפועל נקבעים על ידי נותן השירות.
               </div>
             </div>
             <div className="flex gap-3">

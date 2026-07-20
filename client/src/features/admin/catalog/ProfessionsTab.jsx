@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import CatalogModal from './CatalogModal';
-import { StatusPill } from './catalogUi';
+import { StatusPill, SortHeader, useTableSort } from './catalogUi';
 import {
   createProfession,
   updateProfession,
@@ -9,7 +9,7 @@ import {
   deleteProfession
 } from './catalogApi';
 
-const EMPTY_FORM = { fieldId: '', nameHebrew: '', name: '', displayOrder: 0 };
+const EMPTY_FORM = { fieldId: '', nameHebrew: '', name: '' };
 
 export default function ProfessionsTab({ professions, fields, onReload, onSuccess, onError }) {
   const [search, setSearch] = useState('');
@@ -20,9 +20,16 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
 
+  const { sort, toggle, sortRows } = useTableSort('name', {
+    name: (p) => p.nameHebrew,
+    field: (p) => p.field?.nameHebrew,
+    status: (p) => p.status,
+    services: (p) => p._count?.serviceTemplates ?? 0
+  });
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return professions.filter((p) => {
+    const rows = professions.filter((p) => {
       if (fieldFilter !== 'ALL' && String(p.fieldId) !== String(fieldFilter)) return false;
       if (statusFilter !== 'ALL' && p.status !== statusFilter) return false;
       if (!q) return true;
@@ -31,7 +38,8 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
         (p.name || '').toLowerCase().includes(q)
       );
     });
-  }, [professions, search, fieldFilter, statusFilter]);
+    return sortRows(rows);
+  }, [professions, search, fieldFilter, statusFilter, sortRows]);
 
   function openCreate() {
     setEditingId(null);
@@ -44,8 +52,7 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
     setForm({
       fieldId: String(profession.fieldId ?? ''),
       nameHebrew: profession.nameHebrew || '',
-      name: profession.name || '',
-      displayOrder: profession.displayOrder ?? 0
+      name: profession.name || ''
     });
     setModalOpen(true);
   }
@@ -67,11 +74,11 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
     }
     setSaving(true);
     try {
+      // displayOrder intentionally omitted (create → default; edit → unchanged).
       const payload = {
         fieldId: Number(form.fieldId),
         nameHebrew: form.nameHebrew.trim(),
-        name: form.name.trim(),
-        displayOrder: Number(form.displayOrder) || 0
+        name: form.name.trim()
       };
       if (editingId) {
         await updateProfession(editingId, payload);
@@ -93,7 +100,7 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
     try {
       if (profession.status === 'ARCHIVED') {
         await restoreProfession(profession.id);
-        onSuccess('המקצוע שוחזר');
+        onSuccess('המקצוע הוחזר לפעילות');
       } else {
         await archiveProfession(profession.id);
         onSuccess('המקצוע הועבר לארכיון');
@@ -107,7 +114,7 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
   async function handleDelete(profession) {
     const count = profession._count?.serviceTemplates ?? 0;
     if (count > 0) {
-      onError(new Error('לא ניתן למחוק מקצוע שמכיל שירותים. יש להעביר או לארכב אותם קודם'));
+      onError(new Error('לא ניתן למחוק מקצוע שמכיל שירותים. יש להעביר לארכיון או למחוק אותם קודם'));
       return;
     }
     if (!confirm(`למחוק לצמיתות את המקצוע "${profession.nameHebrew}"?`)) return;
@@ -179,11 +186,10 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
             <table>
               <thead>
                 <tr>
-                  <th>תחום</th>
-                  <th>שם המקצוע</th>
-                  <th>שירותים</th>
-                  <th>סדר תצוגה</th>
-                  <th>סטטוס</th>
+                  <SortHeader label="תחום" sortKey="field" sort={sort} onToggle={toggle} />
+                  <SortHeader label="שם המקצוע" sortKey="name" sort={sort} onToggle={toggle} />
+                  <SortHeader label="שירותים" sortKey="services" sort={sort} onToggle={toggle} />
+                  <SortHeader label="סטטוס" sortKey="status" sort={sort} onToggle={toggle} />
                   <th>פעולות</th>
                 </tr>
               </thead>
@@ -200,13 +206,12 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
                       </div>
                     </td>
                     <td>{profession._count?.serviceTemplates ?? 0}</td>
-                    <td>{profession.displayOrder ?? 0}</td>
                     <td><StatusPill status={profession.status} /></td>
                     <td>
                       <div className="flex gap-2">
                         <button className="btn-sm btn-secondary" onClick={() => openEdit(profession)}>✏️ ערוך</button>
                         <button className="btn-sm btn-secondary" onClick={() => handleArchiveToggle(profession)}>
-                          {profession.status === 'ARCHIVED' ? '♻️ שחזר' : '📥 ארכב'}
+                          {profession.status === 'ARCHIVED' ? '♻️ החזר לפעילות' : '📥 העבר לארכיון'}
                         </button>
                         <button className="btn-sm btn-danger" onClick={() => handleDelete(profession)}>🗑️ מחק</button>
                       </div>
@@ -246,24 +251,14 @@ export default function ProfessionsTab({ professions, fields, onReload, onSucces
                 required
               />
             </div>
-            <div className="grid grid-2">
-              <div className="form-group">
-                <label className="form-label">שם באנגלית (מזהה) *</label>
-                <input
-                  placeholder="e.g. Hairdresser"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">סדר תצוגה</label>
-                <input
-                  type="number"
-                  value={form.displayOrder}
-                  onChange={(e) => setForm({ ...form, displayOrder: e.target.value })}
-                />
-              </div>
+            <div className="form-group">
+              <label className="form-label">שם באנגלית (מזהה) *</label>
+              <input
+                placeholder="e.g. Hairdresser"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+              />
             </div>
             <div className="flex gap-3">
               <button className="btn-primary" disabled={saving}>
