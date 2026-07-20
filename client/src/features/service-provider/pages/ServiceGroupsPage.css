@@ -130,31 +130,36 @@
   gap: var(--space-2);
 }
 
-/* Icon action buttons (page-specific, reset the global button base) */
+/* Icon action buttons — clean borderless icons, not boxed buttons */
 .btn-icon {
   background: none;
-  border: 1px solid var(--border-subtle);
+  border: none;
   border-radius: var(--radius-md);
   padding: var(--space-2);
   cursor: pointer;
   font-size: var(--text-base);
   line-height: 1;
-  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
 
 .btn-icon:hover {
   background: var(--bg-secondary);
-  border-color: var(--border-strong);
+}
+
+.btn-icon:focus-visible {
+  outline: 2px solid var(--primary-400);
+  outline-offset: 2px;
 }
 
 .btn-icon.btn-edit:hover {
   background: var(--primary-50);
-  border-color: var(--primary-400);
+  color: var(--primary-600);
 }
 
 .btn-icon.btn-delete:hover {
   background: var(--danger-50);
-  border-color: var(--danger-500);
+  color: var(--danger-600);
 }
 
 /* Services List (inside a group card) */

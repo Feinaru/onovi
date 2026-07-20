@@ -148,8 +148,8 @@ export default function DashboardPage({ user, approvalStatus }) {
 
       {/* Quick Stats Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
-        <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-          <div>
+        <div className="card">
+          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
             <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>⏳</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.pendingCount}
@@ -160,8 +160,8 @@ export default function DashboardPage({ user, approvalStatus }) {
           </div>
         </div>
 
-        <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-          <div>
+        <div className="card">
+          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
             <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>📅</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.todayCount}
@@ -172,8 +172,8 @@ export default function DashboardPage({ user, approvalStatus }) {
           </div>
         </div>
 
-        <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-          <div>
+        <div className="card">
+          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
             <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>📊</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : stats.weeklyCount}
@@ -184,8 +184,8 @@ export default function DashboardPage({ user, approvalStatus }) {
           </div>
         </div>
 
-        <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-          <div>
+        <div className="card">
+          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
             <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>💰</div>
             <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', marginBottom: 'var(--space-1)' }}>
               {loadingStats ? '...' : `₪${stats.weeklyRevenue}`}

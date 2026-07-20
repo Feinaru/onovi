@@ -28,6 +28,7 @@ import ReportsPage from './pages/ReportsPage';
 export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
   const [activePage, setActivePage] = useState('dashboard');
   const [approvalStatus, setApprovalStatus] = useState(null);
+  const [businessName, setBusinessName] = useState('');
   const [loading, setLoading] = useState(true);
 
   // Fetch approval status on mount
@@ -38,6 +39,11 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
   async function fetchApprovalStatus() {
     try {
       const result = await api('/api/service-provider/business/status');
+
+      // Capture the business display name if present (used in the sidebar user area)
+      if (result && result.data && result.data.name) {
+        setBusinessName(result.data.name);
+      }
 
       // Handle response structure: { success: true, data: { approvalStatus: 'APPROVED', ... } }
       if (result && result.data && result.data.approvalStatus) {
@@ -148,8 +154,17 @@ export default function ServiceProviderWorkspace({ user, setView, onLogout }) {
           ))}
         </nav>
 
-        {/* Logout button at bottom */}
-        <div style={{ marginTop: 'auto', padding: 'var(--space-4)' }}>
+        {/* User area + logout at bottom (consistent with admin/customer panels) */}
+        <div className="sidebar-footer">
+          <div style={{ marginBottom: 'var(--space-3)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+            <div style={{ fontWeight: 'var(--font-semibold)', color: 'var(--text-primary)' }}>
+              {businessName || user.fullName}
+            </div>
+            <div>{user.phone}</div>
+            <div style={{ fontSize: 'var(--text-xs)', marginTop: 'var(--space-1)' }}>
+              <span className="badge badge-primary">בעל עסק</span>
+            </div>
+          </div>
           <button
             className="btn-secondary"
             style={{ width: '100%' }}
