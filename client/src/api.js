@@ -61,6 +61,14 @@ export async function api(path, options = {}) {
 
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || 'שגיאת שרת');
+  if (!res.ok) {
+    // Prefer a Hebrew `message`, then fall back to a server `error` string
+    // (some routes return { error }) before the generic message. Attach the raw
+    // payload + status so callers can map specific server errors to friendly copy.
+    const err = new Error(data.message || data.error || 'שגיאת שרת');
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
   return data;
 }

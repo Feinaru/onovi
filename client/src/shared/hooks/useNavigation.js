@@ -26,6 +26,7 @@ export function getNavItems(user) {
   // Admin navigation
   if (user.role === 'ADMIN') {
     items.push({ id: 'admin', label: 'ניהול מערכת', icon: '⚙️' });
+    items.push({ id: 'admin-catalog', label: 'קטלוג', icon: '🗂️' });
     items.push({ id: 'admin-users', label: 'משתמשים', icon: '👥' });
     items.push({ id: 'admin-approvals', label: 'אישורי נותני שירות', icon: '✓' });
     items.push({ id: 'admin-bookings', label: 'ניהול הזמנות', icon: '📋' });
@@ -45,7 +46,7 @@ export function getHomeView(user) {
 }
 
 export function isAuthorized(view, userRole) {
-  if (view === 'admin' || view === 'admin-users' || view === 'crm' || view === 'admin-approvals' || view === 'admin-bookings') {
+  if (view === 'admin' || view === 'admin-catalog' || view === 'admin-users' || view === 'crm' || view === 'admin-approvals' || view === 'admin-bookings') {
     return userRole === 'ADMIN';
   }
   return true;

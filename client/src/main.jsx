@@ -12,6 +12,7 @@ import BusinessPage from './features/business/BusinessPage';
 import ServiceProviderWorkspace from './features/service-provider/ServiceProviderWorkspace';
 import AdminPage from './pages/AdminPage';
 import AdminApprovalsPage from './features/admin/pages/AdminApprovalsPage';
+import CatalogPage from './features/admin/catalog/CatalogPage';
 import AdminBookingsPage from './features/admin/pages/AdminBookingsPage';
 import AdminUsersPage from './features/admin/users/UsersPage';
 import LandingPage from './pages/LandingPage';
@@ -475,6 +476,12 @@ function App() {
         {/* Admin View */}
         {view === 'admin' && user.role === 'ADMIN' && <AdminPage user={user} setView={setView} />}
         {view === 'admin' && user.role !== 'ADMIN' && (
+          <UnauthorizedAccess onNavigateHome={handleNavigateHome} />
+        )}
+
+        {/* Admin Catalog View */}
+        {view === 'admin-catalog' && user.role === 'ADMIN' && <CatalogPage />}
+        {view === 'admin-catalog' && user.role !== 'ADMIN' && (
           <UnauthorizedAccess onNavigateHome={handleNavigateHome} />
         )}
 
