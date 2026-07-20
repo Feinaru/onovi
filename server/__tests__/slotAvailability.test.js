@@ -11,7 +11,40 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+// Tests run against the shared dev database (no dedicated test DB), so fixtures
+// must never collide with existing/global data or with leftovers from a prior
+// (possibly failed) run. Two safeguards:
+//   1. Every fixture name/identifier carries a per-run unique suffix.
+//   2. Cleanup is always by tracked id and defensively guarded, so we only ever
+//      remove what this run created — even if beforeAll failed partway through.
+const RUN_ID = `${Date.now()}-${process.pid}-${Math.floor(Math.random() * 1e6)}`;
+const uid = (label) => `${label} ${RUN_ID}`;
+
+// Slot dates must always be in the future: getLegalStartTimes filters out past
+// times, so hardcoded calendar dates make the suite fail once that date passes.
+// Derive a stable future date at run time instead.
+function futureDate(daysAhead) {
+  const d = new Date();
+  d.setDate(d.getDate() + daysAhead);
+  return d.toISOString().slice(0, 10);
+}
+const TEST_DATE = futureDate(30);
+
+// Await a delete and swallow errors so one failed step never blocks the rest of
+// cleanup (e.g. when a referenced fixture was never created).
+async function safeDelete(promiseFactory) {
+  try {
+    await promiseFactory();
+  } catch (err) {
+    // Ignore: record may not exist if setup failed before creating it.
+  }
+}
+
 describe('slotAvailability.service', () => {
+  afterAll(async () => {
+    await prisma.$disconnect();
+  });
+
   describe('time conversion utilities', () => {
     test('timeToMinutes converts correctly', () => {
       expect(timeToMinutes('00:00')).toBe(0);
@@ -71,11 +104,11 @@ describe('slotAvailability.service', () => {
       });
 
       if (!testUser) {
-        // Create a test user if none exists
+        // Create a test user if none exists (unique creds to avoid collisions)
         testUser = await prisma.user.create({
           data: {
-            email: 'test-sprint-a@test.com',
-            phone: '0501111111',
+            email: uid('test-a').replace(/\s/g, '') + '@test.local',
+            phone: `05${String(Date.now()).slice(-8)}`,
             passwordHash: 'test-hash',
             role: 'SERVICE_PROVIDER',
             fullName: 'Test Sprint A User'
@@ -86,7 +119,7 @@ describe('slotAvailability.service', () => {
       // Create test field
       testField = await prisma.field.create({
         data: {
-          name: 'Test Field Sprint A',
+          name: uid('Test Field Sprint A'),
           nameHebrew: 'תחום טסט',
           displayOrder: 0,
           status: 'ACTIVE'
@@ -97,30 +130,30 @@ describe('slotAvailability.service', () => {
       testProfession = await prisma.profession.create({
         data: {
           fieldId: testField.id,
-          name: 'Test Profession Sprint A',
+          name: uid('Test Profession Sprint A'),
           nameHebrew: 'מקצוע טסט',
           displayOrder: 0,
           status: 'ACTIVE'
         }
       });
 
-      // Create test business
+      // Create test business (categoryId omitted — nullable, avoids FK to a
+      // category that may not exist in this DB)
       testBusiness = await prisma.business.create({
         data: {
-          name: 'Test Salon Sprint A',
+          name: uid('Test Salon Sprint A'),
           ownerId: testUser.id,
           cityCode: 5000,
-          categoryId: 1,
           phone: '0501111111',
           identifierType: 'ISRAELI_ID',
-          identifierValue: '123456789'
+          identifierValue: uid('A').replace(/\s/g, '')
         }
       });
 
       // Create test service templates
       testServiceTemplate30 = await prisma.serviceTemplate.create({
         data: {
-          name: 'Test Haircut 30min',
+          name: uid('Test Haircut 30min'),
           nameHebrew: 'תספורת 30 דקות',
           professionId: testProfession.id,
           defaultDurationMinutes: 30,
@@ -130,7 +163,7 @@ describe('slotAvailability.service', () => {
 
       testServiceTemplate45 = await prisma.serviceTemplate.create({
         data: {
-          name: 'Test Color 45min',
+          name: uid('Test Color 45min'),
           nameHebrew: 'צביעה 45 דקות',
           professionId: testProfession.id,
           defaultDurationMinutes: 45,
@@ -163,17 +196,28 @@ describe('slotAvailability.service', () => {
     });
 
     afterAll(async () => {
-      // Cleanup - must delete in reverse dependency order
-      await prisma.businessService.deleteMany({
-        where: { businessId: testBusiness.id }
-      });
-      await prisma.serviceTemplate.deleteMany({
-        where: { id: { in: [testServiceTemplate30.id, testServiceTemplate45.id] } }
-      });
-      await prisma.business.delete({ where: { id: testBusiness.id } });
-      await prisma.profession.delete({ where: { id: testProfession.id } });
-      await prisma.field.delete({ where: { id: testField.id } });
-      await prisma.$disconnect();
+      // Cleanup by tracked id in reverse dependency order. Defensive so a partial
+      // beforeAll failure never throws "testBusiness is undefined".
+      if (testBusiness?.id) {
+        await safeDelete(() =>
+          prisma.businessService.deleteMany({ where: { businessId: testBusiness.id } })
+        );
+      }
+      const templateIds = [testServiceTemplate30?.id, testServiceTemplate45?.id].filter(Boolean);
+      if (templateIds.length) {
+        await safeDelete(() =>
+          prisma.serviceTemplate.deleteMany({ where: { id: { in: templateIds } } })
+        );
+      }
+      if (testBusiness?.id) {
+        await safeDelete(() => prisma.business.delete({ where: { id: testBusiness.id } }));
+      }
+      if (testProfession?.id) {
+        await safeDelete(() => prisma.profession.delete({ where: { id: testProfession.id } }));
+      }
+      if (testField?.id) {
+        await safeDelete(() => prisma.field.delete({ where: { id: testField.id } }));
+      }
     });
 
     beforeEach(async () => {
@@ -181,7 +225,7 @@ describe('slotAvailability.service', () => {
       testSlot = await prisma.slot.create({
         data: {
           businessId: testBusiness.id,
-          date: '2026-07-10',
+          date: TEST_DATE,
           startTime: '10:00',
           endTime: '11:00',
           status: 'OPEN'
@@ -295,7 +339,7 @@ describe('slotAvailability.service', () => {
       const largeSlot = await prisma.slot.create({
         data: {
           businessId: testBusiness.id,
-          date: '2026-07-10',
+          date: TEST_DATE,
           startTime: '10:00',
           endTime: '13:00',
           status: 'OPEN'
@@ -354,7 +398,7 @@ describe('slotAvailability.service', () => {
       // Create test field
       testField = await prisma.field.create({
         data: {
-          name: 'Test Field Capacity Sprint A',
+          name: uid('Test Field Capacity Sprint A'),
           nameHebrew: 'תחום קיבולת ספרינט A',
           displayOrder: 0,
           status: 'ACTIVE'
@@ -365,7 +409,7 @@ describe('slotAvailability.service', () => {
       testProfession = await prisma.profession.create({
         data: {
           fieldId: testField.id,
-          name: 'Test Profession Capacity Sprint A',
+          name: uid('Test Profession Capacity Sprint A'),
           nameHebrew: 'מקצוע קיבולת ספרינט A',
           displayOrder: 0,
           status: 'ACTIVE'
@@ -374,19 +418,18 @@ describe('slotAvailability.service', () => {
 
       testBusiness = await prisma.business.create({
         data: {
-          name: 'Test Salon Capacity',
+          name: uid('Test Salon Capacity'),
           ownerId: testUser.id,
           cityCode: 5000,
-          categoryId: 1,
           phone: '0502222222',
           identifierType: 'ISRAELI_ID',
-          identifierValue: '223456789'
+          identifierValue: uid('B').replace(/\s/g, '')
         }
       });
 
       testTemplate = await prisma.serviceTemplate.create({
         data: {
-          name: 'Test Service Capacity',
+          name: uid('Test Service Capacity'),
           nameHebrew: 'שירות קיבולת',
           professionId: testProfession.id,
           defaultDurationMinutes: 30,
@@ -407,18 +450,31 @@ describe('slotAvailability.service', () => {
     });
 
     afterAll(async () => {
-      await prisma.businessService.deleteMany({ where: { businessId: testBusiness.id } });
-      await prisma.serviceTemplate.delete({ where: { id: testTemplate.id } });
-      await prisma.business.delete({ where: { id: testBusiness.id } });
-      await prisma.profession.delete({ where: { id: testProfession.id } });
-      await prisma.field.delete({ where: { id: testField.id } });
+      // Cleanup by tracked id, defensive against partial beforeAll failure.
+      if (testBusiness?.id) {
+        await safeDelete(() =>
+          prisma.businessService.deleteMany({ where: { businessId: testBusiness.id } })
+        );
+      }
+      if (testTemplate?.id) {
+        await safeDelete(() => prisma.serviceTemplate.delete({ where: { id: testTemplate.id } }));
+      }
+      if (testBusiness?.id) {
+        await safeDelete(() => prisma.business.delete({ where: { id: testBusiness.id } }));
+      }
+      if (testProfession?.id) {
+        await safeDelete(() => prisma.profession.delete({ where: { id: testProfession.id } }));
+      }
+      if (testField?.id) {
+        await safeDelete(() => prisma.field.delete({ where: { id: testField.id } }));
+      }
     });
 
     beforeEach(async () => {
       testSlot = await prisma.slot.create({
         data: {
           businessId: testBusiness.id,
-          date: '2026-07-11',
+          date: TEST_DATE,
           startTime: '10:00',
           endTime: '11:00',
           status: 'OPEN'
@@ -486,7 +542,7 @@ describe('slotAvailability.service', () => {
       // Create test field
       testField = await prisma.field.create({
         data: {
-          name: 'Test Field Status Sprint A',
+          name: uid('Test Field Status Sprint A'),
           nameHebrew: 'תחום סטטוס ספרינט A',
           displayOrder: 0,
           status: 'ACTIVE'
@@ -497,7 +553,7 @@ describe('slotAvailability.service', () => {
       testProfession = await prisma.profession.create({
         data: {
           fieldId: testField.id,
-          name: 'Test Profession Status Sprint A',
+          name: uid('Test Profession Status Sprint A'),
           nameHebrew: 'מקצוע סטטוס ספרינט A',
           displayOrder: 0,
           status: 'ACTIVE'
@@ -506,19 +562,18 @@ describe('slotAvailability.service', () => {
 
       testBusiness = await prisma.business.create({
         data: {
-          name: 'Test Salon Status',
+          name: uid('Test Salon Status'),
           ownerId: testUser.id,
           cityCode: 5000,
-          categoryId: 1,
           phone: '0503333333',
           identifierType: 'ISRAELI_ID',
-          identifierValue: '323456789'
+          identifierValue: uid('C').replace(/\s/g, '')
         }
       });
 
       testTemplate = await prisma.serviceTemplate.create({
         data: {
-          name: 'Test Service Status',
+          name: uid('Test Service Status'),
           nameHebrew: 'שירות סטטוס',
           professionId: testProfession.id,
           defaultDurationMinutes: 30,
@@ -539,18 +594,31 @@ describe('slotAvailability.service', () => {
     });
 
     afterAll(async () => {
-      await prisma.businessService.deleteMany({ where: { businessId: testBusiness.id } });
-      await prisma.serviceTemplate.delete({ where: { id: testTemplate.id } });
-      await prisma.business.delete({ where: { id: testBusiness.id } });
-      await prisma.profession.delete({ where: { id: testProfession.id } });
-      await prisma.field.delete({ where: { id: testField.id } });
+      // Cleanup by tracked id, defensive against partial beforeAll failure.
+      if (testBusiness?.id) {
+        await safeDelete(() =>
+          prisma.businessService.deleteMany({ where: { businessId: testBusiness.id } })
+        );
+      }
+      if (testTemplate?.id) {
+        await safeDelete(() => prisma.serviceTemplate.delete({ where: { id: testTemplate.id } }));
+      }
+      if (testBusiness?.id) {
+        await safeDelete(() => prisma.business.delete({ where: { id: testBusiness.id } }));
+      }
+      if (testProfession?.id) {
+        await safeDelete(() => prisma.profession.delete({ where: { id: testProfession.id } }));
+      }
+      if (testField?.id) {
+        await safeDelete(() => prisma.field.delete({ where: { id: testField.id } }));
+      }
     });
 
     beforeEach(async () => {
       testSlot = await prisma.slot.create({
         data: {
           businessId: testBusiness.id,
-          date: '2026-07-12',
+          date: TEST_DATE,
           startTime: '10:00',
           endTime: '11:00',
           status: 'OPEN'
