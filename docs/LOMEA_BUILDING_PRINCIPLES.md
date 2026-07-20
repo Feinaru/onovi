@@ -1,8 +1,8 @@
 # Lomea Building Principles
 
 **Status:** 🔒 MANDATORY
-**Last Updated:** 2026-07-12
-**Version:** 1.0
+**Last Updated:** 2026-07-20
+**Version:** 1.1
 
 ---
 
@@ -67,25 +67,30 @@ A **User** represents any authenticated person in the system.
 - One user has exactly one role
 - Phone number is the primary unique identifier
 
-### Active Roles
+### Active Roles (Official)
 
-| Role | Purpose | Home View | Primary Navigation |
-|------|---------|-----------|-------------------|
-| `CUSTOMER` | Service recipients who book appointments | `customer` | Customer search, my appointments, calendar |
-| `SERVICE_PROVIDER` | Service providers who manage businesses | `service-provider` | Dashboard, services, availability, bookings |
-| `ADMIN` | System administrators | `admin` | Business approvals, system management |
+| Role | Hebrew | Purpose | Home View | Primary Navigation |
+|------|--------|---------|-----------|-------------------|
+| `SERVICE_RECIPIENT` | מקבל שירות | Service recipients who book appointments | `customer` | Customer search, my appointments, calendar |
+| `SERVICE_PROVIDER` | נותן שירות | Service providers who manage businesses | `service-provider` | Dashboard, services, availability, bookings |
+| `ADMIN` | מנהל | System administrators | `admin` | Business approvals, system management |
 
-### DEPRECATED Roles
+**These three are the official role names for all new planning and new code.**
 
-| Role | Status | Replacement | Action Required |
+### DEPRECATED / Legacy Roles
+
+| Legacy Role | Status | Official Replacement | Action Required |
 |------|--------|-------------|-----------------|
+| `CUSTOMER` | ⚠️ LEGACY | `SERVICE_RECIPIENT` | Being migrated |
 | `BUSINESS` | ⚠️ LEGACY | `SERVICE_PROVIDER` | Being migrated |
-| `SERVICE_RECIPIENT` | ❌ NOT USED | `CUSTOMER` | Use CUSTOMER |
 
 **Rules:**
-- All new service provider users **MUST** be created with `SERVICE_PROVIDER` role
-- Frontend routing **MUST** check for `SERVICE_PROVIDER`, not `BUSINESS`
-- Backend auth middleware **MAY** accept both during migration, but prefer `SERVICE_PROVIDER`
+- `CUSTOMER` and `BUSINESS` are **legacy aliases only**: `CUSTOMER` → `SERVICE_RECIPIENT`, `BUSINESS` → `SERVICE_PROVIDER`.
+- These legacy values **may still exist in current code and data** until a dedicated role-migration BRAVE completes.
+- **Do NOT use `CUSTOMER` or `BUSINESS` as official future role names** in new planning or new code.
+- All new service provider users **MUST** be created with `SERVICE_PROVIDER` role; all new service recipient users **MUST** be created with `SERVICE_RECIPIENT` role.
+- Frontend routing **MUST** check for `SERVICE_PROVIDER` / `SERVICE_RECIPIENT`, not `BUSINESS` / `CUSTOMER`.
+- Backend auth middleware **MAY** accept both legacy and official values during migration, but **prefer** the official names.
 
 ---
 
@@ -324,8 +329,8 @@ NO_SHOW - Customer did not show up
 |---------|--------|-----------|
 | Service | שירות | Same everywhere |
 | Business | עסק | Same everywhere |
-| Customer | לקוח | Prefer over "מקבל שירות" |
-| Service provider | נותן שירות | - |
+| Service recipient (role) | מקבל שירות | Official role term for `SERVICE_RECIPIENT`. "לקוח" remains acceptable as a general customer-facing word for the person, but is **not** the role name |
+| Service provider (role) | נותן שירות | Official role term for `SERVICE_PROVIDER` |
 
 ### Grammar and Style Rules
 
@@ -777,14 +782,16 @@ await prisma.user.upsert({
 - ✅ Create related data (business → services → slots → bookings)
 - ❌ Do NOT use fake/test-looking data in demo
 
-### Demo Credentials (Standard)
+### Demo Credentials (Authoritative)
 
-**Consistent demo passwords:**
-- Customer: `customer@lomea.com` / `12345678`
-- Provider: `provider@lomea.com` / `12345678`
-- Admin: `admin@lomea.com` / `12345678`
+**Authoritative current demo credentials (phone-based, aligned 2026-07-20):**
+- Admin: `0500000001` / `admin123`
+- Service Provider: `0500000002` / `123456`
+- Service Recipient: `0500000003` / `123456`
 
-**Rule:** Keep demo credentials consistent across seed scripts.
+**Legacy / non-authoritative:** the older email-based scheme (`customer@lomea.com` / `provider@lomea.com` / `admin@lomea.com`, password `12345678`) is **no longer authoritative**. Email-based demo credentials may be re-introduced later only if needed.
+
+**Rule:** Keep demo credentials consistent across seed scripts, using the authoritative phone-based set above.
 
 ### Database Reset
 
@@ -1130,6 +1137,7 @@ stop and report before changing code.
 | 2026-07-12 | Added UI/UX principles, Hebrew terminology, workflow rules | Consistency audit |
 | 2026-07-12 | Merged availability model and calendar principles | From AVAILABILITY_MODEL.md, CALENDAR_ARCHITECTURE.md |
 | 2026-07-12 | Merged AI agent workflow rules | From AI_AGENT_WORKFLOW.md |
+| 2026-07-20 | Role naming aligned to official set: `SERVICE_RECIPIENT` / `SERVICE_PROVIDER` / `ADMIN`; `CUSTOMER`/`BUSINESS` marked legacy aliases. Updated §1 roles, §7 role terminology, §21 demo credentials. Code/data role migration remains a separate future BRAVE. | Role-naming alignment |
 
 ## Source Documents
 
