@@ -27,6 +27,9 @@ export default function ServiceGroupsPage({ user }) {
   const [selectedFieldId, setSelectedFieldId] = useState('');
   const [selectedProfessionId, setSelectedProfessionId] = useState('');
   const [selectedServiceIds, setSelectedServiceIds] = useState([]);
+  // In "add" mode, the existing group (if any) matching the selected field+profession.
+  // When set, Save updates that group instead of creating a duplicate.
+  const [existingGroup, setExistingGroup] = useState(null);
 
   // Modals
   const [deleteConfirmGroup, setDeleteConfirmGroup] = useState(null);
@@ -85,6 +88,7 @@ export default function ServiceGroupsPage({ user }) {
   function handleAddClick() {
     setModalMode('add');
     setEditingGroup(null);
+    setExistingGroup(null);
     setSelectedFieldId('');
     setSelectedProfessionId('');
     setSelectedServiceIds([]);
@@ -96,6 +100,7 @@ export default function ServiceGroupsPage({ user }) {
   function handleEditClick(group) {
     setModalMode('edit');
     setEditingGroup(group);
+    setExistingGroup(null);
     setSelectedFieldId(group.fieldId);
     setSelectedProfessionId(group.professionId);
     setSelectedServiceIds(group.services.map(s => s.serviceTemplateId));
@@ -115,6 +120,7 @@ export default function ServiceGroupsPage({ user }) {
     setShowModal(false);
     setModalMode('add');
     setEditingGroup(null);
+    setExistingGroup(null);
     setSelectedFieldId('');
     setSelectedProfessionId('');
     setSelectedServiceIds([]);
@@ -127,6 +133,7 @@ export default function ServiceGroupsPage({ user }) {
     setSelectedFieldId(fieldId);
     setSelectedProfessionId('');
     setSelectedServiceIds([]);
+    setExistingGroup(null);
     setProfessions([]);
     setServices([]);
 
@@ -138,8 +145,22 @@ export default function ServiceGroupsPage({ user }) {
   function handleProfessionChange(e) {
     const professionId = e.target.value;
     setSelectedProfessionId(professionId);
-    setSelectedServiceIds([]);
     setServices([]);
+
+    // A service group is identified by field + profession. If one already exists
+    // for the chosen profession, adding services must update that group (PUT) rather
+    // than create a duplicate (POST). Detect it here and pre-select its services.
+    const match = professionId
+      ? serviceGroups.find(g => String(g.professionId) === String(professionId))
+      : null;
+
+    if (match) {
+      setExistingGroup(match);
+      setSelectedServiceIds(match.services.map(s => s.serviceTemplateId));
+    } else {
+      setExistingGroup(null);
+      setSelectedServiceIds([]);
+    }
 
     if (professionId) {
       fetchServices(professionId);
@@ -166,12 +187,24 @@ export default function ServiceGroupsPage({ user }) {
       return;
     }
 
+    // A group already exists for this field+profession (either we opened it in edit
+    // mode, or the user picked an existing field+profession in add mode). Update it
+    // instead of creating a duplicate, which the backend rejects.
+    const targetGroup = editingGroup || existingGroup;
+
     try {
       setSubmitting(true);
       setError(null);
 
       let data;
-      if (modalMode === 'add') {
+      if (targetGroup) {
+        data = await api(`/api/service-provider/service-groups/${targetGroup.businessProfessionId}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            serviceTemplateIds: selectedServiceIds
+          })
+        });
+      } else {
         data = await api('/api/service-provider/service-groups', {
           method: 'POST',
           body: JSON.stringify({
@@ -180,17 +213,10 @@ export default function ServiceGroupsPage({ user }) {
             serviceTemplateIds: selectedServiceIds
           })
         });
-      } else {
-        data = await api(`/api/service-provider/service-groups/${editingGroup.businessProfessionId}`, {
-          method: 'PUT',
-          body: JSON.stringify({
-            serviceTemplateIds: selectedServiceIds
-          })
-        });
       }
 
       if (data.success) {
-        setSuccess(modalMode === 'add' ? 'קבוצת שירותים נוספה בהצלחה' : 'קבוצת שירותים עודכנה בהצלחה');
+        setSuccess(targetGroup ? 'קבוצת שירותים עודכנה בהצלחה' : 'קבוצת שירותים נוספה בהצלחה');
         handleCloseModal();
         await fetchServiceGroups();
       }
@@ -336,6 +362,16 @@ export default function ServiceGroupsPage({ user }) {
             </div>
 
             <div className="modal-body">
+              {/* Existing group notice (add mode, chosen profession already has a group) */}
+              {modalMode === 'add' && existingGroup && (
+                <div className="services-empty-hint">
+                  <span className="services-empty-hint-icon">ℹ️</span>
+                  <span>
+                    כבר קיימת קבוצה עבור תחום ומקצוע אלו. השירותים הקיימים נבחרו מראש — הוספה או הסרה תעדכן את הקבוצה הקיימת.
+                  </span>
+                </div>
+              )}
+
               {/* Field */}
               <div className="form-group">
                 <label className="form-label required">תחום</label>
@@ -429,7 +465,7 @@ export default function ServiceGroupsPage({ user }) {
                   onClick={handleSubmit}
                   disabled={submitting || !selectedFieldId || !selectedProfessionId || selectedServiceIds.length === 0}
                 >
-                  {submitting ? 'שומר...' : 'שמור קבוצה'}
+                  {submitting ? 'שומר...' : ((editingGroup || existingGroup) ? 'עדכן קבוצה' : 'שמור קבוצה')}
                 </button>
                 <button
                   className="btn-secondary"
