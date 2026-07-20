@@ -32,9 +32,14 @@ services:
         generateValue: true
       - key: JWT_EXPIRES_IN
         value: 7d
-      # Explicit CORS allowlist for the production frontend. Update this value
-      # if the frontend is served from a different domain than the default
-      # Render host below.
+      # Trust the Render reverse proxy so rate limiting uses the real client IP
+      # (X-Forwarded-For). "1" trusts a single proxy hop.
+      - key: TRUST_PROXY
+        value: 1
+      # Explicit CORS allowlist for the production frontend. Defaults to the
+      # Render-generated host of the "lomea-client" static site defined below.
+      # Override this value (comma-separated) when serving the frontend from a
+      # custom domain.
       - key: CORS_ORIGIN
         value: https://lomea-client.onrender.com
       - key: NOMINATIM_USER_AGENT

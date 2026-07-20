@@ -38,6 +38,32 @@ const serviceProviderReportsRoutes = require('./routes/service-provider-reports.
 const customerSearchRoutes = require('./routes/customer-search.routes');
 
 const app = express();
+
+// Trust proxy configuration for reverse-proxy / PaaS environments (e.g. Render).
+// Behind a proxy the real client IP arrives in X-Forwarded-For; Express must be
+// told to trust it so per-IP rate limiting sees the true client IP. This is kept
+// explicit and env-driven (TRUST_PROXY) so local development (direct connection)
+// stays on the safe Express default of NOT trusting any proxy.
+//
+// Accepted values:
+//   - a hop count, e.g. "1" (recommended for Render: trust the first proxy hop)
+//   - "true" / "false"
+//   - a named preset or comma-separated IP/CIDR list (passed through as-is)
+const trustProxy = process.env.TRUST_PROXY;
+if (trustProxy !== undefined && trustProxy !== '') {
+  const value = trustProxy.trim();
+  const numeric = Number.parseInt(value, 10);
+  if (value === 'true') {
+    app.set('trust proxy', true);
+  } else if (value === 'false') {
+    app.set('trust proxy', false);
+  } else if (Number.isFinite(numeric) && String(numeric) === value) {
+    app.set('trust proxy', numeric);
+  } else {
+    app.set('trust proxy', value);
+  }
+}
+
 // Security headers. CSP is disabled: this is a JSON API consumed by a separate
 // frontend origin, so a strict CSP here provides no benefit and risks breakage.
 app.use(helmet({ contentSecurityPolicy: false }));

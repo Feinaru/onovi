@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './DocumentCard.css';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 /**
  * Document Card Component
