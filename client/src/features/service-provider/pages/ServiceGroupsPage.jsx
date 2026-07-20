@@ -241,7 +241,9 @@ export default function ServiceGroupsPage({ user }) {
     <div className="service-groups-page">
       <div className="page-header">
         <h1>קבוצות שירותים</h1>
-        <p className="page-description">נהל את קבוצות השירותים שלך - תחומים, מקצועות ושירותים</p>
+        <p className="page-description">
+          קבוצת שירותים מאגדת יחד שירותים קשורים לפי תחום ומקצוע, כדי שתוכלו להציע אותם ללקוחות בצורה מסודרת וברורה.
+        </p>
       </div>
 
       {/* Messages */}
@@ -270,10 +272,10 @@ export default function ServiceGroupsPage({ user }) {
       {/* Service Groups List */}
       {serviceGroups.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">✂️</div>
+          <div className="empty-state-icon">📦</div>
           <div className="empty-state-title">אין עדיין קבוצות שירותים</div>
           <div className="empty-state-description">
-            התחל בהוספת קבוצת שירותים ראשונה כדי להציע שירותים ללקוחות שלך
+            התחילו בהוספת קבוצת שירותים ראשונה כדי להציע שירותים ללקוחות שלכם
           </div>
           <button className="btn-primary" onClick={handleAddClick}>
             + הוסף קבוצת שירותים
@@ -373,54 +375,70 @@ export default function ServiceGroupsPage({ user }) {
               {/* Services */}
               {selectedProfessionId && (
                 <div className="form-group">
-                  <label className="form-label required">שירותים</label>
+                  <label className="form-label required">שירותים בקבוצה</label>
                   {services.length > 0 ? (
                     <>
                       <div className="services-selection">
-                        {services.map(service => (
-                          <label key={service.id} className="service-checkbox">
-                            <input
-                              type="checkbox"
-                              checked={selectedServiceIds.includes(service.id)}
-                              onChange={() => handleServiceToggle(service.id)}
-                            />
-                            <div className="service-checkbox-label">
-                              <div className="service-checkbox-name">{service.nameHebrew}</div>
-                              <div className="service-checkbox-info">
-                                {service.defaultDurationMinutes} דקות • ₪{service.defaultPrice || 0}
+                        {services.map(service => {
+                          const isSelected = selectedServiceIds.includes(service.id);
+                          return (
+                            <label
+                              key={service.id}
+                              className={`service-checkbox ${isSelected ? 'selected' : ''}`}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={() => handleServiceToggle(service.id)}
+                              />
+                              <div className="service-checkbox-label">
+                                <div className="service-checkbox-name">{service.nameHebrew}</div>
+                                <div className="service-checkbox-info">
+                                  {service.defaultDurationMinutes} דקות • ₪{service.defaultPrice || 0}
+                                </div>
                               </div>
-                            </div>
-                          </label>
-                        ))}
+                            </label>
+                          );
+                        })}
                       </div>
-                      <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
-                        נבחרו {selectedServiceIds.length} שירותים
+                      <small className="services-selected-count">
+                        נבחרו {selectedServiceIds.length} מתוך {services.length} שירותים
                       </small>
                     </>
                   ) : (
-                    <small style={{ display: 'block', marginTop: '8px', color: '#666' }}>
-                      אין שירותים זמינים למקצוע זה כרגע. יש לבחור מקצוע אחר או להוסיף שירותים לפני יצירת הקבוצה.
-                    </small>
+                    <div className="services-empty-hint">
+                      <span className="services-empty-hint-icon">💡</span>
+                      <span>
+                        אין שירותים זמינים למקצוע זה כרגע. יש לבחור מקצוע אחר, או להוסיף שירותים למקצוע לפני יצירת הקבוצה.
+                      </span>
+                    </div>
                   )}
                 </div>
               )}
             </div>
 
             <div className="modal-footer">
-              <button
-                className="btn-primary"
-                onClick={handleSubmit}
-                disabled={submitting || !selectedFieldId || !selectedProfessionId || selectedServiceIds.length === 0}
-              >
-                {submitting ? 'שומר...' : 'שמור'}
-              </button>
-              <button
-                className="btn-secondary"
-                onClick={handleCloseModal}
-                disabled={submitting}
-              >
-                ביטול
-              </button>
+              {(!selectedFieldId || !selectedProfessionId || selectedServiceIds.length === 0) && (
+                <small className="save-hint">
+                  בחרו תחום, מקצוע ולפחות שירות אחד כדי לשמור קבוצה
+                </small>
+              )}
+              <div className="modal-footer-actions">
+                <button
+                  className="btn-primary"
+                  onClick={handleSubmit}
+                  disabled={submitting || !selectedFieldId || !selectedProfessionId || selectedServiceIds.length === 0}
+                >
+                  {submitting ? 'שומר...' : 'שמור קבוצה'}
+                </button>
+                <button
+                  className="btn-secondary"
+                  onClick={handleCloseModal}
+                  disabled={submitting}
+                >
+                  ביטול
+                </button>
+              </div>
             </div>
           </div>
         </div>
