@@ -1,8 +1,8 @@
 # Lomea Building Principles
 
 **Status:** 🔒 MANDATORY
-**Last Updated:** 2026-07-20
-**Version:** 1.1
+**Last Updated:** 2026-07-21
+**Version:** 1.2
 
 ---
 
@@ -67,29 +67,44 @@ A **User** represents any authenticated person in the system.
 - One user has exactly one role
 - Phone number is the primary unique identifier
 
+> **Canonical terminology:** role and booking-identity naming is defined in
+> [`docs/LOMEA_ROLE_TERMINOLOGY.md`](./LOMEA_ROLE_TERMINOLOGY.md). This section follows it.
+
 ### Active Roles (Official)
 
 | Role | Hebrew | Purpose | Home View | Primary Navigation |
 |------|--------|---------|-----------|-------------------|
-| `SERVICE_RECIPIENT` | מקבל שירות | Service recipients who book appointments | `customer` | Customer search, my appointments, calendar |
-| `SERVICE_PROVIDER` | נותן שירות | Service providers who manage businesses | `service-provider` | Dashboard, services, availability, bookings |
-| `ADMIN` | מנהל | System administrators | `admin` | Business approvals, system management |
+| `SERVICE_BOOKER` | מזמין השירות | The registered user who searches, books, manages, approves, and may pay for a booking (customer-facing login role) | `customer` | Customer search, my appointments, calendar |
+| `SERVICE_PROVIDER` | נותן השירות | Service providers who manage businesses | `service-provider` | Dashboard, services, availability, bookings |
+| `ADMIN` | מנהל מערכת | System administrators | `admin` | Business approvals, system management |
 
-**These three are the official role names for all new planning and new code.**
+**These three are the official login-role names for all new planning and new code.**
+
+### Booking-level identity (not a login role)
+
+| Concept | Hebrew | Purpose |
+|---------|--------|---------|
+| `SERVICE_RECIPIENT` | מקבל השירות | The person who actually **receives** the service inside a booking. May be the booker themselves or someone else (child, parent, spouse, employee, …). |
+
+**Rules:**
+- `SERVICE_RECIPIENT` is a **booking-level identity/fields, not necessarily a login role**.
+  Do **not** treat it as the replacement for `CUSTOMER` and do **not** build a separate
+  recipient login/workspace. Whether it should ever be an account role is deferred to a
+  separate code/data-model plan. See `docs/LOMEA_ROLE_TERMINOLOGY.md` §3.
 
 ### DEPRECATED / Legacy Roles
 
 | Legacy Role | Status | Official Replacement | Action Required |
 |------|--------|-------------|-----------------|
-| `CUSTOMER` | ⚠️ LEGACY | `SERVICE_RECIPIENT` | Being migrated |
+| `CUSTOMER` | ⚠️ LEGACY | `SERVICE_BOOKER` | Being migrated |
 | `BUSINESS` | ⚠️ LEGACY | `SERVICE_PROVIDER` | Being migrated |
 
 **Rules:**
-- `CUSTOMER` and `BUSINESS` are **legacy aliases only**: `CUSTOMER` → `SERVICE_RECIPIENT`, `BUSINESS` → `SERVICE_PROVIDER`.
+- `CUSTOMER` and `BUSINESS` are **legacy aliases only**: `CUSTOMER` → `SERVICE_BOOKER`, `BUSINESS` → `SERVICE_PROVIDER`. `SERVICE_RECIPIENT` is **not** the replacement for `CUSTOMER`.
 - These legacy values **may still exist in current code and data** until a dedicated role-migration BRAVE completes.
 - **Do NOT use `CUSTOMER` or `BUSINESS` as official future role names** in new planning or new code.
-- All new service provider users **MUST** be created with `SERVICE_PROVIDER` role; all new service recipient users **MUST** be created with `SERVICE_RECIPIENT` role.
-- Frontend routing **MUST** check for `SERVICE_PROVIDER` / `SERVICE_RECIPIENT`, not `BUSINESS` / `CUSTOMER`.
+- All new service provider users **MUST** be created with `SERVICE_PROVIDER` role; all new customer-facing (booker) users **MUST** be created with `SERVICE_BOOKER` role.
+- Frontend routing **MUST** check for `SERVICE_PROVIDER` / `SERVICE_BOOKER`, not `BUSINESS` / `CUSTOMER`.
 - Backend auth middleware **MAY** accept both legacy and official values during migration, but **prefer** the official names.
 
 ---
@@ -329,8 +344,9 @@ NO_SHOW - Customer did not show up
 |---------|--------|-----------|
 | Service | שירות | Same everywhere |
 | Business | עסק | Same everywhere |
-| Service recipient (role) | מקבל שירות | Official role term for `SERVICE_RECIPIENT`. "לקוח" remains acceptable as a general customer-facing word for the person, but is **not** the role name |
-| Service provider (role) | נותן שירות | Official role term for `SERVICE_PROVIDER` |
+| Service booker (role) | מזמין השירות | Official role term for `SERVICE_BOOKER`, the customer-facing login role (migrated from `CUSTOMER`). "לקוח" remains acceptable as a general customer-facing word for the person, but is **not** the role name |
+| Service recipient (identity) | מקבל השירות | The person who receives the service inside a booking (`SERVICE_RECIPIENT`). A booking-level identity, **not** a login role, and **not** the same as the booker. See `docs/LOMEA_ROLE_TERMINOLOGY.md` |
+| Service provider (role) | נותן השירות | Official role term for `SERVICE_PROVIDER` |
 
 ### Grammar and Style Rules
 
@@ -1138,6 +1154,7 @@ stop and report before changing code.
 | 2026-07-12 | Merged availability model and calendar principles | From AVAILABILITY_MODEL.md, CALENDAR_ARCHITECTURE.md |
 | 2026-07-12 | Merged AI agent workflow rules | From AI_AGENT_WORKFLOW.md |
 | 2026-07-20 | Role naming aligned to official set: `SERVICE_RECIPIENT` / `SERVICE_PROVIDER` / `ADMIN`; `CUSTOMER`/`BUSINESS` marked legacy aliases. Updated §1 roles, §7 role terminology, §21 demo credentials. Code/data role migration remains a separate future BRAVE. | Role-naming alignment |
+| 2026-07-21 | Corrected the customer-facing login role to `SERVICE_BOOKER` (מזמין השירות): `CUSTOMER` → `SERVICE_BOOKER` (not `SERVICE_RECIPIENT`). Clarified `SERVICE_RECIPIENT` (מקבל השירות) as a booking-level recipient identity, not a login role. Updated §1 roles and §7 terminology. Canonical terminology now lives in `docs/LOMEA_ROLE_TERMINOLOGY.md`. | Role-terminology clarification |
 
 ## Source Documents
 

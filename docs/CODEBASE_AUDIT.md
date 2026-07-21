@@ -51,6 +51,12 @@ This audit reveals a codebase in transition between multiple naming conventions,
 ---
 
 #### UserRole Enum (MIXED - LEGACY + ACTIVE)
+
+> **Terminology note:** this section describes historical/current-code `CUSTOMER` /
+> `SERVICE_RECIPIENT` naming as-built. The canonical target terminology is defined in
+> `docs/LOMEA_ROLE_TERMINOLOGY.md`: `CUSTOMER` maps to `SERVICE_BOOKER`, while
+> `SERVICE_RECIPIENT` is the booking recipient identity, not the replacement for `CUSTOMER`.
+
 **File:** `server/prisma/schema.prisma:12-18`
 
 ```prisma

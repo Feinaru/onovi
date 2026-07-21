@@ -382,6 +382,10 @@ surface raw server errors or codes; map to a friendly Hebrew message.
   booking, distinct from the booker (§5.6).
 
 ### 5.6 SERVICE_BOOKER vs SERVICE_RECIPIENT (terminology rule)
+> **Canonical role terminology:** the authoritative definitions live in
+> [`docs/LOMEA_ROLE_TERMINOLOGY.md`](./LOMEA_ROLE_TERMINOLOGY.md). This section is the
+> UI-copy application of those rules.
+
 These are **not the same concept**:
 - **SERVICE_BOOKER = מזמין השירות** — the registered user who searches, books, manages,
   approves, and may pay. This is the customer-facing **role**. Use **"מזמין שירות"** for this
