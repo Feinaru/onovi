@@ -43,13 +43,13 @@ export default function CRMPage({ user, setView }) {
       <div style={{ padding: 'var(--space-6)', maxWidth: '600px', margin: '0 auto' }}>
         <div style={{
           padding: 'var(--space-6)',
-          background: 'var(--success-light)',
-          border: '2px solid var(--success)',
+          background: 'var(--success-50)',
+          border: '2px solid var(--success-600)',
           borderRadius: 'var(--radius-lg)',
           textAlign: 'center'
         }}>
           <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>✅</div>
-          <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-2)', color: 'var(--success-dark)' }}>
+          <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-2)', color: 'var(--success-700)' }}>
             {successMessage}
           </h2>
           <div style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)' }}>
@@ -59,7 +59,7 @@ export default function CRMPage({ user, setView }) {
           {createdLead.registrationStatus === 'REGISTERED' && (
             <div style={{
               padding: 'var(--space-4)',
-              background: 'white',
+              background: 'var(--bg-elevated)',
               borderRadius: 'var(--radius-md)',
               marginBottom: 'var(--space-4)'
             }}>

@@ -25,11 +25,11 @@ export default function LeadListView({ onCreateNew, onViewLead }) {
 
   function getStatusBadge(status) {
     const statusConfig = {
-      NEW: { label: 'חדש', color: 'blue' },
-      CONTACTED: { label: 'נוצר קשר', color: 'purple' },
-      INTERESTED: { label: 'מעוניין', color: 'cyan' },
-      MEETING_SCHEDULED: { label: 'פגישה קבועה', color: 'orange' },
-      PROPOSAL_SENT: { label: 'הצעה נשלחה', color: 'green' },
+      NEW: { label: 'חדש', color: 'primary' },
+      CONTACTED: { label: 'נוצר קשר', color: 'primary' },
+      INTERESTED: { label: 'מעוניין', color: 'success' },
+      MEETING_SCHEDULED: { label: 'פגישה קבועה', color: 'warning' },
+      PROPOSAL_SENT: { label: 'הצעה נשלחה', color: 'warning' },
       CLOSED_WON: { label: 'נסגר בהצלחה', color: 'success' },
       CLOSED_LOST: { label: 'נסגר ללא הצלחה', color: 'danger' },
       INACTIVE: { label: 'לא פעיל', color: 'gray' }
@@ -190,7 +190,7 @@ export default function LeadListView({ onCreateNew, onViewLead }) {
                   {lead.registrationStatus === 'REGISTERED' ? (
                     <span className="badge badge-success">✓ רשום</span>
                   ) : (
-                    <span className="badge badge-secondary">לא רשום</span>
+                    <span className="badge badge-gray">לא רשום</span>
                   )}
                 </td>
 

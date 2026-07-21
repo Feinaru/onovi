@@ -341,11 +341,11 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
     return (
       <div style={{ padding: 'var(--space-6)' }}>
         <div style={{
-          backgroundColor: '#fee',
+          backgroundColor: 'var(--danger-50)',
           padding: 'var(--space-4)',
           borderRadius: 'var(--radius-2)',
           marginBottom: 'var(--space-4)',
-          color: '#dc2626'
+          color: 'var(--danger-600)'
         }}>
           <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>❌</div>
           <div>{error}</div>
@@ -372,7 +372,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
   if (!lead) {
     return (
       <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-        <div style={{ fontSize: '1.2rem', marginBottom: 'var(--space-4)', color: '#666' }}>
+        <div style={{ fontSize: '1.2rem', marginBottom: 'var(--space-4)', color: 'var(--text-secondary)' }}>
           ליד לא נמצא
         </div>
         <button
@@ -408,8 +408,8 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
           style={{
             padding: 'var(--space-2) var(--space-4)',
             backgroundColor: 'transparent',
-            color: 'var(--accent-9)',
-            border: '1px solid var(--accent-9)',
+            color: 'var(--primary-600)',
+            border: '1px solid var(--primary-600)',
             borderRadius: 'var(--radius-2)',
             cursor: 'pointer',
             fontSize: '0.9rem'
@@ -421,10 +421,10 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
       {/* Main Info Card */}
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-elevated)',
         padding: 'var(--space-6)',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
         marginBottom: 'var(--space-6)'
       }}>
         <h1 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: '1.8rem' }}>
@@ -433,26 +433,26 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)', marginBottom: 'var(--space-4)' }}>
           <div>
-            <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>טלפון</div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>טלפון</div>
             <div style={{ fontWeight: '500' }}>{lead.phone}</div>
           </div>
 
           {lead.contactPersonName && (
             <div>
-              <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>איש קשר</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>איש קשר</div>
               <div style={{ fontWeight: '500' }}>{lead.contactPersonName}</div>
             </div>
           )}
 
           {lead.email && (
             <div>
-              <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>אימייל</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>אימייל</div>
               <div style={{ fontWeight: '500' }}>{lead.email}</div>
             </div>
           )}
 
           <div>
-            <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
               {getIdentifierTypeLabel(lead.identifierType)}
             </div>
             <div style={{ fontWeight: '500', fontFamily: 'monospace', fontSize: '1rem', direction: 'ltr', textAlign: 'right' }}>
@@ -498,25 +498,25 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
           </span>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)', paddingTop: 'var(--space-4)', borderTop: '1px solid #eee' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)', paddingTop: 'var(--space-4)', borderTop: '1px solid var(--border-subtle)' }}>
           <div>
-            <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>נוצר</div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>נוצר</div>
             <div>{formatDate(lead.createdAt)}</div>
           </div>
           {lead.lastContactedAt && (
             <div>
-              <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>יצירת קשר אחרונה</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>יצירת קשר אחרונה</div>
               <div>{formatDate(lead.lastContactedAt)}</div>
             </div>
           )}
         </div>
 
         {lead.linkedBusiness && (
-          <div style={{ marginTop: 'var(--space-4)', padding: 'var(--space-4)', backgroundColor: '#f0fdf4', borderRadius: 'var(--radius-2)' }}>
-            <div style={{ fontSize: '0.85rem', color: '#166534', marginBottom: 'var(--space-2)', fontWeight: '600' }}>
+          <div style={{ marginTop: 'var(--space-4)', padding: 'var(--space-4)', backgroundColor: 'var(--success-50)', borderRadius: 'var(--radius-2)' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--success-700)', marginBottom: 'var(--space-2)', fontWeight: '600' }}>
               🎉 עסק רשום במערכת
             </div>
-            <div style={{ color: '#166534' }}>
+            <div style={{ color: 'var(--success-700)' }}>
               {lead.linkedBusiness.name}
             </div>
           </div>
@@ -525,10 +525,10 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
       {/* Status Management */}
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-elevated)',
         padding: 'var(--space-6)',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
         marginBottom: 'var(--space-6)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-4)' }}>
@@ -545,7 +545,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
           </span>
         </div>
 
-        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: 'var(--space-4)' }}>
+        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-4)' }}>
           שינוי סטטוס
         </div>
 
@@ -592,10 +592,10 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
       {/* Quick Actions */}
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-elevated)',
         padding: 'var(--space-6)',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
         marginBottom: 'var(--space-6)'
       }}>
         <h2 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: '1.3rem' }}>
@@ -707,7 +707,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
               <div style={{ fontWeight: '600', marginBottom: 'var(--space-1)', fontSize: '0.95rem' }}>
                 לתזמן מעקב?
               </div>
-              <div style={{ fontSize: '0.85rem', color: '#666' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                 בחר מתי תרצה ליצור קשר עם הליד הזה שוב
               </div>
             </div>
@@ -859,10 +859,10 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
       {/* Follow-up Section */}
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-elevated)',
         padding: 'var(--space-6)',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
         marginBottom: 'var(--space-6)'
       }}>
         <h2 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: '1.3rem' }}>
@@ -878,7 +878,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
                   <span style={{ fontSize: '1.5rem' }}>{getFollowUpIcon(lead.nextAction)}</span>
                   <span style={{ fontSize: '1.1rem', fontWeight: '500' }}>{lead.nextAction}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: '#666' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--text-secondary)' }}>
                   <span style={{ fontSize: '1.2rem' }}>📅</span>
                   <span>{formatFollowUpDate(lead.nextActionAt)}</span>
                   {lead.followUpState === 'OVERDUE' && (
@@ -910,7 +910,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
                 </div>
               </div>
             ) : (
-              <div style={{ color: '#999', marginBottom: 'var(--space-4)' }}>
+              <div style={{ color: 'var(--text-tertiary)', marginBottom: 'var(--space-4)' }}>
                 לא נקבע מעקב
               </div>
             )}
@@ -918,7 +918,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
               onClick={handleEditFollowUp}
               style={{
                 padding: 'var(--space-2) var(--space-4)',
-                backgroundColor: 'var(--accent-9)',
+                backgroundColor: 'var(--primary-600)',
                 color: 'white',
                 border: 'none',
                 borderRadius: 'var(--radius-2)',
@@ -1006,7 +1006,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
                 disabled={!followUpDate || !followUpTime || savingFollowUp}
                 style={{
                   padding: 'var(--space-3) var(--space-4)',
-                  backgroundColor: followUpDate && followUpTime && !savingFollowUp ? 'var(--accent-9)' : '#d1d5db',
+                  backgroundColor: followUpDate && followUpTime && !savingFollowUp ? 'var(--primary-600)' : '#d1d5db',
                   color: 'white',
                   border: 'none',
                   borderRadius: 'var(--radius-2)',
@@ -1023,7 +1023,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
                 style={{
                   padding: 'var(--space-3) var(--space-4)',
                   backgroundColor: 'white',
-                  color: '#666',
+                  color: 'var(--text-secondary)',
                   border: '1px solid #d1d5db',
                   borderRadius: 'var(--radius-2)',
                   cursor: savingFollowUp ? 'not-allowed' : 'pointer',
@@ -1040,10 +1040,10 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
 
       {/* Timeline Section */}
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'var(--bg-elevated)',
         padding: 'var(--space-6)',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-sm)',
         marginBottom: 'var(--space-6)'
       }}>
         <h2 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: '1.3rem' }}>
@@ -1074,7 +1074,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
             disabled={!noteContent.trim() || addingNote}
             style={{
               padding: 'var(--space-3) var(--space-4)',
-              backgroundColor: noteContent.trim() && !addingNote ? 'var(--accent-9)' : '#d1d5db',
+              backgroundColor: noteContent.trim() && !addingNote ? 'var(--primary-600)' : '#d1d5db',
               color: 'white',
               border: 'none',
               borderRadius: 'var(--radius-2)',
@@ -1095,21 +1095,21 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
                 key={event.id}
                 style={{
                   padding: 'var(--space-4)',
-                  backgroundColor: '#f9fafb',
+                  backgroundColor: 'var(--gray-50)',
                   borderRadius: 'var(--radius-2)',
-                  borderRight: '3px solid var(--accent-9)'
+                  borderRight: '3px solid var(--primary-600)'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-3)' }}>
                   <div style={{ fontSize: '1.5rem' }}>{getEventIcon(event.type)}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '0.85rem', color: '#666', marginBottom: 'var(--space-1)' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
                       {event.type.replace(/_/g, ' ')}
                     </div>
                     <div style={{ marginBottom: 'var(--space-2)' }}>
                       {event.description}
                     </div>
-                    <div style={{ fontSize: '0.85rem', color: '#999' }}>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)' }}>
                       {formatDate(event.createdAt)}
                     </div>
                   </div>
@@ -1118,7 +1118,7 @@ export default function LeadDetailsView({ leadId, onBack, onCreateNew }) {
             ))}
           </div>
         ) : (
-          <div style={{ textAlign: 'center', color: '#999', padding: 'var(--space-4)' }}>
+          <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', padding: 'var(--space-4)' }}>
             אין אירועים בציר הזמן
           </div>
         )}

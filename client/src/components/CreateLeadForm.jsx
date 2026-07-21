@@ -96,7 +96,7 @@ export default function CreateLeadForm({ onSuccess, onCancel }) {
         {/* Identifier Type and Value */}
         <div style={{ marginBottom: 'var(--space-6)', padding: 'var(--space-4)', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)' }}>
           <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-4)' }}>
-            מזהה רשמי <span style={{ color: 'var(--danger)' }}>*</span>
+            מזהה רשמי <span style={{ color: 'var(--danger-600)' }}>*</span>
           </h3>
 
           <div style={{ marginBottom: 'var(--space-4)' }}>
@@ -139,7 +139,7 @@ export default function CreateLeadForm({ onSuccess, onCancel }) {
           </h3>
 
           <div style={{ marginBottom: 'var(--space-4)' }}>
-            <label className="form-label">שם העסק <span style={{ color: 'var(--danger)' }}>*</span></label>
+            <label className="form-label">שם העסק <span style={{ color: 'var(--danger-600)' }}>*</span></label>
             <input
               type="text"
               className="form-input"
@@ -151,7 +151,7 @@ export default function CreateLeadForm({ onSuccess, onCancel }) {
           </div>
 
           <div style={{ marginBottom: 'var(--space-4)' }}>
-            <label className="form-label">טלפון <span style={{ color: 'var(--danger)' }}>*</span></label>
+            <label className="form-label">טלפון <span style={{ color: 'var(--danger-600)' }}>*</span></label>
             <input
               type="tel"
               className="form-input"
@@ -221,10 +221,10 @@ export default function CreateLeadForm({ onSuccess, onCancel }) {
           <div style={{
             marginBottom: 'var(--space-4)',
             padding: 'var(--space-4)',
-            background: 'var(--danger-light)',
-            border: '1px solid var(--danger)',
+            background: 'var(--danger-50)',
+            border: '1px solid var(--danger-600)',
             borderRadius: 'var(--radius-md)',
-            color: 'var(--danger-dark)'
+            color: 'var(--danger-700)'
           }}>
             <div style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-1)' }}>
               שגיאה
@@ -238,8 +238,8 @@ export default function CreateLeadForm({ onSuccess, onCancel }) {
           <div style={{
             marginBottom: 'var(--space-4)',
             padding: 'var(--space-4)',
-            background: 'var(--warning-light)',
-            border: '1px solid var(--warning)',
+            background: 'var(--warning-50)',
+            border: '1px solid var(--warning-500)',
             borderRadius: 'var(--radius-md)'
           }}>
             <div style={{ fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-2)' }}>
