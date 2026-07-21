@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import CreateLeadForm from '../components/CreateLeadForm';
 import LeadListView from '../components/LeadListView';
 import LeadDetailsView from '../components/LeadDetailsView';
@@ -10,18 +10,41 @@ export default function CRMPage({ user, setView }) {
   const [successMessage, setSuccessMessage] = useState('');
   const [createdLead, setCreatedLead] = useState(null);
   const [detailsOrigin, setDetailsOrigin] = useState('queue'); // where 'details' was opened from ('queue' | 'list')
+  const successTimeoutRef = useRef(null);
+
+  function clearSuccessTimeout() {
+    if (successTimeoutRef.current) {
+      clearTimeout(successTimeoutRef.current);
+      successTimeoutRef.current = null;
+    }
+  }
 
   function handleSuccess(lead) {
     setCreatedLead(lead);
     setSuccessMessage('הליד נוצר בהצלחה!');
-    setTimeout(() => {
+    clearSuccessTimeout();
+    successTimeoutRef.current = setTimeout(() => {
       setSuccessMessage('');
       setCreatedLead(null);
       setCurrentView('queue'); // Return to work queue after success
     }, 3000);
   }
 
+  // Open the just-created lead in the existing details view.
+  function handleEditCreatedLead() {
+    clearSuccessTimeout();
+    const leadId = createdLead?.id;
+    setSuccessMessage('');
+    setCreatedLead(null);
+    if (leadId != null) {
+      setSelectedLeadId(leadId);
+      setDetailsOrigin('queue');
+      setCurrentView('details');
+    }
+  }
+
   function handleCreateNew() {
+    clearSuccessTimeout();
     setCurrentView('create');
     setSuccessMessage('');
     setCreatedLead(null);
@@ -80,9 +103,18 @@ export default function CRMPage({ user, setView }) {
           )}
 
           <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center', marginTop: 'var(--space-6)' }}>
+            {createdLead.id != null && (
+              <button
+                className="btn-primary"
+                onClick={handleEditCreatedLead}
+              >
+                פתח פרטי ליד
+              </button>
+            )}
             <button
-              className="btn-primary"
+              className="btn-secondary"
               onClick={() => {
+                clearSuccessTimeout();
                 setSuccessMessage('');
                 setCreatedLead(null);
               }}
