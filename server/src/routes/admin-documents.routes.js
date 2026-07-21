@@ -69,6 +69,17 @@ router.post('/document-types/:id/restore', async (req, res) => {
   }
 });
 
+// Delete document type (guarded: unused types only)
+router.delete('/document-types/:id', async (req, res) => {
+  const result = await documentService.deleteDocumentType(req.params.id);
+
+  if (result.success) {
+    res.status(200).json(result);
+  } else {
+    res.status(400).json(result);
+  }
+});
+
 /**
  * ============================================
  * SERVICE DOCUMENT REQUIREMENTS

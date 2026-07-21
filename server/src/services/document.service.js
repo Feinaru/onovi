@@ -151,6 +151,52 @@ async function restoreDocumentType(id) {
   }
 }
 
+async function deleteDocumentType(id) {
+  const typeId = parseInt(id);
+
+  if (Number.isNaN(typeId)) {
+    return { success: false, error: 'Document type not found' };
+  }
+
+  // The whole body is wrapped so this always resolves to a { success } envelope.
+  // These route handlers don't try/catch the awaited service call, and Express 4
+  // does not forward async throws to the error middleware — so a bare throw here
+  // would leave the request hanging with no JSON, which the client surfaces as an
+  // opaque error. Returning an envelope keeps the delete flow well-behaved.
+  try {
+    const existing = await prisma.documentType.findUnique({
+      where: { id: typeId }
+    });
+
+    if (!existing) {
+      return { success: false, error: 'Document type not found' };
+    }
+
+    // Guard: only unused document types can be hard-deleted. "In use" means it is
+    // referenced by any service requirement or any uploaded document. Otherwise the
+    // admin should archive it instead (the DB FKs are onDelete: Restrict, so this
+    // also prevents an accidental delete slipping through).
+    const [requirementCount, uploadedCount] = await Promise.all([
+      prisma.serviceDocumentRequirement.count({ where: { documentTypeId: typeId } }),
+      prisma.uploadedDocument.count({ where: { documentTypeId: typeId } })
+    ]);
+
+    if (requirementCount > 0 || uploadedCount > 0) {
+      return { success: false, error: 'Document type is in use and cannot be deleted' };
+    }
+
+    await prisma.documentType.delete({ where: { id: typeId } });
+    return { success: true, data: { id: typeId } };
+  } catch (error) {
+    console.error('Delete document type error:', error);
+    return {
+      success: false,
+      error: 'Failed to delete document type',
+      details: error.message
+    };
+  }
+}
+
 async function listDocumentTypes(filters = {}) {
   const { status } = filters;
 
@@ -857,6 +903,7 @@ module.exports = {
   updateDocumentType,
   archiveDocumentType,
   restoreDocumentType,
+  deleteDocumentType,
   listDocumentTypes,
 
   // Admin - Service Document Requirements

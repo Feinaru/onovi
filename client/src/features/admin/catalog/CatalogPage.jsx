@@ -2,14 +2,17 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import FieldsTab from './FieldsTab';
 import ProfessionsTab from './ProfessionsTab';
 import ServicesTab from './ServicesTab';
+import DocumentTypesTab from './DocumentTypesTab';
 import CatalogToast from './CatalogToast';
 import { listFields, listProfessions, listServiceTemplates } from './catalogApi';
+import { listDocumentTypes } from './documentsApi';
 import { toHebrewError } from './catalogErrors';
 
 const TABS = [
   { id: 'fields', label: 'תחומים', icon: '🗂️' },
   { id: 'professions', label: 'מקצועות', icon: '🧰' },
-  { id: 'services', label: 'שירותים', icon: '🛎️' }
+  { id: 'services', label: 'שירותים', icon: '🛎️' },
+  { id: 'documentTypes', label: 'סוגי מסמכים', icon: '📄' }
 ];
 
 export default function CatalogPage() {
@@ -17,20 +20,25 @@ export default function CatalogPage() {
   const [fields, setFields] = useState([]);
   const [professions, setProfessions] = useState([]);
   const [serviceTemplates, setServiceTemplates] = useState([]);
+  const [documentTypes, setDocumentTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [toast, setToast] = useState(null); // { type: 'success' | 'error', text }
   const toastTimer = useRef(null);
 
   const reload = useCallback(async () => {
-    const [fieldsData, professionsData, serviceTemplatesData] = await Promise.all([
+    // Document types are loaded across all statuses so the "סוגי מסמכים" tab can
+    // show archived ones; the requirements editor filters to ACTIVE itself.
+    const [fieldsData, professionsData, serviceTemplatesData, documentTypesData] = await Promise.all([
       listFields(),
       listProfessions(),
-      listServiceTemplates()
+      listServiceTemplates(),
+      listDocumentTypes()
     ]);
     setFields(fieldsData);
     setProfessions(professionsData);
     setServiceTemplates(serviceTemplatesData);
+    setDocumentTypes(documentTypesData);
   }, []);
 
   useEffect(() => {
@@ -71,6 +79,7 @@ export default function CatalogPage() {
     fields,
     professions,
     serviceTemplates,
+    documentTypes,
     onReload: reload,
     onSuccess,
     onError
@@ -125,6 +134,7 @@ export default function CatalogPage() {
             {activeTab === 'fields' && <FieldsTab {...tabProps} />}
             {activeTab === 'professions' && <ProfessionsTab {...tabProps} />}
             {activeTab === 'services' && <ServicesTab {...tabProps} />}
+            {activeTab === 'documentTypes' && <DocumentTypesTab {...tabProps} />}
           </>
         )}
       </div>
