@@ -133,6 +133,40 @@
   --z-modal: 1050;
   --z-toast: 1060;
   --z-tooltip: 1070;
+
+  /* Compatibility aliases — map legacy names to canonical tokens (see LOMEA_DESIGN_SYSTEM §1.2). TODO: migrate call sites to numbered tokens (Phase 2). */
+  --primary: var(--primary-600);
+  --primary-dark: var(--primary-700);
+  --primary-color: var(--primary-600);
+
+  --danger: var(--danger-600);
+  --danger-color: var(--danger-600);
+  --error: var(--danger-600);
+  --text-danger: var(--danger-600);
+  --danger-200: var(--danger-100);
+
+  --success-color: var(--success-600);
+  --success: var(--success-600);
+  --success-light: var(--success-50);
+  --success-dark: var(--success-700);
+  --success-200: var(--success-100);
+
+  --warning-color: var(--warning-500);
+  --warning-700: var(--warning-600);
+
+  --info-color: var(--info-500);
+
+  --border-color: var(--border-subtle);
+  --border-light: var(--border-subtle);
+
+  --surface-primary: var(--bg-elevated);
+  --surface-secondary: var(--bg-secondary);
+  --surface-hover: var(--gray-50);
+
+  --bg-tertiary: var(--gray-100);
+
+  --radius-1: var(--radius-sm);
+  --radius-2: var(--radius-md);
 }
 
 /* ============================================
