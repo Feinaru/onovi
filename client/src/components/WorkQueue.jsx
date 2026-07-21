@@ -75,18 +75,20 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
     return labels[status] || status;
   }
 
-  function getStatusColor(status) {
-    const colors = {
-      NEW: '#3b82f6',
-      CONTACTED: '#8b5cf6',
-      INTERESTED: '#10b981',
-      MEETING_SCHEDULED: '#f59e0b',
-      PROPOSAL_SENT: '#06b6d4',
-      CLOSED_WON: '#22c55e',
-      CLOSED_LOST: '#ef4444',
-      INACTIVE: '#9ca3af'
+  // Collapse CRM lead statuses into the 5 canonical Lomea badge variants
+  // (see docs/LOMEA_DESIGN_SYSTEM.md §4.10 / styles.css .badge-*).
+  function getStatusBadgeClass(status) {
+    const classes = {
+      NEW: 'badge-primary',
+      CONTACTED: 'badge-primary',
+      INTERESTED: 'badge-success',
+      MEETING_SCHEDULED: 'badge-warning',
+      PROPOSAL_SENT: 'badge-warning',
+      CLOSED_WON: 'badge-success',
+      CLOSED_LOST: 'badge-danger',
+      INACTIVE: 'badge-gray'
     };
-    return colors[status] || '#6b7280';
+    return classes[status] || 'badge-gray';
   }
 
   function getPriorityBadge(priority) {
@@ -99,66 +101,59 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
     return { icon: '⚪', label: 'עדיפות נמוכה' };
   }
 
-  function LeadCard({ lead, accentColor = '#e5e7eb' }) {
+  function LeadCard({ lead, accentColor = 'var(--border-subtle)' }) {
     const priorityBadge = getPriorityBadge(lead.priority);
 
     return (
       <div
         onClick={() => onViewLead(lead.id)}
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--bg-elevated)',
           padding: 'var(--space-4)',
           borderRadius: 'var(--radius-2)',
           borderLeft: `4px solid ${accentColor}`,
           cursor: 'pointer',
           transition: 'all 0.2s',
-          boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+          boxShadow: 'var(--shadow-sm)'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+          e.currentTarget.style.boxShadow = 'var(--shadow-md)';
           e.currentTarget.style.transform = 'translateY(-2px)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+          e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
           e.currentTarget.style.transform = 'translateY(0)';
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-2)' }}>
           <div>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '600' }}>
+            <h3 style={{ margin: 0, fontSize: 'var(--text-lg)', fontWeight: '600' }}>
               {lead.businessName}
             </h3>
-            <div style={{ fontSize: '0.9rem', color: '#666', marginTop: 'var(--space-1)' }}>
+            <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginTop: 'var(--space-1)' }}>
               {lead.phone}
             </div>
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <span style={{ fontSize: '1rem' }} title={priorityBadge.label}>
+            <span style={{ fontSize: 'var(--text-base)' }} title={priorityBadge.label}>
               {priorityBadge.icon}
             </span>
-            <div style={{
-              padding: 'var(--space-1) var(--space-2)',
-              backgroundColor: getStatusColor(lead.status) + '20',
-              color: getStatusColor(lead.status),
-              borderRadius: 'var(--radius-1)',
-              fontSize: '0.75rem',
-              fontWeight: '600'
-            }}>
+            <span className={`badge ${getStatusBadgeClass(lead.status)}`}>
               {getStatusLabel(lead.status)}
-            </div>
+            </span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: '0.85rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
           {lead.nextAction && lead.nextActionAt && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
               <span>📌</span>
               <span style={{ fontWeight: '500' }}>{lead.nextAction}</span>
-              <span style={{ color: '#666' }}>· {formatDate(lead.nextActionAt)}</span>
+              <span style={{ color: 'var(--text-secondary)' }}>· {formatDate(lead.nextActionAt)}</span>
             </div>
           )}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: '#666' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--text-secondary)' }}>
             <span>🕒</span>
             <span>יצירת קשר אחרונה: {formatLastContacted(lead.lastContactedAt)}</span>
           </div>
@@ -166,7 +161,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
           {lead.linkedBusiness && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
               <span>✅</span>
-              <span style={{ color: '#22c55e', fontSize: '0.85rem', fontWeight: '500' }}>
+              <span style={{ color: 'var(--success-600)', fontSize: 'var(--text-sm)', fontWeight: '500' }}>
                 רשום במערכת
               </span>
             </div>
@@ -179,10 +174,10 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
   function QueueSection({ title, leads, emptyMessage, accentColor, icon }) {
     return (
       <div style={{ marginBottom: 'var(--space-6)' }}>
-        <h2 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+        <h2 style={{ margin: 0, marginBottom: 'var(--space-4)', fontSize: 'var(--text-xl)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           <span>{icon}</span>
           <span>{title}</span>
-          <span style={{ fontSize: '0.9rem', color: '#999', fontWeight: 'normal' }}>
+          <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-tertiary)', fontWeight: 'normal' }}>
             ({leads.length})
           </span>
         </h2>
@@ -190,9 +185,9 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
         {leads.length === 0 ? (
           <div style={{
             padding: 'var(--space-4)',
-            backgroundColor: '#f9fafb',
+            backgroundColor: 'var(--gray-50)',
             borderRadius: 'var(--radius-2)',
-            color: '#999',
+            color: 'var(--text-tertiary)',
             textAlign: 'center'
           }}>
             {emptyMessage}
@@ -211,7 +206,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
   if (loading) {
     return (
       <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-        <div style={{ fontSize: '2rem', marginBottom: 'var(--space-4)' }}>⏳</div>
+        <div style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-4)' }}>⏳</div>
         <div>טוען תור עבודה...</div>
       </div>
     );
@@ -221,12 +216,12 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
     return (
       <div style={{ padding: 'var(--space-6)' }}>
         <div style={{
-          backgroundColor: '#fee',
+          backgroundColor: 'var(--danger-50)',
           padding: 'var(--space-4)',
           borderRadius: 'var(--radius-2)',
           marginBottom: 'var(--space-4)'
         }}>
-          <div style={{ fontSize: '2rem', marginBottom: 'var(--space-2)' }}>❌</div>
+          <div style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-2)' }}>❌</div>
           <div>{error}</div>
         </div>
       </div>
@@ -238,20 +233,8 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
   return (
     <div style={{ padding: 'var(--space-6)', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-6)' }}>
-        <h1 style={{ margin: 0, fontSize: '2rem' }}>תור העבודה שלך</h1>
-        <button
-          onClick={onCreateNew}
-          style={{
-            padding: 'var(--space-3) var(--space-4)',
-            backgroundColor: 'var(--accent-9)',
-            color: 'white',
-            border: 'none',
-            borderRadius: 'var(--radius-2)',
-            cursor: 'pointer',
-            fontSize: '0.95rem',
-            fontWeight: '500'
-          }}
-        >
+        <h1 style={{ margin: 0, fontSize: 'var(--text-3xl)' }}>תור העבודה שלך</h1>
+        <button className="btn-primary" onClick={onCreateNew}>
           + ליד חדש
         </button>
       </div>
@@ -261,7 +244,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
         icon="🔴"
         leads={queue.overdue}
         emptyMessage="אין פעולות באיחור"
-        accentColor="#ef4444"
+        accentColor="var(--border-subtle)"
       />
 
       <QueueSection
@@ -269,7 +252,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
         icon="🟡"
         leads={queue.today}
         emptyMessage="אין מעקבים מתוזמנים להיום"
-        accentColor="#f59e0b"
+        accentColor="var(--border-subtle)"
       />
 
       <QueueSection
@@ -277,7 +260,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
         icon="🟢"
         leads={queue.newLeads}
         emptyMessage="אין לידים חדשים"
-        accentColor="#3b82f6"
+        accentColor="var(--border-subtle)"
       />
 
       <QueueSection
@@ -285,7 +268,7 @@ export default function WorkQueue({ onViewLead, onCreateNew }) {
         icon="⚪"
         leads={queue.recent}
         emptyMessage="אין פעילות אחרונה"
-        accentColor="#e5e7eb"
+        accentColor="var(--border-subtle)"
       />
     </div>
   );
