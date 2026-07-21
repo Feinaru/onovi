@@ -9,6 +9,7 @@ export default function CRMPage({ user, setView }) {
   const [selectedLeadId, setSelectedLeadId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [createdLead, setCreatedLead] = useState(null);
+  const [detailsOrigin, setDetailsOrigin] = useState('queue'); // where 'details' was opened from ('queue' | 'list')
 
   function handleSuccess(lead) {
     setCreatedLead(lead);
@@ -35,7 +36,13 @@ export default function CRMPage({ user, setView }) {
 
   function handleViewLead(leadId) {
     setSelectedLeadId(leadId);
+    setDetailsOrigin(currentView === 'list' ? 'list' : 'queue');
     setCurrentView('details');
+  }
+
+  function handleBackFromDetails() {
+    setSelectedLeadId(null);
+    setCurrentView(detailsOrigin === 'list' ? 'list' : 'queue');
   }
 
   if (successMessage && createdLead) {
@@ -92,29 +99,52 @@ export default function CRMPage({ user, setView }) {
     return (
       <LeadDetailsView
         leadId={selectedLeadId}
-        onBack={handleBackToQueue}
+        onBack={handleBackFromDetails}
         onCreateNew={handleCreateNew}
       />
     );
   }
 
-  if (currentView === 'list') {
-    return (
-      <div style={{ padding: 'var(--space-6)' }}>
-        <LeadListView
-          onCreateNew={handleCreateNew}
-          onViewLead={handleViewLead}
-        />
+  // Main CRM views (queue / list) share a tab switcher.
+  if (currentView === 'queue' || currentView === 'list') {
+    const crmTabs = (
+      <div
+        role="group"
+        aria-label="ניווט CRM"
+        style={{ display: 'flex', gap: 'var(--space-2)', padding: 'var(--space-6)', paddingBottom: 0 }}
+      >
+        <button
+          className={currentView === 'queue' ? 'btn-primary' : 'btn-secondary'}
+          onClick={() => setCurrentView('queue')}
+        >
+          תור העבודה
+        </button>
+        <button
+          className={currentView === 'list' ? 'btn-primary' : 'btn-secondary'}
+          onClick={() => setCurrentView('list')}
+        >
+          כל הלידים
+        </button>
       </div>
     );
-  }
 
-  if (currentView === 'queue') {
     return (
-      <WorkQueue
-        onViewLead={handleViewLead}
-        onCreateNew={handleCreateNew}
-      />
+      <div>
+        {crmTabs}
+        {currentView === 'list' ? (
+          <div style={{ padding: 'var(--space-6)' }}>
+            <LeadListView
+              onCreateNew={handleCreateNew}
+              onViewLead={handleViewLead}
+            />
+          </div>
+        ) : (
+          <WorkQueue
+            onViewLead={handleViewLead}
+            onCreateNew={handleCreateNew}
+          />
+        )}
+      </div>
     );
   }
 

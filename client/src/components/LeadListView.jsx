@@ -1,20 +1,33 @@
 import { useState, useEffect } from 'react';
 import { api } from '../api';
 
+// Status filter options for the leads list.
+// `query` is sent to GET /api/leads?status=... : a single status, a comma-list,
+// or the ALL sentinel (no status restriction, incl. closed/inactive).
+const STATUS_FILTERS = [
+  { key: 'open', label: 'פתוחים', query: 'NEW,CONTACTED,INTERESTED,MEETING_SCHEDULED,PROPOSAL_SENT' },
+  { key: 'won', label: 'נסגרו בהצלחה', query: 'CLOSED_WON' },
+  { key: 'lost', label: 'נסגרו ללא הצלחה', query: 'CLOSED_LOST' },
+  { key: 'inactive', label: 'לא פעילים', query: 'INACTIVE' },
+  { key: 'all', label: 'הכל', query: 'ALL' }
+];
+
 export default function LeadListView({ onCreateNew, onViewLead }) {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [statusFilter, setStatusFilter] = useState('open');
 
   useEffect(() => {
     loadLeads();
-  }, []);
+  }, [statusFilter]);
 
   async function loadLeads() {
     setLoading(true);
     setError('');
     try {
-      const data = await api('/api/leads');
+      const filter = STATUS_FILTERS.find(f => f.key === statusFilter) || STATUS_FILTERS[0];
+      const data = await api(`/api/leads?status=${encodeURIComponent(filter.query)}`);
       setLeads(data);
     } catch (err) {
       setError(err.message);
@@ -70,38 +83,12 @@ export default function LeadListView({ onCreateNew, onViewLead }) {
     return date.toLocaleDateString('he-IL');
   }
 
-  if (loading) {
-    return (
-      <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
-        <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>⏳</div>
-        <div style={{ color: 'var(--text-secondary)' }}>טוען לידים...</div>
-      </div>
-    );
-  }
-
   if (error) {
     return (
       <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
         <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>❌</div>
         <div style={{ color: 'var(--danger)', marginBottom: 'var(--space-4)' }}>{error}</div>
         <button className="btn-secondary" onClick={loadLeads}>נסה שוב</button>
-      </div>
-    );
-  }
-
-  if (leads.length === 0) {
-    return (
-      <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
-        <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>📋</div>
-        <div style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)', marginBottom: 'var(--space-2)' }}>
-          אין לידים במערכת
-        </div>
-        <div style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-6)' }}>
-          צור את הליד הראשון כדי להתחיל
-        </div>
-        <button className="btn-primary" onClick={onCreateNew}>
-          ➕ ליד חדש
-        </button>
       </div>
     );
   }
@@ -123,86 +110,117 @@ export default function LeadListView({ onCreateNew, onViewLead }) {
         </button>
       </div>
 
-      {/* Lead List */}
-      <div style={{ background: 'white', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-light)', overflow: 'hidden' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-light)' }}>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}></th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>שם העסק</th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>טלפון</th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>מזהה</th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>סטטוס</th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>רישום</th>
-              <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>נוצר</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((lead) => (
-              <tr
-                key={lead.id}
-                onClick={() => onViewLead(lead.id)}
-                style={{
-                  borderBottom: '1px solid var(--border-light)',
-                  cursor: 'pointer',
-                  transition: 'background 0.15s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
-                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-              >
-                {/* Priority Indicator */}
-                <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-lg)', width: '40px' }}>
-                  {getPriorityIndicator(lead.priority)}
-                </td>
-
-                {/* Business Name */}
-                <td style={{ padding: 'var(--space-3)' }}>
-                  <div style={{ fontWeight: 'var(--font-medium)' }}>{lead.businessName}</div>
-                  {lead.contactPersonName && (
-                    <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-                      {lead.contactPersonName}
-                    </div>
-                  )}
-                </td>
-
-                {/* Phone */}
-                <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-                  {lead.phone}
-                </td>
-
-                {/* Identifier */}
-                <td style={{ padding: 'var(--space-3)' }}>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
-                    {getIdentifierTypeLabel(lead.identifierType)}
-                  </div>
-                  <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'monospace' }}>
-                    {lead.identifierValue}
-                  </div>
-                </td>
-
-                {/* Lead Status */}
-                <td style={{ padding: 'var(--space-3)' }}>
-                  {getStatusBadge(lead.status)}
-                </td>
-
-                {/* Registration Status */}
-                <td style={{ padding: 'var(--space-3)' }}>
-                  {lead.registrationStatus === 'REGISTERED' ? (
-                    <span className="badge badge-success">✓ רשום</span>
-                  ) : (
-                    <span className="badge badge-gray">לא רשום</span>
-                  )}
-                </td>
-
-                {/* Created Date */}
-                <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
-                  {formatDate(lead.createdAt)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Status Filter */}
+      <div
+        role="group"
+        aria-label="סינון לפי סטטוס"
+        style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', marginBottom: 'var(--space-4)' }}
+      >
+        {STATUS_FILTERS.map(f => (
+          <button
+            key={f.key}
+            className={statusFilter === f.key ? 'btn-primary' : 'btn-secondary'}
+            onClick={() => setStatusFilter(f.key)}
+          >
+            {f.label}
+          </button>
+        ))}
       </div>
+
+      {/* List / states */}
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+          <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>⏳</div>
+          <div style={{ color: 'var(--text-secondary)' }}>טוען לידים...</div>
+        </div>
+      ) : leads.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+          <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>📋</div>
+          <div style={{ color: 'var(--text-secondary)' }}>
+            לא נמצאו לידים בסטטוס זה
+          </div>
+        </div>
+      ) : (
+        <div style={{ background: 'white', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-light)', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-light)' }}>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}></th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>שם העסק</th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>טלפון</th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>מזהה</th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>סטטוס</th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>רישום</th>
+                <th style={{ padding: 'var(--space-3)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-semibold)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>נוצר</th>
+              </tr>
+            </thead>
+            <tbody>
+              {leads.map((lead) => (
+                <tr
+                  key={lead.id}
+                  onClick={() => onViewLead(lead.id)}
+                  style={{
+                    borderBottom: '1px solid var(--border-light)',
+                    cursor: 'pointer',
+                    transition: 'background 0.15s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                >
+                  {/* Priority Indicator */}
+                  <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-lg)', width: '40px' }}>
+                    {getPriorityIndicator(lead.priority)}
+                  </td>
+
+                  {/* Business Name */}
+                  <td style={{ padding: 'var(--space-3)' }}>
+                    <div style={{ fontWeight: 'var(--font-medium)' }}>{lead.businessName}</div>
+                    {lead.contactPersonName && (
+                      <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                        {lead.contactPersonName}
+                      </div>
+                    )}
+                  </td>
+
+                  {/* Phone */}
+                  <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                    {lead.phone}
+                  </td>
+
+                  {/* Identifier */}
+                  <td style={{ padding: 'var(--space-3)' }}>
+                    <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+                      {getIdentifierTypeLabel(lead.identifierType)}
+                    </div>
+                    <div style={{ fontSize: 'var(--text-sm)', fontFamily: 'monospace' }}>
+                      {lead.identifierValue}
+                    </div>
+                  </td>
+
+                  {/* Lead Status */}
+                  <td style={{ padding: 'var(--space-3)' }}>
+                    {getStatusBadge(lead.status)}
+                  </td>
+
+                  {/* Registration Status */}
+                  <td style={{ padding: 'var(--space-3)' }}>
+                    {lead.registrationStatus === 'REGISTERED' ? (
+                      <span className="badge badge-success">✓ רשום</span>
+                    ) : (
+                      <span className="badge badge-gray">לא רשום</span>
+                    )}
+                  </td>
+
+                  {/* Created Date */}
+                  <td style={{ padding: 'var(--space-3)', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
+                    {formatDate(lead.createdAt)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

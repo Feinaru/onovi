@@ -204,9 +204,25 @@ router.get('/', auth(), requireRole('ADMIN'), async (req, res, next) => {
 
     const where = {};
 
-    // Filter by status
-    if (status) {
-      where.status = status;
+    // Valid lead statuses (mirrors the LeadStatus enum in prisma/schema.prisma)
+    const VALID_STATUSES = ['NEW', 'CONTACTED', 'INTERESTED', 'MEETING_SCHEDULED', 'PROPOSAL_SENT', 'CLOSED_WON', 'CLOSED_LOST', 'INACTIVE'];
+
+    // Filter by status:
+    //   status=ALL     -> no status restriction (all leads incl. closed/inactive)
+    //   status=A,B,C   -> Prisma { in: [...] } (comma-separated list)
+    //   status=A       -> exact match (backward-compatible)
+    //   omitted        -> default: exclude closed leads (backward-compatible)
+    if (status === 'ALL') {
+      // no status restriction
+    } else if (status) {
+      const statuses = String(status).split(',').map(s => s.trim()).filter(Boolean);
+      const invalid = statuses.filter(s => !VALID_STATUSES.includes(s));
+      if (invalid.length > 0) {
+        return res.status(400).json({
+          message: `Invalid status. Must be one of: ${VALID_STATUSES.join(', ')} (or ALL)`
+        });
+      }
+      where.status = statuses.length > 1 ? { in: statuses } : statuses[0];
     } else {
       // By default, exclude closed leads
       where.status = {
